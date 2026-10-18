@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ConnectedSteps } from "@/components/sections/services/ConnectedSteps";
@@ -7,13 +5,14 @@ import { ServiceScrollspy } from "@/components/sections/services/ServiceScrollsp
 import { PageHero } from "@/components/ui/PageHero";
 import { homeHealth } from "@/lib/services";
 import { site } from "@/lib/site";
+import { CareLink } from "@/components/forms/CareLink";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/services/home-health",
   title: "Home Health (Skilled Care)",
-  description:
-    "Skilled nursing, physical therapy, occupational therapy, speech therapy, medical social work and home health aide services delivered at home across Central Florida.",
-  alternates: { canonical: "/services/home-health" },
-};
+  description: "Skilled nursing, physical, occupational and speech therapy, medical social work and home health aides, delivered at home in Central Florida.",
+});
 
 export default function HomeHealthPage() {
   return (
@@ -25,11 +24,11 @@ export default function HomeHealthPage() {
         crumbs={[{ href: "/services", label: "Services" }, { label: "Home Health" }]}
         images={["/images/skilled-nursing.jpg", "/images/nurse-blood-pressure.jpg"]}
       >
-        <Link href="/contact?care=home-health" className="btn-primary">
+        <CareLink care="home-health" className="btn-primary">
           Request skilled care <ArrowRight className="size-4" />
-        </Link>
+        </CareLink>
         <a href={site.phone.href} className="btn-ghost">
-          <Phone className="size-4 text-blush-600" /> {site.phone.display}
+          <Phone className="size-4 text-blush-700" /> {site.phone.display}
         </a>
       </PageHero>
       <ConnectedSteps />

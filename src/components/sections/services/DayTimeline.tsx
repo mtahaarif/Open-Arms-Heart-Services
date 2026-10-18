@@ -57,7 +57,7 @@ export function DayTimeline() {
                     <div className="glass inline-block w-full rounded-[1.75rem] p-6 text-left md:max-w-md">
                       <div className={`flex items-center gap-3 ${right ? "" : "md:flex-row-reverse"}`}>
                         <span className="rounded-full bg-iris-900 px-3 py-1 text-xs font-bold tracking-wide text-white">{d.time}</span>
-                        <span className="text-xs font-semibold tracking-[0.14em] text-blush-600 uppercase">{d.service}</span>
+                        <span className="text-xs font-semibold tracking-[0.14em] text-blush-700 uppercase">{d.service}</span>
                       </div>
                       <h3 className={`mt-4 font-display text-2xl ${right ? "" : "md:text-right"}`}>{d.title}</h3>
                       <p className={`mt-2 text-ink-soft ${right ? "" : "md:text-right"}`}>{d.text}</p>

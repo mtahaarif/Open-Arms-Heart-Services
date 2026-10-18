@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import { homeCare, homeHealth, type PillarSlug, type Service } from "@/lib/services";
 import { SectionIntro } from "../ui/SectionIntro";
@@ -52,10 +52,7 @@ function StackCard({
           <p className="mt-3 text-lg leading-relaxed text-ink-soft">{s.summary}</p>
           <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
             {s.points.map((p) => (
-              <li key={p} className="flex items-start gap-2 text-[0.95rem] text-ink">
-                <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-iris-100 text-iris-700">
-                  <Check className="size-3" />
-                </span>
+              <li key={p} className="tick-circle text-[0.95rem] text-ink">
                 {p}
               </li>
             ))}
@@ -69,7 +66,7 @@ function StackCard({
           </Link>
         </div>
         <div className="relative hidden min-h-[320px] md:block">
-          <Image src={s.image} alt={s.imageAlt} fill sizes="(min-width: 768px) 45vw, 100vw" className="object-cover" />
+          <Photo src={s.image} alt={s.imageAlt}  sizes="(min-width: 1280px) 400px, 45vw" className="object-cover" />
           <div className="absolute inset-0 bg-linear-to-r from-white/30 to-transparent" />
         </div>
         <motion.div style={{ opacity: dim }} className="pointer-events-none absolute inset-0 bg-iris-950" />
@@ -100,13 +97,6 @@ export function StackingCards({ slug }: { slug: PillarSlug }) {
                   All home care services <ArrowRight className="size-4" />
                 </Link>
               </Magnetic>
-            </Reveal>
-            <Reveal delay={0.3} className="mt-10 hidden lg:block">
-              <ol className="space-y-1 border-l border-iris-100 pl-5 text-sm text-ink-soft">
-                {pillar.services.map((s) => (
-                  <li key={s.slug}>{s.name}</li>
-                ))}
-              </ol>
             </Reveal>
           </div>
         </div>

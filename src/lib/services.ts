@@ -46,7 +46,7 @@ export const homeHealth: Pillar = {
   href: "/services/home-health",
   headline: "Clinical care, brought home.",
   intro:
-    "Physician-ordered nursing and therapy delivered by licensed professionals in the place you feel most like yourself — so recovery, rehabilitation and chronic-condition care happen around your life, not a waiting room.",
+    "**Physician-ordered nursing and therapy** delivered by licensed professionals in the place you feel most like yourself — so recovery, rehabilitation and chronic-condition care happen around your life, not a waiting room.",
   image: "/images/skilled-nursing.jpg",
   services: [
     {
@@ -158,7 +158,7 @@ export const homeCare: Pillar = {
   href: "/services/home-care",
   headline: "Everyday help, with heart.",
   intro:
-    "Trusted caregivers who help with the routines that make a house a home — personal care, meals, company, rides and a well-earned break for family caregivers. No doctor's order needed.",
+    "Trusted caregivers who help with the routines that make a house a home — personal care, meals, company, rides and a well-earned break for family caregivers. **No doctor's order needed.**",
   image: "/images/companion-care.jpg",
   services: [
     {

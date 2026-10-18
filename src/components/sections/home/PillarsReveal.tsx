@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import { pillars } from "@/lib/services";
 import { SectionIntro } from "../../ui/SectionIntro";
 import { EASE, Reveal } from "../../ui/motion";
+import { rich } from "@/lib/rich";
 
 /** Two pillars as expanding panels — hover (or tap) grows one and reveals its services. */
 export function PillarsReveal() {
@@ -63,7 +64,7 @@ export function PillarsReveal() {
                   animate={{ scale: isActive ? 1.04 : 1.12 }}
                   transition={{ duration: 1.2, ease: EASE }}
                 >
-                  <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 60vw, 100vw" className="object-cover" />
+                  <Photo src={p.image} alt="" sizes="(min-width: 1280px) 780px, (min-width: 1024px) 60vw, 100vw" className="object-cover" />
                 </motion.div>
                 <div
                   className={`absolute inset-0 -z-10 transition-colors duration-700 ${
@@ -93,7 +94,7 @@ export function PillarsReveal() {
                           : "lg:pointer-events-none lg:max-h-0 lg:translate-y-6 lg:overflow-hidden lg:opacity-0"
                       }`}
                     >
-                      <p className="mt-5 max-w-xl text-white/80">{p.intro}</p>
+                      <p className="mt-5 max-w-xl text-white/80">{rich(p.intro)}</p>
                       <ul className="mt-6 flex max-w-2xl flex-wrap gap-2">
                         {p.services.map((s, j) => (
                           <li

@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
+import { Photo } from "@/components/ui/Photo";
 import { motion } from "motion/react";
 import { ArrowRight, Check, Phone } from "lucide-react";
 import { homeCare } from "@/lib/services";
@@ -9,6 +8,7 @@ import { site } from "@/lib/site";
 import { GlowCard } from "../../ui/GlowCard";
 import { SectionIntro } from "../../ui/SectionIntro";
 import { EASE } from "../../ui/motion";
+import { CareLink } from "@/components/forms/CareLink";
 
 /** Tall photo cards — details slide up over the image on hover (always shown on touch screens). */
 export function HoverRevealGrid() {
@@ -32,10 +32,9 @@ export function HoverRevealGrid() {
               transition={{ duration: 0.8, delay: (i % 4) * 0.08, ease: EASE }}
             >
               <GlowCard as="article" className="group relative isolate h-[480px] overflow-hidden rounded-[2rem] focus-within:ring-2 focus-within:ring-iris-400">
-                <Image
+                <Photo
                   src={s.image}
                   alt={s.imageAlt}
-                  fill
                   sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
                   className="-z-10 object-cover transition duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-110 group-hover:blur-[2px]"
                 />
@@ -62,12 +61,12 @@ export function HoverRevealGrid() {
                             </li>
                           ))}
                         </ul>
-                        <Link
-                          href={`/contact?care=home-care`}
+                        <CareLink
+                          care="home-care"
                           className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-iris-900 transition hover:bg-blush-100"
                         >
-                          Ask about this <ArrowRight className="size-3.5" />
-                        </Link>
+                          Ask about {s.name.toLowerCase()} <ArrowRight className="size-3.5" />
+                        </CareLink>
                       </div>
                     </div>
                   </div>

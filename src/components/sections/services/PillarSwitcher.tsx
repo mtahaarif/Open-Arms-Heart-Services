@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import { pillars } from "@/lib/services";
 import { GlowCard } from "../../ui/GlowCard";
 import { EASE } from "../../ui/motion";
+import { rich } from "@/lib/rich";
 
 /** Segmented control that morphs between the two pillars' service grids. */
 export function PillarSwitcher() {
@@ -55,9 +56,9 @@ export function PillarSwitcher() {
           >
             <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
               <div>
-                <p className="text-sm font-bold tracking-[0.16em] text-blush-600 uppercase">{p.level} care</p>
+                <p className="text-sm font-bold tracking-[0.16em] text-blush-700 uppercase">{p.level} care</p>
                 <h2 className="mt-3 text-4xl leading-tight font-medium sm:text-5xl">{p.headline}</h2>
-                <p className="mt-5 text-lg leading-relaxed text-ink-soft">{p.intro}</p>
+                <p className="mt-5 text-lg leading-relaxed text-ink-soft">{rich(p.intro)}</p>
                 <Link href={p.href} className="btn-primary mt-8">
                   Explore {p.name.toLowerCase()} <ArrowRight className="size-4" />
                 </Link>
@@ -69,7 +70,7 @@ export function PillarSwitcher() {
                   transition={{ duration: 1.2, ease: EASE }}
                   className="absolute inset-0"
                 >
-                  <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+                  <Photo src={p.image} alt="" sizes="(min-width: 1280px) 640px, (min-width: 1024px) 50vw, 100vw" className="object-cover" />
                 </motion.div>
                 <div className="absolute inset-0 bg-linear-to-tr from-iris-900/40 to-transparent" />
               </div>

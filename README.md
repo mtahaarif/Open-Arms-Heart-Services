@@ -26,6 +26,8 @@ Copy `.env.example` to `.env.local` (or set them in Vercel → Project → Setti
 | `RESEND_API_KEY` | API key from [resend.com](https://resend.com) for the contact & careers forms. |
 | `CONTACT_TO_EMAIL` | Where form submissions are sent (comma-separate for several). |
 | `CONTACT_FROM_EMAIL` | Optional verified sender, e.g. `Open Arms Website <website@yourdomain.com>`. |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Optional Search Console verification code (adds the `google-site-verification` meta tag). |
+| `NEXT_PUBLIC_GTM_ID` | Optional Google Tag Manager container ID. Loaded lazily, and only then is GTM/GA allowed by the CSP. |
 
 Until `RESEND_API_KEY` and `CONTACT_TO_EMAIL` are set, the forms show a friendly “please call us” message instead of silently failing.
 
@@ -42,6 +44,19 @@ Until `RESEND_API_KEY` and `CONTACT_TO_EMAIL` are set, the forms show a friendly
 ## Pages
 
 `/` · `/about` · `/services` · `/services/home-health` · `/services/home-care` · `/getting-started` · `/careers` · `/faq` · `/contact` · plus `sitemap.xml`, `robots.txt`, a generated Open Graph image and the SVG favicon.
+
+## SEO & performance conventions
+
+These keep the site passing technical SEO audits — please follow them when adding pages or content.
+
+- **Metadata:** every page exports `pageMetadata({ path, title, description })` from `src/lib/seo.ts`. Keep `title` ≤ 31 characters (the suffix ` | Open Arms & Heart Services` brings it to ≤ 60) and `description` ≤ 155. It sets a self-referencing canonical, `og:url`, `og:title` and Twitter tags.
+- **Photos:** use `<Photo src="/images/…" sizes="…" />` (`src/components/ui/Photo.tsx`), never raw `<img>`. It emits width/height and a colour placeholder from `src/lib/photos.ts` — regenerate that file if you add or replace photos. Always give an accurate `sizes`. Only the first, above-the-fold image on a page gets `priority`.
+- **Above the fold:** hero entrances are CSS (`enter` utility, `CssSplitHeading`) so text and the lead image paint before JavaScript loads. Don't wrap hero content in Motion `initial={{ opacity: 0 }}`.
+- **Links to the contact form:** use `<CareLink care="home-health">` instead of `/contact?care=…` query strings, so `/contact` stays one indexable URL.
+- **Collapsible content** (FAQ answers, job details) stays in the HTML and is hidden with CSS + `inert`, so search and AI engines can read it.
+- **Emphasis:** `PageHero` / `SectionIntro` text and the service intros accept `**bold**`, rendered as `<strong>`.
+- **Security headers** (CSP, frame, MIME, referrer, permissions, HSTS) are set in `next.config.ts`. Add any new third-party domain to the CSP there.
+- **`/llms.txt`** is generated from the content files for AI answer engines.
 
 ## Motion & UI patterns
 
@@ -66,6 +81,7 @@ Until `RESEND_API_KEY` and `CONTACT_TO_EMAIL` are set, the forms show a friendly
 | Sticky image story, sliding name typography, 3D flip cards, photo marquee | About |
 | Auto-advancing story stepper, interactive checklist with progress ring | Getting Started |
 | Live-search FAQ with sticky category filter | FAQ |
+| Click-to-load map facade | Contact |
 
 All motion respects `prefers-reduced-motion`.
 
@@ -128,5 +144,6 @@ All photos are from [Unsplash](https://unsplash.com) under the [Unsplash License
 | `nurses-team.jpg` | https://unsplash.com/photos/AZq99Wqunjs |
 
 </details>
-#   O p e n - A r m s - H e a r t - S e r v i c e s  
+#   O p e n - A r m s - H e a r t - S e r v i c e s 
+ 
  

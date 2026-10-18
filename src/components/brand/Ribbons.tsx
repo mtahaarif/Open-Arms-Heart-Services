@@ -51,18 +51,27 @@ export function Ribbons({ className = "", animate = true }: { className?: string
   );
 }
 
-/** Soft drifting colour blobs used behind heroes. */
+/**
+ * Soft drifting colour blobs used behind heroes. Radial gradients rather than
+ * blur filters: the same soft edge without rasterising a 64px blur every frame.
+ */
 export function Aurora({ className = "", dark = false }: { className?: string; dark?: boolean }) {
+  const a = dark ? "rgb(116 70 189 / 0.45)" : "rgb(225 210 248 / 0.85)";
+  const b = dark ? "rgb(234 106 156 / 0.28)" : "rgb(253 203 224 / 0.75)";
+  const c = dark ? "rgb(170 134 228 / 0.28)" : "rgb(240 233 252 / 0.9)";
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
       <div
-        className={`animate-blob absolute -top-1/4 -left-1/6 h-[55vmax] w-[55vmax] rounded-full blur-3xl ${dark ? "bg-iris-600/40" : "bg-iris-200/70"}`}
+        className="animate-blob absolute -top-1/4 -left-1/6 h-[60vmax] w-[60vmax] rounded-full"
+        style={{ background: `radial-gradient(closest-side, ${a}, transparent)` }}
       />
       <div
-        className={`animate-blob absolute top-1/4 -right-1/5 h-[45vmax] w-[45vmax] rounded-full blur-3xl [animation-delay:-6s] ${dark ? "bg-blush-500/25" : "bg-blush-200/60"}`}
+        className="animate-blob absolute top-1/4 -right-1/5 h-[50vmax] w-[50vmax] rounded-full [animation-delay:-6s]"
+        style={{ background: `radial-gradient(closest-side, ${b}, transparent)` }}
       />
       <div
-        className={`animate-blob absolute -bottom-1/3 left-1/4 h-[40vmax] w-[40vmax] rounded-full blur-3xl [animation-delay:-12s] ${dark ? "bg-iris-400/25" : "bg-iris-100/80"}`}
+        className="animate-blob absolute -bottom-1/3 left-1/4 h-[45vmax] w-[45vmax] rounded-full [animation-delay:-12s]"
+        style={{ background: `radial-gradient(closest-side, ${c}, transparent)` }}
       />
     </div>
   );

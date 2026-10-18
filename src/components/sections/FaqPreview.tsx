@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { ArrowRight, MessagesSquare } from "lucide-react";
 import { faqs } from "@/lib/faqs";
@@ -23,11 +23,11 @@ export function FaqPreview({ count = 5 }: { count?: number }) {
                 All FAQs <ArrowRight className="size-4" />
               </Link>
               <a href={site.phone.href} className="btn-ghost">
-                <MessagesSquare className="size-4 text-blush-600" /> Ask us directly
+                <MessagesSquare className="size-4 text-blush-700" /> Ask us directly
               </a>
             </Reveal>
             <Reveal delay={0.3} className="relative mt-10 hidden h-56 overflow-hidden rounded-[2rem] lg:block">
-              <Image src="/images/friends-talking.jpg" alt="Two older women talking together on a sofa" fill sizes="40vw" className="object-cover" />
+              <Photo src="/images/friends-talking.jpg" alt="Two older women talking together on a sofa" sizes="480px" className="object-cover" />
               <div className="absolute inset-0 bg-linear-to-tr from-iris-900/40 to-transparent" />
             </Reveal>
           </div>

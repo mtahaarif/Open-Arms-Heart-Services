@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Reveal, SplitHeading } from "./motion";
+import { rich } from "@/lib/rich";
 
 export function SectionIntro({
   eyebrow,
@@ -36,7 +37,9 @@ export function SectionIntro({
       />
       {text && (
         <Reveal delay={0.15}>
-          <p className={`mt-5 text-lg leading-relaxed ${dark ? "text-iris-100/80" : "text-ink-soft"}`}>{text}</p>
+          <p className={`mt-5 text-lg leading-relaxed ${dark ? "text-iris-100/80" : "text-ink-soft"}`}>
+            {typeof text === "string" ? rich(text) : text}
+          </p>
         </Reveal>
       )}
       {children}

@@ -10,6 +10,15 @@ import { CrossMarquee } from "@/components/sections/home/CrossMarquee";
 import { Hero } from "@/components/sections/home/Hero";
 import { Manifesto } from "@/components/sections/home/Manifesto";
 import { PillarsReveal } from "@/components/sections/home/PillarsReveal";
+import { pageMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
+
+export const metadata = pageMetadata({
+  path: "/",
+  absoluteTitle: true,
+  title: "Open Arms & Heart Services | Home Health & Home Care in FL",
+  description: site.description,
+});
 
 export default function HomePage() {
   return (

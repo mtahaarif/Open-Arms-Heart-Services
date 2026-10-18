@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ArrowRight, Phone } from "lucide-react";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { PaymentGrid } from "@/components/sections/PaymentGrid";
@@ -6,13 +5,13 @@ import { ReadyChecklist, ReferralPanel, StoryStepper } from "@/components/sectio
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Getting Started",
-  description:
-    "How to start home health or home care with Open Arms & Heart Services: what happens after you call, what to have ready, and ways to pay — including Florida Medicaid.",
-  alternates: { canonical: "/getting-started" },
-};
+export const metadata = pageMetadata({
+  path: "/getting-started",
+  title: "How to Start Home Care",
+  description: "What happens after you call, what to have ready for your first visit, and how to pay for care, including Florida Medicaid.",
+});
 
 export default function GettingStartedPage() {
   return (
@@ -20,7 +19,7 @@ export default function GettingStartedPage() {
       <PageHero
         eyebrow="Getting started"
         title="Starting care, *without the stress.*"
-        text="One phone call is all it takes. Here's what happens next, what to have on hand, and how paying for care works."
+        text="**One phone call** is all it takes. Here's what happens next, what to have on hand, and how paying for care works."
         crumbs={[{ label: "Getting Started" }]}
         images={["/images/breakfast-family.jpg", "/images/friends-talking.jpg"]}
       >
@@ -28,7 +27,7 @@ export default function GettingStartedPage() {
           Request a consultation <ArrowRight className="size-4" />
         </a>
         <a href={site.phone.href} className="btn-ghost">
-          <Phone className="size-4 text-blush-600" /> {site.phone.display}
+          <Phone className="size-4 text-blush-700" /> {site.phone.display}
         </a>
       </PageHero>
       <StoryStepper />

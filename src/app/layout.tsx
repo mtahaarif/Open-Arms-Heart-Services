@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Courgette, Figtree, Fraunces, Quicksand } from "next/font/google";
+import Script from "next/script";
+import { LogoDefs } from "@/components/brand/Logo";
 import { MobileCallBar, ScrollProgress } from "@/components/layout/Chrome";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -8,45 +10,41 @@ import { allServices } from "@/lib/services";
 import { site } from "@/lib/site";
 import "./globals.css";
 
+// Variable weight axis only — the optional SOFT/WONK/opsz axes roughly doubled the font payload.
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
-  axes: ["SOFT", "WONK", "opsz"],
   style: ["normal", "italic"],
   display: "swap",
 });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
 const courgette = Courgette({ subsets: ["latin"], weight: "400", variable: "--font-courgette", display: "swap" });
-const quicksand = Quicksand({ subsets: ["latin"], variable: "--font-quicksand", display: "swap" });
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  weight: "500",
+  variable: "--font-quicksand",
+  display: "swap",
+  preload: false,
+});
+
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.shortName} | Home Health & Home Care in Central Florida`,
+    default: `${site.shortName} | Home Health & Home Care in FL`,
     template: `%s | ${site.shortName}`,
   },
   description: site.description,
   applicationName: site.shortName,
-  keywords: [
-    "home health care Central Florida",
-    "home care Haines City",
-    "skilled nursing at home",
-    "respite care Florida",
-    "companion care",
-    "Medicaid home care provider",
-    "Polk County home care",
-    "Lake County home care",
-    "Orange County home care",
-  ],
   openGraph: {
     type: "website",
     siteName: site.name,
     locale: "en_US",
-    title: `${site.shortName} | Home Health & Home Care`,
-    description: site.description,
   },
   twitter: { card: "summary_large_image" },
-  alternates: { canonical: "/" },
+  ...(GOOGLE_VERIFICATION ? { verification: { google: GOOGLE_VERIFICATION } } : {}),
 };
 
 export const viewport: Viewport = {
@@ -60,6 +58,7 @@ const jsonLd = {
   "@type": "MedicalBusiness",
   name: site.name,
   url: site.url,
+  description: site.description,
   telephone: "+1-321-430-8194",
   faxNumber: "+1-855-257-1340",
   foundingDate: String(site.founded),
@@ -90,6 +89,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body>
+        {GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+              title="Google Tag Manager"
+            />
+          </noscript>
+        )}
+        <LogoDefs />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Providers>
           <ScrollProgress />
@@ -98,6 +109,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <MobileCallBar />
         </Providers>
+        {GTM_ID && (
+          <Script id="gtm" strategy="lazyOnload">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}
+          </Script>
+        )}
       </body>
     </html>
   );

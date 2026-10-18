@@ -1,13 +1,23 @@
 import Link from "next/link";
 import { ArrowUpRight, Clock, MapPin, Phone, Printer } from "lucide-react";
 import { homeCare, homeHealth } from "@/lib/services";
-import { fullAddress, nav, site } from "@/lib/site";
+import { fullAddress, site } from "@/lib/site";
 import { Logo, LogoMark } from "../brand/Logo";
 import { Marquee } from "../ui/Marquee";
 import { FacebookIcon, LinkedInIcon } from "../ui/SocialIcons";
 import { BackToTop } from "./BackToTop";
 
 const words = ["Open arms", "Open heart", "Open lines", "Open door"];
+
+// Descriptive anchors (the header already uses the short labels).
+const footerLinks = [
+  { href: "/about", label: "About our agency" },
+  { href: "/services", label: "All home care services" },
+  { href: "/getting-started", label: "How to start care" },
+  { href: "/careers", label: "Caregiver jobs" },
+  { href: "/faq", label: "Home care FAQs" },
+  { href: "/contact", label: "Contact our office" },
+];
 
 export function Footer() {
   return (
@@ -61,9 +71,9 @@ export function Footer() {
 
         {[homeHealth, homeCare].map((p) => (
           <div key={p.slug}>
-            <h3 className="font-sans text-sm font-bold tracking-[0.16em] text-blush-200 uppercase">
+            <h2 className="font-sans text-sm font-bold tracking-[0.16em] text-blush-200 uppercase">
               {p.name} <span className="font-medium text-iris-300/70 normal-case">· {p.level}</span>
-            </h3>
+            </h2>
             <ul className="mt-5 space-y-2.5 text-[0.95rem]">
               {p.services.map((s) => (
                 <li key={s.slug}>
@@ -77,7 +87,7 @@ export function Footer() {
         ))}
 
         <div>
-          <h3 className="font-sans text-sm font-bold tracking-[0.16em] text-blush-200 uppercase">Contact</h3>
+          <h2 className="font-sans text-sm font-bold tracking-[0.16em] text-blush-200 uppercase">Contact</h2>
           <ul className="mt-5 space-y-4 text-[0.95rem]">
             <li>
               <a href={site.phone.href} className="group flex gap-3 text-white">
@@ -111,7 +121,7 @@ export function Footer() {
 
       <div className="container-x relative">
         <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2 border-t border-white/10 py-6 text-sm">
-          {nav.map((n) => (
+          {footerLinks.map((n) => (
             <Link key={n.href} href={n.href} className="group inline-flex items-center gap-1 text-iris-100/70 hover:text-white">
               {n.label}
               <ArrowUpRight className="size-3 opacity-0 transition group-hover:opacity-100" />

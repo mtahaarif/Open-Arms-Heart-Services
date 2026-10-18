@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { homeCare, homeHealth, type PillarSlug, type Service } from "@/lib/services";
 import { EASE, Reveal } from "../../ui/motion";
+import { CareLink } from "@/components/forms/CareLink";
 
 function ServiceBlock({ s, i, onActive }: { s: Service; i: number; onActive: (slug: string) => void }) {
   const ref = useRef<HTMLElement>(null);
@@ -22,7 +23,7 @@ function ServiceBlock({ s, i, onActive }: { s: Service; i: number; onActive: (sl
     <article ref={ref} id={s.slug} className="scroll-mt-32 border-b border-iris-100 py-14 first:pt-0 last:border-0">
       <Reveal className="relative h-72 overflow-hidden rounded-[2rem] sm:h-[420px]">
         <motion.div style={{ y }} className="absolute inset-[-12%_0]">
-          <Image src={s.image} alt={s.imageAlt} fill sizes="(min-width: 1024px) 60vw, 100vw" className="object-cover" />
+          <Photo src={s.image} alt={s.imageAlt}  sizes="(min-width: 1280px) 880px, (min-width: 1024px) 65vw, 100vw" className="object-cover" />
         </motion.div>
         <div className="absolute inset-0 bg-linear-to-t from-iris-950/60 via-transparent to-transparent" />
         <div className="absolute bottom-5 left-5 flex items-center gap-3">
@@ -61,12 +62,12 @@ function ServiceBlock({ s, i, onActive }: { s: Service; i: number; onActive: (sl
           <Sparkles className="absolute -top-4 -right-4 size-28 text-white/5" />
           <p className="text-sm font-bold tracking-[0.16em] text-blush-200 uppercase">Who it helps</p>
           <p className="mt-4 leading-relaxed text-iris-50/90">{s.helps}</p>
-          <Link
-            href={`/contact?care=${homeHealth.services.includes(s) ? "home-health" : "home-care"}`}
+          <CareLink
+            care={homeHealth.services.includes(s) ? "home-health" : "home-care"}
             className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blush-200 hover:text-white"
           >
             Ask about {s.name.toLowerCase()} <ArrowRight className="size-4" />
-          </Link>
+          </CareLink>
         </Reveal>
       </div>
     </article>
@@ -86,7 +87,7 @@ export function ServiceScrollspy({ slug }: { slug: PillarSlug }) {
       <div className="container-x grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
         <aside className="hidden lg:block">
           <div className="sticky top-32">
-            <p className="text-sm font-bold tracking-[0.16em] text-blush-600 uppercase">{pillar.level} services</p>
+            <p className="text-sm font-bold tracking-[0.16em] text-blush-700 uppercase">{pillar.level} services</p>
             <nav aria-label={`${pillar.name} services`} className="relative mt-5 pl-5">
               <span className="absolute top-0 bottom-0 left-0 w-0.5 rounded bg-iris-100" />
               <motion.span

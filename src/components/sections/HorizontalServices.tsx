@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { homeCare, homeHealth, type PillarSlug } from "@/lib/services";
 import { GlowCard } from "../ui/GlowCard";
+import { rich } from "@/lib/rich";
 
 /**
  * Pinned horizontal scroller: the section sticks to the viewport while vertical
@@ -61,7 +62,7 @@ export function HorizontalServices({ slug }: { slug: PillarSlug }) {
               {pillar.headline.split(",")[0]},
               <span className="text-gradient-light block italic">{pillar.headline.split(",")[1]?.trim() ?? ""}</span>
             </h2>
-            <p className="mt-6 max-w-md text-lg text-iris-100/75">{pillar.intro}</p>
+            <p className="mt-6 max-w-md text-lg text-iris-100/75">{rich(pillar.intro)}</p>
             <div className="mt-10 flex items-center gap-4 text-sm text-iris-200/80">
               <div className="h-1 w-40 overflow-hidden rounded-full bg-white/10">
                 <motion.div style={{ width: bar }} className="h-full rounded-full bg-linear-to-r from-iris-400 to-blush-400" />
@@ -77,11 +78,10 @@ export function HorizontalServices({ slug }: { slug: PillarSlug }) {
               className="group flex w-[82vw] shrink-0 flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] backdrop-blur-xl sm:w-[400px]"
             >
               <div className="relative h-52 overflow-hidden sm:h-60">
-                <Image
+                <Photo
                   src={s.image}
                   alt={s.imageAlt}
-                  fill
-                  sizes="400px"
+                  sizes="(min-width: 640px) 400px, 82vw"
                   className="object-cover transition duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-iris-950 via-iris-950/20 to-transparent" />
@@ -95,8 +95,8 @@ export function HorizontalServices({ slug }: { slug: PillarSlug }) {
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-iris-100/70">{s.summary}</p>
                 <ul className="mt-5 space-y-2">
                   {s.points.map((pt) => (
-                    <li key={pt} className="flex items-start gap-2.5 text-sm text-iris-50/90">
-                      <Check className="mt-0.5 size-4 shrink-0 text-blush-300" /> {pt}
+                    <li key={pt} className="tick text-sm text-iris-50/90 [--tick:var(--color-blush-300)]">
+                      {pt}
                     </li>
                   ))}
                 </ul>
@@ -104,7 +104,7 @@ export function HorizontalServices({ slug }: { slug: PillarSlug }) {
                   href={`${pillar.href}#${s.slug}`}
                   className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-blush-200 transition hover:text-white"
                 >
-                  Learn more <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  Learn more<span className="sr-only"> about {s.name.toLowerCase()}</span> <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
               </div>
             </GlowCard>

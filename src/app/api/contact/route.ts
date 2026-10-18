@@ -22,34 +22,34 @@ const clean = (v: unknown, max = 2000) => (typeof v === "string" ? v.trim().slic
 const escape = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
 export async function POST(req: Request) {
+  // JSON from the enhanced form; urlencoded/multipart when JavaScript is unavailable.
+  const isJson = (req.headers.get("content-type") ?? "").includes("application/json");
   let body: Record<string, unknown>;
   try {
-    body = await req.json();
+    body = isJson ? await req.json() : Object.fromEntries((await req.formData()).entries());
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
+  /** JSON callers get JSON; plain form posts are redirected to the thank-you page. */
+  const reply = (status: number, error?: string) => {
+    if (isJson) return NextResponse.json(error ? { error } : { ok: true }, { status });
+    const url = new URL(error ? "/thank-you?status=error" : "/thank-you", req.url);
+    return NextResponse.redirect(url, 303);
+  };
+
   // Honeypot — bots fill every field. Pretend success.
-  if (clean(body.company)) return NextResponse.json({ ok: true });
+  if (clean(body.company)) return reply(200);
 
   const name = clean(body.name, 120);
   const phone = clean(body.phone, 40);
   const email = clean(body.email, 160);
-  if (!name || !phone) {
-    return NextResponse.json({ error: "Please include your name and phone number." }, { status: 422 });
-  }
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ error: "That email address doesn't look right." }, { status: 422 });
-  }
+  if (!name || !phone) return reply(422, "Please include your name and phone number.");
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return reply(422, "That email address doesn't look right.");
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
-  if (!apiKey || !to) {
-    return NextResponse.json(
-      { error: "Our online form isn't connected yet." },
-      { status: 503 },
-    );
-  }
+  if (!apiKey || !to) return reply(503, "Our online form isn't connected yet.");
 
   const isCareers = body.variant === "careers";
   const rows = Object.entries(FIELDS)
@@ -88,8 +88,8 @@ export async function POST(req: Request) {
 
   if (!res.ok) {
     console.error("Resend error", res.status, await res.text().catch(() => ""));
-    return NextResponse.json({ error: "We couldn't send your message right now." }, { status: 502 });
+    return reply(502, "We couldn't send your message right now.");
   }
 
-  return NextResponse.json({ ok: true });
+  return reply(200);
 }

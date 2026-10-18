@@ -1,10 +1,14 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { Plus } from "lucide-react";
 import { useId, useState } from "react";
 import { EASE } from "./motion";
 
+/**
+ * Animated accordion. Every answer is always rendered (collapsed with CSS grid rows
+ * and `inert`), so the full text is in the HTML for search engines and answer engines.
+ */
 export function Accordion({
   items,
   defaultOpen = 0,
@@ -23,11 +27,9 @@ export function Accordion({
         const isOpen = open === i;
         const id = `${base}-${i}`;
         return (
-          <motion.li
+          <li
             key={item.q}
-            layout
-            transition={{ layout: { duration: 0.5, ease: EASE } }}
-            className={`overflow-hidden rounded-3xl border transition-colors duration-500 ${
+            className={`overflow-hidden rounded-3xl border transition-[background-color,border-color,box-shadow] duration-500 ${
               dark
                 ? isOpen
                   ? "border-white/20 bg-white/10"
@@ -37,44 +39,45 @@ export function Accordion({
                   : "border-iris-100 bg-white/60 hover:border-iris-200 hover:bg-white"
             }`}
           >
-            <button
-              type="button"
-              aria-expanded={isOpen}
-              aria-controls={id}
-              onClick={() => setOpen(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left sm:px-7"
-            >
-              <span className={`text-lg font-semibold ${dark ? "text-white" : "text-iris-950"}`}>{item.q}</span>
-              <motion.span
-                animate={{ rotate: isOpen ? 135 : 0 }}
-                transition={{ duration: 0.5, ease: EASE }}
-                className={`grid size-9 shrink-0 place-items-center rounded-full ${
-                  isOpen
-                    ? "bg-linear-to-br from-iris-600 to-blush-500 text-white"
-                    : dark
-                      ? "bg-white/10 text-blush-200"
-                      : "bg-iris-50 text-iris-700"
-                }`}
+            <h3 className="m-0 font-sans">
+              <button
+                type="button"
+                id={`${id}-q`}
+                aria-expanded={isOpen}
+                aria-controls={id}
+                onClick={() => setOpen(isOpen ? null : i)}
+                className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left sm:px-7"
               >
-                <Plus className="size-4" />
-              </motion.span>
-            </button>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  id={id}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
+                <span className={`text-lg font-semibold tracking-normal ${dark ? "text-white" : "text-iris-950"}`}>{item.q}</span>
+                <motion.span
+                  animate={{ rotate: isOpen ? 135 : 0 }}
                   transition={{ duration: 0.5, ease: EASE }}
+                  className={`grid size-9 shrink-0 place-items-center rounded-full ${
+                    isOpen
+                      ? "bg-linear-to-br from-iris-600 to-blush-500 text-white"
+                      : dark
+                        ? "bg-white/10 text-blush-200"
+                        : "bg-iris-50 text-iris-700"
+                  }`}
                 >
-                  <p className={`px-6 pb-6 leading-relaxed sm:px-7 ${dark ? "text-iris-100/80" : "text-ink-soft"}`}>
-                    {item.a}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.li>
+                  <Plus className="size-4" />
+                </motion.span>
+              </button>
+            </h3>
+            <div
+              id={id}
+              role="region"
+              aria-labelledby={`${id}-q`}
+              inert={!isOpen}
+              className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[var(--ease-out-expo)] ${
+                isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <p className={`px-6 pb-6 leading-relaxed sm:px-7 ${dark ? "text-iris-100/80" : "text-ink-soft"}`}>{item.a}</p>
+              </div>
+            </div>
+          </li>
         );
       })}
     </ul>

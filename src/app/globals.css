@@ -66,6 +66,29 @@
     0% { transform: scale(0.8); opacity: 0.7; }
     100% { transform: scale(2.2); opacity: 0; }
   }
+
+  /* Above-the-fold entrances. Pure CSS so they start at first paint instead of
+     waiting for JavaScript to hydrate (keeps LCP / Speed Index fast). */
+  @keyframes enter-up {
+    from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  }
+  @keyframes enter-left {
+    from { opacity: 0; transform: translate3d(-36px, 0, 0); }
+  }
+  @keyframes enter-right {
+    from { opacity: 0; transform: translate3d(36px, 0, 0); }
+  }
+  @keyframes enter-pop {
+    from { opacity: 0; transform: scale(0.7) rotate(-20deg); }
+  }
+  /* Headline words rise while staying painted, so the H1 counts for LCP immediately. */
+  @keyframes word-rise {
+    from { transform: translate3d(0, 0.45em, 0) rotate(2deg); }
+  }
+  /* Hero photo reveal via clip-path — the image is painted from the first frame. */
+  @keyframes arch-reveal {
+    from { clip-path: inset(18% 8% 0 8% round 48px); transform: translate3d(0, 24px, 0); }
+  }
 }
 
 @theme inline {
@@ -108,8 +131,58 @@
   transition: all 0.3s var(--ease-out-expo);
 }
 
+/* Check-mark bullets drawn with pseudo-elements (no per-item SVG nodes). */
+@utility tick {
+  position: relative;
+  padding-left: 1.6rem;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--tick, currentColor);
+    -webkit-mask: var(--tick-icon) center / contain no-repeat;
+    mask: var(--tick-icon) center / contain no-repeat;
+  }
+}
+@utility tick-circle {
+  position: relative;
+  padding-left: 1.85rem;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: var(--tick-bg, var(--color-iris-100));
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0.3rem;
+    top: calc(0.1em + 0.3rem);
+    width: 0.65rem;
+    height: 0.65rem;
+    background-color: var(--tick, var(--color-iris-700));
+    -webkit-mask: var(--tick-icon) center / contain no-repeat;
+    mask: var(--tick-icon) center / contain no-repeat;
+  }
+}
+
+@utility enter {
+  animation: var(--enter, enter-up) 0.9s var(--ease-out-expo) both;
+  animation-delay: var(--d, 0ms);
+}
+
 /* ───────────────────────── Base ───────────────────────── */
 @layer base {
+  :root {
+    --tick-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  }
   html {
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 7rem;
@@ -125,7 +198,6 @@
   }
   h1, h2, h3, h4 {
     @apply font-display text-iris-950;
-    font-variation-settings: "SOFT" 60, "WONK" 0;
     letter-spacing: -0.02em;
   }
   :focus-visible {

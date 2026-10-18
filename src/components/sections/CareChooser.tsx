@@ -9,6 +9,7 @@ import { allServices, homeCare, homeHealth } from "@/lib/services";
 import { Aurora } from "../brand/Ribbons";
 import { SectionIntro } from "../ui/SectionIntro";
 import { EASE } from "../ui/motion";
+import { CareLink } from "@/components/forms/CareLink";
 
 /** Interactive "which care fits?" helper. */
 export function CareChooser() {
@@ -23,10 +24,10 @@ export function CareChooser() {
     const pillarOf = (slug: string) => (homeHealth.services.some((s) => s.slug === slug) ? homeHealth : homeCare);
     const verdict =
       skilled && nonSkilled
-        ? { title: "A blend of both", text: "Skilled visits for health needs, plus non-skilled help with daily life — coordinated by one team.", care: "both" }
+        ? { title: "A blend of both", text: "Skilled visits for health needs, plus non-skilled help with daily life — coordinated by one team.", care: "both" as const }
         : skilled
-          ? { title: "Home Health (Skilled)", text: "Clinical care from licensed nurses and therapists, usually with a physician's order. We can coordinate with your doctor.", care: "home-health" }
-          : { title: "Home Care (Non-Skilled)", text: "Hands-on help with daily routines and companionship — no doctor's order needed.", care: "home-care" };
+          ? { title: "Home Health (Skilled)", text: "Clinical care from licensed nurses and therapists, usually with a physician's order. We can coordinate with your doctor.", care: "home-health" as const }
+          : { title: "Home Care (Non-Skilled)", text: "Hands-on help with daily routines and companionship — no doctor's order needed.", care: "home-care" as const };
     return { services, pillarOf, verdict, any: chosen.length > 0 };
   }, [picked]);
 
@@ -139,7 +140,7 @@ export function CareChooser() {
                     exit={{ opacity: 0, y: -12, filter: "blur(6px)" }}
                     transition={{ duration: 0.45, ease: EASE }}
                   >
-                    <p className="text-sm font-semibold tracking-[0.14em] text-blush-600 uppercase">We'd suggest</p>
+                    <p className="text-sm font-semibold tracking-[0.14em] text-blush-700 uppercase">We'd suggest</p>
                     <h3 className="mt-2 text-3xl font-medium text-gradient sm:text-4xl">{result.verdict.title}</h3>
                     <p className="mt-3 text-ink-soft">{result.verdict.text}</p>
                     <ul className="mt-6 space-y-2">
@@ -175,9 +176,9 @@ export function CareChooser() {
                         })}
                       </AnimatePresence>
                     </ul>
-                    <Link href={`/contact?care=${result.verdict.care}`} className="btn-primary mt-7 w-full">
+                    <CareLink care={result.verdict.care} className="btn-primary mt-7 w-full">
                       Talk it through with us <ArrowRight className="size-4" />
-                    </Link>
+                    </CareLink>
                   </motion.div>
                 )}
               </AnimatePresence>

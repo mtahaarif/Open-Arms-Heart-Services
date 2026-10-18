@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import { AnimatePresence, motion, useInView } from "motion/react";
 import { Check, Pause, Play, Printer, Phone, Stethoscope } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -77,7 +77,7 @@ export function StoryStepper() {
                 transition={{ duration: 1, ease: EASE }}
                 className="absolute inset-0"
               >
-                <Image src={s.image} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+                <Photo src={s.image} alt="" sizes="(min-width: 1280px) 620px, (min-width: 1024px) 50vw, 100vw" className="object-cover" />
               </motion.div>
             </AnimatePresence>
             <div className="absolute inset-0 bg-linear-to-r from-transparent to-iris-950/30" />

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
@@ -77,7 +77,7 @@ export function Header() {
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <a href={site.phone.href} className="flex items-center gap-1.5 font-semibold text-iris-800 hover:text-blush-600">
+                  <a href={site.phone.href} className="flex items-center gap-1.5 font-semibold text-iris-800 hover:text-blush-700">
                     <Phone className="size-3.5" /> {site.phone.display}
                   </a>
                   <span className="h-3 w-px bg-iris-200" />
@@ -156,7 +156,7 @@ export function Header() {
                 <a
                   href={site.phone.href}
                   aria-label={`Call ${site.phone.display}`}
-                  className="relative grid size-11 place-items-center rounded-full bg-white text-iris-700 shadow-sm ring-1 ring-iris-100 transition hover:text-blush-600"
+                  className="relative grid size-11 place-items-center rounded-full bg-white text-iris-700 shadow-sm ring-1 ring-iris-100 transition hover:text-blush-700"
                 >
                   <span className="animate-pulse-ring absolute inset-0 rounded-full bg-blush-300/50" />
                   <Phone className="relative size-[1.05rem]" />
@@ -199,7 +199,7 @@ export function Header() {
                     <div key={p.slug} className="rounded-[1.6rem] bg-white/70 p-5">
                       <Link href={p.href} className="group flex items-baseline justify-between">
                         <span>
-                          <span className="text-[0.7rem] font-bold tracking-[0.16em] text-blush-600 uppercase">{p.level}</span>
+                          <span className="text-[0.7rem] font-bold tracking-[0.16em] text-blush-700 uppercase">{p.level}</span>
                           <span className="block font-display text-xl text-iris-950">{p.name}</span>
                         </span>
                         <ArrowUpRight className="size-4 text-iris-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-iris-700" />
@@ -225,10 +225,9 @@ export function Header() {
                     href="/services#care-finder"
                     className="group relative isolate flex flex-col justify-end overflow-hidden rounded-[1.6rem] p-5 text-white"
                   >
-                    <Image
+                    <Photo
                       src="/images/hero-caregiver-laughing.jpg"
                       alt=""
-                      fill
                       sizes="320px"
                       className="-z-10 object-cover transition duration-700 group-hover:scale-105"
                     />

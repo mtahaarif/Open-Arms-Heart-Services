@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { AnimatePresence, motion } from "motion/react";
+import { Photo } from "@/components/ui/Photo";
+import { motion } from "motion/react";
 import { useLenis } from "lenis/react";
 import { ArrowUpRight, BadgeCheck, Check, GraduationCap, HeartHandshake, MapPin, Plus, Users } from "lucide-react";
 import { useState } from "react";
@@ -38,10 +38,10 @@ export function CareersClient() {
       <section className="relative py-24 sm:py-28">
         <div className="container-x grid gap-4 lg:grid-cols-3">
           <Reveal className="relative min-h-[380px] overflow-hidden rounded-[2.25rem] lg:row-span-2 lg:min-h-0">
-            <Image src="/images/nurses-team.jpg" alt="Two smiling healthcare workers in scrubs" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover object-top" />
+            <Photo src="/images/nurses-team.jpg" alt="Two smiling healthcare workers in scrubs" sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover object-top" />
             <div className="absolute inset-0 bg-linear-to-t from-iris-950/85 via-iris-950/10 to-transparent" />
             <div className="absolute right-0 bottom-0 left-0 p-7 text-white">
-              <p className="font-display text-3xl">Bring your heart to work.</p>
+              <h2 className="font-display text-3xl text-white">Bring your heart to work.</h2>
               <p className="mt-2 text-iris-100/80">We hire for kindness and train for excellence.</p>
             </div>
           </Reveal>
@@ -87,6 +87,7 @@ export function CareersClient() {
               const isOpen = open === i;
               return (
                 <li key={r.title}>
+                  <h3 className="m-0 font-sans tracking-normal">
                   <button
                     type="button"
                     aria-expanded={isOpen}
@@ -98,7 +99,7 @@ export function CareersClient() {
                       <span className="block font-display text-2xl text-iris-950 transition group-hover:translate-x-2 group-hover:text-iris-700 sm:text-3xl">
                         {r.title}
                       </span>
-                      <span className="mt-1 block text-sm font-semibold tracking-[0.12em] text-blush-600 uppercase">{r.type}</span>
+                      <span className="mt-1 block text-sm font-semibold tracking-[0.12em] text-blush-700 uppercase">{r.type}</span>
                     </span>
                     <motion.span
                       animate={{ rotate: isOpen ? 45 : 0 }}
@@ -110,31 +111,29 @@ export function CareersClient() {
                       <Plus className="size-5" />
                     </motion.span>
                   </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.5, ease: EASE }}
-                        className="overflow-hidden"
-                      >
-                        <div className="grid gap-6 pb-8 sm:pl-14 md:grid-cols-[1.3fr_1fr_auto] md:items-end">
-                          <p className="text-lg text-ink-soft">{r.text}</p>
-                          <ul className="space-y-2">
-                            {r.needs.map((n) => (
-                              <li key={n} className="flex items-start gap-2 text-sm text-ink">
-                                <Check className="mt-0.5 size-4 shrink-0 text-blush-500" /> {n}
-                              </li>
-                            ))}
-                          </ul>
-                          <button type="button" onClick={() => apply(r.title)} className="btn-primary">
-                            Apply now <ArrowUpRight className="size-4" />
-                          </button>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  </h3>
+                  <div
+                    inert={!isOpen}
+                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[var(--ease-out-expo)] ${
+                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="grid gap-6 pb-8 sm:pl-14 md:grid-cols-[1.3fr_1fr_auto] md:items-end">
+                        <p className="text-lg text-ink-soft">{r.text}</p>
+                        <ul className="space-y-2">
+                          {r.needs.map((n) => (
+                            <li key={n} className="flex items-start gap-2 text-sm text-ink">
+                              <Check className="mt-0.5 size-4 shrink-0 text-blush-500" /> {n}
+                            </li>
+                          ))}
+                        </ul>
+                        <button type="button" onClick={() => apply(r.title)} className="btn-primary">
+                          Apply for this role <ArrowUpRight className="size-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </li>
               );
             })}

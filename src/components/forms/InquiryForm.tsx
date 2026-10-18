@@ -5,6 +5,7 @@ import { ArrowRight, CircleCheck, LoaderCircle, Phone, TriangleAlert } from "luc
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { roles } from "@/lib/content";
 import { site } from "@/lib/site";
+import { CARE_KEY } from "./CareLink";
 import { EASE } from "../ui/motion";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -55,7 +56,16 @@ export function InquiryForm({
   const [care, setCare] = useState(defaultCare ?? "unsure");
 
   useEffect(() => {
-    if (defaultCare) setCare(defaultCare);
+    if (defaultCare) return setCare(defaultCare);
+    // Pre-selection from <CareLink> (or a legacy ?care= link).
+    let stored: string | null = null;
+    try {
+      stored = sessionStorage.getItem(CARE_KEY);
+      sessionStorage.removeItem(CARE_KEY);
+    } catch {}
+    const fromQuery = new URLSearchParams(window.location.search).get("care");
+    const next = stored ?? fromQuery;
+    if (next && careOptions.some((o) => o.value === next)) setCare(next);
   }, [defaultCare]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -98,29 +108,31 @@ export function InquiryForm({
             >
               <CircleCheck className="size-10" />
             </motion.span>
-            <h3 className="mt-6 text-3xl font-medium">Thank you — we've got it.</h3>
+            <h2 className="mt-6 text-3xl font-medium">Thank you — we've got it.</h2>
             <p className="mt-3 max-w-sm text-ink-soft">
               {variant === "careers"
                 ? "Our team will review your details and reach out about next steps."
                 : "A member of our team will call you back soon. If it's urgent, please call us now."}
             </p>
             <a href={site.phone.href} className="btn-ghost mt-6">
-              <Phone className="size-4 text-blush-600" /> {site.phone.display}
+              <Phone className="size-4 text-blush-700" /> {site.phone.display}
             </a>
           </motion.div>
         ) : (
           <motion.form
             key="form"
             onSubmit={onSubmit}
+            method="post"
+            action="/api/contact"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="grid gap-5 sm:grid-cols-2"
           >
             <div className="sm:col-span-2">
-              <h3 className="text-3xl font-medium">
+              <h2 className="text-3xl font-medium">
                 {title ?? (variant === "careers" ? "Apply to join our team" : "Request a care consultation")}
-              </h3>
+              </h2>
               <p className="mt-2 text-ink-soft">
                 {variant === "careers"
                   ? "Tell us a little about yourself — it only takes a minute."
@@ -128,6 +140,7 @@ export function InquiryForm({
               </p>
             </div>
 
+            <input type="hidden" name="variant" value={variant} />
             {/* Honeypot */}
             <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 

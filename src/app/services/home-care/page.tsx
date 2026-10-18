@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { DayTimeline } from "@/components/sections/services/DayTimeline";
@@ -8,13 +6,14 @@ import { RespiteSpotlight } from "@/components/sections/services/RespiteSpotligh
 import { PageHero } from "@/components/ui/PageHero";
 import { homeCare } from "@/lib/services";
 import { site } from "@/lib/site";
+import { CareLink } from "@/components/forms/CareLink";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/services/home-care",
   title: "Home Care (Non-Skilled)",
-  description:
-    "Personal care, companion services, homemaking, respite care, personal supports, transportation and residential habilitation across Polk, Lake and Orange counties, Florida.",
-  alternates: { canonical: "/services/home-care" },
-};
+  description: "Personal care, companions, homemaking, respite, personal supports and transportation for families in Polk, Lake and Orange counties, FL.",
+});
 
 export default function HomeCarePage() {
   return (
@@ -26,11 +25,11 @@ export default function HomeCarePage() {
         crumbs={[{ href: "/services", label: "Services" }, { label: "Home Care" }]}
         images={["/images/companion-care.jpg", "/images/homemaker.jpg"]}
       >
-        <Link href="/contact?care=home-care" className="btn-primary">
+        <CareLink care="home-care" className="btn-primary">
           Request home care <ArrowRight className="size-4" />
-        </Link>
+        </CareLink>
         <a href={site.phone.href} className="btn-ghost">
-          <Phone className="size-4 text-blush-600" /> {site.phone.display}
+          <Phone className="size-4 text-blush-700" /> {site.phone.display}
         </a>
       </PageHero>
       <HoverRevealGrid />

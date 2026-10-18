@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import { motion, useScroll, useTransform } from "motion/react";
 import { RotateCw } from "lucide-react";
 import { useRef, useState } from "react";
@@ -60,7 +60,7 @@ export function StoryChapters() {
                   }}
                   transition={{ duration: 0.9, ease: EASE }}
                 >
-                  <Image src={c.image} alt="" fill sizes="50vw" className="object-cover" />
+                  <Photo src={c.image} alt="" sizes="(min-width: 1280px) 600px, 45vw" className="object-cover" />
                 </motion.div>
               ))}
               <div className="absolute inset-0 bg-linear-to-t from-iris-950/60 via-transparent to-transparent" />
@@ -82,9 +82,9 @@ export function StoryChapters() {
             >
               <Reveal>
                 <div className="relative mb-6 h-56 overflow-hidden rounded-[2rem] lg:hidden">
-                  <Image src={c.image} alt="" fill sizes="100vw" className="object-cover" />
+                  <Photo src={c.image} alt="" sizes="(min-width: 1024px) 1px, 92vw" className="object-cover" />
                 </div>
-                <p className="text-sm font-bold tracking-[0.16em] text-blush-600 uppercase">
+                <p className="text-sm font-bold tracking-[0.16em] text-blush-700 uppercase">
                   {String(i + 1).padStart(2, "0")} · {c.kicker}
                 </p>
                 <h2 className="mt-4 text-4xl leading-[1.08] font-medium sm:text-5xl">{c.title}</h2>
@@ -159,7 +159,7 @@ export function FounderSpotlight() {
               <span className="size-1.5 rounded-full bg-blush-500" /> Meet our founder
             </span>
             <h2 className="mt-5 text-4xl font-medium sm:text-5xl">{site.founder.name}</h2>
-            <p className="mt-1 font-display text-xl text-blush-600 italic">{site.founder.title}</p>
+            <p className="mt-1 font-display text-xl text-blush-700 italic">{site.founder.title}</p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
               As founder and President, {site.founder.name} leads Open Arms &amp; Heart Services with a family-oriented
               approach to care — one that brings skilled home health and non-skilled home care together under one roof
@@ -257,7 +257,7 @@ export function PhotoMarquee() {
                 key={src}
                 className={`relative h-56 shrink-0 overflow-hidden rounded-[1.75rem] sm:h-72 ${i % 2 ? "w-64 sm:w-80" : "w-80 sm:w-[28rem]"}`}
               >
-                <Image src={src} alt="" fill sizes="450px" className="object-cover transition duration-700 hover:scale-110" />
+                <Photo src={src} alt="" sizes="(min-width: 640px) 448px, 320px" className="object-cover transition duration-700 hover:scale-110" />
               </div>
             ))}
           </Marquee>

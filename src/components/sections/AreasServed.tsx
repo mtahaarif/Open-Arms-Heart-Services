@@ -1,12 +1,10 @@
 import { MapPin, Navigation } from "lucide-react";
 import { fullAddress, site } from "@/lib/site";
 import { GlowCard } from "../ui/GlowCard";
-import { Marquee } from "../ui/Marquee";
 import { SectionIntro } from "../ui/SectionIntro";
 import { Reveal, Stagger, StaggerItem } from "../ui/motion";
 
 export function AreasServed() {
-  const towns = site.areas.flatMap((a) => a.towns);
   return (
     <section className="relative isolate overflow-hidden bg-iris-950 py-24 text-white sm:py-32">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_0%,rgb(139_96_211/0.4),transparent_45%),radial-gradient(circle_at_100%_100%,rgb(234_106_156/0.22),transparent_45%)]" />
@@ -72,14 +70,6 @@ export function AreasServed() {
         </Reveal>
       </div>
 
-      <Marquee duration={60} gap="3rem" className="mt-20" pauseOnHover={false}>
-        {towns.map((t) => (
-          <span key={t} className="flex items-center gap-12 font-display text-5xl whitespace-nowrap text-white/[0.08] sm:text-7xl">
-            {t}
-            <span className="size-3 rounded-full bg-blush-400/30" />
-          </span>
-        ))}
-      </Marquee>
     </section>
   );
 }

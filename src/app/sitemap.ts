@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 
 const routes = [
-  { path: "", priority: 1 },
+  { path: "/", priority: 1 },
   { path: "/services", priority: 0.9 },
   { path: "/services/home-health", priority: 0.9 },
   { path: "/services/home-care", priority: 0.9 },

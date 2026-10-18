@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, Phone } from "lucide-react";
@@ -34,7 +34,7 @@ export function CtaBand({
           className="relative isolate overflow-hidden rounded-[2.5rem] bg-iris-950 px-6 py-16 sm:px-12 sm:py-20 lg:px-20"
         >
           <motion.div style={{ y }} className="absolute inset-[-14%_0] -z-10">
-            <Image src={image} alt="" fill sizes="100vw" className="object-cover opacity-40" />
+            <Photo src={image} alt="" sizes="(min-width: 1024px) 960px, 100vw" className="object-cover opacity-40" />
           </motion.div>
           <div className="absolute inset-0 -z-10 bg-linear-to-br from-iris-950 via-iris-900/90 to-blush-800/70" />
           <div className="noise absolute inset-0 -z-10" />

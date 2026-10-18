@@ -1,14 +1,19 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ChevronRight } from "lucide-react";
 import { useRef, type ReactNode } from "react";
+import { rich } from "@/lib/rich";
 import { Aurora, Ribbons } from "../brand/Ribbons";
-import { EASE, SplitHeading } from "./motion";
+import { CssSplitHeading } from "./CssSplitHeading";
+import { Photo } from "./Photo";
 
-/** Shared inner-page hero: aurora + ribbons, breadcrumb, split headline and a parallax image collage. */
+/**
+ * Shared inner-page hero: aurora + ribbons, breadcrumb, split headline and a parallax image collage.
+ * Entrances are CSS so the headline and lead image paint at first render (fast LCP);
+ * Motion only drives the scroll parallax.
+ */
 export function PageHero({
   eyebrow,
   title,
@@ -19,6 +24,7 @@ export function PageHero({
 }: {
   eyebrow: string;
   title: string;
+  /** Supports **bold** emphasis. */
   text: string;
   crumbs: { href?: string; label: string }[];
   images?: [string, string?];
@@ -31,20 +37,14 @@ export function PageHero({
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0.2]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden pt-36 pb-20 sm:pt-44 lg:pb-28">
+    <section ref={ref} className="relative overflow-hidden pt-32 pb-16 sm:pt-44 lg:pb-28">
       <Aurora />
       <div className="hairline-grid absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />
       <Ribbons className="absolute -right-24 bottom-0 h-[70%] w-[75%] opacity-60" />
 
-      <div className="container-x relative grid items-center gap-14 lg:grid-cols-12">
+      <div className="container-x relative grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
         <motion.div style={{ opacity: fade }} className={images ? "lg:col-span-7" : "lg:col-span-10"}>
-          <motion.nav
-            aria-label="Breadcrumb"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="mb-6 flex flex-wrap items-center gap-1 text-sm text-ink-soft"
-          >
+          <nav aria-label="Breadcrumb" className="enter mb-6 flex flex-wrap items-center gap-1 text-sm text-ink-soft">
             <Link href="/" className="hover:text-iris-700">
               Home
             </Link>
@@ -62,63 +62,33 @@ export function PageHero({
                 )}
               </span>
             ))}
-          </motion.nav>
-          <motion.span
-            className="eyebrow"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.05, ease: EASE }}
-          >
+          </nav>
+          <span className="eyebrow enter [--d:60ms]">
             <span className="size-1.5 rounded-full bg-blush-500" />
             {eyebrow}
-          </motion.span>
-          <SplitHeading
-            as="h1"
+          </span>
+          <CssSplitHeading
             text={title}
-            delay={0.1}
-            className="mt-6 text-[2.75rem] leading-[1.02] font-medium sm:text-6xl lg:text-7xl"
+            delay={120}
+            className="mt-6 text-[2.75rem] leading-[1.02] font-medium text-balance sm:text-6xl lg:text-7xl"
           />
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft"
-          >
-            {text}
-          </motion.p>
-          {children && (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-              className="mt-8 flex flex-wrap gap-3"
-            >
-              {children}
-            </motion.div>
-          )}
+          <p className="enter mt-6 max-w-xl text-lg leading-relaxed text-ink-soft [--d:320ms]">{rich(text)}</p>
+          {children && <div className="enter mt-8 flex flex-wrap gap-3 [--d:440ms]">{children}</div>}
         </motion.div>
 
         {images && (
-          <div className="relative mx-auto hidden h-[440px] w-full max-w-md lg:col-span-5 lg:block">
-            <motion.div
-              style={{ y: yMain }}
-              initial={{ opacity: 0, scale: 0.92, borderRadius: "40%" }}
-              animate={{ opacity: 1, scale: 1, borderRadius: "999px 999px 32px 32px" }}
-              transition={{ duration: 1.2, ease: EASE }}
-              className="absolute inset-y-0 right-0 w-[78%] overflow-hidden shadow-2xl shadow-iris-900/20"
-            >
-              <Image src={images[0]} alt="" fill priority sizes="360px" className="object-cover" />
-              <div className="absolute inset-0 bg-linear-to-t from-iris-900/30 to-transparent" />
+          <div className="relative mx-auto h-56 w-full sm:h-72 lg:col-span-5 lg:h-[440px] lg:max-w-md">
+            <motion.div style={{ y: yMain }} className="absolute inset-0 lg:left-auto lg:w-[78%]">
+              <div className="relative size-full overflow-hidden rounded-[2rem] shadow-2xl shadow-iris-900/20 [animation:arch-reveal_1.2s_var(--ease-out-expo)_both] lg:rounded-t-full lg:rounded-b-[32px]">
+                <Photo src={images[0]} alt="" priority sizes="(min-width: 1024px) 360px, 92vw" />
+                <div className="absolute inset-0 bg-linear-to-t from-iris-900/30 to-transparent" />
+              </div>
             </motion.div>
             {images[1] && (
-              <motion.div
-                style={{ y: ySub }}
-                initial={{ opacity: 0, x: -30, rotate: -8 }}
-                animate={{ opacity: 1, x: 0, rotate: -4 }}
-                transition={{ duration: 1.1, delay: 0.3, ease: EASE }}
-                className="absolute bottom-6 left-0 size-48 overflow-hidden rounded-[2rem] border-[6px] border-white shadow-xl"
-              >
-                <Image src={images[1]} alt="" fill sizes="192px" className="object-cover" />
+              <motion.div style={{ y: ySub }} className="absolute bottom-6 left-0 hidden lg:block">
+                <div className="enter relative size-48 -rotate-4 overflow-hidden rounded-[2rem] border-[6px] border-white shadow-xl [--d:300ms] [--enter:enter-left]">
+                  <Photo src={images[1]} alt="" sizes="192px" />
+                </div>
               </motion.div>
             )}
           </div>

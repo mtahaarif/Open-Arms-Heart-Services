@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { ArrowUpRight, Phone } from "lucide-react";
 import { audiences } from "@/lib/content";
@@ -31,10 +31,9 @@ export function AudienceBento() {
           {audiences.map((a, i) => (
             <StaggerItem key={a.title} className={spans[i]}>
               <GlowCard tilt className="group relative isolate h-full overflow-hidden rounded-[2rem]">
-                <Image
+                <Photo
                   src={a.image}
                   alt={a.alt}
-                  fill
                   sizes="(min-width: 768px) 50vw, 100vw"
                   className="-z-10 object-cover transition duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110"
                 />

@@ -18,7 +18,7 @@ export function Reveal({
   delay = 0,
   y = 28,
   x = 0,
-  blur = true,
+  blur = false,
   className,
   as = "div",
   ...rest
@@ -35,8 +35,8 @@ export function Reveal({
   return (
     <Comp
       className={className}
-      initial={{ opacity: 0, y, x, filter: blur ? "blur(8px)" : "blur(0px)" }}
-      whileInView={{ opacity: 1, y: 0, x: 0, filter: "blur(0px)" }}
+      initial={blur ? { opacity: 0, y, x, filter: "blur(8px)" } : { opacity: 0, y, x }}
+      whileInView={blur ? { opacity: 1, y: 0, x: 0, filter: "blur(0px)" } : { opacity: 1, y: 0, x: 0 }}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={{ duration: 0.9, delay, ease: EASE }}
       {...rest}
@@ -72,8 +72,8 @@ export function Stagger({
 }
 
 export const staggerItem = {
-  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
-  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: EASE } },
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } },
 };
 
 export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {

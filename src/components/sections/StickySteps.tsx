@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { AnimatePresence, motion, useInView, useScroll, useTransform } from "motion/react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { steps } from "@/lib/content";
 import { SectionIntro } from "../ui/SectionIntro";
@@ -33,20 +33,20 @@ function Step({
         className="glass w-full overflow-hidden rounded-[2rem]"
       >
         <div className="relative h-56 sm:h-64">
-          <Image src={s.image} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          <Photo src={s.image} alt="" sizes="(min-width: 1280px) 560px, (min-width: 1024px) 45vw, 100vw" className="object-cover" />
           <div className="absolute inset-0 bg-linear-to-t from-white via-white/10 to-transparent" />
         </div>
         <div className="relative -mt-10 p-7 sm:p-9">
           <span className="grid size-14 place-items-center rounded-2xl bg-linear-to-br from-iris-600 to-blush-500 text-white shadow-lg">
             <s.icon className="size-6" />
           </span>
-          <p className="mt-5 text-sm font-semibold tracking-[0.14em] text-blush-600 uppercase">Step {i + 1}</p>
+          <p className="mt-5 text-sm font-semibold tracking-[0.14em] text-blush-700 uppercase">Step {i + 1}</p>
           <h3 className="mt-1 text-3xl font-medium">{s.title}</h3>
           <p className="mt-3 text-lg leading-relaxed text-ink-soft">{s.text}</p>
           <ul className="mt-5 flex flex-wrap gap-2">
             {s.details.map((d) => (
-              <li key={d} className="flex items-center gap-1.5 rounded-full bg-iris-50 px-3 py-1.5 text-sm text-iris-800">
-                <Check className="size-3.5 text-blush-500" /> {d}
+              <li key={d} className="tick rounded-full bg-iris-50 py-1.5 pr-3 text-sm text-iris-800 [--tick:var(--color-blush-500)] before:!left-2.5 before:!top-2 before:!size-3.5 !pl-7">
+                {d}
               </li>
             ))}
           </ul>

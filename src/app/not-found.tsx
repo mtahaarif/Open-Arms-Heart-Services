@@ -20,7 +20,7 @@ export default function NotFound() {
             Back to home <ArrowRight className="size-4" />
           </Link>
           <a href={site.phone.href} className="btn-ghost">
-            <Phone className="size-4 text-blush-600" /> {site.phone.display}
+            <Phone className="size-4 text-blush-700" /> {site.phone.display}
           </a>
         </div>
       </div>

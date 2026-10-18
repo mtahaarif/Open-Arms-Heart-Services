@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { ArrowRight } from "lucide-react";
@@ -65,7 +65,7 @@ export function Manifesto() {
 
         <div className="flex flex-col gap-4 lg:col-span-4 lg:pt-20">
           <Reveal className="relative overflow-hidden rounded-[2rem] bg-iris-900 p-7 text-white">
-            <Image src="/images/hands.jpg" alt="" fill sizes="400px" className="object-cover opacity-25" />
+            <Photo src="/images/hands.jpg" alt="" sizes="400px" className="object-cover opacity-25" />
             <div className="relative">
               <p className="text-sm font-semibold tracking-[0.16em] text-blush-200 uppercase">Serving families since</p>
               <p className="mt-1 font-display text-7xl">

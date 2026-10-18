@@ -13,7 +13,7 @@ export const site = {
   shortName: "Open Arms & Heart Services",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? vercelUrl ?? "http://localhost:3000",
   description:
-    "Skilled home health and non-skilled home care across Central Florida — nursing, therapy, personal care, companionship, respite and more, delivered with open arms and an open heart.",
+    "Skilled home health and non-skilled home care in Polk, Lake and Orange counties, FL: nursing, therapy, personal care, companionship and respite.",
   founded: 2017,
   founder: { name: "Shantana Johnson", title: "Founder & President" },
   npi: "1144748922",
