@@ -46,7 +46,7 @@ export function PillarsReveal() {
           </Reveal>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 lg:h-[620px] lg:flex-row">
+        <div className="mt-14 -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-4 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:h-[620px] lg:snap-none lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
           {pillars.map((p, i) => {
             const isActive = active === i;
             return (
@@ -55,16 +55,17 @@ export function PillarsReveal() {
                 layout
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
+                onClick={() => setActive(i)}
                 animate={{ flexGrow: isActive ? 1.75 : 1 }}
                 transition={{ duration: 0.8, ease: EASE }}
-                className="glow-card group relative isolate min-h-[520px] flex-1 basis-0 overflow-hidden rounded-[2.25rem] lg:min-h-0"
+                className="glow-card group relative isolate min-h-[600px] w-[86vw] max-w-[440px] shrink-0 snap-center overflow-hidden rounded-[2.25rem] sm:w-[70vw] lg:min-h-0 lg:w-auto lg:max-w-none lg:min-w-0 lg:flex-1 lg:basis-0"
               >
                 <motion.div
                   className="absolute inset-0 -z-10"
                   animate={{ scale: isActive ? 1.04 : 1.12 }}
                   transition={{ duration: 1.2, ease: EASE }}
                 >
-                  <Photo src={p.image} alt="" sizes="(min-width: 1280px) 780px, (min-width: 1024px) 60vw, 100vw" className="object-cover" />
+                  <Photo src={p.image} alt="" sizes="(min-width: 1280px) 780px, (min-width: 1024px) 60vw, 70vw" className="object-cover" />
                 </motion.div>
                 <div
                   className={`absolute inset-0 -z-10 transition-colors duration-700 ${
@@ -74,7 +75,7 @@ export function PillarsReveal() {
                   }`}
                 />
 
-                <div className="relative z-10 flex h-full flex-col justify-between p-7 sm:p-10">
+                <div className="relative z-10 flex h-full flex-col justify-between p-6 sm:p-10">
                   <div className="flex items-start justify-between">
                     <span className="glass-dark rounded-full px-4 py-1.5 text-xs font-bold tracking-[0.18em] text-white uppercase">
                       {p.level}
@@ -90,12 +91,12 @@ export function PillarsReveal() {
                     <div
                       className={`transition-all duration-700 ease-[var(--ease-out-expo)] ${
                         isActive
-                          ? "lg:max-h-[420px] lg:translate-y-0 lg:opacity-100 lg:delay-150"
+                          ? "lg:max-h-[460px] lg:translate-y-0 lg:opacity-100 lg:delay-150"
                           : "lg:pointer-events-none lg:max-h-0 lg:translate-y-6 lg:overflow-hidden lg:opacity-0"
                       }`}
                     >
-                      <p className="mt-5 max-w-xl text-white/80">{rich(p.intro)}</p>
-                      <ul className="mt-6 flex max-w-2xl flex-wrap gap-2">
+                      <p className="mt-4 max-w-xl text-[0.95rem] text-white/80 sm:mt-5 sm:text-base">{rich(p.intro)}</p>
+                      <ul className="mt-5 flex max-w-2xl flex-wrap gap-2 sm:mt-6">
                         {p.services.map((s, j) => (
                           <li
                             key={s.slug}
@@ -104,7 +105,7 @@ export function PillarsReveal() {
                           >
                             <Link
                               href={`${p.href}#${s.slug}`}
-                              className="glass-dark inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm text-white transition hover:bg-white/20"
+                              className="glass-dark inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[0.8rem] text-white transition hover:bg-white/20 sm:px-3.5 sm:py-2 sm:text-sm"
                             >
                               <s.icon className="size-3.5 text-blush-200" />
                               {s.name}
@@ -116,7 +117,7 @@ export function PillarsReveal() {
 
                     <Link
                       href={p.href}
-                      className="mt-8 inline-flex items-center gap-3 rounded-full bg-white py-2 pr-2 pl-5 text-sm font-semibold text-iris-900 transition hover:gap-4"
+                      className="mt-6 inline-flex items-center gap-3 rounded-full bg-white py-2 pr-2 pl-5 text-sm sm:mt-8 font-semibold text-iris-900 transition hover:gap-4"
                     >
                       Explore {p.name.toLowerCase()}
                       <span className="grid size-9 place-items-center rounded-full bg-iris-900 text-white transition group-hover:rotate-45">

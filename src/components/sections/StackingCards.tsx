@@ -34,12 +34,12 @@ function StackCard({
   const dim = useTransform(progress, [start, Math.min(1, start + 0.25)], [0, i === total - 1 ? 0 : 0.18]);
 
   return (
-    <div className="mb-5 md:sticky md:mb-0 md:h-[80vh] md:min-h-[560px]" style={{ top: `calc(7rem + ${i * 18}px)` }}>
+    <div className="sticky min-h-[74svh] md:h-[80vh] md:min-h-[560px]" style={{ top: `calc(5.5rem + ${i * 14}px)` }}>
       <motion.article
         style={{ scale, transformOrigin: "top center" }}
         className={`relative grid h-auto overflow-hidden rounded-[2.25rem] border border-white bg-linear-to-br shadow-[0_30px_80px_-40px_rgb(51_27_88/0.45)] md:grid-cols-[1.05fr_1fr] ${tints[i % tints.length]}`}
       >
-        <div className="flex flex-col p-7 sm:p-10">
+        <div className="flex flex-col p-6 sm:p-10">
           <div className="flex items-center gap-4">
             <span className="grid size-14 place-items-center rounded-2xl bg-linear-to-br from-iris-600 to-blush-500 text-white shadow-lg shadow-iris-600/25">
               <s.icon className="size-6" />
@@ -57,7 +57,7 @@ function StackCard({
               </li>
             ))}
           </ul>
-          <p className="mt-6 rounded-2xl bg-white/70 p-4 text-sm text-ink-soft">
+          <p className="mt-6 hidden rounded-2xl bg-white/70 p-4 text-sm text-ink-soft md:block">
             <span className="font-semibold text-iris-800">Who it helps: </span>
             {s.helps}
           </p>

@@ -40,18 +40,18 @@ export function AreasServed() {
           </Reveal>
         </div>
 
-        <Stagger className="mt-14 grid gap-4 md:grid-cols-3" stagger={0.12}>
+        <Stagger className="mt-14 grid grid-cols-3 gap-2 sm:gap-4" stagger={0.12}>
           {site.areas.map((a, i) => (
             <StaggerItem key={a.county}>
-              <GlowCard className="glass-dark h-full rounded-[2rem] p-7">
+              <GlowCard className="glass-dark h-full rounded-[1.2rem] p-3 sm:rounded-[2rem] sm:p-7">
                 <div className="relative z-10">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-display text-3xl text-white">{a.county}</h3>
-                    <span className="font-display text-5xl text-white/10">0{i + 1}</span>
+                    <h3 className="font-display text-base leading-tight text-white sm:text-3xl">{a.county.replace(" County", "")}<span className="hidden sm:inline"> County</span></h3>
+                    <span className="hidden font-display text-5xl text-white/10 sm:block">0{i + 1}</span>
                   </div>
-                  <ul className="mt-6 flex flex-wrap gap-2">
+                  <ul className="mt-3 flex flex-col gap-1.5 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-2">
                     {a.towns.map((t) => (
-                      <li key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-iris-100 transition hover:border-blush-300/60 hover:text-white">
+                      <li key={t} className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-center text-[0.68rem] leading-tight text-iris-100 sm:px-3 sm:py-1.5 sm:text-left sm:text-sm transition hover:border-blush-300/60 hover:text-white">
                         {t}
                       </li>
                     ))}

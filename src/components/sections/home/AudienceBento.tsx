@@ -7,12 +7,13 @@ import { GlowCard } from "../../ui/GlowCard";
 import { SectionIntro } from "../../ui/SectionIntro";
 import { Reveal, Stagger, StaggerItem } from "../../ui/motion";
 
+// Same bento layout at every breakpoint: 6-col grid, tall lead card, then 3+3 and 4+2.
 const spans = [
-  "md:col-span-3 md:row-span-2 min-h-[420px] md:min-h-0",
-  "md:col-span-3 min-h-[280px] md:min-h-0",
-  "md:col-span-3 min-h-[280px] md:min-h-0",
-  "md:col-span-4 min-h-[300px] md:min-h-0",
-  "md:col-span-2 min-h-[300px] md:min-h-0",
+  "col-span-3 row-span-2",
+  "col-span-3",
+  "col-span-3",
+  "col-span-4",
+  "col-span-2",
 ];
 
 /** Bento grid of who we serve — image cards with spotlight glow and hover-reveal copy. */
@@ -27,10 +28,10 @@ export function AudienceBento() {
           text="Our arms are open to seniors, adults and children alike — and to the family members who love them."
         />
 
-        <Stagger className="mt-16 grid gap-4 md:auto-rows-[260px] md:grid-cols-6" stagger={0.1}>
+        <Stagger className="mt-16 grid grid-cols-6 auto-rows-[140px] gap-2.5 sm:auto-rows-[200px] sm:gap-4 md:auto-rows-[260px]" stagger={0.1}>
           {audiences.map((a, i) => (
             <StaggerItem key={a.title} className={spans[i]}>
-              <GlowCard tilt className="group relative isolate h-full overflow-hidden rounded-[2rem]">
+              <GlowCard tilt className="group relative isolate h-full overflow-hidden rounded-[1.4rem] sm:rounded-[2rem]">
                 <Photo
                   src={a.image}
                   alt={a.alt}
@@ -38,13 +39,13 @@ export function AudienceBento() {
                   className="-z-10 object-cover transition duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110"
                 />
                 <div className="absolute inset-0 -z-10 bg-linear-to-t from-iris-950/90 via-iris-950/30 to-transparent transition-opacity duration-700 group-hover:opacity-95" />
-                <div className="relative z-10 flex h-full flex-col justify-between p-6 sm:p-7">
-                  <span className="glass-dark grid size-12 place-items-center rounded-2xl text-blush-200">
-                    <a.icon className="size-5" />
+                <div className="relative z-10 flex h-full flex-col justify-between p-3 sm:p-6">
+                  <span className="glass-dark grid size-9 place-items-center rounded-xl text-blush-200 sm:size-12 sm:rounded-2xl">
+                    <a.icon className="size-4 sm:size-5" />
                   </span>
                   <div className="transition-transform duration-700 ease-[var(--ease-out-expo)] md:translate-y-10 md:group-hover:translate-y-0">
-                    <h3 className="font-display text-2xl text-white sm:text-3xl">{a.title}</h3>
-                    <p className="mt-2 max-w-sm text-white/80 transition-opacity duration-700 md:opacity-0 md:group-hover:opacity-100">
+                    <h3 className="font-display text-[0.95rem] leading-tight text-white sm:text-2xl md:text-3xl">{a.title}</h3>
+                    <p className="mt-2 hidden max-w-sm text-white/80 sm:block transition-opacity duration-700 md:opacity-0 md:group-hover:opacity-100">
                       {a.text}
                     </p>
                   </div>

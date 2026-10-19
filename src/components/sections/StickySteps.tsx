@@ -26,7 +26,7 @@ function Step({
   const s = steps[i];
 
   return (
-    <div ref={ref} className="flex min-h-[70vh] items-center py-6 lg:min-h-[78vh]">
+    <div ref={ref} className="flex min-h-[62svh] items-center py-6 lg:min-h-[78vh]">
       <motion.article
         animate={{ opacity: active ? 1 : 0.35, scale: active ? 1 : 0.96 }}
         transition={{ duration: 0.6, ease: EASE }}
@@ -117,6 +117,39 @@ export function StickySteps({ title = "From first call to *first visit.*" }: { t
         </div>
 
         <div ref={ref}>
+          {/* Mobile/tablet: pinned progress bar (the desktop equivalent is the sticky left column) */}
+          <div className="glass sticky top-3 z-20 -mx-1 mb-2 rounded-2xl p-3 lg:hidden">
+            <div className="flex items-center gap-3">
+              <div className="relative h-10 w-12 overflow-hidden">
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.span
+                    key={active}
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: "0%", opacity: 1 }}
+                    exit={{ y: "-100%", opacity: 0 }}
+                    transition={{ duration: 0.5, ease: EASE }}
+                    className="absolute inset-0 font-display text-4xl leading-10 text-gradient"
+                  >
+                    0{active + 1}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold text-iris-900">{steps[active].title}</p>
+                <div className="mt-2 grid grid-cols-4 gap-1.5" aria-hidden="true">
+                  {steps.map((st, k) => (
+                    <span
+                      key={st.title}
+                      className={`h-1 rounded-full transition-colors duration-500 ${k <= active ? "bg-linear-to-r from-iris-500 to-blush-500" : "bg-iris-100"}`}
+                    />
+                  ))}
+                </div>
+              </div>
+              <span className="text-xs font-semibold text-ink-soft">
+                {active + 1}/{steps.length}
+              </span>
+            </div>
+          </div>
           {steps.map((s, i) => (
             <Step key={s.title} i={i} active={active === i} onActive={setActive} />
           ))}
