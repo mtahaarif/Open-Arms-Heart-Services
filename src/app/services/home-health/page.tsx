@@ -21,7 +21,7 @@ export default function HomeHealthPage() {
         eyebrow="Home Health · Skilled"
         title="Clinical care, *brought home.*"
         text={homeHealth.intro}
-        crumbs={[{ href: "/services", label: "Services" }, { label: "Home Health" }]}
+        crumbs={[{ href: "/services", label: "Types of Care" }, { label: "Home Health" }]}
         images={["/images/skilled-nursing.jpg", "/images/nurse-blood-pressure.jpg"]}
       >
         <CareLink care="home-health" className="btn-primary">
@@ -32,7 +32,7 @@ export default function HomeHealthPage() {
         </a>
       </PageHero>
       <ConnectedSteps />
-      <ServiceScrollspy slug="home-health" />
+      <ServiceScrollspy source="home-health" />
       <CtaBand
         title="Coming home from the hospital? *We can help.*"
         text="Ask your doctor or discharge planner about home health with Open Arms & Heart Services — or call us and we'll coordinate with them."

@@ -5,9 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useLenis } from "lenis/react";
-import { ArrowRight, ArrowUpRight, ChevronDown, Clock, MapPin, Phone, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BadgeCheck, ChevronDown, Mail, MapPin, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { homeCare, homeHealth } from "@/lib/services";
+import { programHref, programs } from "@/lib/services";
 import { nav, site } from "@/lib/site";
 import { Logo } from "../brand/Logo";
 import { EASE, Magnetic } from "../ui/motion";
@@ -70,13 +70,17 @@ export function Header() {
               <div className="container-x flex items-center justify-between py-2.5 text-[0.8rem] text-ink-soft">
                 <div className="flex items-center gap-6">
                   <span className="flex items-center gap-1.5">
-                    <MapPin className="size-3.5 text-blush-500" /> Serving Polk, Lake &amp; Orange counties
+                    <BadgeCheck className="size-3.5 text-blush-500" /> {site.credentials.join(" · ")}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Clock className="size-3.5 text-blush-500" /> {site.hours[0].days}: {site.hours[0].time}
+                    <MapPin className="size-3.5 text-blush-500" /> Serving Central Florida since {site.founded}
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
+                  <a href={`mailto:${site.email}`} className="flex items-center gap-1.5 hover:text-iris-800">
+                    <Mail className="size-3.5" /> {site.email}
+                  </a>
+                  <span className="h-3 w-px bg-iris-200" />
                   <a href={site.phone.href} className="flex items-center gap-1.5 font-semibold text-iris-800 hover:text-blush-700">
                     <Phone className="size-3.5" /> {site.phone.display}
                   </a>
@@ -194,33 +198,36 @@ export function Header() {
                 className="glass absolute inset-x-4 mx-auto mt-3 hidden max-w-5xl origin-top rounded-[2rem] p-3 lg:block"
                 onMouseLeave={() => setMega(false)}
               >
-                <div className="grid grid-cols-[1fr_1fr_0.9fr] gap-3">
-                  {[homeHealth, homeCare].map((p) => (
-                    <div key={p.slug} className="rounded-[1.6rem] bg-white/70 p-5">
-                      <Link href={p.href} className="group flex items-baseline justify-between">
-                        <span>
-                          <span className="text-[0.7rem] font-bold tracking-[0.16em] text-blush-700 uppercase">{p.level}</span>
-                          <span className="block font-display text-xl text-iris-950">{p.name}</span>
+                <div className="grid grid-cols-[2fr_0.9fr] gap-3">
+                  <div className="rounded-[1.6rem] bg-white/70 p-5">
+                    <Link href="/services" className="group flex items-baseline justify-between">
+                      <span>
+                        <span className="text-[0.7rem] font-bold tracking-[0.16em] text-blush-700 uppercase">
+                          {site.credentials[0]}
                         </span>
-                        <ArrowUpRight className="size-4 text-iris-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-iris-700" />
-                      </Link>
-                      <ul className="mt-3 space-y-0.5">
-                        {p.services.map((s) => (
-                          <li key={s.slug}>
-                            <Link
-                              href={`${p.href}#${s.slug}`}
-                              className="group flex items-center gap-3 rounded-xl px-2 py-1.5 text-sm text-ink transition hover:bg-iris-50 hover:text-iris-800"
-                            >
-                              <span className="grid size-7 place-items-center rounded-lg bg-iris-50 text-iris-600 transition group-hover:bg-white">
-                                <s.icon className="size-3.5" />
-                              </span>
-                              {s.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                        <span className="block font-display text-xl text-iris-950">Types of care</span>
+                      </span>
+                      <ArrowUpRight className="size-4 text-iris-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-iris-700" />
+                    </Link>
+                    <ul className="mt-3 grid grid-cols-2 gap-x-3 gap-y-0.5">
+                      {programs.map((p) => (
+                        <li key={p.slug}>
+                          <Link
+                            href={programHref(p)}
+                            className="group flex items-start gap-3 rounded-xl px-2 py-2 text-sm text-ink transition hover:bg-iris-50 hover:text-iris-800"
+                          >
+                            <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-iris-50 text-iris-600 transition group-hover:bg-white">
+                              <p.icon className="size-4" />
+                            </span>
+                            <span>
+                              <span className="block font-semibold text-iris-950">{p.short}</span>
+                              <span className="block text-xs text-ink-soft">{p.tag}</span>
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   <Link
                     href="/services#care-finder"
                     className="group relative isolate flex flex-col justify-end overflow-hidden rounded-[1.6rem] p-5 text-white"

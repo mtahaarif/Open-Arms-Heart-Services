@@ -18,9 +18,9 @@ export function HoverRevealGrid() {
         <SectionIntro
           eyebrow="Home care services"
           title="Help with the little things *that mean everything.*"
-          text="Mix and match services to build the support that fits — a few hours a week, or every day."
+          text="Our caregivers help children, adults, seniors, and people with disabilities remain **comfortable and supported in their homes.**"
         />
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {homeCare.services.map((s, i) => (
             <motion.div
               key={s.slug}
@@ -29,7 +29,7 @@ export function HoverRevealGrid() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "0px 0px -8% 0px" }}
-              transition={{ duration: 0.8, delay: (i % 4) * 0.08, ease: EASE }}
+              transition={{ duration: 0.8, delay: (i % 3) * 0.08, ease: EASE }}
             >
               <GlowCard as="article" className="group relative isolate h-[480px] overflow-hidden rounded-[2rem] focus-within:ring-2 focus-within:ring-iris-400">
                 <Photo
@@ -79,15 +79,18 @@ export function HoverRevealGrid() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.24, ease: EASE }}
-            className="flex h-[480px] flex-col justify-between overflow-hidden rounded-[2rem] bg-linear-to-br from-iris-700 via-iris-600 to-blush-500 p-7 text-white"
+            className="col-span-full flex flex-col justify-between gap-6 overflow-hidden rounded-[2rem] bg-linear-to-br from-iris-700 via-iris-600 to-blush-500 p-7 text-white sm:p-10 md:flex-row md:items-center"
           >
             <p className="font-display text-4xl leading-tight">
               Not sure where to start?
               <span className="mt-2 block text-blush-100 italic">Let&apos;s build it together.</span>
             </p>
             <div>
-              <p className="text-white/85">We&apos;ll recommend a mix of services and a schedule that fits your family.</p>
-              <a href={site.phone.href} className="btn-light mt-6 w-full">
+              <p className="max-w-md text-white/85">
+                Service areas: {site.areas[0].counties.join(", ")} Counties. Our caregivers complete applicable background
+                screening and role-appropriate training.
+              </p>
+              <a href={site.phone.href} className="btn-light mt-6">
                 <Phone className="size-4" /> {site.phone.display}
               </a>
             </div>

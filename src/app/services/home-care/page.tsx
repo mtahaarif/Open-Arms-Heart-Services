@@ -11,18 +11,18 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   path: "/services/home-care",
-  title: "Home Care (Non-Skilled)",
-  description: "Personal care, companions, homemaking, respite, personal supports and transportation for families in Polk, Lake and Orange counties, FL.",
+  title: "Non-Skilled Home Care",
+  description: "Personal care, mobility help, homemaking, companionship and respite in Polk, Highlands, Hardee, Hillsborough and Manatee counties, FL.",
 });
 
 export default function HomeCarePage() {
   return (
     <>
       <PageHero
-        eyebrow="Home Care · Non-Skilled"
+        eyebrow="Non-Skilled Home Health Services"
         title="Everyday help, *with heart.*"
         text={homeCare.intro}
-        crumbs={[{ href: "/services", label: "Services" }, { label: "Home Care" }]}
+        crumbs={[{ href: "/services", label: "Types of Care" }, { label: "Home Care" }]}
         images={["/images/companion-care.jpg", "/images/homemaker.jpg"]}
       >
         <CareLink care="home-care" className="btn-primary">

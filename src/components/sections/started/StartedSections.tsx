@@ -128,7 +128,7 @@ export function ReadyChecklist() {
           <SectionIntro
             eyebrow="Before your first visit"
             title="What to *have ready.*"
-            text="None of this is required to call us — but having it handy helps us build the right plan faster. Tick items off as you go."
+            text="None of this is required to call us — but having what applies to you handy helps us get started faster. Tick items off as you go."
           />
           <Reveal delay={0.2} className="mt-10 flex items-center gap-6">
             <div className="relative size-32">
@@ -210,11 +210,11 @@ export function ReferralPanel() {
                 <Stethoscope className="size-3.5" /> For referral partners
               </span>
               <h2 className="mt-5 text-4xl font-medium text-white sm:text-5xl">
-                Physicians, hospitals &amp; case managers — <span className="text-gradient-light italic">we&apos;re ready.</span>
+                Case managers, social workers &amp; coordinators — <span className="text-gradient-light italic">we&apos;re ready.</span>
               </h2>
               <p className="mt-4 max-w-xl text-lg text-iris-100/80">
-                Send referrals by fax or call our office to coordinate skilled home health, home care or respite for your
-                patients and clients. We&apos;ll keep you updated on their care.
+                We coordinate with families, social workers, case managers, Waiver Support Coordinators, community-based care
+                organizations, and VA Community Care. Send referrals by fax or call our office.
               </p>
             </div>
             <div className="grid gap-3">

@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowUpRight, Clock, MapPin, Phone, Printer } from "lucide-react";
-import { homeCare, homeHealth } from "@/lib/services";
-import { fullAddress, site } from "@/lib/site";
+import { ArrowUpRight, BadgeCheck, Mail, MapPin, Phone, Printer } from "lucide-react";
+import { resources } from "@/lib/content";
+import { programHref, programs } from "@/lib/services";
+import { fullAddress, licenseLine, site } from "@/lib/site";
 import { Logo, LogoMark } from "../brand/Logo";
 import { Marquee } from "../ui/Marquee";
 import { FacebookIcon, LinkedInIcon } from "../ui/SocialIcons";
@@ -12,7 +13,7 @@ const words = ["Open arms", "Open heart", "Open lines", "Open door"];
 // Descriptive anchors (the header already uses the short labels).
 const footerLinks = [
   { href: "/about", label: "About our agency" },
-  { href: "/services", label: "All home care services" },
+  { href: "/services", label: "All types of care" },
   { href: "/getting-started", label: "How to start care" },
   { href: "/careers", label: "Caregiver jobs" },
   { href: "/faq", label: "Home care FAQs" },
@@ -40,13 +41,20 @@ export function Footer() {
         ))}
       </Marquee>
 
-      <div className="container-x relative grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+      <div className="container-x relative grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1.1fr_1.25fr]">
         <div>
           <Logo tone="light" />
           <p className="mt-6 max-w-sm leading-relaxed text-iris-100/70">
-            Skilled home health and non-skilled home care for Central Florida families — delivered with open arms
-            and an open heart since {site.founded}.
+            Dedicated, family-oriented care that comes from the heart. Serving Central Florida since {site.founded}.
           </p>
+          <ul className="mt-5 space-y-1.5 text-sm">
+            {site.credentials.map((c) => (
+              <li key={c} className="flex items-center gap-2 text-iris-100/85">
+                <BadgeCheck className="size-4 shrink-0 text-blush-300" /> {c}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs font-semibold tracking-wide text-blush-200">{licenseLine}</p>
           <div className="mt-6 flex gap-3">
             <a
               href={site.social.facebook}
@@ -69,22 +77,34 @@ export function Footer() {
           </div>
         </div>
 
-        {[homeHealth, homeCare].map((p) => (
-          <div key={p.slug}>
-            <h2 className="font-sans text-sm font-bold tracking-[0.16em] text-blush-200 uppercase">
-              {p.name} <span className="font-medium text-iris-300/70 normal-case">· {p.level}</span>
-            </h2>
-            <ul className="mt-5 space-y-2.5 text-[0.95rem]">
-              {p.services.map((s) => (
-                <li key={s.slug}>
-                  <Link href={`${p.href}#${s.slug}`} className="text-iris-100/75 transition hover:text-white">
-                    {s.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div>
+          <h2 className="font-sans text-sm font-bold tracking-[0.16em] text-blush-200 uppercase">Types of care</h2>
+          <ul className="mt-5 space-y-2.5 text-[0.95rem]">
+            {programs.map((p) => (
+              <li key={p.slug}>
+                <Link href={programHref(p)} className="text-iris-100/75 transition hover:text-white">
+                  {p.short}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="font-sans text-sm font-bold tracking-[0.16em] text-blush-200 uppercase">Resources</h2>
+          <ul className="mt-5 space-y-3 text-[0.95rem]">
+            {resources.map((r) => (
+              <li key={r.name}>
+                <a href={r.href} target="_blank" rel="noreferrer" className="group text-iris-100/80 transition hover:text-white">
+                  <span className="inline-flex items-center gap-1">
+                    {r.name}
+                    <ArrowUpRight className="size-3 opacity-50 transition group-hover:opacity-100" />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div>
           <h2 className="font-sans text-sm font-bold tracking-[0.16em] text-blush-200 uppercase">Contact</h2>
@@ -92,7 +112,7 @@ export function Footer() {
             <li>
               <a href={site.phone.href} className="group flex gap-3 text-white">
                 <Phone className="mt-0.5 size-4 shrink-0 text-blush-300" />
-                <span className="font-semibold group-hover:text-blush-200">{site.phone.display}</span>
+                <span className="font-semibold group-hover:text-blush-200">Office {site.phone.display}</span>
               </a>
             </li>
             <li className="flex gap-3 text-iris-100/75">
@@ -105,15 +125,11 @@ export function Footer() {
                 <span className="group-hover:text-white">{fullAddress}</span>
               </a>
             </li>
-            <li className="flex gap-3 text-iris-100/75">
-              <Clock className="mt-0.5 size-4 shrink-0 text-blush-300" />
-              <span>
-                {site.hours.map((h) => (
-                  <span key={h.days} className="block">
-                    {h.days}: {h.time}
-                  </span>
-                ))}
-              </span>
+            <li>
+              <a href={`mailto:${site.email}`} className="group flex gap-3 text-iris-100/75">
+                <Mail className="mt-0.5 size-4 shrink-0 text-blush-300" />
+                <span className="break-all group-hover:text-white">{site.email}</span>
+              </a>
             </li>
           </ul>
         </div>

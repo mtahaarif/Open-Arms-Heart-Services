@@ -1,6 +1,7 @@
 import { Photo } from "@/components/ui/Photo";
 import Link from "next/link";
 import { ArrowRight, MessagesSquare } from "lucide-react";
+import { trustQAs } from "@/lib/content";
 import { faqs } from "@/lib/faqs";
 import { site } from "@/lib/site";
 import { Accordion } from "../ui/Accordion";
@@ -33,7 +34,7 @@ export function FaqPreview({ count = 5 }: { count?: number }) {
           </div>
         </div>
         <Reveal delay={0.1}>
-          <Accordion items={faqs.slice(0, count)} />
+          <Accordion items={faqs.filter((f) => !trustQAs.some((t) => t.q === f.q)).slice(0, count)} />
         </Reveal>
       </div>
     </section>

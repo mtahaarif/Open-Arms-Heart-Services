@@ -6,8 +6,8 @@ import { MobileCallBar, ScrollProgress } from "@/components/layout/Chrome";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Providers } from "@/components/layout/Providers";
-import { allServices } from "@/lib/services";
-import { site } from "@/lib/site";
+import { programs } from "@/lib/services";
+import { allCounties, site } from "@/lib/site";
 import "./globals.css";
 
 // Variable weight axis only — the optional SOFT/WONK/opsz axes roughly doubled the font payload.
@@ -33,7 +33,7 @@ const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.shortName} | Home Health & Home Care in FL`,
+    default: `${site.shortName} | Home Care in Central Florida`,
     template: `%s | ${site.shortName}`,
   },
   description: site.description,
@@ -59,7 +59,8 @@ const jsonLd = {
   name: site.name,
   url: site.url,
   description: site.description,
-  telephone: "+1-321-430-8194",
+  telephone: "+1-321-217-2409",
+  email: site.email,
   faxNumber: "+1-855-257-1340",
   foundingDate: String(site.founded),
   founder: { "@type": "Person", name: site.founder.name, jobTitle: site.founder.title },
@@ -71,13 +72,20 @@ const jsonLd = {
     postalCode: site.address.zip,
     addressCountry: "US",
   },
-  areaServed: site.areas.map((a) => ({ "@type": "AdministrativeArea", name: `${a.county}, Florida` })),
+  areaServed: allCounties.map((c) => ({ "@type": "AdministrativeArea", name: `${c} County, Florida` })),
   sameAs: [site.social.facebook, site.social.linkedin],
-  identifier: { "@type": "PropertyValue", propertyID: "NPI", value: site.npi },
+  identifier: [
+    { "@type": "PropertyValue", propertyID: "NPI", value: site.npi },
+    ...site.licenses.map((l) => ({ "@type": "PropertyValue", propertyID: "Florida license", value: l })),
+  ],
+  slogan: site.tagline,
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Home health & home care services",
-    itemListElement: allServices.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.name } })),
+    name: "Types of care",
+    itemListElement: programs.map((p) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: p.name, description: p.summary },
+    })),
   },
 };
 

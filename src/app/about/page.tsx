@@ -8,8 +8,8 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   path: "/about",
-  title: "About Our Home Care Agency",
-  description: `Founded in ${site.founded} by ${site.founder.name}, Open Arms & Heart Services brings family-oriented home health and home care to Central Florida.`,
+  title: "About Us & Our Mission",
+  description: `Founded in ${site.founded} by ${site.founder.name}, Open Arms & Heart Services delivers compassionate, person-centered care across Central Florida.`,
 });
 
 export default function AboutPage() {
@@ -17,13 +17,13 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About us"
-        title="Care with open arms. *Service with heart.*"
-        text={`Since ${site.founded}, we've been helping Central Florida families stay safe, comfortable and connected at home — with a **family-oriented approach** that puts people before paperwork.`}
+        title="Care rooted in *family.*"
+        text={`${site.founder.name} is the proud owner of Open Arms & Heart Services Inc., where her passion for delivering **high-quality, person-centered care** is rooted in deeply personal experiences since ${site.founded}.`}
         crumbs={[{ label: "About" }]}
-        images={["/images/hero-caregiver-laughing.jpg", "/images/family-baking.jpg"]}
+        images={["/images/hero-caregiver-laughing.jpg", "/images/founder-shantana-johnson.jpg"]}
       >
         <Link href="/services" className="btn-primary">
-          Explore our services <ArrowRight className="size-4" />
+          Explore types of care <ArrowRight className="size-4" />
         </Link>
       </PageHero>
       <StoryChapters />

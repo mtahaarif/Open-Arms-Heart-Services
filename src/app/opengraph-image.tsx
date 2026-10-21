@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
-export const alt = `${site.shortName} — Home Health & Home Care in Central Florida`;
+export const alt = `${site.shortName} — Home Is Where The Heart Is`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -22,14 +22,14 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", fontSize: 28, letterSpacing: 6, textTransform: "uppercase", color: "#fdcbe0" }}>
-          Home Health · Home Care · Central Florida
+          Serving Central Florida since 2017
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 92, lineHeight: 1.05, fontStyle: "italic" }}>Open Arms</div>
           <div style={{ fontSize: 44, color: "#f48bb5" }}>&amp; Heart Services Inc.</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 30, color: "#e1d2f8" }}>
-          <span>Care that welcomes you with open arms.</span>
+          <span>Home is where the heart is.</span>
           <span>{site.phone.display}</span>
         </div>
       </div>

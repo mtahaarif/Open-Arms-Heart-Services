@@ -9,9 +9,9 @@ import { Reveal, Stagger, StaggerItem } from "../../ui/motion";
 import { CareLink } from "@/components/forms/CareLink";
 
 const points = [
-  { icon: Baby, title: "Children & youth", text: "Patient, playful care for kids — including children with autism." },
-  { icon: Puzzle, title: "Developmental disabilities", text: "Support for individuals with intellectual and developmental disabilities." },
-  { icon: Users, title: "Adults & seniors", text: "Relief for spouses and adult children caring for a loved one." },
+  { icon: Baby, title: "Children & youth", text: "Pediatric personal care and foster care respite for children with special needs." },
+  { icon: Puzzle, title: "Developmental disabilities", text: "APD respite and personal supports for people with developmental disabilities." },
+  { icon: Users, title: "Adults & seniors", text: "Relief for families caring for an aging loved one — and for veterans' families." },
   { icon: Heart, title: "You, the caregiver", text: "Time to rest, work, run errands or simply breathe." },
 ];
 

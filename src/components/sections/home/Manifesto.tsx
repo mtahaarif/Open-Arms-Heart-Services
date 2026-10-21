@@ -5,17 +5,18 @@ import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
-import { homeCare, homeHealth } from "@/lib/services";
-import { site } from "@/lib/site";
+import { insurances } from "@/lib/content";
+import { programs } from "@/lib/services";
+import { allCounties, site } from "@/lib/site";
 import { Counter, Reveal } from "../../ui/motion";
 
 const TEXT =
-  "We believe care should feel like a welcome, not a transaction. So we arrive with open arms, listen with an open heart, and treat every home we enter as if it belongs to our own family.";
+  "To work in partnership with our consumers to help them achieve their goals of independence, productivity, and meaningful integration within their communities. We are committed to fulfilling the needs of our consumers with excellence and care.";
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
   const opacity = useTransform(progress, range, [0.14, 1]);
   const y = useTransform(progress, range, [6, 0]);
-  const highlight = /open|family|welcome/i.test(children);
+  const highlight = /^(independence|productivity|meaningful|integration|excellence|care\.)/i.test(children);
   return (
     <motion.span style={{ opacity, y }} className={`mr-[0.25em] inline-block ${highlight ? "text-gradient italic" : ""}`}>
       {children}
@@ -30,9 +31,9 @@ export function Manifesto() {
   const words = TEXT.split(" ");
 
   const stats = [
-    { n: homeHealth.services.length, label: "Skilled home health disciplines" },
-    { n: homeCare.services.length, label: "Non-skilled home care services" },
-    { n: site.areas.length, label: "Central Florida counties served" },
+    { n: programs.length, label: "Types of care under one roof" },
+    { n: allCounties.length, label: "Central Florida counties served" },
+    { n: insurances.length, label: "Insurance plans accepted" },
   ];
 
   return (
@@ -41,7 +42,7 @@ export function Manifesto() {
         <div className="lg:col-span-8">
           <Reveal>
             <span className="eyebrow">
-              <span className="size-1.5 rounded-full bg-blush-500" /> Our heart
+              <span className="size-1.5 rounded-full bg-blush-500" /> Our mission
             </span>
           </Reveal>
           <div ref={ref}>
@@ -71,7 +72,7 @@ export function Manifesto() {
               <p className="mt-1 font-display text-7xl">
                 <Counter from={2000} to={site.founded} />
               </p>
-              <p className="mt-2 text-iris-100/80">Founded by {site.founder.name}, {site.founder.title.toLowerCase()}.</p>
+              <p className="mt-2 text-iris-100/80">{site.credentials.join(" · ")}.</p>
             </div>
           </Reveal>
           {stats.map((s, i) => (

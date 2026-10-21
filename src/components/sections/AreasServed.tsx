@@ -1,9 +1,11 @@
-import { MapPin, Navigation } from "lucide-react";
-import { fullAddress, site } from "@/lib/site";
+import Link from "next/link";
+import { ArrowUpRight, MapPin, Navigation } from "lucide-react";
+import { allCounties, fullAddress, site } from "@/lib/site";
 import { GlowCard } from "../ui/GlowCard";
 import { SectionIntro } from "../ui/SectionIntro";
 import { Reveal, Stagger, StaggerItem } from "../ui/motion";
 
+/** Service areas as published by the agency, grouped by program. */
 export function AreasServed() {
   return (
     <section className="relative isolate overflow-hidden bg-iris-950 py-24 text-white sm:py-32">
@@ -17,8 +19,8 @@ export function AreasServed() {
           <SectionIntro
             dark
             eyebrow="Where we serve"
-            title="Rooted in *Central Florida.*"
-            text="From our office in Haines City, our caregivers and clinicians travel to homes across three counties."
+            title="Serving *Central Florida* since 2017."
+            text={`From our office in ${site.address.city}, our caregivers support families across ${allCounties.length} Central Florida counties.`}
           />
           <Reveal delay={0.2}>
             <a
@@ -40,36 +42,47 @@ export function AreasServed() {
           </Reveal>
         </div>
 
-        <Stagger className="mt-14 grid grid-cols-3 gap-2 sm:gap-4" stagger={0.12}>
+        <Stagger className="mt-14 grid grid-cols-2 gap-2.5 sm:gap-4" stagger={0.12}>
           {site.areas.map((a, i) => (
-            <StaggerItem key={a.county}>
-              <GlowCard className="glass-dark h-full rounded-[1.2rem] p-3 sm:rounded-[2rem] sm:p-7">
+            <StaggerItem key={a.program}>
+              <GlowCard className="glass-dark h-full rounded-[1.4rem] p-4 sm:rounded-[2rem] sm:p-8">
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-base leading-tight text-white sm:text-3xl">{a.county.replace(" County", "")}<span className="hidden sm:inline"> County</span></h3>
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="font-display text-lg leading-tight text-white sm:text-3xl">{a.program}</h3>
+                      <p className="mt-1 text-xs text-iris-200/80 sm:text-sm">{a.note}</p>
+                    </div>
                     <span className="hidden font-display text-5xl text-white/10 sm:block">0{i + 1}</span>
                   </div>
-                  <ul className="mt-3 flex flex-col gap-1.5 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-2">
-                    {a.towns.map((t) => (
-                      <li key={t} className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-center text-[0.68rem] leading-tight text-iris-100 sm:px-3 sm:py-1.5 sm:text-left sm:text-sm transition hover:border-blush-300/60 hover:text-white">
-                        {t}
+                  <ul className="mt-4 flex flex-wrap gap-1.5 sm:mt-6 sm:gap-2">
+                    {a.counties.map((c) => (
+                      <li
+                        key={c}
+                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[0.72rem] text-iris-100 transition hover:border-blush-300/60 hover:text-white sm:px-3.5 sm:py-1.5 sm:text-sm"
+                      >
+                        {c}
                       </li>
                     ))}
                   </ul>
+                  <Link
+                    href={a.href}
+                    className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-blush-200 hover:text-white sm:mt-7 sm:text-sm"
+                  >
+                    View services <ArrowUpRight className="size-3.5" />
+                  </Link>
                 </div>
               </GlowCard>
             </StaggerItem>
           ))}
         </Stagger>
         <Reveal className="mt-6 text-center text-iris-200/70">
-          Don&apos;t see your town? Call{" "}
+          Not sure if we serve your area? Call{" "}
           <a href={site.phone.href} className="font-semibold text-white underline decoration-blush-400 underline-offset-4">
             {site.phone.display}
           </a>{" "}
-          — we may still be able to help.
+          — Open Arms &amp; Heart Services is only a call away.
         </Reveal>
       </div>
-
     </section>
   );
 }

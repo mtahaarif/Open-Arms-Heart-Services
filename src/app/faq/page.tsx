@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/faq",
   title: "Home Health & Home Care FAQs",
-  description: "Answers on home health vs. home care, doctor's orders, Medicaid and payment, service areas, children's respite and caregiver screening.",
+  description: "Answers about types of care, APD and veteran services, insurance we accept, licensing, background checks, service areas and Live Scan.",
 });
 
 const faqJsonLd = {
@@ -27,7 +27,7 @@ export default function FaqPage() {
       <PageHero
         eyebrow="FAQ"
         title="Questions families *ask us most.*"
-        text="Straight answers about services, getting started, paying for care and our caregivers. Search or browse by topic."
+        text="Straight answers about our types of care, getting started, insurance and licensing, and our caregivers. Search or browse by topic."
         crumbs={[{ label: "FAQ" }]}
         images={["/images/speech-therapy.jpg", "/images/seniors-smiling.jpg"]}
       />

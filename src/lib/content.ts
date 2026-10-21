@@ -1,24 +1,25 @@
 import type { LucideIcon } from "lucide-react";
 import {
+  Accessibility,
   Baby,
   BadgeCheck,
-  CalendarHeart,
   ClipboardList,
   DoorOpen,
   FileText,
-  HandCoins,
   HandHeart,
   Heart,
   HeartPulse,
-  Hospital,
-  Landmark,
+  HouseHeart,
+  Medal,
   MessagesSquare,
   PhoneCall,
   ShieldCheck,
   Users,
-  Wallet,
 } from "lucide-react";
-import type { PillarSlug } from "./services";
+import type { ProgramSlug } from "./services";
+import { allCounties, site } from "./site";
+
+/* ───────────────────────── How care begins ───────────────────────── */
 
 export const steps: {
   title: string;
@@ -29,208 +30,296 @@ export const steps: {
 }[] = [
   {
     title: "Reach out",
-    text: "Call us or send a request. We'll listen, answer your questions and help you work out whether skilled home health, non-skilled home care, or a mix of both fits best.",
-    details: ["No-pressure conversation", "Questions about coverage welcome", "Referrals from doctors & case managers"],
+    text: "Call our office or request more information online. Our staff will reach out to discuss how we can help your family.",
+    details: ["Call our office", "Request info online", "Referrals welcome"],
     icon: PhoneCall,
     image: "/images/friends-talking.jpg",
   },
   {
-    title: "We visit & assess",
-    text: "A member of our team meets you at home to understand health needs, daily routines, safety concerns and personal goals. For skilled care, we coordinate with your physician.",
-    details: ["In-home visit", "Safety walk-through", "Family welcome to join"],
+    title: "We talk through eligibility",
+    text: "Services depend on eligibility, authorization, and agency capacity. We coordinate with families, social workers, case managers, Waiver Support Coordinators, and VA Community Care as needed.",
+    details: ["Eligibility & authorization", "Insurance verification", "Referral coordination"],
     icon: ClipboardList,
     image: "/images/social-work.jpg",
   },
   {
-    title: "Your personal care plan",
-    text: "We put together a written plan around your schedule, preferences and goals — then match caregivers and clinicians whose skills fit.",
-    details: ["Built around your routines", "Clear schedule & tasks", "Caregiver matching"],
+    title: "A person-centered plan",
+    text: "Together we build support around each person's goals and support plan — designed to promote independence, safety, and overall well-being.",
+    details: ["Built around your goals", "Independence & safety", "Family involvement"],
     icon: FileText,
     image: "/images/breakfast-family.jpg",
   },
   {
-    title: "Care begins — and adapts",
-    text: "Visits start, and we stay in touch with you and your family. As needs change, the plan changes with them.",
-    details: ["Regular check-ins", "Family updates", "Plan adjusts over time"],
-    icon: CalendarHeart,
+    title: "Care from the heart begins",
+    text: "Trained, Level 2 background-screened caregivers provide dedicated, family-oriented care — treating every person with the attention and dignity of family.",
+    details: ["Level 2 screened caregivers", "Role-appropriate training", "Family-oriented care"],
+    icon: HandHeart,
     image: "/images/celebration.jpg",
   },
 ];
 
+/* ───────────────────────── Who we care for ───────────────────────── */
+
 export const audiences: { title: string; text: string; image: string; alt: string; icon: LucideIcon }[] = [
   {
-    title: "Seniors aging in place",
-    text: "Help with daily routines, health and companionship so home stays home.",
+    title: "Seniors & aging loved ones",
+    text: "Personal care, homemaking, and companionship so home stays home.",
     image: "/images/senior-portrait.jpg",
     alt: "Smiling older woman with short grey hair",
     icon: HandHeart,
   },
   {
-    title: "Recovering after a hospital stay",
-    text: "Nursing and therapy that bridge the gap between hospital and full strength.",
-    image: "/images/walker-autumn.jpg",
-    alt: "Older woman walking along an autumn path with a rollator",
-    icon: Hospital,
+    title: "Veterans & their families",
+    text: "Home care and respite through VA Community Care referrals.",
+    image: "/images/veteran.jpg",
+    alt: "Older veteran wearing an Army cap",
+    icon: Medal,
   },
   {
-    title: "Adults with disabilities",
-    text: "Personal supports and habilitation that build skills and independence.",
+    title: "People with developmental disabilities",
+    text: "APD supports that build skills, independence, and community inclusion.",
     image: "/images/personal-supports.jpg",
     alt: "Caregiver talking with a young man who uses a wheelchair",
-    icon: Users,
+    icon: Accessibility,
   },
   {
-    title: "Children & youth",
-    text: "Respite and support for kids with autism, developmental or physical disabilities.",
+    title: "Children & foster families",
+    text: "Pediatric personal care, foster care respite, and family support.",
     image: "/images/child-smiling.jpg",
     alt: "Smiling young boy looking at the camera",
     icon: Baby,
   },
   {
     title: "Family caregivers",
-    text: "A trusted break for the people who give so much of themselves.",
+    text: "Respite and relief for the people who give so much of themselves.",
     image: "/images/family-baking.jpg",
     alt: "Grandmother and granddaughter baking together in a kitchen",
     icon: Heart,
   },
 ];
 
+/* ───────────────────────── Brand promises ───────────────────────── */
+
 export const promises: { word: string; title: string; text: string; icon: LucideIcon }[] = [
   {
     word: "arms",
     title: "Open arms",
-    text: "Everyone is welcomed exactly as they are — every age, ability, culture and background.",
+    text: "Children, adults, seniors, veterans, and people with disabilities — everyone is welcomed as family.",
     icon: HandHeart,
   },
   {
     word: "heart",
     title: "Open heart",
-    text: "Patience, dignity and genuine warmth in every visit. We care for people, not tasks.",
+    text: "Dedicated, family-oriented care that comes from the heart, with compassion and respect in every visit.",
     icon: HeartPulse,
   },
   {
     word: "lines",
     title: "Open lines",
-    text: "Families stay in the loop with clear, honest updates — and we always pick up the phone.",
+    text: "We work hand in hand with families, case managers, and Waiver Support Coordinators.",
     icon: MessagesSquare,
   },
   {
     word: "door",
     title: "Open door",
-    text: "Questions are always welcome, before care starts and every day after.",
+    text: "Open Arms & Heart Services is only a call away — questions are always welcome.",
     icon: DoorOpen,
   },
 ];
 
-export type Need = { id: string; label: string; pillar: PillarSlug; services: string[] };
+/* ───────────────────────── Care finder ───────────────────────── */
+
+export type Need = { id: string; label: string; programs: ProgramSlug[] };
 
 export const needs: Need[] = [
-  { id: "hospital", label: "Coming home after surgery or a hospital stay", pillar: "home-health", services: ["skilled-nursing", "physical-therapy"] },
-  { id: "wound", label: "Wound care, injections or IV therapy", pillar: "home-health", services: ["skilled-nursing"] },
-  { id: "chronic", label: "Managing a chronic condition", pillar: "home-health", services: ["skilled-nursing"] },
-  { id: "falls", label: "Getting stronger or preventing falls", pillar: "home-health", services: ["physical-therapy"] },
-  { id: "tasks", label: "Relearning everyday tasks safely", pillar: "home-health", services: ["occupational-therapy"] },
-  { id: "speech", label: "Speech, swallowing or communication", pillar: "home-health", services: ["speech-therapy"] },
-  { id: "planning", label: "Planning, paperwork & community resources", pillar: "home-health", services: ["medical-social-work"] },
-  { id: "bathing", label: "Bathing, dressing or grooming", pillar: "home-care", services: ["personal-care"] },
-  { id: "company", label: "Company, conversation & activities", pillar: "home-care", services: ["companion-services"] },
-  { id: "chores", label: "Meals, laundry & light housekeeping", pillar: "home-care", services: ["homemaker-services"] },
-  { id: "rides", label: "Rides to appointments & errands", pillar: "home-care", services: ["transportation"] },
-  { id: "break", label: "A break for the family caregiver", pillar: "home-care", services: ["respite-care"] },
-  { id: "idd", label: "Support for a loved one with a developmental disability", pillar: "home-care", services: ["personal-supports", "respite-care", "residential-habilitation"] },
+  { id: "bathing", label: "Bathing, dressing, grooming or hygiene", programs: ["home-care"] },
+  { id: "mobility", label: "Mobility and transfers at home", programs: ["home-care"] },
+  { id: "chores", label: "Light housekeeping & meal preparation", programs: ["home-care"] },
+  { id: "company", label: "Companionship & socialization", programs: ["home-care"] },
+  { id: "respite", label: "A break for the family caregiver", programs: ["home-care", "apd"] },
+  { id: "idd", label: "Support for a loved one with a developmental disability", programs: ["apd"] },
+  { id: "skills", label: "Life skills, supported living or supported employment", programs: ["apd"] },
+  { id: "group-home", label: "A group home (residential habilitation)", programs: ["apd"] },
+  { id: "vulnerable", label: "Help for a vulnerable adult (DCF referral)", programs: ["dcf"] },
+  { id: "foster", label: "Support for a foster family or child with special needs", programs: ["cbc"] },
+  { id: "veteran", label: "Home care or respite for a veteran", programs: ["va"] },
+  { id: "clinical", label: "Nursing or therapy after a hospital stay", programs: ["home-health"] },
+  { id: "fingerprint", label: "Live Scan fingerprinting / background screening", programs: ["live-scan"] },
 ];
 
-export const payment: { title: string; text: string; icon: LucideIcon }[] = [
+/* ───────────────────────── Insurance ───────────────────────── */
+
+/** "Insurances we accept", as published by the agency. */
+export const insurances = [
+  "Sunshine Health",
+  "Aetna",
+  "Florida Blue",
+  "Humana",
+  "Children's Medical Services",
+  "Molina",
+  "Integrated Simply",
+  "Optum (VA)",
+  "UnitedHealthcare",
+  "Florida Community Care",
+];
+
+export const fundingNotes: { title: string; text: string; icon: LucideIcon }[] = [
   {
-    title: "Florida Medicaid",
-    text: "We're an enrolled Florida Medicaid provider. Tell us about your plan and we'll check which services it covers.",
-    icon: Landmark,
+    title: "APD Medicaid Waiver",
+    text: "As an APD Central Region provider, we work with Waiver Support Coordinators on each person's support plan.",
+    icon: Accessibility,
   },
   {
-    title: "Medicaid waiver programs",
-    text: "If your loved one receives services through a Medicaid waiver, ask us how we can be part of their support plan.",
-    icon: BadgeCheck,
+    title: "VA Community Care",
+    text: "Veteran services are subject to applicable VA Community Care referral and authorization requirements.",
+    icon: Medal,
   },
   {
-    title: "Private health insurance",
-    text: "Some plans cover skilled home health when it's ordered by a physician. We'll help you verify benefits.",
+    title: "Coverage questions?",
+    text: "Services depend on eligibility, authorization, and agency capacity. Call our office and we'll help you check.",
     icon: ShieldCheck,
   },
-  {
-    title: "Long-term care insurance",
-    text: "Many long-term care policies help pay for in-home care. We can provide the documentation insurers ask for.",
-    icon: Wallet,
-  },
-  {
-    title: "Private pay",
-    text: "Flexible private-pay options for families who want to arrange care directly. Ask us about rates.",
-    icon: HandCoins,
-  },
 ];
+
+/* ───────────────────────── Getting started checklist ───────────────────────── */
 
 export const checklist = [
-  "Insurance and/or Medicaid cards",
-  "A current list of medications & doses",
-  "Your doctor's name and phone number",
-  "Hospital discharge papers (if any)",
-  "Daily routine & preferences you'd like us to know",
-  "Emergency contacts for family members",
+  "Insurance or Medicaid card",
+  "Waiver Support Coordinator's contact (APD services)",
+  "VA Community Care referral or authorization (veterans)",
+  "Case manager or social worker's contact (DCF / CBC referrals)",
+  "Your loved one's daily routine and preferences",
+  "Photo ID (for Live Scan fingerprinting appointments)",
 ];
+
+/* ───────────────────────── A day of home care ───────────────────────── */
 
 export const dayTimeline = [
-  { time: "8:00 AM", title: "A gentle start", text: "Help with bathing, dressing and grooming, then breakfast together at the table.", service: "Personal Care" },
-  { time: "10:30 AM", title: "Out and about", text: "A ride to the doctor, a stop at the pharmacy and a few groceries on the way home.", service: "Transportation & Errands" },
-  { time: "12:30 PM", title: "Lunch & a good chat", text: "A fresh meal and real conversation — the kind that makes the afternoon go by easy.", service: "Companion Services" },
-  { time: "3:00 PM", title: "Time for things you love", text: "Cards, a short walk, music, gardening or a favourite show. Whatever lights you up.", service: "Companion Services" },
-  { time: "5:30 PM", title: "Dinner & a tidy home", text: "Supper prepared, dishes done, laundry folded and a reminder to take evening medications.", service: "Homemaker Services" },
-  { time: "Evening", title: "Family gets a night off", text: "When family caregivers need rest, respite care keeps the evening calm and covered.", service: "Respite Care" },
+  { time: "8:00 AM", title: "A gentle start", text: "Help with bathing, dressing, grooming, and hygiene — at a calm, unhurried pace.", service: "Personal Care" },
+  { time: "10:00 AM", title: "Moving safely", text: "A steady hand for transfers and getting around the home, so the day can begin with confidence.", service: "Mobility & Transfers" },
+  { time: "12:00 PM", title: "Lunch together", text: "A fresh meal prepared at home, and a tidy kitchen afterwards.", service: "Homemaker Services" },
+  { time: "2:00 PM", title: "Company & conversation", text: "Games, stories, music, or a favourite show — real companionship and socialization.", service: "Companionship" },
+  { time: "5:00 PM", title: "Evening routine", text: "Help with the activities of daily living that close out the day comfortably.", service: "Daily Living Assistance" },
+  { time: "Evening", title: "Family gets a break", text: "When family caregivers need rest, respite care keeps the evening calm and covered.", service: "Respite Care" },
 ];
 
+/* ───────────────────────── Careers ───────────────────────── */
+
+/** Positions offered on the agency's employment application. */
 export const roles = [
   {
-    title: "Registered Nurse (RN) / LPN",
-    type: "Skilled · Field",
-    text: "Deliver skilled nursing visits — assessments, wound care, medication management and patient teaching — and coordinate with physicians.",
-    needs: ["Active Florida RN or LPN license", "Home health experience preferred", "Reliable transportation"],
+    title: "Home Health Aide",
+    type: "Non-skilled · In-home care",
+    text: "Provide personal care, homemaker assistance, companionship, and respite to children, adults, seniors, and people with disabilities in their homes.",
+    needs: ["CNA, HHA, or CPR certification", "High school diploma or GED", "Florida Level 2 background screening"],
   },
   {
-    title: "Physical, Occupational & Speech Therapists",
-    type: "Skilled · Field",
-    text: "Help clients regain strength, independence and communication through therapy delivered where they live.",
-    needs: ["Active Florida PT / PTA, OT / COTA or SLP license", "Home health experience a plus", "Reliable transportation"],
+    title: "Group Home Staff",
+    type: "APD · Residential Habilitation",
+    text: "Support adults with developmental disabilities in our group home — building daily living skills, independence, and community inclusion.",
+    needs: ["Caregiving experience preferred", "High school diploma or GED", "Florida Level 2 background screening"],
   },
-  {
-    title: "Home Health Aide (HHA) / CNA",
-    type: "Skilled support · Field",
-    text: "Provide personal care alongside a skilled plan of care — bathing, grooming, mobility and light homemaking.",
-    needs: ["HHA certificate or CNA license", "Current CPR / First Aid", "Compassionate and dependable"],
-  },
-  {
-    title: "Companion & Homemaker",
-    type: "Non-skilled · Field",
-    text: "Bring company, conversation and practical help — meals, light housekeeping, errands and outings.",
-    needs: ["Caregiving experience preferred", "Valid driver's license & insurance", "Warm, patient personality"],
-  },
-  {
-    title: "Respite Care Provider",
-    type: "Non-skilled · Field",
-    text: "Give families a break by caring for children, youth and adults — including those with autism and developmental disabilities.",
-    needs: ["Experience with children or IDD a plus", "Current CPR / First Aid", "Calm, playful and patient"],
-  },
-  {
-    title: "Direct Support Professional",
-    type: "Non-skilled · Field & residential",
-    text: "Support individuals with developmental disabilities in building life skills and community connections.",
-    needs: ["Experience supporting people with IDD", "Required APD trainings (or willingness to complete)", "Valid driver's license"],
-  },
+];
+
+/** What the online employment application asks for. */
+export const applicationChecklist = [
+  "Contact details & position",
+  "Caregiving experience",
+  "Certifications (CNA, HHA, CPR)",
+  "Resume & certificate uploads",
+  "Education history",
+  "Employment history",
+  "Three personal references",
+  "Emergency contact & e-signature",
 ];
 
 export const requirements = [
+  "CNA, HHA or CPR certification",
+  "High school diploma or GED",
   "Florida Level 2 background screening",
-  "Current CPR & First Aid",
-  "Valid Florida driver's license",
-  "Proof of auto insurance",
-  "Role-specific license or certificate",
-  "References from past work",
+  "Drug & alcohol screening",
+  "Three personal references",
+  "90-day introductory period",
   "A genuinely kind heart",
 ];
+
+/* ───────────────────────── Home page Q&As (from the agency's home page) ───────────────────────── */
+
+export const trustQAs: {
+  q: string;
+  a: string;
+  icon: LucideIcon;
+  image: string;
+  imageAlt: string;
+  chips?: string[];
+  link?: { href: string; label: string };
+}[] = [
+  {
+    q: "What types of care do you provide?",
+    a: "Caring for a developmentally disabled family member or senior can be extremely challenging, and we are here to help. We provide dedicated, family-oriented care that comes from the heart.",
+    icon: HouseHeart,
+    image: "/images/companion-care.jpg",
+    imageAlt: "Caregiver in green scrubs leaning in to chat with an older woman",
+    chips: ["Non-skilled home care", "APD services", "Skilled home health", "DCF & CBC referrals", "Veterans (VA)", "Live Scan"],
+    link: { href: "/services", label: "See all types of care" },
+  },
+  {
+    q: "Are care providers background checked?",
+    a: "Your safety, trust, and peace of mind are our highest priorities. All direct care personnel undergo comprehensive Level 2 background screening in accordance with Florida state requirements. Our compassionate caregivers are committed to providing safe, dependable, and high-quality care to children, seniors, and individuals with disabilities — because your family deserves care you can trust.",
+    icon: ShieldCheck,
+    image: "/images/aide-smiling-patient.jpg",
+    imageAlt: "Smiling caregiver sitting close to an older woman",
+  },
+  {
+    q: "Do you accept insurance?",
+    a: "Yes. We accept a range of health plans — call our office to confirm coverage for your plan and the services you need.",
+    icon: BadgeCheck,
+    image: "/images/breakfast-family.jpg",
+    imageAlt: "Grandmother and granddaughter sharing breakfast at home",
+    chips: insurances,
+  },
+  {
+    q: "Are you licensed?",
+    a: `Yes. Open Arms & Heart Services is an APD Central Region provider and a licensed Florida Home Health Agency that has served Central Florida since ${site.founded}.`,
+    icon: Users,
+    image: "/images/celebration.jpg",
+    imageAlt: "Caregiver celebrating with a group of older adults",
+    chips: site.licenses.map((l) => `Lic# ${l}`),
+  },
+];
+
+/* ───────────────────────── Community resources (from the agency's footer) ───────────────────────── */
+
+export const resources = [
+  {
+    name: "Florida 211",
+    href: "https://fl211.org/",
+    text: "Food, housing, utility assistance, transportation, healthcare, childcare, and mental health support.",
+  },
+  {
+    name: "Florida Dept. of Elder Affairs",
+    href: "https://elderaffairs.org/",
+    text: "Programs and services for older Floridians and their caregivers.",
+  },
+  {
+    name: "Florida Agency for Persons with Disabilities",
+    href: "https://apd.myflorida.com/resources.htm",
+    text: "Resources for people with developmental disabilities and their families.",
+  },
+  {
+    name: "FloridaHealthFinder",
+    href: "https://quality.healthfinder.fl.gov/",
+    text: "Compare and look up licensed health care providers in Florida.",
+  },
+  {
+    name: "Florida SHINE",
+    href: "https://www.floridashine.org/",
+    text: "Free, unbiased health insurance counseling for Medicare beneficiaries.",
+  },
+];
+
+/** Headline numbers used across the site. */
+export const stats = {
+  counties: allCounties.length,
+  insurances: insurances.length,
+};

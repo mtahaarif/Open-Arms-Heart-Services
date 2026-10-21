@@ -5,7 +5,7 @@ import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { ArrowRight, Check, RotateCcw, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import { needs } from "@/lib/content";
-import { allServices, homeCare, homeHealth } from "@/lib/services";
+import { programHref, programs } from "@/lib/services";
 import { Aurora } from "../brand/Ribbons";
 import { SectionIntro } from "../ui/SectionIntro";
 import { EASE } from "../ui/motion";
@@ -17,18 +17,16 @@ export function CareChooser() {
 
   const result = useMemo(() => {
     const chosen = needs.filter((n) => picked.includes(n.id));
-    const skilled = chosen.some((n) => n.pillar === "home-health");
-    const nonSkilled = chosen.some((n) => n.pillar === "home-care");
-    const slugs = [...new Set(chosen.flatMap((n) => n.services))];
-    const services = allServices.filter((s) => slugs.includes(s.slug));
-    const pillarOf = (slug: string) => (homeHealth.services.some((s) => s.slug === slug) ? homeHealth : homeCare);
+    const slugs = new Set(chosen.flatMap((n) => n.programs));
+    const matched = programs.filter((p) => slugs.has(p.slug));
     const verdict =
-      skilled && nonSkilled
-        ? { title: "A blend of both", text: "Skilled visits for health needs, plus non-skilled help with daily life — coordinated by one team.", care: "both" as const }
-        : skilled
-          ? { title: "Home Health (Skilled)", text: "Clinical care from licensed nurses and therapists, usually with a physician's order. We can coordinate with your doctor.", care: "home-health" as const }
-          : { title: "Home Care (Non-Skilled)", text: "Hands-on help with daily routines and companionship — no doctor's order needed.", care: "home-care" as const };
-    return { services, pillarOf, verdict, any: chosen.length > 0 };
+      matched.length === 1
+        ? { title: matched[0].short, text: matched[0].summary }
+        : {
+            title: "A combination of services",
+            text: "More than one of our programs fits — one team can coordinate everything for your family.",
+          };
+    return { matched, verdict, any: chosen.length > 0 };
   }, [picked]);
 
   const toggle = (id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
@@ -43,7 +41,7 @@ export function CareChooser() {
           align="center"
           eyebrow="Care finder"
           title="Not sure what kind of care you need? *Let's figure it out.*"
-          text="Tap everything that applies. We'll suggest where to start — then a real person can talk it through with you."
+          text="Tap everything that applies. We'll point you to the right type of care — then our staff can talk it through with your family."
         />
 
         <LayoutGroup>
@@ -145,38 +143,33 @@ export function CareChooser() {
                     <p className="mt-3 text-ink-soft">{result.verdict.text}</p>
                     <ul className="mt-6 space-y-2">
                       <AnimatePresence initial={false}>
-                        {result.services.map((s) => {
-                          const p = result.pillarOf(s.slug);
-                          return (
-                            <motion.li
-                              key={s.slug}
-                              layout
-                              initial={{ opacity: 0, x: 20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              exit={{ opacity: 0, x: -20 }}
-                              transition={{ duration: 0.35, ease: EASE }}
+                        {result.matched.map((p) => (
+                          <motion.li
+                            key={p.slug}
+                            layout
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.35, ease: EASE }}
+                          >
+                            <Link
+                              href={programHref(p)}
+                              className="group flex items-center gap-3 rounded-2xl border border-iris-100 p-3 transition hover:border-iris-300 hover:bg-iris-50"
                             >
-                              <Link
-                                href={`${p.href}#${s.slug}`}
-                                className="group flex items-center gap-3 rounded-2xl border border-iris-100 p-3 transition hover:border-iris-300 hover:bg-iris-50"
-                              >
-                                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-iris-50 text-iris-700 group-hover:bg-white">
-                                  <s.icon className="size-4.5" />
-                                </span>
-                                <span className="flex-1">
-                                  <span className="block font-semibold text-iris-950">{s.name}</span>
-                                  <span className="text-xs text-ink-soft">
-                                    {p.name} · {p.level}
-                                  </span>
-                                </span>
-                                <ArrowRight className="size-4 text-iris-400 transition group-hover:translate-x-1 group-hover:text-iris-700" />
-                              </Link>
-                            </motion.li>
-                          );
-                        })}
+                              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-iris-50 text-iris-700 group-hover:bg-white">
+                                <p.icon className="size-4.5" />
+                              </span>
+                              <span className="flex-1">
+                                <span className="block font-semibold text-iris-950">{p.short}</span>
+                                <span className="text-xs text-ink-soft">{p.tag}</span>
+                              </span>
+                              <ArrowRight className="size-4 text-iris-400 transition group-hover:translate-x-1 group-hover:text-iris-700" />
+                            </Link>
+                          </motion.li>
+                        ))}
                       </AnimatePresence>
                     </ul>
-                    <CareLink care={result.verdict.care} className="btn-primary mt-7 w-full">
+                    <CareLink care={result.matched.map((p) => p.slug)} className="btn-primary mt-7 w-full">
                       Talk it through with us <ArrowRight className="size-4" />
                     </CareLink>
                   </motion.div>

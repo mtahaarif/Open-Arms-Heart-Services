@@ -9,7 +9,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { ArrowRight, BadgeCheck, HandHeart, Phone, Stethoscope } from "lucide-react";
+import { Accessibility, ArrowRight, BadgeCheck, HandHeart, HeartHandshake, Phone } from "lucide-react";
 import { useRef } from "react";
 import { site } from "@/lib/site";
 import { Aurora, Ribbons } from "../../brand/Ribbons";
@@ -72,26 +72,28 @@ export function Hero() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-blush-400 opacity-75" />
               <span className="relative inline-flex size-2 rounded-full bg-blush-500" />
             </span>
-            Home health &amp; home care · Central Florida
+            Serving Central Florida since {site.founded}
           </div>
 
           <CssSplitHeading
             delay={80}
-            text="Care that welcomes you with *open arms.*"
+            text="Home is where *the heart is.*"
             className="mt-7 text-[3.1rem] leading-[0.98] font-medium text-balance sm:text-7xl lg:text-[5.4rem]"
           />
+          <p className="enter mt-4 font-display text-2xl text-blush-700 italic [--d:280ms] sm:text-3xl">
+            Where there is love, there is life.
+          </p>
 
-          <p className="enter mt-7 max-w-xl text-lg leading-relaxed text-ink-soft [--d:350ms] sm:text-xl">
-            From nurse and therapy visits after a hospital stay to a friendly face at the kitchen table —{" "}
-            <strong className="font-semibold text-iris-800">{site.shortName}</strong> brings{" "}
-            <strong className="font-semibold text-iris-800">skilled home health and non-skilled home care</strong> to
-            families across Central Florida.
+          <p className="enter mt-6 max-w-xl text-lg leading-relaxed text-ink-soft [--d:350ms] sm:text-xl">
+            Caring for a developmentally disabled family member or senior can be extremely challenging, and{" "}
+            <strong className="font-semibold text-iris-800">we are here to help.</strong> We provide dedicated,{" "}
+            <strong className="font-semibold text-iris-800">family-oriented care that comes from the heart.</strong>
           </p>
 
           <div className="enter mt-9 flex flex-wrap items-center gap-3 [--d:480ms]">
             <Magnetic>
               <Link href="/contact" className="btn-primary px-7 py-4 text-base">
-                Request a care consultation <ArrowRight className="size-4" />
+                Request more information <ArrowRight className="size-4" />
               </Link>
             </Magnetic>
             <Magnetic>
@@ -102,7 +104,7 @@ export function Hero() {
           </div>
 
           <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-iris-900">
-            {["Florida Medicaid provider", "Skilled & non-skilled care", `Family-oriented since ${site.founded}`].map((t, i) => (
+            {[...site.credentials, "Level 2 background-screened caregivers"].map((t, i) => (
               <li key={t} className="enter flex items-center gap-2" style={{ ["--d" as string]: `${620 + i * 90}ms` }}>
                 <BadgeCheck className="size-4.5 text-blush-500" /> {t}
               </li>
@@ -145,16 +147,16 @@ export function Hero() {
             <div className="enter [--d:650ms] [--enter:enter-left]">
               <div className="animate-float" style={{ ["--r" as string]: "-2deg" }}>
                 <Link
-                  href="/services/home-health"
+                  href="/services/home-care"
                   className="glass group flex items-center gap-3 rounded-2xl py-3 pr-5 pl-3 transition duration-500 hover:scale-[1.04]"
                 >
                   <span className="grid size-11 place-items-center rounded-xl bg-iris-600 text-white">
-                    <Stethoscope className="size-5" />
+                    <HeartHandshake className="size-5" />
                   </span>
                   <span>
-                    <span className="block text-[0.68rem] font-bold tracking-[0.16em] text-blush-700 uppercase">Skilled</span>
-                    <span className="block font-display text-lg leading-tight text-iris-950">Home Health</span>
-                    <span className="block text-xs text-ink-soft">Nursing · PT · OT · Speech</span>
+                    <span className="block text-[0.68rem] font-bold tracking-[0.16em] text-blush-700 uppercase">Home care</span>
+                    <span className="block font-display text-lg leading-tight text-iris-950">Non-Skilled Services</span>
+                    <span className="block text-xs text-ink-soft">Personal care · Companions · Respite</span>
                   </span>
                 </Link>
               </div>
@@ -165,16 +167,16 @@ export function Hero() {
             <div className="enter [--d:800ms] [--enter:enter-right]">
               <div className="animate-float-slow" style={{ ["--r" as string]: "2deg" }}>
                 <Link
-                  href="/services/home-care"
+                  href="/services#apd"
                   className="glass group flex items-center gap-3 rounded-2xl py-3 pr-5 pl-3 transition duration-500 hover:scale-[1.04]"
                 >
                   <span className="grid size-11 place-items-center rounded-xl bg-blush-500 text-white">
-                    <HandHeart className="size-5" />
+                    <Accessibility className="size-5" />
                   </span>
                   <span>
-                    <span className="block text-[0.68rem] font-bold tracking-[0.16em] text-iris-600 uppercase">Non-skilled</span>
-                    <span className="block font-display text-lg leading-tight text-iris-950">Home Care</span>
-                    <span className="block text-xs text-ink-soft">Personal care · Companions · Respite</span>
+                    <span className="block text-[0.68rem] font-bold tracking-[0.16em] text-iris-600 uppercase">APD provider</span>
+                    <span className="block font-display text-lg leading-tight text-iris-950">Central Region</span>
+                    <span className="block text-xs text-ink-soft">Personal supports · Group home</span>
                   </span>
                 </Link>
               </div>

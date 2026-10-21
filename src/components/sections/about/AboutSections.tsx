@@ -13,29 +13,30 @@ import { EASE, Reveal } from "../../ui/motion";
 
 /* ───────────── Story: sticky image stack + scrolling chapters ───────────── */
 
+// Copy adapted from the founder's story on the agency's original About Us page.
 const chapters = [
   {
     kicker: "Where it began",
-    title: "A simple idea: treat every client like family.",
-    text: `${site.founder.name} founded Open Arms & Heart Services in ${site.founded} with a family-oriented approach to care — the belief that the people we serve deserve the same patience, warmth and respect we'd want for our own parents, children and grandparents.`,
+    title: "Inspired by a grandmother's devotion.",
+    text: "Shantana was inspired by her grandmother, who devoted herself to caring for both her mother, who was living with Alzheimer's disease, and her son with developmental disabilities. Witnessing her grandmother's selfless dedication and compassion left a lasting impression and inspired Shantana to pursue a life of service to others.",
     image: "/images/activities-coloring.jpg",
   },
   {
+    kicker: "A living legacy",
+    title: "Patience, love, and exceptional caregiving.",
+    text: "Although her grandmother has since passed, the patience, love, and exceptional caregiving she demonstrated continue to guide Shantana's work every day. She carries on that legacy not only through her professional mission but also by continuing to provide care and support to her own uncle.",
+    image: "/images/grandpa-granddaughter.jpg",
+  },
+  {
     kicker: "What we do",
-    title: "Two levels of care, one caring team.",
-    text: "Today we provide both skilled home health — nursing, therapy, medical social work and home health aides — and non-skilled home care, from personal care and companionship to respite, transportation and support for people with developmental disabilities.",
-    image: "/images/nurse-blood-pressure.jpg",
+    title: "Person-centered care since 2017.",
+    text: "Open Arms & Heart Services is a licensed Florida Home Health Agency and an APD Central Region provider — supporting children, adults, seniors, veterans, and people with disabilities through home care, APD services, family support, and more.",
+    image: "/images/personal-supports.jpg",
   },
   {
-    kicker: "Who we serve",
-    title: "Seniors, adults, children — and the families who love them.",
-    text: "We care for seniors aging in place, adults recovering after hospital stays, individuals with disabilities, and children and youth who need extra support, across Polk, Lake and Orange counties.",
-    image: "/images/therapy-play.jpg",
-  },
-  {
-    kicker: "How we work",
-    title: "Listening first. Adjusting always.",
-    text: "Every plan starts with a conversation in your home. We keep families in the loop, check in often and adapt as needs change — because good care is never one-size-fits-all.",
+    kicker: "How we care",
+    title: "Every person, treated like family.",
+    text: "Shantana and her staff are committed to ensuring that every individual and family served receives compassionate, respectful, and personalized care — with the same attention and dignity as family, supporting their independence, well-being, and quality of life.",
     image: "/images/celebration.jpg",
   },
 ];
@@ -129,10 +130,15 @@ export function NameMeaning() {
         <span style={{ WebkitTextStroke: "2px rgb(244 139 181)" }}>&amp; Heart</span>
       </motion.p>
       <div className="container-x relative mt-14">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xl leading-relaxed text-iris-100/85 sm:text-2xl">
-            Our name is our promise. <span className="text-white">Open arms</span> means everyone is welcome.{" "}
-            <span className="text-blush-200">Heart</span> means compassion leads everything we do.
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <h2 className="font-sans text-sm font-bold tracking-[0.2em] text-blush-200 uppercase">Our mission</h2>
+          <p className="mt-5 font-display text-2xl leading-relaxed text-white sm:text-3xl">
+            To work in partnership with our consumers to help them achieve their goals of{" "}
+            <span className="text-gradient-light italic">independence, productivity, and meaningful integration</span>{" "}
+            within their communities.
+          </p>
+          <p className="mt-5 text-lg text-iris-100/80">
+            We are committed to fulfilling the needs of our consumers with excellence and care.
           </p>
         </Reveal>
       </div>
@@ -146,12 +152,23 @@ export function FounderSpotlight() {
   return (
     <section className="relative py-24 sm:py-32">
       <div className="container-x">
-        <Reveal className="relative isolate grid overflow-hidden rounded-[2.5rem] bg-linear-to-br from-iris-50 via-white to-blush-50 p-8 ring-1 ring-iris-100 sm:p-12 lg:grid-cols-[auto_1fr] lg:gap-14">
+        <Reveal className="relative isolate grid items-center gap-10 overflow-hidden rounded-[2.5rem] bg-linear-to-br from-iris-50 via-white to-blush-50 p-6 ring-1 ring-iris-100 sm:p-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
           <LogoMark className="absolute -right-10 -bottom-10 -z-10 h-72 w-auto opacity-[0.06]" />
-          <div className="relative mx-auto mb-8 h-fit self-center lg:mb-0">
-            <div className="animate-spin-slow absolute -inset-3 rounded-full bg-[conic-gradient(from_0deg,var(--color-iris-400),var(--color-blush-400),var(--color-iris-200),var(--color-iris-400))] opacity-70 blur-[2px]" />
-            <div className="relative grid size-44 place-items-center rounded-full bg-linear-to-br from-iris-700 to-blush-500 font-display text-6xl text-white ring-8 ring-white sm:size-52">
-              SJ
+          <div className="relative mx-auto w-full max-w-sm">
+            {/* Rotating gradient border */}
+            <div className="relative overflow-hidden rounded-[2.3rem] p-[6px] shadow-[0_30px_70px_-30px_rgb(96_52_159/0.6)]">
+              <div className="animate-spin-slow absolute -inset-1/2 bg-[conic-gradient(from_0deg,var(--color-iris-500),var(--color-blush-400),var(--color-iris-200),var(--color-blush-500),var(--color-iris-500))]" />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-white">
+                <Photo
+                  src="/images/founder-shantana-johnson.jpg"
+                  alt={`${site.founder.name}, ${site.founder.title} of Open Arms & Heart Services`}
+                  sizes="(min-width: 1024px) 384px, 90vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </div>
+            <div className="glass absolute -bottom-5 left-1/2 z-10 w-max -translate-x-1/2 rounded-full px-5 py-2.5 text-sm font-semibold text-iris-900">
+              Serving families since {site.founded}
             </div>
           </div>
           <div>
@@ -161,12 +178,16 @@ export function FounderSpotlight() {
             <h2 className="mt-5 text-4xl font-medium sm:text-5xl">{site.founder.name}</h2>
             <p className="mt-1 font-display text-xl text-blush-700 italic">{site.founder.title}</p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              As founder and President, {site.founder.name} leads Open Arms &amp; Heart Services with a family-oriented
-              approach to care — one that brings skilled home health and non-skilled home care together under one roof
-              for Central Florida families.
+              {site.founder.name} is the proud owner of Open Arms &amp; Heart Services Inc., where her passion for
+              delivering <strong className="font-semibold text-iris-900">high-quality, person-centered care</strong> is rooted
+              in deeply personal experiences since {site.founded}.
+            </p>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+              Through Open Arms &amp; Heart Services, Shantana and her staff are committed to ensuring that every individual
+              and family served receives compassionate, respectful, and personalized care.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              {[`Founded ${site.founded}`, "Florida Medicaid provider", "Serving Polk, Lake & Orange counties"].map((t) => (
+              {[...site.credentials, `Founded ${site.founded}`].map((t) => (
                 <span key={t} className="glass rounded-full px-4 py-2 text-sm font-semibold text-iris-800">
                   {t}
                 </span>

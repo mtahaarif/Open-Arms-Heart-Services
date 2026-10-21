@@ -1,7 +1,7 @@
+import { insurances, resources } from "@/lib/content";
 import { faqs } from "@/lib/faqs";
-import { plain } from "@/lib/rich";
-import { pillars } from "@/lib/services";
-import { fullAddress, site } from "@/lib/site";
+import { programHref, programs } from "@/lib/services";
+import { fullAddress, licenseLine, site } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -13,34 +13,49 @@ export function GET() {
 
 > ${site.description}
 
-${site.shortName} is a Florida home care agency founded in ${site.founded} by ${site.founder.name} (${site.founder.title}). It provides skilled home health and non-skilled home care to families in ${site.areas.map((a) => a.county).join(", ")}, Florida, and is an enrolled Florida Medicaid provider (NPI ${site.npi}).
+${site.shortName} is a Central Florida care agency owned by ${site.founder.name}, serving families since ${site.founded}. It is a ${site.credentials.join(" and an ")} (${licenseLine}). "${site.tagline} — ${site.motto}."
 
-- Phone: ${site.phone.display}
+Mission: To work in partnership with our consumers to help them achieve their goals of independence, productivity, and meaningful integration within their communities.
+
+- Office phone: ${site.phone.display}
 - Fax (referrals): ${site.fax.display}
+- Email: ${site.email}
 - Office: ${fullAddress}
-- Hours: ${site.hours.map((h) => `${h.days} ${h.time}`).join("; ")}
+${site.areas.map((a) => `- ${a.program} counties: ${a.counties.join(", ")}`).join("\n")}
 
-## Services
+## Types of care
 
-${pillars
+${programs
   .map(
-    (p) => `### ${p.name} (${p.level}) — ${url(p.href)}
+    (p) => `### ${p.name} — ${url(programHref(p))}
 
-${plain(p.intro)}
+${p.intro}
 
-${p.services.map((s) => `- [${s.name}](${url(`${p.href}#${s.slug}`)}): ${s.summary}`).join("\n")}`,
+${p.points.map((pt) => `- ${pt}`).join("\n")}
+
+${p.note}`,
   )
   .join("\n\n")}
 
+## Insurances accepted
+
+${insurances.map((i) => `- ${i}`).join("\n")}
+
 ## Pages
 
-- [Home](${url("/")}): Overview of skilled and non-skilled care, who we serve and how care begins.
-- [Services](${url("/services")}): Compare home health and home care, with a care finder.
-- [About](${url("/about")}): Our story, founder and the promises behind our name.
-- [Getting started](${url("/getting-started")}): Steps to begin care, what to have ready and ways to pay.
-- [Careers](${url("/careers")}): Open roles for nurses, therapists, aides, companions and respite caregivers.
-- [FAQ](${url("/faq")}): Answers about doctor's orders, Medicaid, service areas and caregivers.
-- [Contact](${url("/contact")}): Phone, fax, office address and the care request form.
+- [Home](${url("/")}): Overview, types of care, answers to common questions, and service areas.
+- [Types of care](${url("/services")}): Every program in detail, insurance, and the request-information form.
+- [Non-skilled home care](${url("/services/home-care")}): Personal care, mobility, homemaking, companionship, respite and pediatric support.
+- [Skilled home health](${url("/services/home-health")}): Nursing and therapy at home.
+- [About us](${url("/about")}): Mission and the founder's story.
+- [Getting started](${url("/getting-started")}): How services begin, what to have ready, insurance and resources.
+- [Careers](${url("/careers")}): Home Health Aide and Group Home Staff positions; online application.
+- [FAQ](${url("/faq")}): Common questions.
+- [Contact](${url("/contact")}): Phone, email, fax, address and the request form.
+
+## Community resources
+
+${resources.map((r) => `- [${r.name}](${r.href}): ${r.text}`).join("\n")}
 
 ## Frequently asked questions
 

@@ -5,16 +5,14 @@ import Link from "next/link";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useLayoutEffect, useRef, useState } from "react";
-import { homeCare, homeHealth, type PillarSlug } from "@/lib/services";
+import { programHref, programs } from "@/lib/services";
 import { GlowCard } from "../ui/GlowCard";
-import { rich } from "@/lib/rich";
 
 /**
  * Pinned horizontal scroller: the section sticks to the viewport while vertical
  * scroll drives the card track sideways.
  */
-export function HorizontalServices({ slug }: { slug: PillarSlug }) {
-  const pillar = slug === "home-health" ? homeHealth : homeCare;
+export function HorizontalServices() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [distance, setDistance] = useState(0);
@@ -46,7 +44,7 @@ export function HorizontalServices({ slug }: { slug: PillarSlug }) {
       ref={sectionRef}
       className="relative bg-iris-950"
       style={{ height: distance ? distance + vh : "320vh" }}
-      aria-label={`${pillar.name} services`}
+      aria-label="Types of care"
     >
       <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgb(139_96_211/0.35),transparent_40%),radial-gradient(circle_at_90%_80%,rgb(234_106_156/0.18),transparent_40%)]" />
@@ -56,13 +54,17 @@ export function HorizontalServices({ slug }: { slug: PillarSlug }) {
           {/* Intro panel */}
           <div className="flex w-[82vw] shrink-0 flex-col justify-center pr-4 text-white sm:w-[480px] sm:pr-10">
             <span className="eyebrow-dark w-fit">
-              <span className="size-1.5 rounded-full bg-blush-300" /> {pillar.name} · {pillar.level}
+              <span className="size-1.5 rounded-full bg-blush-300" /> Types of care
             </span>
             <h2 className="mt-6 text-5xl leading-[1.02] font-medium text-white sm:text-6xl">
-              {pillar.headline.split(",")[0]},
-              <span className="text-gradient-light block italic">{pillar.headline.split(",")[1]?.trim() ?? ""}</span>
+              Support for every
+              <span className="text-gradient-light block italic">stage of life.</span>
             </h2>
-            <p className="mt-6 max-w-md text-lg text-iris-100/75">{rich(pillar.intro)}</p>
+            <p className="mt-6 max-w-md text-lg text-iris-100/75">
+              Providing care for a family member with developmental disabilities or an aging loved one can present many
+              challenges. We offer <strong className="font-semibold text-white">dependable, person-centered support</strong>{" "}
+              designed to meet the unique needs of each individual.
+            </p>
             <div className="mt-10 flex items-center gap-4 text-sm text-iris-200/80">
               <div className="h-1 w-40 overflow-hidden rounded-full bg-white/10">
                 <motion.div style={{ width: bar }} className="h-full rounded-full bg-linear-to-r from-iris-400 to-blush-400" />
@@ -71,7 +73,7 @@ export function HorizontalServices({ slug }: { slug: PillarSlug }) {
             </div>
           </div>
 
-          {pillar.services.map((s, i) => (
+          {programs.map((s, i) => (
             <GlowCard
               key={s.slug}
               as="article"
@@ -91,20 +93,21 @@ export function HorizontalServices({ slug }: { slug: PillarSlug }) {
                 </span>
               </div>
               <div className="relative z-10 flex flex-1 flex-col p-7">
-                <h3 className="font-display text-2xl text-white">{s.name}</h3>
+                <span className="text-xs font-bold tracking-[0.16em] text-blush-200 uppercase">{s.tag}</span>
+                <h3 className="mt-1.5 font-display text-2xl text-white">{s.short}</h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-iris-100/70">{s.summary}</p>
                 <ul className="mt-5 space-y-2">
-                  {s.points.map((pt) => (
+                  {s.points.slice(0, 4).map((pt) => (
                     <li key={pt} className="tick text-sm text-iris-50/90 [--tick:var(--color-blush-300)]">
                       {pt}
                     </li>
                   ))}
                 </ul>
                 <Link
-                  href={`${pillar.href}#${s.slug}`}
+                  href={programHref(s)}
                   className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-blush-200 transition hover:text-white"
                 >
-                  Learn more<span className="sr-only"> about {s.name.toLowerCase()}</span> <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  Learn more<span className="sr-only"> about {s.short.toLowerCase()}</span> <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
               </div>
             </GlowCard>

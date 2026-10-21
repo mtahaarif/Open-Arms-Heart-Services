@@ -12,8 +12,8 @@ import { Magnetic, Reveal, SplitHeading } from "../ui/motion";
 
 /** Closing call-to-action: parallax photo, iris gradient wash, glass card and animated ribbons. */
 export function CtaBand({
-  title = "Let's talk about care for *someone you love.*",
-  text = "Tell us what's going on and we'll help you find the right mix of skilled and non-skilled support — no pressure, no obligation.",
+  title = "Open Arms & Heart Services is *only a call away!*",
+  text = "If you would like to learn more about our services or discuss how we can support your loved one, give us a call or send a request — a member of our team will contact you.",
   image = "/images/breakfast-family.jpg",
 }: {
   title?: string;
@@ -53,16 +53,17 @@ export function CtaBand({
               </Reveal>
             </div>
             <Reveal delay={0.3} className="glass-dark rounded-[2rem] p-7 sm:p-8">
-              <p className="text-sm font-semibold tracking-[0.14em] text-blush-200 uppercase">Call our office</p>
+              <p className="text-sm font-semibold tracking-[0.14em] text-blush-200 uppercase">Office</p>
               <a
                 href={site.phone.href}
                 className="mt-2 block font-display text-3xl text-white transition-colors hover:text-blush-200 sm:text-4xl"
               >
                 {site.phone.display}
               </a>
-              <p className="mt-2 text-sm text-iris-100/70">
-                {site.hours[0].days}, {site.hours[0].time}
-              </p>
+              <a href={`mailto:${site.email}`} className="mt-2 block text-sm break-all text-iris-100/75 hover:text-white">
+                {site.email}
+              </a>
+              <p className="mt-1 text-sm text-iris-100/60">Serving Central Florida since {site.founded}</p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
                 <Magnetic className="block">
                   <a href={site.phone.href} className="btn-light w-full">

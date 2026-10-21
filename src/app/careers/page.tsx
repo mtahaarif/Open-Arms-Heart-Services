@@ -1,12 +1,13 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { site } from "@/lib/site";
 import { CareersClient } from "@/components/sections/careers/CareersClient";
 import { PageHero } from "@/components/ui/PageHero";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   path: "/careers",
-  title: "Caregiver & Nursing Jobs",
-  description: "Join our team: nurse, therapist, home health aide, companion, respite and direct support jobs in Polk, Lake and Orange counties, FL.",
+  title: "Careers — Join Our Care Team",
+  description: "Home Health Aide and Group Home Staff jobs with Open Arms & Heart Services in Central Florida. Make a difference and build a meaningful career.",
 });
 
 export default function CareersPage() {
@@ -14,13 +15,16 @@ export default function CareersPage() {
     <>
       <PageHero
         eyebrow="Careers"
-        title="Do work that *feels like home.*"
-        text="We're looking for **compassionate nurses, therapists, aides, companions and respite caregivers** who believe care should come with open arms and an open heart."
+        title="Quality care. *Brighter tomorrows.*"
+        text="**Make a difference and build a meaningful career.** Join our care team and help children, adults, seniors, and people with disabilities live safely and comfortably at home."
         crumbs={[{ label: "Careers" }]}
         images={["/images/caregiver-portrait.jpg", "/images/nurses-team.jpg"]}
       >
-        <a href="#apply" className="btn-primary">
-          Apply now <ArrowRight className="size-4" />
+        <a href={site.applicationUrl} target="_blank" rel="noreferrer" className="btn-primary">
+          Apply now <ArrowUpRight className="size-4" />
+        </a>
+        <a href="#apply" className="btn-ghost">
+          What you&apos;ll need <ArrowRight className="size-4" />
         </a>
       </PageHero>
       <CareersClient />

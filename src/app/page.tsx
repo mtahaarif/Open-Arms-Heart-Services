@@ -16,7 +16,7 @@ import { site } from "@/lib/site";
 export const metadata = pageMetadata({
   path: "/",
   absoluteTitle: true,
-  title: "Open Arms & Heart Services | Home Health & Home Care in FL",
+  title: "Open Arms & Heart Services | Home Care in Central Florida",
   description: site.description,
 });
 
@@ -27,8 +27,8 @@ export default function HomePage() {
       <CrossMarquee />
       <PillarsReveal />
       <Manifesto />
-      <HorizontalServices slug="home-health" />
-      <StackingCards slug="home-care" />
+      <HorizontalServices />
+      <StackingCards />
       <CareChooser />
       <StickySteps />
       <AudienceBento />
