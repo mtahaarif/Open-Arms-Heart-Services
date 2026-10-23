@@ -26,13 +26,14 @@ export default function HomePage() {
       <CrossMarquee />
       <PillarsReveal />
       <Manifesto />
-      <HorizontalServices />
       <StackingCards />
       {/*<CareChooser />
-      <AudienceBento />
+      <HorizontalServices />
       <AreasServed />
       <FaqPreview />
       */}
+      <AudienceBento />
+
 
       <CtaBand />
     </>
