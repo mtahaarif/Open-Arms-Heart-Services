@@ -1,5 +1,5 @@
 import { ArrowUpRight, BadgeCheck, Mail, MapPin, Phone, Printer } from "lucide-react";
-import { InquiryForm } from "@/components/forms/InquiryForm";
+import { GoogleForm } from "@/components/forms/GoogleForm";
 import { ResourcesSection } from "@/components/sections/ResourcesSection";
 import { Accordion } from "@/components/ui/Accordion";
 import { GlowCard } from "@/components/ui/GlowCard";
@@ -101,7 +101,7 @@ export default function ContactPage() {
           </div>
 
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <InquiryForm />
+            <GoogleForm />
           </div>
         </div>
       </section>

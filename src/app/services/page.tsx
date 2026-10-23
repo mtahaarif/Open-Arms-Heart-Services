@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Phone } from "lucide-react";
-import { InquiryForm } from "@/components/forms/InquiryForm";
+import { GoogleForm } from "@/components/forms/GoogleForm";
 import { CareChooser } from "@/components/sections/CareChooser";
 import { InsuranceSection } from "@/components/sections/InsuranceSection";
 import { ServiceScrollspy } from "@/components/sections/services/ServiceScrollspy";
@@ -69,7 +69,7 @@ export default function ServicesPage() {
               </p>
             </Reveal>
           </div>
-          <InquiryForm />
+          <GoogleForm />
         </div>
       </section>
     </>

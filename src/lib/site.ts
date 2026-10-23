@@ -32,6 +32,12 @@ export const site = {
   /** "Apply Now" on the original Careers page. */
   applicationUrl: "https://form.jotform.com/260676196988075",
 
+  /** "Request More Information" Google Form embedded on the original Contact and Types of Care pages. */
+  inquiryForm: {
+    url: "https://docs.google.com/forms/d/e/1FAIpQLScTQTwN2QlIn15iXq_LH065IpvekPYgO8AslI_lh0bNm-2hZQ/viewform",
+    servicesEntry: "entry.499657858",
+  },
+
   /** Service areas as published, by type of care. */
   areas: [
     {

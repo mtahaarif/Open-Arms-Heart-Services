@@ -11,8 +11,8 @@
 | **Framework** | Next.js 16 (App Router, Turbopack) · React 19 · TypeScript 5 |
 | **Styling** | Tailwind CSS v4 (CSS-first `@theme` config) |
 | **Motion** | Motion (Framer Motion successor) v14 · Lenis smooth scroll |
-| **Hosting** | Vercel (static pre-rendering + one serverless function) |
-| **Email delivery** | Resend (HTTP API, no SDK) |
+| **Hosting** | Vercel (fully static pre-rendering) |
+| **Inquiries** | The agency's own Google Form, embedded |
 
 ---
 
@@ -60,7 +60,7 @@ Contact, as published: Office 321-217-2409 · Fax 855-257-1340 · openarmsandhea
 | Goal | How the site delivers it |
 | --- | --- |
 | Present the six types of care | The agency's own descriptions, service lists and notes, verbatim, plus an interactive care finder |
-| Generate inquiries | Phone CTAs, a floating mobile call bar, and a "Request More Information" form delivered to the agency's existing Google Form |
+| Generate inquiries | Phone CTAs, a floating mobile call bar, and the agency's own "Request More Information" Google Form, embedded as on the original site |
 | Recruit caregivers | A Careers page linking to the agency's online employment application |
 | Build trust | Mission, owner story and photo, licenses, insurances accepted, Level 2 background screening, service areas and FAQs |
 | Rank in search and AI answers | Unique metadata, structured data (JSON-LD), sitemap, `llms.txt`, server-rendered content |
@@ -99,7 +99,7 @@ The colour palette, script wordmark and "hands holding a heart" mark come from t
 | `lenis` | ^1.3.27 | Inertial smooth scrolling (`lenis/react`) |
 | `lucide-react` | ^1.59.0 | Icon set (tree-shaken per icon) |
 
-There are **no other runtime dependencies**. Inquiries are posted with plain `fetch` calls (Google Form; optional Resend email).
+There are **no other runtime dependencies**, and no server-side code: inquiries go through the embedded Google Form.
 
 **Fonts** (self-hosted at build time via `next/font/google`, so there are no runtime requests to Google):
 
@@ -148,14 +148,10 @@ Copy `.env.example` to `.env.local` for local work, or set the variables in **Ve
 | Variable | Required | Exposed to browser | Purpose |
 | --- | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Recommended | Yes | Canonical base URL for canonicals, `og:url`, the sitemap, `robots.txt`, JSON-LD and `llms.txt`. If unset, falls back to `VERCEL_PROJECT_PRODUCTION_URL` (set automatically by Vercel), then `http://localhost:3000`. |
-| `RESEND_API_KEY` | Optional | No | API key from [resend.com](https://resend.com). Adds an email copy of each inquiry (the Google Form channel works without it). |
-| `CONTACT_TO_EMAIL` | Optional | No | Recipient(s) of the email copy. Separate several addresses with commas. |
-| `GOOGLE_FORM_DISABLED` | Optional | No | Set to `true` to stop forwarding inquiries to the agency's Google Form (e.g. for local testing). |
-| `CONTACT_FROM_EMAIL` | Optional | No | Verified sender, e.g. `Open Arms Website <website@yourdomain.com>`. Defaults to Resend's `onboarding@resend.dev` test sender. |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Optional | Yes | Google Search Console HTML-tag verification code (just the `content` value). Adds `<meta name="google-site-verification">`. |
 | `NEXT_PUBLIC_GTM_ID` | Optional | Yes | Google Tag Manager container ID (`GTM-XXXXXXX`). When set, GTM loads lazily *and* the Content-Security-Policy opens up for GTM / Google Analytics domains. When unset, no tracking code exists on the site at all. |
 
-> **Inquiries work out of the box.** Every submission is forwarded to the agency's existing Google Form, so it lands in the same response sheet the old website used. Resend is an optional second channel. See §13.
+> **Inquiries need no configuration.** The contact and Types of Care pages embed the agency's existing Google Form, so responses land in the same place as with the old website. See §13.
 
 ---
 
@@ -177,9 +173,7 @@ Copy `.env.example` to `.env.local` for local work, or set the variables in **Ve
 │   │   ├── careers/                /careers
 │   │   ├── faq/                    /faq   (+ FAQPage JSON-LD)
 │   │   ├── contact/                /contact
-│   │   ├── thank-you/              /thank-you  (no-JS form landing page, noindex)
 │   │   ├── not-found.tsx           Branded 404
-│   │   ├── api/contact/route.ts    POST endpoint → agency's Google Form (+ optional Resend email)
 │   │   ├── llms.txt/route.ts       /llms.txt for AI answer engines
 │   │   ├── sitemap.ts              /sitemap.xml
 │   │   ├── robots.ts               /robots.txt
@@ -187,7 +181,7 @@ Copy `.env.example` to `.env.local` for local work, or set the variables in **Ve
 │   │   └── icon.svg                Favicon (logo mark on a rounded tile)
 │   ├── components/
 │   │   ├── brand/                  Logo (wordmark + SVG mark + shared defs), Ribbons, Aurora
-│   │   ├── forms/                  InquiryForm, CareLink
+│   │   ├── forms/                  GoogleForm (embed), CareLink
 │   │   ├── layout/                 Header, Footer, Providers, SmoothScroll, Chrome
 │   │   │                           (ScrollProgress + MobileCallBar), BackToTop
 │   │   ├── sections/               Page sections (shared ones at the root of this folder)
@@ -230,8 +224,6 @@ All content pages are **statically pre-rendered at build time** (○ in the buil
 | --- | --- | --- |
 | `/`, `/about`, `/services`, `/careers`, `/faq`, `/contact` | Static | Served from the CDN edge cache; full HTML for crawlers |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt`, `/opengraph-image`, `/icon.svg` | Static | Generated once at build time |
-| `/api/contact` | Dynamic (serverless) | Handles form submissions |
-| `/thank-you` | Dynamic | Reads `?status=` to show success or error |
 
 **Server vs client components.** Page files (`app/**/page.tsx`) are Server Components. They export metadata and compose sections. Interactive sections are Client Components (`"use client"`), but they are still **server-rendered to HTML first**, so every word of copy is in the initial response. This was verified by an SEO audit that reported "11 of 11 pages readable without JavaScript". Purely presentational components with no hooks stay as Server Components: `Marquee`, `CrossMarquee`, `AudienceBento`, `AreasServed`, `FaqPreview`, `InsuranceSection`, `ResourcesSection`, `Photo`, `Footer` and `not-found`.
 
@@ -328,7 +320,7 @@ Named **"Types of Care"**, as on the original site.
 | Types of care | `ServiceScrollspy` | All six with their full published copy (description, "Services and Support", closing note). Scroll-spy sidebar, parallax images, "Ask about …" CareLinks. |
 | Care finder | `CareChooser` | |
 | Insurance | `InsuranceSection` | "Insurances we accept:" — ten tiles (glow + tilt) and a marquee. |
-| Request form | `InquiryForm` | Anchor `#request`, as on the original page. |
+| Request form | `GoogleForm` | The agency's Google Form, embedded; anchor `#request`, as on the original page. |
 
 ### 7.7 Careers — `/careers`
 
@@ -356,7 +348,7 @@ Mirrors the original Contact page.
 | --- | --- |
 | Hero | "We're here, *with open arms.*" · "Proudly serving counties in Central Florida since 2017." |
 | Contact cards | **Office** 321-217-2409, **Email**, **Fax**, **Address** (as published) and a **Licensed** card with both credentials and license numbers. |
-| Form | `InquiryForm` (sticky on desktop). |
+| Form | `GoogleForm` — the agency's Google Form, embedded as on the original Contact page. |
 | Types of Care Offered | The six types of care as glow link cards (the original Contact page lists them). |
 | Quick answers | Four verified FAQs + the published county lists. |
 | Resources | `ResourcesSection` — the original footer's resources. |
@@ -365,7 +357,6 @@ Mirrors the original Contact page.
 
 | Route | Details |
 | --- | --- |
-| `/thank-you` | Landing page for **form posts made without JavaScript**. `?status=error` shows an apology and the phone number. `robots: noindex, follow`. |
 | 404 (`not-found.tsx`) | Branded page: a floating logo, a gradient italic "404", "This page wandered off.", a home link and the phone number. |
 | `/sitemap.xml` | The six public pages with priorities (home 1.0 · services 0.9 · contact 0.8 · about 0.7 · careers/faq 0.6), `changeFrequency: monthly`. |
 | Redirects | `/services/home-care` → `/services#home-care`, `/services/home-health` → `/services`, `/getting-started` → `/contact` (308, in `next.config.ts`) — pages removed because their content wasn't verified. |
@@ -432,7 +423,7 @@ Mirrors the original Contact page.
 
 | Component | Purpose |
 | --- | --- |
-| `InquiryForm` | The "Request More Information" form. See §13. |
+| `GoogleForm` | Embeds the agency's "Request More Information" Google Form. See §13. |
 | `CareLink` | `<Link href="/contact">` that saves one or more type-of-care slugs in `sessionStorage` (`oa-care-programs`) on click, so the form pre-ticks them. This keeps `/contact` a single indexable URL instead of `/contact?care=…` duplicates. Fails silently if storage is unavailable. |
 
 ### 8.5 Other shared sections
@@ -462,7 +453,7 @@ It also exports `allCounties` (9), `fullAddress`, `licenseLine`, `sinceLine` and
 
 ### 9.2 `services.ts` — programs, pillars & highlights
 
-* **`programs`** — the six types of care (`Program`: slug, name, short, tag, icon, image, summary, intro, points, note, `formLabel` = the exact option on the agency's Google Form). Copy is verbatim; only the spelling typos "Habitation" and "Healtchare" are corrected. `programHref(p)` → `/services#slug`.
+* **`programs`** — the six types of care (`Program`: slug, name, short, tag, icon, image, summary, intro, points, note, `formLabel` = the exact checkbox option on the agency's Google Form, used to pre-tick it). Copy is verbatim; only the spelling typos "Habitation" and "Healtchare" are corrected. `programHref(p)` → `/services#slug`.
 * **`highlights`** — the original home page's three highlights (Companion Care, Residential, Personal Support), each tagged with matching published service items.
 * `programBySlug`.
 
@@ -583,8 +574,6 @@ Headings (`h1–h4`) use Fraunces with −0.02em tracking in `iris-950`. Body te
 | Photo marquee | Two opposite rows | About | `about/AboutSections.tsx` |
 | Requirements ticker | `Marquee` | Careers | `careers/CareersClient.tsx` |
 | Live search + filter | `useMemo` filter, `layoutId` pill, popLayout | FAQ | `faq/FaqExplorer.tsx` |
-| Checkbox chip selection | Animated gradient fill per chip | Inquiry form | `forms/InquiryForm.tsx` |
-| Form success state | Spring check icon, `AnimatePresence` | Forms | `forms/InquiryForm.tsx` |
 
 **Reduced motion.** `MotionConfig reducedMotion="user"` disables transform animations in Motion, Lenis is not mounted, and a CSS media query neutralises keyframes and transitions.
 
@@ -612,29 +601,16 @@ The site is designed **mobile-first**. These sections adapt their *interaction p
 
 ## 13. Forms & the contact pipeline
 
-### 13.1 `InquiryForm` — "Request More Information"
+### 13.1 `GoogleForm` — "Request More Information"
 
-The form mirrors the agency's original Google Form: **First and last name\*, Email\*, Phone number\*, Services you are interested in** (checkbox chips for the six types of care), plus an optional **"Anything else we should know?"** note. It's used on Contact and Types of Care.
+The Contact and Types of Care pages embed the agency's own Google Form (`site.inquiryForm` in `src/lib/site.ts`), the same form the original website embedded. It asks for **First and Last Name\*, Email\*, Phone Number\*, Services you are interested in\*** (the six types of care, plus "Other"). Google handles validation, submission, the confirmation message and response storage, so responses arrive exactly where they did before. There is no server code, API route or email setup.
 
-A `CareLink` (or the care finder) pre-ticks programs via `sessionStorage` (`oa-care-programs`).
+* **Embed:** `…/viewform?embedded=true` in a lazy-loaded iframe inside a glass card, with a spinner underneath until the form paints. Below it: "Open the form in a new tab" and the office phone.
+* **Height:** a cross-origin iframe can't report its height, so the iframe has fixed heights per breakpoint (`1660px` / `1520px` from 420px / `1420px` from 640px). These were measured with room for Google's validation messages. Re-measure if questions are added to the form.
+* **Pre-ticking:** `CareLink` (and the care finder) store type-of-care slugs in `sessionStorage` (`oa-care-programs`). `GoogleForm` reads them once and uses Google's prefill parameters (`usp=pp_url&entry.499657858=<formLabel>`), so the chosen types of care arrive already ticked.
+* **CSP:** `frame-src` allows `https://docs.google.com`.
 
-### 13.2 Delivery — `POST /api/contact`
-
-```
-InquiryForm ──JSON──► /api/contact ──┬─► Google Form "Request More Information"   (always, no setup)
-no-JS <form> ──POST─►                └─► Resend email                              (when configured)
-```
-
-1. **Input:** JSON (enhanced form) or form-encoded (no-JS fallback, which redirects `303` to `/thank-you`).
-2. **Honeypot:** a filled hidden `company` field gets a fake success.
-3. **Validation:** name, email and phone are required, email format is checked, and at least one service *or* a note is needed. All values are trimmed and length-capped.
-4. **Google Form channel.** The handler posts to the agency's existing form (`…/formResponse`) using its field IDs. Types of care are sent with their **exact option labels** (`formLabel`); the free-text note goes into the form's **"Other"** answer. Responses land in the same Google Forms inbox the agency used with its old site. Disable with `GOOGLE_FORM_DISABLED=true`.
-5. **Email channel** (optional): a Resend email with HTML-escaped fields and `reply_to` set to the visitor.
-6. The request succeeds if **either** channel accepts it. Otherwise it returns `502`, and the UI shows the phone number and email address.
-
-> **Verification:** the endpoint and field format were checked against Google with deliberately incomplete submissions, which Google rejects without recording. Only the omitted required field was flagged, so every other field and the option labels were accepted. Send one real test inquiry after deploying and confirm it appears in the agency's Google Form responses.
-
-> If the agency edits the Google Form's questions or options, update `GOOGLE_FORM` in `src/app/api/contact/route.ts` and the `formLabel` values in `src/lib/services.ts`.
+> If the agency renames the form's checkbox options, update `formLabel` in `src/lib/services.ts` (prefill matches the labels exactly). If the "Services" question is recreated, update `site.inquiryForm.servicesEntry`.
 
 ## 14. SEO & AI discoverability
 
@@ -661,7 +637,7 @@ Every page uses `pageMetadata()` (unique title, description, self-referencing ca
 * Pages are statically rendered with all copy in the HTML.
 * **Collapsed content is still in the DOM.** FAQ answers are hidden with CSS and `inert`, not removed, so crawlers index them.
 * **One URL per page.** `CareLink` replaces `?care=` links, which previously created three duplicate copies of `/contact`.
-* `/thank-you` is `noindex`; `/api/` is disallowed in `robots.txt`.
+* `/api/` is disallowed in `robots.txt` (there are no API routes today).
 
 ### 14.4 On-page signals
 
@@ -755,16 +731,14 @@ Lighthouse accessibility: **100** on Services, Contact, FAQ, Careers and About; 
 
 * `default-src 'self'`; `object-src 'none'`; `base-uri 'self'`; `form-action 'self'`; `frame-ancestors 'self'`; `upgrade-insecure-requests` (production).
 * `script-src 'self' 'unsafe-inline'`. Inline scripts are needed for Next's bootstrap and the JSON-LD; nonces would force every page to render dynamically and lose static caching. It also allows `vercel.live` (preview toolbar), adds `'unsafe-eval'` in development only, and allows GTM only when configured.
-* `frame-src` allows only `vercel.live` (and GTM when enabled).
+* `frame-src` allows `docs.google.com` (the embedded Google Form) and `vercel.live` (and GTM when enabled).
 * `img-src`, `connect-src` and `font-src` allow `self`, `data:`/`blob:` where needed, and the Vercel toolbar. GTM and Google Analytics domains are added only when `NEXT_PUBLIC_GTM_ID` is set.
 
 > **Adding any new third-party service (chat widget, booking tool, analytics) requires adding its domains to the CSP in `next.config.ts`.** Otherwise the browser will block it.
 
 ### 17.2 Application security
 
-* Secrets (`RESEND_API_KEY`) are server-only (no `NEXT_PUBLIC_` prefix).
-* Form input is trimmed, length-limited and **HTML-escaped** before it goes into the email.
-* There's a honeypot field for basic bot protection.
+* There are no server secrets and no API routes. Form data goes directly from the visitor's browser to Google Forms, which handles validation and spam protection.
 * `/api/` is disallowed in `robots.txt`.
 * External links use `rel="noreferrer"`.
 
@@ -840,8 +814,8 @@ Never link to `/contact?care=…`.
 The project is configured for **Vercel**, with no extra configuration file.
 
 1. Import the GitHub repository into Vercel. The framework is auto-detected as Next.js; the build command is `npm run build`.
-2. Set `NEXT_PUBLIC_SITE_URL` (§4). Resend variables are optional — inquiries go to the agency's Google Form.
-3. Optional: to also email inquiries, verify a sending domain in Resend and set `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.
+2. Set `NEXT_PUBLIC_SITE_URL` (§4).
+3. Inquiries need no setup — they go through the embedded Google Form.
 4. Add the custom domain in Vercel, then update `NEXT_PUBLIC_SITE_URL` to match and redeploy.
 5. Verify the domain in Google Search Console (`NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`) and submit `https://<domain>/sitemap.xml`.
 6. After deploying, run PageSpeed Insights and the SEO audit against the live domain.
@@ -883,16 +857,15 @@ Any other Node host works as well (`npm run build && npm start`); the security h
 - [ ] **"Integrated Simply"**, "Children Medical Services", "OPTUM (VA)", "United Healthcare" are shown exactly as published.
 - [ ] **Skilled home health** — not on the original site, so not shown. Add back only if the client confirms it.
 - [ ] **Photography.** The owner's photo is the client's own; all other images are licensed stock (§24).
-- [ ] **Google Form delivery.** Send one real test inquiry after deploying.
+- [ ] **Google Form.** Submit one test inquiry on the live site and confirm it appears in the form's responses.
 
 ## 22. Known limitations & future work
 
-* Inquiries go to the agency's Google Form (and optionally email). There is no database or CRM integration.
+* Inquiries go to the agency's Google Form, which can notify by email (Google Forms → Responses → "Get email notifications"). There is no database or CRM integration.
 * **No CMS.** Content is edited in TypeScript files and needs a redeploy. A headless CMS (Sanity, Contentful, etc.) could be added later; the `src/lib` modules are the natural seam.
 * **No automated tests, ESLint or CI pipeline.** The production build is the only gate.
 * **CSP uses `'unsafe-inline'` for scripts.** This is a deliberate trade-off to keep pages static; nonce-based CSP would need dynamic rendering.
 * **Analytics and HIPAA.** Home-health agencies are typically HIPAA-covered entities. Review with the client before enabling GTM, Google Analytics or any tracking on pages that collect health-related enquiries.
-* **Bot protection** is a honeypot only. Consider Cloudflare Turnstile or rate limiting if spam appears, and add its domains to the CSP.
 * **Lighthouse figures are lab measurements.** Field data (CrUX) will only exist once the site has real traffic.
 
 ---
@@ -905,7 +878,8 @@ Any other Node host works as well (`npm run build && npm start`); the security h
 | `ac9f6ac` — *SEO Optimization* | Resolved the technical SEO audit: CSS-first hero entrances, `Photo` component and image sizing, font trimming, shared logo defs (duplicate IDs), `CareLink` (duplicate contact URLs), `pageMetadata` (titles, descriptions, `og:url`), security headers and CSP, crawlable accordions, contact page content and map facade, heading hierarchy, descriptive links, `<strong>` emphasis, `llms.txt`, no-JS form fallback and `/thank-you`, contrast fixes |
 | `310b2b7` — *Mobile version fixes* | Mobile adaptations: pillar snap carousel (no cropped service pills), stacking cards on mobile, pinned step progress bar, bento layout on all sizes, three-column service areas |
 | *Content from original website* | Rebuilt the content around the agency's original site: seven types of care, insurance list, licenses, mission, founder story + photo, office phone & email, published counties, careers via the agency's JotForm, community resources; inquiries delivered to the agency's Google Form; new `InsuranceSection` and `ResourcesSection`; removed `PillarSwitcher`, `ComparisonTable`, `PaymentGrid` |
-| *(next)* — *Verified content only* | Captured the original site verbatim in `docs/original-site-content.md` and removed every unverified fact and page: Skilled Home Health, Home Care and Getting Started pages, process steps, promises, funding notes, social links, NPI, maps/directory address data; FAQs, careers, audiences, highlights, insurance and resources rewritten to verbatim content; redirects for removed URLs |
+| *Verified content only* | Captured the original site verbatim in `docs/original-site-content.md` and removed every unverified fact and page: Skilled Home Health, Home Care and Getting Started pages, process steps, promises, funding notes, social links, NPI, maps/directory address data; FAQs, careers, audiences, highlights, insurance and resources rewritten to verbatim content; redirects for removed URLs |
+| *(next)* — *Embedded Google Form* | Contact and Types of Care now embed the agency's own "Request More Information" Google Form (as the original site did), with type-of-care pre-ticking via Google's prefill parameters; removed `InquiryForm`, `/api/contact`, `/thank-you` (redirects to `/contact`) and the Resend setup; the site is now fully static |
 
 ---
 

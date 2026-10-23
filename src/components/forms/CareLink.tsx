@@ -7,7 +7,7 @@ import type { ProgramSlug } from "@/lib/services";
 export const CARE_KEY = "oa-care-programs";
 
 /**
- * Link to /contact that pre-ticks the given types of care in the inquiry form.
+ * Link to /contact that pre-ticks the given types of care in the embedded Google Form.
  * The choice travels in sessionStorage rather than a query string, so the
  * contact page stays a single crawlable URL (no duplicate titles/H1s/canonicals).
  */
