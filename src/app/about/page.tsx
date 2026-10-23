@@ -20,7 +20,7 @@ export default function AboutPage() {
         title="Care rooted in *family.*"
         text={`${site.owner.name} is the proud owner of Open Arms & Heart Services Inc., where her passion for delivering **high-quality, person-centered care** is rooted in deeply personal experiences since ${site.since}.`}
         crumbs={[{ label: "About" }]}
-        images={["/images/hero-caregiver-laughing.jpg", "/images/founder-shantana-johnson.jpg"]}
+        images={["/images/hero-caregiver-laughing.jpg", "/images/friends-talking.jpg"]}
       >
         <Link href="/services" className="btn-primary">
           Explore types of care <ArrowRight className="size-4" />

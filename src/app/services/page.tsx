@@ -49,8 +49,8 @@ export default function ServicesPage() {
       </section>
 
       <ServiceScrollspy />
-      <CareChooser />
-      <InsuranceSection />
+        {/*<CareChooser />
+    <InsuranceSection />*/}
 
       <section id="request" className="scroll-mt-28 bg-iris-50/60 py-24 sm:py-28">
         <div className="container-x grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">

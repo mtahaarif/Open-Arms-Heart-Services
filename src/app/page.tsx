@@ -28,10 +28,12 @@ export default function HomePage() {
       <Manifesto />
       <HorizontalServices />
       <StackingCards />
-      <CareChooser />
+      {/*<CareChooser />
       <AudienceBento />
       <AreasServed />
       <FaqPreview />
+      */}
+
       <CtaBand />
     </>
   );
