@@ -11,7 +11,7 @@ import {
 } from "motion/react";
 import { Accessibility, ArrowRight, BadgeCheck, HandHeart, HeartHandshake, Phone } from "lucide-react";
 import { useRef } from "react";
-import { site } from "@/lib/site";
+import { sinceLine, site } from "@/lib/site";
 import { Aurora, Ribbons } from "../../brand/Ribbons";
 import { CssSplitHeading } from "../../ui/CssSplitHeading";
 import { Magnetic } from "../../ui/motion";
@@ -72,7 +72,7 @@ export function Hero() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-blush-400 opacity-75" />
               <span className="relative inline-flex size-2 rounded-full bg-blush-500" />
             </span>
-            Serving Central Florida since {site.founded}
+            {sinceLine}
           </div>
 
           <CssSplitHeading
@@ -104,7 +104,7 @@ export function Hero() {
           </div>
 
           <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-iris-900">
-            {[...site.credentials, "Level 2 background-screened caregivers"].map((t, i) => (
+            {[...site.credentials, "Level 2 background screening"].map((t, i) => (
               <li key={t} className="enter flex items-center gap-2" style={{ ["--d" as string]: `${620 + i * 90}ms` }}>
                 <BadgeCheck className="size-4.5 text-blush-500" /> {t}
               </li>
@@ -147,16 +147,16 @@ export function Hero() {
             <div className="enter [--d:650ms] [--enter:enter-left]">
               <div className="animate-float" style={{ ["--r" as string]: "-2deg" }}>
                 <Link
-                  href="/services/home-care"
+                  href="/services#home-care"
                   className="glass group flex items-center gap-3 rounded-2xl py-3 pr-5 pl-3 transition duration-500 hover:scale-[1.04]"
                 >
                   <span className="grid size-11 place-items-center rounded-xl bg-iris-600 text-white">
                     <HeartHandshake className="size-5" />
                   </span>
                   <span>
-                    <span className="block text-[0.68rem] font-bold tracking-[0.16em] text-blush-700 uppercase">Home care</span>
-                    <span className="block font-display text-lg leading-tight text-iris-950">Non-Skilled Services</span>
-                    <span className="block text-xs text-ink-soft">Personal care · Companions · Respite</span>
+                    <span className="block text-[0.68rem] font-bold tracking-[0.16em] text-blush-700 uppercase">Non-Skilled</span>
+                    <span className="block font-display text-lg leading-tight text-iris-950">Home Health Services</span>
+                    <span className="block text-xs text-ink-soft">Personal care · Companionship · Respite</span>
                   </span>
                 </Link>
               </div>
@@ -174,9 +174,9 @@ export function Hero() {
                     <Accessibility className="size-5" />
                   </span>
                   <span>
-                    <span className="block text-[0.68rem] font-bold tracking-[0.16em] text-iris-600 uppercase">APD provider</span>
-                    <span className="block font-display text-lg leading-tight text-iris-950">Central Region</span>
-                    <span className="block text-xs text-ink-soft">Personal supports · Group home</span>
+                    <span className="block text-[0.68rem] font-bold tracking-[0.16em] text-iris-600 uppercase">APD</span>
+                    <span className="block font-display text-lg leading-tight text-iris-950">Central Region Provider</span>
+                    <span className="block text-xs text-ink-soft">Personal Supports · Group Home</span>
                   </span>
                 </Link>
               </div>

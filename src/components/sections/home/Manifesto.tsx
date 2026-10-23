@@ -31,9 +31,9 @@ export function Manifesto() {
   const words = TEXT.split(" ");
 
   const stats = [
-    { n: programs.length, label: "Types of care under one roof" },
-    { n: allCounties.length, label: "Central Florida counties served" },
-    { n: insurances.length, label: "Insurance plans accepted" },
+    { n: programs.length, label: "Types of care offered" },
+    { n: allCounties.length, label: "Central Florida counties" },
+    { n: insurances.length, label: "Insurances we accept" },
   ];
 
   return (
@@ -68,9 +68,9 @@ export function Manifesto() {
           <Reveal className="relative overflow-hidden rounded-[2rem] bg-iris-900 p-7 text-white">
             <Photo src="/images/hands.jpg" alt="" sizes="400px" className="object-cover opacity-25" />
             <div className="relative">
-              <p className="text-sm font-semibold tracking-[0.16em] text-blush-200 uppercase">Serving families since</p>
+              <p className="text-sm font-semibold tracking-[0.16em] text-blush-200 uppercase">Serving Central Florida since</p>
               <p className="mt-1 font-display text-7xl">
-                <Counter from={2000} to={site.founded} />
+                <Counter from={2000} to={site.since} />
               </p>
               <p className="mt-2 text-iris-100/80">{site.credentials.join(" · ")}.</p>
             </div>

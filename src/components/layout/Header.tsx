@@ -8,10 +8,9 @@ import { useLenis } from "lenis/react";
 import { ArrowRight, ArrowUpRight, BadgeCheck, ChevronDown, Mail, MapPin, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { programHref, programs } from "@/lib/services";
-import { nav, site } from "@/lib/site";
+import { nav, sinceLine, site } from "@/lib/site";
 import { Logo } from "../brand/Logo";
 import { EASE, Magnetic } from "../ui/motion";
-import { FacebookIcon, LinkedInIcon } from "../ui/SocialIcons";
 
 export function Header() {
   const pathname = usePathname();
@@ -73,7 +72,7 @@ export function Header() {
                     <BadgeCheck className="size-3.5 text-blush-500" /> {site.credentials.join(" · ")}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <MapPin className="size-3.5 text-blush-500" /> Serving Central Florida since {site.founded}
+                    <MapPin className="size-3.5 text-blush-500" /> {sinceLine}
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
@@ -82,14 +81,7 @@ export function Header() {
                   </a>
                   <span className="h-3 w-px bg-iris-200" />
                   <a href={site.phone.href} className="flex items-center gap-1.5 font-semibold text-iris-800 hover:text-blush-700">
-                    <Phone className="size-3.5" /> {site.phone.display}
-                  </a>
-                  <span className="h-3 w-px bg-iris-200" />
-                  <a href={site.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook" className="hover:text-iris-700">
-                    <FacebookIcon className="size-4" />
-                  </a>
-                  <a href={site.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-iris-700">
-                    <LinkedInIcon className="size-4" />
+                    <Phone className="size-3.5" /> Office {site.phone.display}
                   </a>
                 </div>
               </div>
@@ -308,7 +300,7 @@ export function Header() {
                 <Phone className="size-4" /> {site.phone.display}
               </a>
               <p className="mt-4 text-center text-sm text-iris-200/70">
-                {site.address.city}, {site.address.state} · Serving Central Florida
+                {sinceLine}
               </p>
             </motion.div>
           </motion.div>

@@ -1,8 +1,8 @@
 # Open Arms & Heart Services Inc. — Website
 
-> Production marketing website for **Open Arms & Heart Services Inc.**, a family-oriented Central Florida agency — a **Licensed Florida Home Health Agency** and **APD Central Region Provider** offering non-skilled home care, APD services, skilled home health, DCF/CBC referral support, veterans respite and Live Scan fingerprinting.
+> Production marketing website for **Open Arms & Heart Services Inc.** — an **APD Central Region Provider** and **Licensed Florida Home Health Agency** serving Central Florida since 2017.
 >
-> **Content** comes from the agency's original website (openarmsandheart.org); **design and interactions** are this project's. See §21.
+> **Content policy:** every fact and every piece of copy on the site is taken from the agency's original website (openarmsandheart.org) and the two forms it links to. The complete verified record is [`docs/original-site-content.md`](docs/original-site-content.md). **Design and interactions** are this project's. See §21.
 
 | | |
 | --- | --- |
@@ -49,53 +49,41 @@
 
 ### 1.1 The client
 
-**Open Arms & Heart Services Inc.** has served Central Florida since **2017**. It is owned by **Shantana Johnson** and is a **Licensed Florida Home Health Agency** (Lic# 2999995365 · Lic# 235855) and an **APD Central Region Provider**. Its motto: *"Home Is Where The Heart Is — Where There Is Love, There Is Life."*
+**Open Arms & Heart Services Inc.** — *"Home Is Where The Heart Is · Where There Is Love, There Is Life."* An **APD Central Region Provider** and **Licensed Florida Home Health Agency** (Lic# 2999995365 · Lic# 235855), serving Central Florida since **2017**. **Shantana Johnson** is the proud owner.
 
-**Mission:** *To work in partnership with our consumers to help them achieve their goals of independence, productivity, and meaningful integration within their communities. We are committed to fulfilling the needs of our consumers with excellence and care.*
+**Our Mission:** *To work in partnership with our consumers to help them achieve their goals of independence, productivity, and meaningful integration within their communities. We are committed to fulfilling the needs of our consumers with excellence and care.*
 
-The office is at 1920 Verano Dr, Suite 105, Haines City, FL. The agency serves **9 counties**: Polk, Highlands, Hardee, Hillsborough and Manatee (home care), plus Orange, Brevard, Sumter, Lake, Polk and Highlands (APD Central Region).
+Contact, as published: Office 321-217-2409 · Fax 855-257-1340 · openarmsandheartservices@gmail.com · 1920 Verano Dr., Ste 105, Ocala, FL 2345 *(see §21 — the published ZIP is incomplete)*.
 
 ### 1.2 What the site has to do
 
 | Goal | How the site delivers it |
 | --- | --- |
-| Explain the types of care clearly | Seven programs presented with the agency's own wording, two dedicated pages (home care, skilled home health), and an interactive care finder |
-| Generate enquiries | A phone CTA on every screen, a floating mobile call bar, care-request and job-application forms, and a referral panel for physicians |
-| Recruit caregivers | A dedicated Careers page with six role descriptions and an application form |
-| Build trust | Founder story and photo, mission, licenses, insurance accepted, background screening, service areas and FAQs |
+| Present the six types of care | The agency's own descriptions, service lists and notes, verbatim, plus an interactive care finder |
+| Generate inquiries | Phone CTAs, a floating mobile call bar, and a "Request More Information" form delivered to the agency's existing Google Form |
+| Recruit caregivers | A Careers page linking to the agency's online employment application |
+| Build trust | Mission, owner story and photo, licenses, insurances accepted, Level 2 background screening, service areas and FAQs |
 | Rank in search and AI answers | Unique metadata, structured data (JSON-LD), sitemap, `llms.txt`, server-rendered content |
 | Feel premium, not "template-like" | A distinct interaction pattern for almost every section (see §11) |
 
 ### 1.3 Types of care offered
 
-The site is organised around **seven types of care** (`programs` in `src/lib/services.ts`). Six come word-for-word from the agency's original "Types of Care" page; Skilled Home Health comes from the client's service brief.
+The six types of care published on the original website (`programs` in `src/lib/services.ts`), all presented on `/services` ("Types of Care"):
 
-| # | Type of care | Where it lives |
+| # | Type of care | Anchor |
 | --- | --- | --- |
-| 1 | Non-Skilled Home Health Services | `/services/home-care` (own page) + `/services#home-care` |
+| 1 | Non-Skilled Home Health Services | `/services#home-care` |
 | 2 | Agency for Persons with Disabilities (APD) | `/services#apd` |
-| 3 | Skilled Home Health | `/services/home-health` (own page) + `/services#home-health` |
-| 4 | Vulnerable Adult Support Services / DCF Referrals | `/services#dcf` |
-| 5 | Children & Family Support Services (CBC) | `/services#cbc` |
-| 6 | Veterans Home Care & Respite Services (VA) | `/services#va` |
-| 7 | Live Scan Fingerprinting & Background Screening | `/services#live-scan` |
+| 3 | Vulnerable Adult Support Services / DCF Referrals | `/services#dcf` |
+| 4 | Children & Family Support Services (CBC) | `/services#cbc` |
+| 5 | Veterans Home Care & Respite Services (VA) | `/services#va` |
+| 6 | Live Scan Fingerprinting & Background Screening | `/services#live-scan` |
 
-The two dedicated pages break their program into individual services:
-
-| Home Care — *Non-Skilled* (6) | Home Health — *Skilled* (6) |
-| --- | --- |
-| Personal Care | Skilled Nursing |
-| Mobility & Transfer Assistance | Physical Therapy |
-| Homemaker Services | Occupational Therapy |
-| Companionship & Socialization | Speech Therapy |
-| Respite Care | Medical Social Work |
-| Pediatric & Disability Support | Home Health Aide Services |
-
-The agency accepts **10 insurance plans**: Sunshine Health, Aetna, Florida Blue, Humana, Children's Medical Services, Molina, Integrated Simply, Optum (VA), UnitedHealthcare and Florida Community Care.
+**Insurances we accept** (as published): Sunshine Health, Aetna, Florida Blue, Humana, Children Medical Services, Molina, Integrated Simply, OPTUM (VA), United Healthcare, Florida Community Care.
 
 ### 1.4 Brand
 
-The colour palette, script wordmark and "hands holding a heart" mark come from the client's logo and Facebook banner: purple hands, a pink heart, and flowing purple-to-pink ribbons. The logo mark is redrawn as an SVG (`src/components/brand/Logo.tsx`), and the banner's swooshes appear as the animated `Ribbons` component.
+The colour palette, script wordmark and "hands holding a heart" mark come from the client's logo and banner artwork: purple hands, a pink heart, and flowing purple-to-pink ribbons. The logo mark is redrawn as an SVG (`src/components/brand/Logo.tsx`), and the banner's swooshes appear as the animated `Ribbons` component.
 
 ---
 
@@ -111,7 +99,7 @@ The colour palette, script wordmark and "hands holding a heart" mark come from t
 | `lenis` | ^1.3.27 | Inertial smooth scrolling (`lenis/react`) |
 | `lucide-react` | ^1.59.0 | Icon set (tree-shaken per icon) |
 
-There are **no other runtime dependencies**. Email is sent with a plain `fetch` to the Resend REST API, and the Facebook and LinkedIn icons are inline SVG components.
+There are **no other runtime dependencies**. Inquiries are posted with plain `fetch` calls (Google Form; optional Resend email).
 
 **Fonts** (self-hosted at build time via `next/font/google`, so there are no runtime requests to Google):
 
@@ -176,7 +164,7 @@ Copy `.env.example` to `.env.local` for local work, or set the variables in **Ve
 ```
 .
 ├── public/
-│   └── images/                     31 optimised stock photos (Unsplash licence, ≈8.8 MB source)
+│   └── images/                     25 stock photos (Unsplash licence) + the owner's photo from the original site
 ├── src/
 │   ├── app/                        ── Next.js App Router ──
 │   │   ├── layout.tsx              Root layout: fonts, global metadata, MedicalBusiness JSON-LD,
@@ -185,16 +173,13 @@ Copy `.env.example` to `.env.local` for local work, or set the variables in **Ve
 │   │   ├── globals.css             Tailwind v4 theme, design tokens, utilities, keyframes
 │   │   ├── page.tsx                Home  (/)
 │   │   ├── about/page.tsx          /about
-│   │   ├── services/page.tsx       /services
-│   │   ├── services/home-health/   /services/home-health
-│   │   ├── services/home-care/     /services/home-care
-│   │   ├── getting-started/        /getting-started
+│   │   ├── services/page.tsx       /services  ("Types of Care")
 │   │   ├── careers/                /careers
 │   │   ├── faq/                    /faq   (+ FAQPage JSON-LD)
 │   │   ├── contact/                /contact
 │   │   ├── thank-you/              /thank-you  (no-JS form landing page, noindex)
 │   │   ├── not-found.tsx           Branded 404
-│   │   ├── api/contact/route.ts    POST endpoint → Resend email
+│   │   ├── api/contact/route.ts    POST endpoint → agency's Google Form (+ optional Resend email)
 │   │   ├── llms.txt/route.ts       /llms.txt for AI answer engines
 │   │   ├── sitemap.ts              /sitemap.xml
 │   │   ├── robots.ts               /robots.txt
@@ -207,32 +192,31 @@ Copy `.env.example` to `.env.local` for local work, or set the variables in **Ve
 │   │   │                           (ScrollProgress + MobileCallBar), BackToTop
 │   │   ├── sections/               Page sections (shared ones at the root of this folder)
 │   │   │   ├── home/               Hero, CrossMarquee, PillarsReveal, Manifesto, AudienceBento
-│   │   │   ├── services/           ConnectedSteps,
-│   │   │   │                       ServiceScrollspy, HoverRevealGrid, DayTimeline, RespiteSpotlight
+│   │   │   ├── services/           ServiceScrollspy (the six types of care)
 │   │   │   ├── about/              AboutSections (StoryChapters, NameMeaning, FounderSpotlight,
-│   │   │   │                       FlipPromises, PhotoMarquee)
-│   │   │   ├── started/            StartedSections (StoryStepper, ReadyChecklist, ReferralPanel)
+│   │   │   │                       PhotoMarquee)
 │   │   │   ├── careers/            CareersClient
 │   │   │   └── faq/                FaqExplorer
 │   │   └── ui/                     Primitives: motion helpers, PageHero, SectionIntro, Photo,
-│   │                               GlowCard, Marquee, Accordion, CssSplitHeading, SocialIcons
+│   │                               GlowCard, Marquee, Accordion, CssSplitHeading
 │   └── lib/                        ── Content & helpers (no UI) ──
 │       ├── site.ts                 Company facts, nav, service areas
-│       ├── services.ts             Seven programs, two pillars (12 services), home highlights
-│       ├── content.ts              Steps, audiences, promises, care-finder needs, insurances,
-│       │                           checklist, day timeline, job roles, requirements
-│       ├── faqs.ts                 13 FAQs in 4 categories
+│       ├── services.ts             The six types of care + three home highlights
+│       ├── content.ts              Audiences, care-finder needs, insurances, careers facts,
+│       │                           home Q&As, resources
+│       ├── faqs.ts                 12 FAQs (verbatim answers) in 4 categories
 │       ├── photos.ts               Generated: intrinsic size + average colour per photo
 │       ├── seo.ts                  pageMetadata() helper
 │       └── rich.tsx                **bold** → <strong> renderer
-├── next.config.ts                  Image config + security headers / CSP
+├── docs/original-site-content.md   Verified record of the original website (source of truth)
+├── next.config.ts                  Image config, security headers / CSP, redirects for removed pages
 ├── postcss.config.mjs              Tailwind v4 PostCSS plugin
 ├── tsconfig.json                   Strict TS, "@/*" → "./src/*"
 ├── .env.example                    Documented environment variables
 └── package.json
 ```
 
-Around 6,700 lines of TypeScript/CSS across 75 source files.
+
 
 ---
 
@@ -244,14 +228,14 @@ All content pages are **statically pre-rendered at build time** (○ in the buil
 
 | Route | Type | Why |
 | --- | --- | --- |
-| `/`, `/about`, `/services`, `/services/home-health`, `/services/home-care`, `/getting-started`, `/careers`, `/faq`, `/contact` | Static | Served from the CDN edge cache; full HTML for crawlers |
+| `/`, `/about`, `/services`, `/careers`, `/faq`, `/contact` | Static | Served from the CDN edge cache; full HTML for crawlers |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt`, `/opengraph-image`, `/icon.svg` | Static | Generated once at build time |
 | `/api/contact` | Dynamic (serverless) | Handles form submissions |
 | `/thank-you` | Dynamic | Reads `?status=` to show success or error |
 
-**Server vs client components.** Page files (`app/**/page.tsx`) are Server Components. They export metadata and compose sections. Interactive sections are Client Components (`"use client"`), but they are still **server-rendered to HTML first**, so every word of copy is in the initial response. This was verified by an SEO audit that reported "11 of 11 pages readable without JavaScript". Purely presentational components with no hooks stay as Server Components: `Marquee`, `CrossMarquee`, `AudienceBento`, `AreasServed`, `FaqPreview`, `InsuranceSection`, `ResourcesSection`, `Photo`, `SocialIcons`, `Footer` and `not-found`.
+**Server vs client components.** Page files (`app/**/page.tsx`) are Server Components. They export metadata and compose sections. Interactive sections are Client Components (`"use client"`), but they are still **server-rendered to HTML first**, so every word of copy is in the initial response. This was verified by an SEO audit that reported "11 of 11 pages readable without JavaScript". Purely presentational components with no hooks stay as Server Components: `Marquee`, `CrossMarquee`, `AudienceBento`, `AreasServed`, `FaqPreview`, `InsuranceSection`, `ResourcesSection`, `Photo`, `Footer` and `not-found`.
 
-**Data across the server/client boundary.** Service objects carry Lucide icon components, and components can't be serialised as props. Client components therefore take a **slug** (`<HorizontalServices slug="home-health" />`) and import the data themselves, rather than receiving the object from a server page.
+**Data across the server/client boundary.** Service objects carry Lucide icon components, and components can't be serialised as props. Client components therefore import the data themselves rather than receiving those objects from a server page.
 
 ### 6.2 Request lifecycle of a page
 
@@ -276,7 +260,7 @@ Browser ──► Vercel CDN (static HTML, fonts, /_next/image AVIF/WebP)
 * Global `metadata`: `metadataBase`, title template `%s | Open Arms & Heart Services`, default title and description, Open Graph site name and locale, Twitter card, and optional Google verification.
 * `viewport.themeColor = #60349f` (iris-700), which tints the mobile browser chrome.
 * Renders **`<LogoDefs />`** once: a hidden SVG holding the logo's gradients and finger-gap mask. Every `<LogoMark>` references these shared IDs, so logos cloned inside marquees never create duplicate HTML `id`s.
-* Injects **`MedicalBusiness` JSON-LD**: name, URL, description, phone, fax, founding date, founder, postal address, email, slogan, `areaServed` (9 counties), `sameAs` (Facebook, LinkedIn), identifiers (NPI + both Florida license numbers), and an `OfferCatalog` of the seven types of care.
+* Injects **`MedicalBusiness` JSON-LD** built only from verified data: name, URL, description, phone, fax, email, the published street address (no ZIP — see §21), slogan, `areaServed` (9 counties), both license numbers, and an `OfferCatalog` of the six types of care.
 * Optionally injects **Google Tag Manager** (`strategy="lazyOnload"`) plus its `<noscript>` iframe, but only when `NEXT_PUBLIC_GTM_ID` is set.
 * Includes a skip link target: `<main id="main">`.
 
@@ -289,8 +273,8 @@ Browser ──► Vercel CDN (static HTML, fonts, /_next/image AVIF/WebP)
 * `ReactLenis root` with `lerp: 0.1`, `smoothWheel`, and anchor-link handling offset by **−110px** so the fixed header never covers a target.
 * `ResetOnRouteChange` jumps to the top on each pathname change, unless the URL has a `#hash`.
 * **Disabled entirely** when the user prefers reduced motion (native scrolling is used).
-* Elements marked `data-lenis-prevent` (mobile menu) or `data-lenis-prevent-horizontal` (comparison table) scroll natively.
-* The header calls `lenis.stop()` / `start()` to lock scrolling while the mobile menu is open. Careers uses `lenis.scrollTo()` to glide to the application form, and BackToTop uses it to return to the top.
+* Elements marked `data-lenis-prevent` (mobile menu) scroll natively.
+* The header calls `lenis.stop()` / `start()` to lock scrolling while the mobile menu is open, and BackToTop uses `lenis.scrollTo()` to return to the top.
 
 ### 6.6 Global chrome
 
@@ -309,106 +293,73 @@ Every inner page opens with the shared **`PageHero`** (breadcrumb, eyebrow, word
 
 ### 7.1 Home — `/`
 
-| # | Section | Component | Content (source) & pattern |
+| # | Section | Component | Content (verified source) & pattern |
 | --- | --- | --- | --- |
-| 1 | Hero | `home/Hero.tsx` | "**Home is where the heart is.** *Where there is love, there is life.*" plus the original home-page paragraph ("Caring for a developmentally disabled family member or senior…"), from the old site. CSS-first entrance, mouse parallax, arch photo, floating glass cards (Non-Skilled Services, APD Central Region), rotating text badge, and credential ticks. |
-| 2 | Crossing marquees | `home/CrossMarquee.tsx` | Type-of-care and service names, plus brand values. Infinite crossing ribbons. |
-| 3 | What we provide | `home/PillarsReveal.tsx` | The old home page's three highlights — **Companion Care, Residential, Personal Support** — as expanding hover panels on desktop and a snap carousel on mobile. |
-| 4 | Our mission | `home/Manifesto.tsx` | The agency's **mission statement**, scroll-scrubbed word by word. Count-up stats: since 2017, 7 types of care, 9 counties, 10 insurance plans. |
-| 5 | Types of care | `sections/HorizontalServices.tsx` | All seven programs on a **pinned horizontal scroll**. |
-| 6 | Questions families ask first | `sections/StackingCards.tsx` | The old home page's four Q&As (types of care, background checks, insurance with plan chips, licensing with license numbers) as **sticky stacking cards**. |
-| 7 | Care finder | `sections/CareChooser.tsx` | 13 needs mapped to the seven programs. Its CTA pre-ticks the matching services in the form. |
-| 8 | How care begins | `sections/StickySteps.tsx` | Reach out → eligibility → person-centered plan → care begins (grounded in the old site's wording). Sticky tracker, with a pinned progress bar on mobile. |
-| 9 | Who we care for | `home/AudienceBento.tsx` | Seniors, veterans, people with developmental disabilities, children & foster families, family caregivers. Bento grid. |
-| 10 | Where we serve | `sections/AreasServed.tsx` | The two published county groups (home care · APD Central Region). |
-| 11 | FAQ preview | `sections/FaqPreview.tsx` | FAQs not already covered by the stacking cards. |
-| 12 | CTA | `sections/CtaBand.tsx` | "Open Arms & Heart Services is **only a call away!**", from the old site. |
+| 1 | Hero | `home/Hero.tsx` | "**Home is where the heart is.** *Where there is love, there is life.*" + the original home paragraph. CSS-first entrance, mouse parallax, arch photo, floating glass cards (Non-Skilled Home Health Services; APD Central Region Provider), rotating text badge, credential ticks. |
+| 2 | Crossing marquees | `home/CrossMarquee.tsx` | Type-of-care names, the three home highlights and published APD services; values drawn from the original copy. |
+| 3 | What we provide | `home/PillarsReveal.tsx` | The original home page's three highlights — **Companion Care, Residential, Personal Support** — each showing matching items from the published service lists. Expanding panels (desktop) / snap carousel (mobile). |
+| 4 | Our mission | `home/Manifesto.tsx` | The **mission statement**, scroll-scrubbed. Count-up stats derived from the published data: since 2017, 6 types of care, 9 counties, 10 insurances. |
+| 5 | Types of care | `sections/HorizontalServices.tsx` | The six types of care on a **pinned horizontal scroll**, with the original intro. |
+| 6 | Questions & answers | `sections/StackingCards.tsx` | The original home page's **four Q&As**, verbatim, as sticky stacking cards (insurance and license chips). |
+| 7 | Care finder | `sections/CareChooser.tsx` | 13 needs, each a published service item, mapped to the matching types of care; the CTA pre-ticks them in the form. |
+| 8 | Who we care for | `home/AudienceBento.tsx` | Seniors, veterans & families, people with disabilities, children & foster families, family caregivers — captions quoted from the original copy. Bento grid. |
+| 9 | Where we serve | `sections/AreasServed.tsx` | "Proudly serving counties in Central Florida" — the two published county lists and the published address. |
+| 10 | FAQ preview | `sections/FaqPreview.tsx` | FAQs not already shown in the stacking cards. |
+| 11 | CTA | `sections/CtaBand.tsx` | "Open Arms & Heart Services is **only a call away!**" |
 
 ### 7.2 About — `/about`
 
 | Section | Component | Details |
 | --- | --- | --- |
-| Hero | `PageHero` | "Care rooted in *family.*" The inset photo is the **real photo of Shantana Johnson** from the old site. |
-| Story | `StoryChapters` | Sticky image story. Four chapters adapted from the founder's story on the original About page: her grandmother's devotion, a living legacy, person-centered care since 2017, and every person treated like family. |
-| Mission | `NameMeaning` | Sliding "Open Arms / & Heart" typography, now captioned with the agency's **Our Mission** statement. |
-| Founder | `FounderSpotlight` | The founder photo in a rotating gradient border, plus a bio from the old site and credential chips. |
-| Promises | `FlipPromises` | Four 3D flip cards. |
+| Hero | `PageHero` | "Care rooted in *family.*" + the owner's opening paragraph; the inset photo is the owner's photo from the original site. |
+| Story | `StoryChapters` | Sticky image story — the **four paragraphs of the original About Us page, verbatim**. |
+| Mission | `NameMeaning` | Sliding "Open Arms / & Heart" typography captioned with **Our Mission**. |
+| Owner | `FounderSpotlight` | Shantana Johnson (Owner): photo in a rotating gradient border, verbatim bio, credential chips. |
 | Gallery | `PhotoMarquee` | Two opposite-direction photo rows. |
 
 ### 7.3 Services overview — `/services`
 
-Named **"Types of Care"** in the navigation, matching the original site.
+Named **"Types of Care"**, as on the original site.
 
 | Section | Component | Details |
 | --- | --- | --- |
-| Hero | `PageHero` | The original Types of Care intro ("Providing care for a family member with developmental disabilities…"). |
-| Credentials strip | inline | Licensed FL Home Health Agency · APD Central Region Provider · since 2017 · license numbers. |
-| Programs | `ServiceScrollspy source="programs"` | All seven programs with the old site's full copy (intro, "Services and support" list, fine print). A scroll-spy sidebar and parallax images; each has an "Ask about …" CareLink, and dedicated pages are linked. |
+| Hero | `PageHero` | The original Types of Care intro, verbatim. |
+| Credentials strip | inline | APD Central Region Provider · Licensed Florida Home Health Agency · since 2017 · license numbers. |
+| Types of care | `ServiceScrollspy` | All six with their full published copy (description, "Services and Support", closing note). Scroll-spy sidebar, parallax images, "Ask about …" CareLinks. |
 | Care finder | `CareChooser` | |
-| Insurance | `InsuranceSection` | "Do you accept insurance? *Yes.*" Ten plan tiles (glow + tilt), funding notes (APD waiver, VA Community Care, coverage questions) and a plan marquee. |
-| Request form | `InquiryForm` | Anchor `#request`, mirroring the old page's form at the bottom. |
-
-### 7.4 Home Health — `/services/home-health`
-
-| Section | Component | Details |
-| --- | --- | --- |
-| Hero | `PageHero` | "Clinical care, *brought home.*" `CareLink` pre-selects "Home Health" in the form. |
-| How skilled care works | `services/ConnectedSteps.tsx` | Four numbered circles (Physician order → Clinical assessment → Plan of care → Visits & updates) joined by a gradient SVG line that **draws itself** (`pathLength` 0 → 1) while the steps pop in one after another. |
-| Services | `services/ServiceScrollspy.tsx` | A **scroll-spy sticky sidebar** (desktop) lists the six services. The active one gets a sliding white highlight (`layoutId`) and a progress rail fills as you read; a "Have questions?" card sits below. Each service is a full article (`id` = slug, so footer and mega-menu deep links work): a parallax photo with icon and number, title, summary, a "What's included" list with staggered checkmarks, a dark "Who it helps" card, and an "Ask about …" `CareLink`. |
-| CTA | `CtaBand` | "Coming home from the hospital? *We can help.*" |
-
-### 7.5 Home Care — `/services/home-care`
-
-| Section | Component | Details |
-| --- | --- | --- |
-| Hero | `PageHero` | "Everyday help, *with heart.*" with the original Non-Skilled Home Health Services intro. |
-| Service cards | `services/HoverRevealGrid.tsx` | Six services from the original listing, as hover-reveal photo cards, plus a full-width CTA band listing the service counties. |
-| A day of home care | `services/DayTimeline.tsx` | A scroll-drawn timeline using the same services. |
-| Respite spotlight | `services/RespiteSpotlight.tsx` | Layered parallax photos and four benefit cards (children & foster families, APD respite, families & veterans, the caregiver). |
-| CTA | `CtaBand` | |
-
-### 7.6 Getting Started — `/getting-started`
-
-| Section | Component | Details |
-| --- | --- | --- |
-| Hero | `PageHero` | "Starting care, *without the stress.*" |
-| Four steps | `StoryStepper` | Auto-advancing story stepper. |
-| What to have ready | `ReadyChecklist` | Program-aware checklist: insurance card, Waiver Support Coordinator, VA referral, case manager, routines, photo ID for Live Scan. |
-| Insurance | `InsuranceSection` | |
-| Referral partners | `ReferralPanel` | Case managers, social workers, Waiver Support Coordinators, CBC organisations and VA Community Care. |
-| Resources | `ResourcesSection` | The old site's **community resources** (Florida 211, Dept. of Elder Affairs, APD, FloridaHealthFinder, Florida SHINE) as tilt + glow link cards. |
-| Request form | `InquiryForm` | |
+| Insurance | `InsuranceSection` | "Insurances we accept:" — ten tiles (glow + tilt) and a marquee. |
+| Request form | `InquiryForm` | Anchor `#request`, as on the original page. |
 
 ### 7.7 Careers — `/careers`
 
 | Section | Component | Details |
 | --- | --- | --- |
-| Hero | `PageHero` | "Quality care. *Brighter tomorrows.*" — the original careers headline. **Apply now** opens the agency's online application. |
-| Perks bento | `CareersClient` | "Join our care team!" photo card and four perk cards. |
-| Requirements ticker | `CareersClient` | From the employment application: certifications, diploma/GED, Level 2 screening, drug & alcohol screening, references, 90-day introductory period. |
-| Open positions | `CareersClient` | **Home Health Aide** and **Group Home Staff** (the positions on the agency's application). Accordion; content stays in the DOM. |
-| Application | `CareersClient` | A dark panel listing what the application asks for, with a button to the agency's **JotForm employment application** (`site.applicationUrl`). That form collects the resume, certificates, education, employment history, references and e-signature, which a simple site form couldn't replace. |
+| Hero | `PageHero` | "Quality care. *Brighter tomorrows.*" · "Make a difference and build a meaningful career. Join Our Care Team!" **Apply now** opens the agency's online application. |
+| Positions | `CareersClient` | The two positions on the agency's employment application — **Home Health Aide** and **Group Home Staff** — as tilt + glow cards. |
+| Requirements ticker | `CareersClient` | From the application: diploma/GED, CNA/HHA/CPR certification, background investigation, drug & alcohol screening, three references, 90-day probationary period. |
+| Application | `CareersClient` | What the application asks for, the EEO/ADA note, and a link to the agency's **JotForm employment application** (`site.applicationUrl`). |
 
 ### 7.8 FAQ — `/faq`
 
 | Section | Component | Details |
 | --- | --- | --- |
 | Hero | `PageHero` | "Questions families *ask us most.*" |
-| Explorer | `faq/FaqExplorer.tsx` | A **sticky glass sidebar** with live search (matches questions *and* answers, with a clear button) and category filters (All, Getting started, Services, Paying for care, Our caregivers) showing counts. The active filter pill slides between options. Results are grouped by category with animated enter and exit, and there's an empty state with the phone number. |
-| CTA | `CtaBand` | "Didn't find your answer? *Just ask.*" |
-| Structured data | — | `FAQPage` JSON-LD containing all 13 Q&As. |
+| Explorer | `faq/FaqExplorer.tsx` | Sticky glass sidebar with live search and category filters (Getting started, Types of care, Insurance & licensing, Our caregivers). |
+| CTA | `CtaBand` | |
+| Structured data | — | `FAQPage` JSON-LD with all 12 Q&As. |
 
 ### 7.9 Contact — `/contact`
 
+Mirrors the original Contact page.
+
 | Section | Details |
 | --- | --- |
-| Hero | `PageHero` with photos — "We're here, *with open arms.*" |
-| Contact cards | Glow cards for **Office** phone (large display number), **Email**, **Fax / referrals** and **Visit our office** (opens Google Maps), plus a **Licensed & trusted** card with credentials and license numbers. |
-| Map | `MapFacade` — a lightweight illustrated placeholder (dotted grid, stylised streets, pin) with **Load interactive map** and **Open in Google Maps** buttons. The real Google Maps iframe (~1 MB of third-party script) only loads on click. |
-| Social | Facebook and LinkedIn buttons. |
-| Form | `InquiryForm` (sticky on desktop). Pre-selects the care type when the visitor arrived via a `CareLink`. |
-| What happens next | Three numbered glow cards: We talk it through → We visit your home → Care gets started. |
-| Quick answers | An accordion of four key FAQs, plus a "Communities we serve" panel listing every town as a chip. |
+| Hero | "We're here, *with open arms.*" · "Proudly serving counties in Central Florida since 2017." |
+| Contact cards | **Office** 321-217-2409, **Email**, **Fax**, **Address** (as published) and a **Licensed** card with both credentials and license numbers. |
+| Form | `InquiryForm` (sticky on desktop). |
+| Types of Care Offered | The six types of care as glow link cards (the original Contact page lists them). |
+| Quick answers | Four verified FAQs + the published county lists. |
+| Resources | `ResourcesSection` — the original footer's resources. |
 
 ### 7.10 Utility routes
 
@@ -416,7 +367,8 @@ Named **"Types of Care"** in the navigation, matching the original site.
 | --- | --- |
 | `/thank-you` | Landing page for **form posts made without JavaScript**. `?status=error` shows an apology and the phone number. `robots: noindex, follow`. |
 | 404 (`not-found.tsx`) | Branded page: a floating logo, a gradient italic "404", "This page wandered off.", a home link and the phone number. |
-| `/sitemap.xml` | The nine public pages with priorities (home 1.0 · services 0.9 · getting-started/contact 0.8 · about 0.7 · careers/faq 0.6), `changeFrequency: monthly`. |
+| `/sitemap.xml` | The six public pages with priorities (home 1.0 · services 0.9 · contact 0.8 · about 0.7 · careers/faq 0.6), `changeFrequency: monthly`. |
+| Redirects | `/services/home-care` → `/services#home-care`, `/services/home-health` → `/services`, `/getting-started` → `/contact` (308, in `next.config.ts`) — pages removed because their content wasn't verified. |
 | `/robots.txt` | Allows everything except `/api/`, and points to the sitemap. |
 | `/llms.txt` | See §14.6. |
 | `/opengraph-image` | A 1200×630 PNG generated at build time with `ImageResponse`: dark iris → blush gradient, "Open Arms / & Heart Services Inc.", a tagline and the phone number. |
@@ -443,7 +395,6 @@ Named **"Types of Care"** in the navigation, matching the original site.
 | `GlowCard` | client | Polymorphic (`as` = any element or component, e.g. `Link`). Tracks the pointer into `--mx`/`--my` CSS variables to drive a radial gradient **border glow** plus an inner spotlight (see `.glow-card`). With `tilt`, the card rotates up to ±3° in 3D toward the cursor. |
 | `Marquee` | server | Seamless infinite CSS marquee. Duplicates its children once (the second copy is `aria-hidden`) and translates by exactly half. Props: `duration`, `reverse`, `vertical`, `gap`, `pauseOnHover`. Edges fade out with a mask. |
 | `Accordion` | client | Animated FAQ accordion. Each question is an `<h3><button aria-expanded aria-controls>`. **Every answer is always in the DOM**, collapsed with CSS grid rows and `inert` when closed. The plus icon rotates 135° into a ×. Props: `items`, `defaultOpen`, `dark`. |
-| `SocialIcons` | server | Inline-SVG `FacebookIcon` and `LinkedInIcon` (brand icons aren't in Lucide). |
 
 ### 8.2 Brand — `src/components/brand/`
 
@@ -452,7 +403,7 @@ Named **"Types of Care"** in the navigation, matching the original site.
 | `LogoDefs` | Hidden SVG with the shared gradients (`oa-logo-brand`, `oa-logo-light`) and the finger-gap mask (`oa-logo-gaps`). Rendered once in the root layout. |
 | `LogoMark` | The hands-holding-heart mark: one hand path mirrored, a mask that cuts the finger gaps, and a stroked heart. `tone="brand"` (purple/pink) or `"light"` (white/pale pink) for dark backgrounds. |
 | `Logo` | Mark + "Open Arms" (Courgette script) + "& Heart Services Inc" (Quicksand). Links home. The mark tilts and scales on hover. `compact` hides the tagline. |
-| `Ribbons` | Four flowing SVG strokes in iris and blush gradients (echoing the Facebook banner) that **draw themselves** in when scrolled into view. Gradient IDs come from `useId` per instance. |
+| `Ribbons` | Four flowing SVG strokes in iris and blush gradients (echoing the brand banner artwork) that **draw themselves** in when scrolled into view. Gradient IDs come from `useId` per instance. |
 | `Aurora` | Three slowly drifting colour blobs behind heroes and dark sections, drawn with **radial gradients** rather than blur filters (much cheaper to paint). `dark` variant available. |
 
 ### 8.3 Layout — `src/components/layout/`
@@ -460,19 +411,19 @@ Named **"Types of Care"** in the navigation, matching the original site.
 **`Header`**
 
 * **Skip to content** link (visible on keyboard focus).
-* **Utility bar** (desktop): credentials, "Serving Central Florida since 2017", email, phone and social links. It collapses away once the page is scrolled more than 30px.
+* **Utility bar** (desktop): credentials, "Serving Central Florida since 2017", email and office phone. It collapses away once the page is scrolled more than 30px.
 * **Floating glass pill nav.** Transparent at the top, switching to glass when scrolled or when the mega menu is open. It **hides on scroll down** (after 380px) and returns on scroll up.
 * **Desktop links.** A hover highlight slides between links (`layoutId="nav-hover"`), and the active page shows a pink dot (`layoutId="nav-active"`).
-* **Services mega menu** (hover or focus "Services"). It has a column of service links for each pillar (with icons, linking to deep anchors) and a photo card promoting the care finder. It animates in with scale and blur, and the header won't hide while it's open.
+* **Types of Care mega menu** (hover or focus). The six types of care (icons, deep anchors) and a photo card promoting the care finder. It animates in with scale and blur, and the header won't hide while it's open.
 * **Actions.** A phone button with a pulsing ring, and a "Request care" primary button, both magnetic.
 * **Mobile menu.** A full-screen dark overlay that opens with a **circular `clip-path` reveal** from the hamburger. Numbered links stagger in from the right, with a phone button at the bottom. It locks Lenis and the page scroll, and closes on navigation. `role="dialog"`, `aria-modal`.
 
 **`Footer`**
 
-* A giant **outlined text marquee** ("Open arms · Open heart · Open lines · Open door", with logo marks between).
-* Four columns, following the original site's footer: logo + credentials + license numbers + socials · Types of care · **Resources** (Florida 211, Elder Affairs, APD, FloridaHealthFinder, Florida SHINE) · Contact (office phone, fax, address → Maps, email).
-* A descriptive link row ("About our agency", "All home care services", "How to start care", …), deliberately different wording from the header's short labels for SEO.
-* Copyright with the current year, the NPI number, and **BackToTop** (a Lenis glide).
+* A giant **outlined text marquee** ("Open arms · Open heart · Home is where the heart is · Where there is love, there is life").
+* Four columns, following the original site's footer: logo + credentials + license numbers · Types of care · **Resources** (Florida 211, Elder Affairs, APD, FloridaHealthFinder, Florida SHINE) · Contact (office phone, fax, address as published, email).
+* A descriptive link row, deliberately different wording from the header's short labels for SEO.
+* Copyright with the current year, the license numbers, and **BackToTop** (a Lenis glide).
 * Extra bottom padding on mobile so the floating call bar never covers the footer.
 
 **`Providers`**: `MotionConfig reducedMotion="user"` + `SmoothScroll`.
@@ -481,60 +432,54 @@ Named **"Types of Care"** in the navigation, matching the original site.
 
 | Component | Purpose |
 | --- | --- |
-| `InquiryForm` | One form, two variants (`care` / `careers`). See §13. |
-| `CareLink` | `<Link href="/contact">` that saves the chosen care type (`home-health` / `home-care` / `both` / `unsure`) in `sessionStorage` (`oa-care-type`) on click. This keeps `/contact` a single indexable URL instead of `/contact?care=…` duplicates. Fails silently if storage is unavailable. |
+| `InquiryForm` | The "Request More Information" form. See §13. |
+| `CareLink` | `<Link href="/contact">` that saves one or more type-of-care slugs in `sessionStorage` (`oa-care-programs`) on click, so the form pre-ticks them. This keeps `/contact` a single indexable URL instead of `/contact?care=…` duplicates. Fails silently if storage is unavailable. |
 
 ### 8.5 Other shared sections
 
-`CareChooser`, `CtaBand`, `FaqPreview`, `InsuranceSection`, `ResourcesSection`, `AreasServed`, `StickySteps`, `StackingCards`, `HorizontalServices` and `MapFacade` (described in §7).
+`CareChooser`, `CtaBand`, `FaqPreview`, `InsuranceSection`, `ResourcesSection`, `AreasServed`, `StackingCards` and `HorizontalServices` (described in §7).
 
 ---
 
 ## 9. Content & data layer
 
-All copy and business facts live in **typed TypeScript modules in `src/lib/`**, not in components. Changing content never requires touching UI code, and everything is type-checked at build time.
+All copy and business facts live in **typed TypeScript modules in `src/lib/`**, not in components. **Every value must trace to [`docs/original-site-content.md`](docs/original-site-content.md).**
 
 ### 9.1 `site.ts` — company facts
 
-| Key | Value (source: original website unless noted) |
+| Key | Value (all from the original website) |
 | --- | --- |
 | `name` / `shortName` | "Open Arms & Heart Services Inc." / "Open Arms & Heart Services" |
 | `tagline` / `motto` | "Home Is Where The Heart Is" / "Where There Is Love, There Is Life" |
-| `founded`, `founder` | 2017 · Shantana Johnson, Owner & Founder |
-| `credentials`, `licenses` | Licensed Florida Home Health Agency, APD Central Region Provider · 2999995365, 235855 |
-| `phone`, `fax`, `email` | (321) 217-2409 · (855) 257-1340 · openarmsandheartservices@gmail.com |
-| `address` | 1920 Verano Dr, Suite 105, Haines City, FL 33844 (city/ZIP from the NPI registry — see §21) |
-| `applicationUrl` | The agency's JotForm employment application |
-| `areas` | Two county groups: home care (5) and APD Central Region (6) |
-| `npi` | 1144748922 (NPI registry) |
+| `since`, `owner` | 2017 · Shantana Johnson, Owner |
+| `credentials`, `licenses` | APD Central Region Provider, Licensed Florida Home Health Agency · 2999995365, 235855 |
+| `phone`, `fax`, `email` | 321-217-2409 · 855-257-1340 · openarmsandheartservices@gmail.com |
+| `address` | "1920 Verano Dr., Ste 105" / "Ocala, FL 2345" — exactly as published |
+| `applicationUrl` | The JotForm employment application linked from the original Careers page |
+| `areas` | Non-Skilled Home Health Services counties (5) and APD Central Region counties (6) |
 
-It also exports `allCounties` (9, de-duplicated), `fullAddress`, `licenseLine` and `nav`.
+It also exports `allCounties` (9), `fullAddress`, `licenseLine`, `sinceLine` and `nav`.
 
 ### 9.2 `services.ts` — programs, pillars & highlights
 
-* **`programs`** — the seven types of care (`Program`: slug, name, short, tag, icon, image, summary, intro, points, note, optional dedicated `href`, and `formLabel` — the exact option text on the agency's Google Form). `programHref(p)` returns the program's page or its `/services#slug` anchor.
-* **`homeHealth`** / **`homeCare`** — the two pillars with their individual services, used on the dedicated pages (`Service`: slug, name, icon, image, summary, points, helps).
-* **`highlights`** — the three home-page highlights (Companion Care, Residential, Personal Support).
-* `allServices`, `pillars`, `programBySlug`.
+* **`programs`** — the six types of care (`Program`: slug, name, short, tag, icon, image, summary, intro, points, note, `formLabel` = the exact option on the agency's Google Form). Copy is verbatim; only the spelling typos "Habitation" and "Healtchare" are corrected. `programHref(p)` → `/services#slug`.
+* **`highlights`** — the original home page's three highlights (Companion Care, Residential, Personal Support), each tagged with matching published service items.
+* `programBySlug`.
 
 ### 9.3 `content.ts`
 
-| Export | Used by |
-| --- | --- |
-| `steps` (4) | `StickySteps`, `StoryStepper` |
-| `audiences` (5) | `AudienceBento` |
-| `promises` (4) | `FlipPromises` |
-| `needs` (13, mapped to program slugs) | `CareChooser` |
-| `insurances` (10), `fundingNotes` (3) | `InsuranceSection`, home stacking cards, FAQs, `llms.txt` |
-| `checklist` (6) | `ReadyChecklist` |
-| `dayTimeline` (6) | `DayTimeline` |
-| `roles` (2), `applicationChecklist`, `requirements` | Careers |
-| `trustQAs` (4) | Home `StackingCards` (the original home-page Q&As) |
-| `resources` (5) | Footer, `ResourcesSection`, `llms.txt` |
+| Export | Source | Used by |
+| --- | --- | --- |
+| `audiences` (5) | Phrases from the original copy | `AudienceBento` |
+| `needs` (13) | Published "Services and Support" items | `CareChooser` |
+| `insurances` (10) | Home page Q&A | `InsuranceSection`, stacking cards, FAQs, `llms.txt` |
+| `roles`, `applicationChecklist`, `requirements` | The linked employment application | Careers |
+| `trustQAs` (4) | Home page Q&As, verbatim | `StackingCards` |
+| `resources` (5) | Original footer | Footer, `ResourcesSection`, `llms.txt` |
 
 ### 9.4 `faqs.ts`
 
-Thirteen FAQs in four categories: **Getting started**, **Types of care**, **Insurance & licensing** and **Our caregivers**. The four original home-page questions are included near-verbatim. The others are written strictly from the original program descriptions (APD, veterans, children, DCF, Live Scan, service areas). Answers that list insurances, counties or license numbers are generated from the data, so they can't drift out of sync.
+Twelve FAQs in four categories. **Every answer is verbatim text from the original website**; the four home-page Q&As are included as published, and the rest reuse the published program descriptions and notes. Lists (insurances, counties, licenses) are generated from the data.
 
 ### 9.5 `photos.ts` (generated)
 
@@ -587,7 +532,7 @@ Headings (`h1–h4`) use Fraunces with −0.02em tracking in `iris-950`. Body te
 | --- | --- |
 | `marquee`, `marquee-y` (+ `animate-marquee`, `-reverse`, `-y`) | `Marquee` |
 | `float` (`animate-float`, `animate-float-slow`; rotation via `--r`) | Hero glass cards, 404 logo |
-| `spin` (`animate-spin-slow`, 22s) | Hero rotating badge, founder ring |
+| `spin` (`animate-spin-slow`, 22s) | Hero rotating badge, owner photo ring |
 | `blob` (`animate-blob`) | `Aurora` |
 | `pulse-ring` (`animate-pulse-ring`) | Header phone button, office pin |
 | `shimmer` | Available utility |
@@ -615,7 +560,7 @@ Headings (`h1–h4`) use Fraunces with −0.02em tracking in `iris-950`. Body te
 | Floating call bar | Spring slide-up past 520px | Mobile, all pages | `layout/Chrome.tsx` |
 | CSS-first hero entrance | `enter`, `word-rise`, `arch-reveal` keyframes | Home hero, `PageHero` | `globals.css`, `ui/CssSplitHeading.tsx` |
 | Mouse parallax + 3D tilt | Pointer → springs → two depth layers | Home hero | `home/Hero.tsx` |
-| Scroll parallax / fade | `useScroll` + `useTransform` | Heroes, CTA band, respite photos, service images | various |
+| Scroll parallax / fade | `useScroll` + `useTransform` | Heroes, CTA band, type-of-care images | various |
 | Rotating text badge | SVG `<textPath>` + CSS spin | Home hero | `home/Hero.tsx` |
 | Floating glass cards | CSS `float` keyframe | Home hero | `home/Hero.tsx` |
 | Magnetic buttons | Pointer offset → spring | CTAs | `ui/motion.tsx` |
@@ -624,31 +569,21 @@ Headings (`h1–h4`) use Fraunces with −0.02em tracking in `iris-950`. Body te
 | Expanding hover-reveal panels / snap carousel | `flexGrow` animation, staggered reveal | Home | `home/PillarsReveal.tsx` |
 | Scroll-scrubbed text | Per-word opacity/translate from scroll progress | Home manifesto | `home/Manifesto.tsx` |
 | Count-up stats | `animate()` writing `textContent` | Home manifesto | `ui/motion.tsx` |
-| Pinned horizontal scroll | Sticky viewport + scroll-driven `x` | Home (skilled) | `sections/HorizontalServices.tsx` |
-| Sticky stacking cards | Sticky offsets + scale/dim from progress | Home (non-skilled) | `sections/StackingCards.tsx` |
+| Pinned horizontal scroll | Sticky viewport + scroll-driven `x` | Home (types of care) | `sections/HorizontalServices.tsx` |
+| Sticky stacking cards | Sticky offsets + scale/dim from progress | Home (Q&As) | `sections/StackingCards.tsx` |
 | Interactive recommender | `LayoutGroup`, `layout`, `AnimatePresence` | Home, Services | `sections/CareChooser.tsx` |
-| Sticky sidebar step tracker | `useInView` active step, rail fill, number roll | Home | `sections/StickySteps.tsx` |
 | Bento with spotlight glow + 3D tilt | CSS vars from pointer | Home, Careers, Insurance, Resources, Contact | `ui/GlowCard.tsx` |
 | Self-drawing SVG ribbons | `pathLength` 0 → 1 | Heroes, CTA band | `brand/Ribbons.tsx` |
-| Insurance tiles with monograms | Glow + tilt cards, marquee | Types of Care, Getting Started | `sections/InsuranceSection.tsx` |
-| Resource link cards | Glow + tilt, external links | Getting Started | `sections/ResourcesSection.tsx` |
-| Rotating gradient photo border | Spinning conic gradient behind an inset photo | About (founder) | `about/AboutSections.tsx` |
-| Self-drawing connector line | SVG `pathLength` + staggered nodes | Home Health | `services/ConnectedSteps.tsx` |
-| Scroll-spy sticky sidebar | `useInView` + `layoutId` + progress rail | Home Health | `services/ServiceScrollspy.tsx` |
-| Hover-reveal photo cards | CSS grid-rows, `@media (hover: hover)` | Home Care | `services/HoverRevealGrid.tsx` |
-| Scroll-drawn timeline | `scaleY` from scroll progress | Home Care | `services/DayTimeline.tsx` |
-| Layered parallax photo stack | Two speeds + rotation | Home Care | `services/RespiteSpotlight.tsx` |
+| Insurance tiles with monograms | Glow + tilt cards, marquee | Types of Care | `sections/InsuranceSection.tsx` |
+| Resource link cards | Glow + tilt, external links | Contact | `sections/ResourcesSection.tsx` |
+| Rotating gradient photo border | Spinning conic gradient behind an inset photo | About (owner) | `about/AboutSections.tsx` |
+| Scroll-spy sticky sidebar | `useInView` + `layoutId` + progress rail | Types of Care | `services/ServiceScrollspy.tsx` |
 | Sticky image story | Clip-path wipes keyed to chapters | About | `about/AboutSections.tsx` |
 | Sliding name typography | Opposite-direction `x` + rotating logo | About | `about/AboutSections.tsx` |
-| 3D flip cards | CSS `preserve-3d` + `backface-visibility` | About | `globals.css`, `AboutSections.tsx` |
 | Photo marquee | Two opposite rows | About | `about/AboutSections.tsx` |
-| Auto-advancing story stepper | Timers + progress bars, pause when off-screen | Getting Started | `started/StartedSections.tsx` |
-| Checklist + progress ring | `strokeDashoffset` spring | Getting Started | `started/StartedSections.tsx` |
 | Requirements ticker | `Marquee` | Careers | `careers/CareersClient.tsx` |
-| Role accordion → form pre-fill | Grid-rows collapse, Lenis `scrollTo` | Careers | `careers/CareersClient.tsx` |
 | Live search + filter | `useMemo` filter, `layoutId` pill, popLayout | FAQ | `faq/FaqExplorer.tsx` |
-| Map facade | Click-to-load iframe | Contact | `sections/MapFacade.tsx` |
-| Radio pill selection | `layoutId="care-radio"` | Contact form | `forms/InquiryForm.tsx` |
+| Checkbox chip selection | Animated gradient fill per chip | Inquiry form | `forms/InquiryForm.tsx` |
 | Form success state | Spring check icon, `AnimatePresence` | Forms | `forms/InquiryForm.tsx` |
 
 **Reduced motion.** `MotionConfig reducedMotion="user"` disables transform animations in Motion, Lenis is not mounted, and a CSS media query neutralises keyframes and transitions.
@@ -664,14 +599,11 @@ The site is designed **mobile-first**. These sections adapt their *interaction p
 | Header | Hamburger → full-screen circular-reveal menu; utility bar hidden | Utility bar, inline nav, mega menu |
 | Floating call bar | Shown after 520px of scroll | Hidden |
 | Page heroes | Lead photo shown as a wide card under the text | Arch photo + inset photo collage |
-| Home "Two levels of care" | Horizontal **snap carousel**, all details visible | Expanding hover panels |
-| Home skilled services | Pinned horizontal scroll with 82vw cards | Same, 400px cards |
-| Home non-skilled services | Sticky stacking cards (compact; "Who it helps" hidden) | Sticky stacking cards beside a sticky intro column |
-| Home "How care begins" | **Pinned top progress bar** (step number, title, 4 segments) | Sticky left column with big number and rail |
+| Home "What we provide" | Horizontal **snap carousel**, all details visible | Expanding hover panels |
+| Home types of care | Pinned horizontal scroll with 82vw cards | Same, 400px cards |
+| Home Q&As | Sticky stacking cards | Sticky stacking cards beside a sticky intro column |
 | Home audience bento | Same 6-column bento; compact padding; descriptions hidden | Bento with hover-reveal descriptions |
-| Home "Where we serve" | 3 compact columns; county names shortened; towns stacked | 3 columns with wrapped town chips |
-| Home Care cards | Details always visible (no hover on touch) | Details revealed on hover/focus |
-| Day timeline | Single left-hand line | Alternating left/right around a centre line |
+| Home "Where we serve" | 2 compact columns of county chips | 2 columns |
 | Service scroll-spy | Sidebar hidden; long-form articles only | Sticky sidebar |
 | About story | Image inline in each chapter | Sticky image panel |
 | Footer | Stacked columns + extra bottom padding for the call bar | 4 columns |
@@ -682,7 +614,7 @@ The site is designed **mobile-first**. These sections adapt their *interaction p
 
 ### 13.1 `InquiryForm` — "Request More Information"
 
-The form mirrors the agency's original Google Form: **First and last name\*, Email\*, Phone number\*, Services you are interested in** (checkbox chips for the seven programs), plus an optional **"Anything else we should know?"** note. It's used on Contact, Types of Care and Getting Started.
+The form mirrors the agency's original Google Form: **First and last name\*, Email\*, Phone number\*, Services you are interested in** (checkbox chips for the six types of care), plus an optional **"Anything else we should know?"** note. It's used on Contact and Types of Care.
 
 A `CareLink` (or the care finder) pre-ticks programs via `sessionStorage` (`oa-care-programs`).
 
@@ -696,7 +628,7 @@ no-JS <form> ──POST─►                └─► Resend email             
 1. **Input:** JSON (enhanced form) or form-encoded (no-JS fallback, which redirects `303` to `/thank-you`).
 2. **Honeypot:** a filled hidden `company` field gets a fake success.
 3. **Validation:** name, email and phone are required, email format is checked, and at least one service *or* a note is needed. All values are trimmed and length-capped.
-4. **Google Form channel.** The handler posts to the agency's existing form (`…/formResponse`) using its field IDs. Programs are sent with their **exact option labels** (`formLabel`). Programs without a form option (Skilled Home Health) and the free-text note go into the form's **"Other"** answer. Responses land in the same Google Forms inbox the agency used with its old site. Disable with `GOOGLE_FORM_DISABLED=true`.
+4. **Google Form channel.** The handler posts to the agency's existing form (`…/formResponse`) using its field IDs. Types of care are sent with their **exact option labels** (`formLabel`); the free-text note goes into the form's **"Other"** answer. Responses land in the same Google Forms inbox the agency used with its old site. Disable with `GOOGLE_FORM_DISABLED=true`.
 5. **Email channel** (optional): a Resend email with HTML-escaped fields and `reply_to` set to the visitor.
 6. The request succeeds if **either** channel accepts it. Otherwise it returns `502`, and the UI shows the phone number and email address.
 
@@ -708,36 +640,33 @@ no-JS <form> ──POST─►                └─► Resend email             
 
 ### 14.1 Metadata per page
 
-Every page uses `pageMetadata()`, which gives it a unique title, description, self-referencing canonical, `og:url`, `og:title`, `og:description` and Twitter card. Titles are ≤ 60 characters and descriptions ≤ 155:
+Every page uses `pageMetadata()` (unique title, description, self-referencing canonical, `og:*`, Twitter card). Titles ≤ 60 characters, descriptions ≤ 155, all built from verified content:
 
 | Path | Title |
 | --- | --- |
-| `/` | Open Arms & Heart Services \| Home Health & Home Care in FL |
-| `/services` | Home Health & Home Care \| Open Arms & Heart Services |
-| `/services/home-health` | Home Health (Skilled Care) \| … |
-| `/services/home-care` | Home Care (Non-Skilled) \| … |
-| `/about` | About Our Home Care Agency \| … |
-| `/getting-started` | How to Start Home Care \| … |
-| `/careers` | Caregiver & Nursing Jobs \| … |
-| `/faq` | Home Health & Home Care FAQs \| … |
-| `/contact` | Contact Us in Haines City, FL \| … |
+| `/` | Open Arms & Heart Services \| Home Is Where The Heart Is |
+| `/services` | Types of Care & Services \| Open Arms & Heart Services |
+| `/about` | About Us & Our Mission \| … |
+| `/careers` | Careers — Join Our Care Team \| … |
+| `/faq` | Frequently Asked Questions \| … |
+| `/contact` | Contact Us & Request Info \| … |
 
 ### 14.2 Structured data
 
-* **`MedicalBusiness`** (every page, from the root layout): address, phone, fax, founder, founding date, `areaServed`, `sameAs`, NPI and an `OfferCatalog` of all services.
-* **`FAQPage`** (`/faq`): all 13 questions and answers.
+* **`MedicalBusiness`** (every page): verified fields only — see §6.3.
+* **`FAQPage`** (`/faq`): all 12 questions and answers.
 
 ### 14.3 Crawlability
 
 * Pages are statically rendered with all copy in the HTML.
-* **Collapsed content is still in the DOM.** FAQ answers and careers role details are hidden with CSS and `inert`, not removed, so crawlers index them.
+* **Collapsed content is still in the DOM.** FAQ answers are hidden with CSS and `inert`, not removed, so crawlers index them.
 * **One URL per page.** `CareLink` replaces `?care=` links, which previously created three duplicate copies of `/contact`.
 * `/thank-you` is `noindex`; `/api/` is disallowed in `robots.txt`.
 
 ### 14.4 On-page signals
 
 * Exactly one `<h1>` per page and **no skipped heading levels**. The footer column titles are `h2`, accordion questions `h3`, and form titles `h2`.
-* **Descriptive link text.** "Learn more" links carry screen-reader text naming the service; buttons read "Ask about respite care" etc.; footer links use distinct descriptive anchors.
+* **Descriptive link text.** "Learn more" links carry screen-reader text naming the service; buttons read "Ask about APD services" etc.; footer links use distinct descriptive anchors.
 * **`<strong>` emphasis** on key phrases via `**bold**` in content strings.
 * Descriptive `alt` text on content images; decorative images use `alt=""`.
 
@@ -747,7 +676,7 @@ A generated Open Graph image (`/opengraph-image`, 1200×630) with page-specific 
 
 ### 14.6 `/llms.txt`
 
-A plain-text Markdown map of the site for AI answer engines (ChatGPT, Claude, Perplexity, Gemini), following the [llmstxt.org](https://llmstxt.org) convention. It is **generated from the content modules**: company summary, credentials, mission, contact details, service-area counties, all seven types of care with their service lists, accepted insurances, a page directory, community resources and all FAQs. It is statically built with a one-hour cache header.
+A plain-text Markdown map of the site for AI answer engines (ChatGPT, Claude, Perplexity, Gemini), following the [llmstxt.org](https://llmstxt.org) convention. It is **generated from the content modules**: credentials, licenses, mission, contact details, service-area counties, the six types of care with their published copy, accepted insurances, a page directory, resources and all FAQs — verified content only. It is statically built with a one-hour cache header.
 
 ### 14.7 Search Console & analytics
 
@@ -826,7 +755,7 @@ Lighthouse accessibility: **100** on Services, Contact, FAQ, Careers and About; 
 
 * `default-src 'self'`; `object-src 'none'`; `base-uri 'self'`; `form-action 'self'`; `frame-ancestors 'self'`; `upgrade-insecure-requests` (production).
 * `script-src 'self' 'unsafe-inline'`. Inline scripts are needed for Next's bootstrap and the JSON-LD; nonces would force every page to render dynamically and lose static caching. It also allows `vercel.live` (preview toolbar), adds `'unsafe-eval'` in development only, and allows GTM only when configured.
-* `frame-src` allows Google Maps (the contact map) and `vercel.live`.
+* `frame-src` allows only `vercel.live` (and GTM when enabled).
 * `img-src`, `connect-src` and `font-src` allow `self`, `data:`/`blob:` where needed, and the Vercel toolbar. GTM and Google Analytics domains are added only when `NEXT_PUBLIC_GTM_ID` is set.
 
 > **Adding any new third-party service (chat widget, booking tool, analytics) requires adding its domains to the CSP in `next.config.ts`.** Otherwise the browser will block it.
@@ -845,21 +774,15 @@ Lighthouse accessibility: **100** on Services, Contact, FAQ, Careers and About; 
 
 ### 18.1 Change the phone number, address, hours or service areas
 
-Edit `src/lib/site.ts`. These values flow into the header, footer, every CTA, the contact page, the mobile call bar, FAQ answers, JSON-LD, `llms.txt` and the Open Graph image. Office hours aren't published, because the original site didn't list any. Add an `hours` field and render it if the client wants them shown.
+Edit `src/lib/site.ts` — but **only with information the client has confirmed or published**, and record it in `docs/original-site-content.md` (or a successor source note). Values flow into the header, footer, CTAs, contact page, FAQ answers, JSON-LD, `llms.txt` and the Open Graph image.
 
 ### 18.2 Add the client's email address
 
-Already done: `site.email` is the agency's address from its original website. It appears in the header utility bar, footer, CTA band, contact cards and form error messages.
+Already present — `site.email` is the address published on the original Contact page.
 
 ### 18.3 Add or edit a service
 
-Add or edit an entry in `homeHealth.services` or `homeCare.services` in `src/lib/services.ts`. Give it a unique kebab-case `slug` (it becomes the anchor ID), a Lucide icon, a photo, alt text, a summary, bullet points and a "who it helps" line. The service then automatically appears in:
-
-* the header mega menu, footer and crossing marquee
-* the home sections, Services switcher and its pillar page
-* the JSON-LD offer catalogue and `llms.txt`
-
-Programs are edited in `programs`. If a program is added, give it a `formLabel` only if the agency's Google Form has a matching option; otherwise it is submitted as "Other".
+Types of care live in `programs` in `src/lib/services.ts`. Use the client's own wording, set `formLabel` to the exact option on the agency's Google Form (if one exists), and pick an image. A new type of care automatically appears in the mega menu, footer, marquee, home scroller, Types of Care page, care finder (add matching `needs`), inquiry form, JSON-LD and `llms.txt`.
 
 ### 18.4 Add or replace a photo
 
@@ -889,11 +812,11 @@ Programs are edited in `programs`. If a program is added, give it a `formLabel` 
 
 ### 18.5 Add an FAQ
 
-Append to `faqs` in `src/lib/faqs.ts` with one of the four categories. It appears on `/faq` (with search and filter), in the FAQPage JSON-LD and in `llms.txt`. The home page shows the first five.
+Append to `faqs` in `src/lib/faqs.ts` — the **answer must be text the client has published or approved**. It appears on `/faq`, in the FAQPage JSON-LD and in `llms.txt`; the home page shows FAQs not already in the stacking cards.
 
 ### 18.6 Add a job role or requirement
 
-Edit `roles` / `requirements` in `src/lib/content.ts`. The role is added to the careers accordion and the form's Position dropdown.
+Edit `roles` / `requirements` in `src/lib/content.ts` to match the agency's employment application.
 
 ### 18.7 Add a new page
 
@@ -906,20 +829,19 @@ Edit `roles` / `requirements` in `src/lib/content.ts`. The role is added to the 
 
 ```tsx
 import { CareLink } from "@/components/forms/CareLink";
-<CareLink care="home-health" className="btn-primary">Request skilled care</CareLink>
+<CareLink care="apd" className="btn-primary">Ask about APD services</CareLink>
+<CareLink care={["home-care", "va"]}>…</CareLink>
 ```
 
 Never link to `/contact?care=…`.
-
----
 
 ## 19. Deployment
 
 The project is configured for **Vercel**, with no extra configuration file.
 
 1. Import the GitHub repository into Vercel. The framework is auto-detected as Next.js; the build command is `npm run build`.
-2. Set the environment variables (§4), at minimum `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY` and `CONTACT_TO_EMAIL`.
-3. In Resend, verify the sending domain and set `CONTACT_FROM_EMAIL`. Until then mail comes from `onboarding@resend.dev`, which Resend restricts to test recipients.
+2. Set `NEXT_PUBLIC_SITE_URL` (§4). Resend variables are optional — inquiries go to the agency's Google Form.
+3. Optional: to also email inquiries, verify a sending domain in Resend and set `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.
 4. Add the custom domain in Vercel, then update `NEXT_PUBLIC_SITE_URL` to match and redeploy.
 5. Verify the domain in Google Search Console (`NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`) and submit `https://<domain>/sitemap.xml`.
 6. After deploying, run PageSpeed Insights and the SEO audit against the live domain.
@@ -930,6 +852,7 @@ Any other Node host works as well (`npm run build && npm start`); the security h
 
 ## 20. Conventions & gotchas
 
+* **Verified content only.** Every fact and piece of copy must trace to `docs/original-site-content.md` (or newer client-approved material, recorded there). Don't invent services, claims, statistics, hours, testimonials or contact details.
 * **Content lives in `src/lib/`.** Don't hard-code business facts in components.
 * **Metadata:** always use `pageMetadata()`. The page `title` must be ≤ 31 characters (the suffix adds 29); watch for the dev-mode warnings.
 * **Images:** always use `<Photo>` with an accurate `sizes`. Never use raw `<img>` or a bare `next/image fill` without `sizes`. Only the first above-the-fold image per page gets `priority`.
@@ -947,40 +870,28 @@ Any other Node host works as well (`npm run build && npm start`); the security h
 
 ## 21. Content sources & pre-launch verification
 
-**Primary source:** the agency's original website, **openarmsandheart.org** (Google Sites): its Home, Types of Care, About Us, Careers and Contact pages, its "Request More Information" Google Form, and its JotForm employment application. Supplementary sources: the NPPES NPI registry and the Facebook and LinkedIn pages.
+**Single source of truth:** the agency's original website, **openarmsandheart.org** (Home, Types of Care, About Us, Careers, Contact), plus the two forms it links to (the "Request More Information" Google Form and the JotForm employment application). Everything is captured verbatim in [`docs/original-site-content.md`](docs/original-site-content.md).
 
-What came from where:
-
-| Content | Source |
-| --- | --- |
-| Tagline, motto, home intro, home Q&As, insurance list, licenses, credentials | Original home page |
-| Seven types of care: copy, service lists, fine print, service-area counties | Original Types of Care page (Skilled Home Health from the client brief) |
-| Mission, founder story, **founder photo** | Original About Us page |
-| "Quality care. Brighter tomorrows.", positions, requirements, application link | Original Careers page + JotForm application |
-| Office phone, fax, email | Original footer / Contact page |
-| Community resources | Original footer |
-| Design, motion, structure, extra pages (Getting Started, FAQ, Skilled Home Health) | This project |
+**Removed in the verification pass** (not supported by the original website): the Skilled Home Health program and page, the separate Home Care page (its service descriptions, day timeline and respite cards), the Getting Started page (process steps, checklist, referral panel), the home "How care begins" steps, the "Open arms/heart/lines/door" promise cards, funding notes, invented role descriptions and perks, Facebook/LinkedIn links, the NPI number, maps and city/ZIP data from directories, office hours, and all derived resource descriptions. Old URLs redirect (§7.10).
 
 **Please confirm with the client:**
 
-- [ ] **Address.** The old site lists *"1920 Verano Dr., Ste 105, Ocala, FL 2345"*, which has an incomplete ZIP, and Ocala is outside the published service counties. The NPI registry places this address in **Haines City, FL 33844**, which the site uses.
-- [ ] **Phone.** The old home page shows **407-222-2222** (placeholder-looking) in its call-to-action band, while its footer and Contact page show **321-217-2409**. The site uses 321-217-2409.
-- [ ] **Skilled Home Health.** Not listed on the old site. It's included from the client's original service brief. Remove the `home-health` program and `/services/home-health` if it isn't offered.
-- [ ] **Dept. of Elder Affairs link.** On the old site it pointed to the APD resources page by mistake. The new site links to elderaffairs.org.
-- [ ] **"Integrated Simply"** is listed exactly as on the old site. Confirm the plan's preferred name.
-- [ ] **Office hours.** Not published (the old site had none).
-- [ ] **Testimonials.** None included. Add only real reviews, with permission.
-- [ ] **Photography.** The founder photo is the client's own. Other images are licensed stock (§24). The old site's own highlight photos were too low-resolution (~350px) for the large panels.
-- [ ] **Google Form delivery.** Send one real test inquiry after deploying and confirm it arrives.
+- [ ] **Address.** Published as *"1920 Verano Dr., Ste 105, Ocala, FL 2345"* — the ZIP is incomplete. The site shows it exactly as published, with no map link. Get the correct city and ZIP.
+- [ ] **Phone.** The original home page's call band shows **407-222-2222**; everywhere else shows **321-217-2409** (labelled "Office"). The site uses 321-217-2409.
+- [ ] **Typos corrected:** "Residential Habitation" → **Habilitation**; "Healtchare" → **Healthcare**.
+- [ ] **Dept. of Elder Affairs link.** The original linked it to the APD page; the site links to elderaffairs.org.
+- [ ] **"Integrated Simply"**, "Children Medical Services", "OPTUM (VA)", "United Healthcare" are shown exactly as published.
+- [ ] **Skilled home health** — not on the original site, so not shown. Add back only if the client confirms it.
+- [ ] **Photography.** The owner's photo is the client's own; all other images are licensed stock (§24).
+- [ ] **Google Form delivery.** Send one real test inquiry after deploying.
 
 ## 22. Known limitations & future work
 
-* **Forms need Resend credentials** to deliver email. There is no database or CRM integration, and submissions aren't stored.
+* Inquiries go to the agency's Google Form (and optionally email). There is no database or CRM integration.
 * **No CMS.** Content is edited in TypeScript files and needs a redeploy. A headless CMS (Sanity, Contentful, etc.) could be added later; the `src/lib` modules are the natural seam.
 * **No automated tests, ESLint or CI pipeline.** The production build is the only gate.
 * **CSP uses `'unsafe-inline'` for scripts.** This is a deliberate trade-off to keep pages static; nonce-based CSP would need dynamic rendering.
 * **Analytics and HIPAA.** Home-health agencies are typically HIPAA-covered entities. Review with the client before enabling GTM, Google Analytics or any tracking on pages that collect health-related enquiries.
-* **The email address isn't displayed** anywhere until the client provides one (§18.2).
 * **Bot protection** is a honeypot only. Consider Cloudflare Turnstile or rate limiting if spam appears, and add its domains to the CSP.
 * **Lighthouse figures are lab measurements.** Field data (CrUX) will only exist once the site has real traffic.
 
@@ -993,7 +904,8 @@ What came from where:
 | `97b655c` / `e993448` — *first commit* | Initial build: brand research, design system, all 9 pages, motion system, forms and API, SEO basics (sitemap, robots, OG image, JSON-LD) |
 | `ac9f6ac` — *SEO Optimization* | Resolved the technical SEO audit: CSS-first hero entrances, `Photo` component and image sizing, font trimming, shared logo defs (duplicate IDs), `CareLink` (duplicate contact URLs), `pageMetadata` (titles, descriptions, `og:url`), security headers and CSP, crawlable accordions, contact page content and map facade, heading hierarchy, descriptive links, `<strong>` emphasis, `llms.txt`, no-JS form fallback and `/thank-you`, contrast fixes |
 | `310b2b7` — *Mobile version fixes* | Mobile adaptations: pillar snap carousel (no cropped service pills), stacking cards on mobile, pinned step progress bar, bento layout on all sizes, three-column service areas |
-| *(next)* — *Content from original website* | Rebuilt the content around the agency's original site: seven types of care, insurance list, licenses, mission, founder story + photo, office phone & email, published counties, careers via the agency's JotForm, community resources; inquiries delivered to the agency's Google Form; new `InsuranceSection` and `ResourcesSection`; removed `PillarSwitcher`, `ComparisonTable`, `PaymentGrid` |
+| *Content from original website* | Rebuilt the content around the agency's original site: seven types of care, insurance list, licenses, mission, founder story + photo, office phone & email, published counties, careers via the agency's JotForm, community resources; inquiries delivered to the agency's Google Form; new `InsuranceSection` and `ResourcesSection`; removed `PillarSwitcher`, `ComparisonTable`, `PaymentGrid` |
+| *(next)* — *Verified content only* | Captured the original site verbatim in `docs/original-site-content.md` and removed every unverified fact and page: Skilled Home Health, Home Care and Getting Started pages, process steps, promises, funding notes, social links, NPI, maps/directory address data; FAQs, careers, audiences, highlights, insurance and resources rewritten to verbatim content; redirects for removed URLs |
 
 ---
 
@@ -1001,7 +913,7 @@ What came from where:
 
 All photos are from [Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license) (free for commercial use; no attribution required). They are self-hosted in `public/images/` and should be replaced with client photography when available.
 
-<details><summary>Source of each image (34)</summary>
+<details><summary>Source of each image (26)</summary>
 
 | File | Source |
 | --- | --- |
@@ -1009,23 +921,15 @@ All photos are from [Unsplash](https://unsplash.com) under the [Unsplash License
 | `aide-smiling-patient.jpg` | https://images.unsplash.com/photo-1765896387387-0538bc9f997e |
 | `companion-care.jpg` | https://images.unsplash.com/photo-1765896387398-1e1ae8d2eb85 |
 | `activities-coloring.jpg` | https://images.unsplash.com/photo-1762955911431-4c44c7c3f408 |
-| `skilled-nursing.jpg` | https://images.unsplash.com/photo-1666887360680-9dc27a1d2753 |
-| `nurse-blood-pressure.jpg` | https://images.unsplash.com/photo-1631815590058-860e4f83c1e8 |
-| `physical-therapy.jpg` | https://images.unsplash.com/photo-1772790969968-ae5d2976601f |
-| `walker-autumn.jpg` | https://images.unsplash.com/photo-1763631007426-5869ece08264 |
 | `occupational-therapy.jpg` | https://images.unsplash.com/photo-1762955911769-d652ceaa94bb |
 | `speech-therapy.jpg` | https://images.unsplash.com/photo-1685608625845-184d982f3f69 |
 | `social-work.jpg` | https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e |
 | `personal-care.jpg` | https://images.unsplash.com/photo-1773227055624-07b515ba87c5 |
-| `homemaker.jpg` | https://images.unsplash.com/photo-1575467678930-c7acd65d6470 |
-| `respite-child.jpg` | https://images.unsplash.com/photo-1761234852163-23f2ededd04e |
 | `personal-supports.jpg` | https://images.unsplash.com/photo-1709127347874-3f4674be5bc8 |
-| `transportation.jpg` | https://images.unsplash.com/photo-1764173039712-da4632d1fa9d |
 | `residential-habilitation.jpg` | https://images.unsplash.com/photo-1709127347878-bd27e64d1e3e |
 | `family-baking.jpg` | https://images.unsplash.com/photo-1758874960394-afd9ead46eba |
 | `child-smiling.jpg` | https://images.unsplash.com/photo-1646250852980-e2beba095e97 |
 | `senior-portrait.jpg` | https://images.unsplash.com/photo-1566616213894-2d4e1baee5d8 |
-| `pediatric-walker.jpg` | https://images.unsplash.com/photo-1709879747841-c341b45044a0 |
 | `caregiver-portrait.jpg` | https://images.unsplash.com/photo-1585842378054-ee2e52f94ba2 |
 | `friends-talking.jpg` | https://images.unsplash.com/photo-1773227059784-c1e36cc8c8c9 |
 | `celebration.jpg` | https://images.unsplash.com/photo-1773227060313-7623fd5bfa64 |

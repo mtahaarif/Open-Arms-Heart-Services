@@ -8,7 +8,6 @@ import { useState } from "react";
 import { highlights } from "@/lib/services";
 import { SectionIntro } from "../../ui/SectionIntro";
 import { EASE, Reveal } from "../../ui/motion";
-import { rich } from "@/lib/rich";
 
 const washes = [
   "bg-linear-to-t from-iris-950 via-iris-950/70 to-iris-900/10",
@@ -30,7 +29,7 @@ export function PillarsReveal() {
           <SectionIntro
             eyebrow="What we provide"
             title="Care that comes *from the heart.*"
-            text="Dependable, person-centered support designed to meet the unique needs of each individual — promoting independence, safety, and overall well-being."
+            text="We provide dedicated, family-oriented care that comes from the heart — dependable, person-centered support designed to meet the unique needs of each individual."
           />
           <Reveal delay={0.2} className="flex flex-wrap gap-2 lg:mb-2">
             {highlights.map((h, i) => (
@@ -88,7 +87,6 @@ export function PillarsReveal() {
 
                   <div>
                     <h3 className="font-display text-4xl text-white sm:text-5xl">{h.name}</h3>
-                    <p className="mt-2 font-display text-xl text-blush-200 italic">{h.headline}</p>
 
                     {/* Always visible on phones; revealed on the active panel from lg up. */}
                     <div
@@ -98,8 +96,7 @@ export function PillarsReveal() {
                           : "lg:pointer-events-none lg:max-h-0 lg:translate-y-6 lg:overflow-hidden lg:opacity-0"
                       }`}
                     >
-                      <p className="mt-4 max-w-xl text-[0.95rem] text-white/85 sm:mt-5 sm:text-base">{rich(h.intro)}</p>
-                      <ul className="mt-5 flex max-w-2xl flex-wrap gap-2">
+                      <ul className="mt-5 flex max-w-2xl flex-col items-start gap-2">
                         {h.tags.map((t, j) => (
                           <li
                             key={t}

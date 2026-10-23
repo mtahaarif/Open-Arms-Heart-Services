@@ -8,13 +8,13 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { Reveal } from "@/components/ui/motion";
 import { pageMetadata } from "@/lib/seo";
-import { licenseLine, site } from "@/lib/site";
+import { licenseLine, sinceLine, site } from "@/lib/site";
 
 export const metadata = pageMetadata({
   path: "/services",
   title: "Types of Care & Services",
   description:
-    "Non-skilled home care, APD services, skilled home health, DCF and CBC referrals, veterans respite and Live Scan fingerprinting in Central Florida.",
+    "Non-skilled home health services, APD services, vulnerable adult support, children & family support, veterans home care and Live Scan fingerprinting.",
 });
 
 export default function ServicesPage() {
@@ -43,12 +43,12 @@ export default function ServicesPage() {
               <BadgeCheck className="size-4 text-blush-500" /> {c}
             </span>
           ))}
-          <span className="text-ink-soft">Serving Central Florida since {site.founded}</span>
+          <span className="text-ink-soft">{sinceLine}</span>
           <span className="text-blush-700">{licenseLine}</span>
         </div>
       </section>
 
-      <ServiceScrollspy source="programs" />
+      <ServiceScrollspy />
       <CareChooser />
       <InsuranceSection />
 

@@ -27,7 +27,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
         <p className="mt-4 text-lg text-ink-soft">
           {failed
             ? "Sorry about that. Please call our office and we'll help you right away."
-            : "A member of our team will call you back soon. If it's urgent, please call us now."}
+            : "A member of our team will contact you. Open Arms & Heart Services is only a call away!"}
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <a href={site.phone.href} className="btn-primary">

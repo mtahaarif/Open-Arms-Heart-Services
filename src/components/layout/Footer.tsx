@@ -2,22 +2,20 @@ import Link from "next/link";
 import { ArrowUpRight, BadgeCheck, Mail, MapPin, Phone, Printer } from "lucide-react";
 import { resources } from "@/lib/content";
 import { programHref, programs } from "@/lib/services";
-import { fullAddress, licenseLine, site } from "@/lib/site";
+import { licenseLine, sinceLine, site } from "@/lib/site";
 import { Logo, LogoMark } from "../brand/Logo";
 import { Marquee } from "../ui/Marquee";
-import { FacebookIcon, LinkedInIcon } from "../ui/SocialIcons";
 import { BackToTop } from "./BackToTop";
 
-const words = ["Open arms", "Open heart", "Open lines", "Open door"];
+const words = ["Open arms", "Open heart", "Home is where the heart is", "Where there is love, there is life"];
 
 // Descriptive anchors (the header already uses the short labels).
 const footerLinks = [
-  { href: "/about", label: "About our agency" },
-  { href: "/services", label: "All types of care" },
-  { href: "/getting-started", label: "How to start care" },
-  { href: "/careers", label: "Caregiver jobs" },
-  { href: "/faq", label: "Home care FAQs" },
-  { href: "/contact", label: "Contact our office" },
+  { href: "/services", label: "Types of care" },
+  { href: "/about", label: "About us & our mission" },
+  { href: "/careers", label: "Join our care team" },
+  { href: "/faq", label: "Frequently asked questions" },
+  { href: "/contact", label: "Contact us" },
 ];
 
 export function Footer() {
@@ -45,7 +43,7 @@ export function Footer() {
         <div>
           <Logo tone="light" />
           <p className="mt-6 max-w-sm leading-relaxed text-iris-100/70">
-            Dedicated, family-oriented care that comes from the heart. Serving Central Florida since {site.founded}.
+            We provide dedicated, family-oriented care that comes from the heart. {sinceLine}.
           </p>
           <ul className="mt-5 space-y-1.5 text-sm">
             {site.credentials.map((c) => (
@@ -55,26 +53,6 @@ export function Footer() {
             ))}
           </ul>
           <p className="mt-3 text-xs font-semibold tracking-wide text-blush-200">{licenseLine}</p>
-          <div className="mt-6 flex gap-3">
-            <a
-              href={site.social.facebook}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Open Arms & Heart Services on Facebook"
-              className="grid size-11 place-items-center rounded-full border border-white/15 transition hover:-translate-y-0.5 hover:border-blush-300 hover:bg-white/10 hover:text-white"
-            >
-              <FacebookIcon />
-            </a>
-            <a
-              href={site.social.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Open Arms & Heart Services on LinkedIn"
-              className="grid size-11 place-items-center rounded-full border border-white/15 transition hover:-translate-y-0.5 hover:border-blush-300 hover:bg-white/10 hover:text-white"
-            >
-              <LinkedInIcon />
-            </a>
-          </div>
         </div>
 
         <div>
@@ -120,10 +98,14 @@ export function Footer() {
               <span>Fax {site.fax.display}</span>
             </li>
             <li>
-              <a href={site.mapsUrl} target="_blank" rel="noreferrer" className="group flex gap-3 text-iris-100/75">
+              <span className="flex gap-3 text-iris-100/75">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-blush-300" />
-                <span className="group-hover:text-white">{fullAddress}</span>
-              </a>
+                <span>
+                  {site.address.line1}
+                  <br />
+                  {site.address.line2}
+                </span>
+              </span>
             </li>
             <li>
               <a href={`mailto:${site.email}`} className="group flex gap-3 text-iris-100/75">
@@ -146,7 +128,7 @@ export function Footer() {
         </nav>
         <div className="flex flex-col gap-4 border-t border-white/10 pt-6 pb-24 text-xs text-iris-100/50 sm:flex-row sm:items-center sm:justify-between lg:pb-6">
           <p>
-            © {new Date().getFullYear()} {site.name} All rights reserved. · NPI {site.npi}
+            © {new Date().getFullYear()} {site.name} All rights reserved. · {licenseLine}
           </p>
           <BackToTop />
         </div>

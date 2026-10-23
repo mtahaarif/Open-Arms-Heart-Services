@@ -6,6 +6,7 @@ import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { programHref, programs } from "@/lib/services";
+import { site } from "@/lib/site";
 import { GlowCard } from "../ui/GlowCard";
 
 /**
@@ -54,16 +55,17 @@ export function HorizontalServices() {
           {/* Intro panel */}
           <div className="flex w-[82vw] shrink-0 flex-col justify-center pr-4 text-white sm:w-[480px] sm:pr-10">
             <span className="eyebrow-dark w-fit">
-              <span className="size-1.5 rounded-full bg-blush-300" /> Types of care
+              <span className="size-1.5 rounded-full bg-blush-300" /> {site.credentials.join(" · ")}
             </span>
             <h2 className="mt-6 text-5xl leading-[1.02] font-medium text-white sm:text-6xl">
-              Support for every
-              <span className="text-gradient-light block italic">stage of life.</span>
+              Types
+              <span className="text-gradient-light block italic">of care.</span>
             </h2>
             <p className="mt-6 max-w-md text-lg text-iris-100/75">
               Providing care for a family member with developmental disabilities or an aging loved one can present many
-              challenges. We offer <strong className="font-semibold text-white">dependable, person-centered support</strong>{" "}
-              designed to meet the unique needs of each individual.
+              challenges. Open Arms &amp; Heart Services Inc. offers{" "}
+              <strong className="font-semibold text-white">dependable, person-centered support</strong> designed to meet the
+              unique needs of each individual.
             </p>
             <div className="mt-10 flex items-center gap-4 text-sm text-iris-200/80">
               <div className="h-1 w-40 overflow-hidden rounded-full bg-white/10">

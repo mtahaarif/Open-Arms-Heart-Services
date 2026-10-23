@@ -3,8 +3,8 @@ import type { NextConfig } from "next";
 const isDev = process.env.NODE_ENV !== "production";
 const gtm = Boolean(process.env.NEXT_PUBLIC_GTM_ID);
 
-// Third parties the site actually uses: the Google Maps embed (contact page),
-// the Vercel preview toolbar, and — only when NEXT_PUBLIC_GTM_ID is set — Google Tag Manager/Analytics.
+// Third parties the site actually uses: the Vercel preview toolbar and — only when
+// NEXT_PUBLIC_GTM_ID is set — Google Tag Manager/Analytics. (The Google Form is posted server-side.)
 const csp = [
   ["default-src", "'self'"],
   [
@@ -34,7 +34,7 @@ const csp = [
     isDev && "ws:",
     gtm && "https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
   ],
-  ["frame-src", "https://www.google.com", "https://maps.google.com", "https://vercel.live", gtm && "https://www.googletagmanager.com"],
+  ["frame-src", "https://vercel.live", gtm && "https://www.googletagmanager.com"],
   ["frame-ancestors", "'self'"],
   ["base-uri", "'self'"],
   ["form-action", "'self'"],
@@ -63,6 +63,14 @@ const nextConfig: NextConfig = {
     // default 2048/3840 variants were producing 100 KB+ downloads.
     deviceSizes: [640, 750, 828, 1080, 1280, 1600, 1920],
     minimumCacheTTL: 60 * 60 * 24 * 31,
+  },
+  // Pages removed because their content was not verified by the agency's original website.
+  async redirects() {
+    return [
+      { source: "/services/home-care", destination: "/services#home-care", permanent: true },
+      { source: "/services/home-health", destination: "/services", permanent: true },
+      { source: "/getting-started", destination: "/contact", permanent: true },
+    ];
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

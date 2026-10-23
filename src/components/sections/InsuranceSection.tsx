@@ -1,5 +1,5 @@
 import { BadgeCheck, Phone } from "lucide-react";
-import { fundingNotes, insurances } from "@/lib/content";
+import { insurances } from "@/lib/content";
 import { site } from "@/lib/site";
 import { GlowCard } from "../ui/GlowCard";
 import { Marquee } from "../ui/Marquee";
@@ -15,7 +15,7 @@ const initials = (name: string) =>
     .map((w) => w[0])
     .join("");
 
-/** "Do you accept insurance?" — the agency's accepted plans as glow tiles, plus funding notes. */
+/** "Do you accept insurance?" — the insurances the agency accepts, as glow tiles. */
 export function InsuranceSection({ eyebrow = "Insurance" }: { eyebrow?: string }) {
   return (
     <section className="relative overflow-hidden py-24 sm:py-32">
@@ -23,12 +23,12 @@ export function InsuranceSection({ eyebrow = "Insurance" }: { eyebrow?: string }
         <div className="lg:sticky lg:top-32">
           <SectionIntro
             eyebrow={eyebrow}
-            title="Do you accept insurance? *Yes.*"
-            text="We accept a range of health plans. Coverage depends on your plan, eligibility, and authorization — call our office and we'll help you check."
+            title="Do you accept *insurance?*"
+            text="Insurances we accept:"
           />
           <Reveal delay={0.2} className="mt-8">
             <a href={site.phone.href} className="btn-primary">
-              <Phone className="size-4" /> Verify my coverage
+              <Phone className="size-4" /> Office {site.phone.display}
             </a>
           </Reveal>
         </div>
@@ -52,17 +52,6 @@ export function InsuranceSection({ eyebrow = "Insurance" }: { eyebrow?: string }
             ))}
           </Stagger>
 
-          <Stagger className="mt-4 grid gap-3 md:grid-cols-3" stagger={0.08}>
-            {fundingNotes.map((n) => (
-              <StaggerItem key={n.title}>
-                <div className="h-full rounded-[1.4rem] bg-iris-950 p-5 text-white">
-                  <n.icon className="size-5 text-blush-300" />
-                  <h3 className="mt-3 font-display text-lg text-white">{n.title}</h3>
-                  <p className="mt-1.5 text-sm text-iris-100/75">{n.text}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
         </div>
       </div>
 

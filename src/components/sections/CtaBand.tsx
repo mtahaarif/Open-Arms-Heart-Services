@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, Phone } from "lucide-react";
 import { useRef } from "react";
-import { site } from "@/lib/site";
+import { sinceLine, site } from "@/lib/site";
 import { LogoMark } from "../brand/Logo";
 import { Ribbons } from "../brand/Ribbons";
 import { Magnetic, Reveal, SplitHeading } from "../ui/motion";
@@ -13,7 +13,7 @@ import { Magnetic, Reveal, SplitHeading } from "../ui/motion";
 /** Closing call-to-action: parallax photo, iris gradient wash, glass card and animated ribbons. */
 export function CtaBand({
   title = "Open Arms & Heart Services is *only a call away!*",
-  text = "If you would like to learn more about our services or discuss how we can support your loved one, give us a call or send a request — a member of our team will contact you.",
+  text = "If you would like to learn more about our services or discuss how we can support your loved one, please complete the form and a member of our team will contact you.",
   image = "/images/breakfast-family.jpg",
 }: {
   title?: string;
@@ -63,7 +63,7 @@ export function CtaBand({
               <a href={`mailto:${site.email}`} className="mt-2 block text-sm break-all text-iris-100/75 hover:text-white">
                 {site.email}
               </a>
-              <p className="mt-1 text-sm text-iris-100/60">Serving Central Florida since {site.founded}</p>
+              <p className="mt-1 text-sm text-iris-100/60">{sinceLine}</p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
                 <Magnetic className="block">
                   <a href={site.phone.href} className="btn-light w-full">

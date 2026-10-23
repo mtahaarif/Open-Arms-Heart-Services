@@ -33,7 +33,7 @@ const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.shortName} | Home Care in Central Florida`,
+    default: `${site.shortName} | Serving Central Florida`,
     template: `%s | ${site.shortName}`,
   },
   description: site.description,
@@ -62,22 +62,16 @@ const jsonLd = {
   telephone: "+1-321-217-2409",
   email: site.email,
   faxNumber: "+1-855-257-1340",
-  foundingDate: String(site.founded),
-  founder: { "@type": "Person", name: site.founder.name, jobTitle: site.founder.title },
+  // Address exactly as published on the original website (it lists no complete ZIP code).
   address: {
     "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    addressLocality: site.address.city,
-    addressRegion: site.address.state,
-    postalCode: site.address.zip,
+    streetAddress: site.address.line1,
+    addressLocality: "Ocala",
+    addressRegion: "FL",
     addressCountry: "US",
   },
   areaServed: allCounties.map((c) => ({ "@type": "AdministrativeArea", name: `${c} County, Florida` })),
-  sameAs: [site.social.facebook, site.social.linkedin],
-  identifier: [
-    { "@type": "PropertyValue", propertyID: "NPI", value: site.npi },
-    ...site.licenses.map((l) => ({ "@type": "PropertyValue", propertyID: "Florida license", value: l })),
-  ],
+  identifier: site.licenses.map((l) => ({ "@type": "PropertyValue", propertyID: "License", value: l })),
   slogan: site.tagline,
   hasOfferCatalog: {
     "@type": "OfferCatalog",

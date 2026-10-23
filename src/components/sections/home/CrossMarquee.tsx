@@ -1,11 +1,11 @@
 import { Heart, Sparkle } from "lucide-react";
-import { homeCare, programs } from "@/lib/services";
+import { programs } from "@/lib/services";
 import { Marquee } from "../../ui/Marquee";
 
 const values = ["Compassion", "Dignity", "Independence", "Family-oriented", "Person-centered", "Community inclusion", "Respect", "Peace of mind"];
 
-// Types of care + everyday home-care services, de-duplicated.
-const names = [...new Set([...programs.map((p) => p.short), ...homeCare.services.map((s) => s.name)])];
+// Types of care, home-page highlights and published APD services.
+const names = [...new Set([...programs.map((p) => p.short), "Companion Care", "Residential", "Personal Support", "Respite Care", "Supported Living Coach", "Supported Employment"])];
 
 /** Two infinite ribbons crossing at opposing angles. */
 export function CrossMarquee() {

@@ -2,10 +2,8 @@
 
 import { Photo } from "@/components/ui/Photo";
 import { motion, useScroll, useTransform } from "motion/react";
-import { RotateCw } from "lucide-react";
 import { useRef, useState } from "react";
-import { promises } from "@/lib/content";
-import { site } from "@/lib/site";
+import { sinceLine, site } from "@/lib/site";
 import { LogoMark } from "../../brand/Logo";
 import { Marquee } from "../../ui/Marquee";
 import { SectionIntro } from "../../ui/SectionIntro";
@@ -13,30 +11,30 @@ import { EASE, Reveal } from "../../ui/motion";
 
 /* ───────────── Story: sticky image stack + scrolling chapters ───────────── */
 
-// Copy adapted from the founder's story on the agency's original About Us page.
+// The four paragraphs of the original About Us page, verbatim.
 const chapters = [
   {
-    kicker: "Where it began",
-    title: "Inspired by a grandmother's devotion.",
-    text: "Shantana was inspired by her grandmother, who devoted herself to caring for both her mother, who was living with Alzheimer's disease, and her son with developmental disabilities. Witnessing her grandmother's selfless dedication and compassion left a lasting impression and inspired Shantana to pursue a life of service to others.",
+    kicker: "Since 2017",
+    title: "High-quality, person-centered care.",
+    text: "Shantana Johnson is the proud owner of Open Arms & Heart Services Inc., where her passion for delivering high-quality, person-centered care is rooted in deeply personal experiences since 2017.",
     image: "/images/activities-coloring.jpg",
   },
   {
-    kicker: "A living legacy",
-    title: "Patience, love, and exceptional caregiving.",
-    text: "Although her grandmother has since passed, the patience, love, and exceptional caregiving she demonstrated continue to guide Shantana's work every day. She carries on that legacy not only through her professional mission but also by continuing to provide care and support to her own uncle.",
+    kicker: "Her inspiration",
+    title: "Inspired by her grandmother.",
+    text: "Shantana was inspired by her grandmother, who devoted herself to caring for both her mother, who was living with Alzheimer's disease, and her son with developmental disabilities. Witnessing her grandmother's selfless dedication and compassion left a lasting impression and inspired Shantana to pursue a life of service to others.",
     image: "/images/grandpa-granddaughter.jpg",
   },
   {
-    kicker: "What we do",
-    title: "Person-centered care since 2017.",
-    text: "Open Arms & Heart Services is a licensed Florida Home Health Agency and an APD Central Region provider — supporting children, adults, seniors, veterans, and people with disabilities through home care, APD services, family support, and more.",
+    kicker: "Her legacy",
+    title: "Patience, love, and exceptional caregiving.",
+    text: "Although her grandmother has since passed, the patience, love, and exceptional caregiving she demonstrated continue to guide Shantana's work every day. She carries on that legacy not only through her professional mission but also by continuing to provide care and support to her own uncle.",
     image: "/images/personal-supports.jpg",
   },
   {
-    kicker: "How we care",
-    title: "Every person, treated like family.",
-    text: "Shantana and her staff are committed to ensuring that every individual and family served receives compassionate, respectful, and personalized care — with the same attention and dignity as family, supporting their independence, well-being, and quality of life.",
+    kicker: "Our commitment",
+    title: "The same attention and dignity as family.",
+    text: "Through Open Arms & Heart Services Inc., Shantana and her staff is committed to ensuring that every individual and family served receives compassionate, respectful, and personalized care. The organization strives to treat every person with the same attention and dignity as family, supporting their independence, well-being, and quality of life.",
     image: "/images/celebration.jpg",
   },
 ];
@@ -161,33 +159,33 @@ export function FounderSpotlight() {
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-white">
                 <Photo
                   src="/images/founder-shantana-johnson.jpg"
-                  alt={`${site.founder.name}, ${site.founder.title} of Open Arms & Heart Services`}
+                  alt={`${site.owner.name}, ${site.owner.title.toLowerCase()} of Open Arms & Heart Services`}
                   sizes="(min-width: 1024px) 384px, 90vw"
                   className="object-cover object-top"
                 />
               </div>
             </div>
             <div className="glass absolute -bottom-5 left-1/2 z-10 w-max -translate-x-1/2 rounded-full px-5 py-2.5 text-sm font-semibold text-iris-900">
-              Serving families since {site.founded}
+              {sinceLine}
             </div>
           </div>
           <div>
             <span className="eyebrow">
-              <span className="size-1.5 rounded-full bg-blush-500" /> Meet our founder
+              <span className="size-1.5 rounded-full bg-blush-500" /> Meet the owner
             </span>
-            <h2 className="mt-5 text-4xl font-medium sm:text-5xl">{site.founder.name}</h2>
-            <p className="mt-1 font-display text-xl text-blush-700 italic">{site.founder.title}</p>
+            <h2 className="mt-5 text-4xl font-medium sm:text-5xl">{site.owner.name}</h2>
+            <p className="mt-1 font-display text-xl text-blush-700 italic">{site.owner.title}</p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              {site.founder.name} is the proud owner of Open Arms &amp; Heart Services Inc., where her passion for
+              {site.owner.name} is the proud owner of Open Arms &amp; Heart Services Inc., where her passion for
               delivering <strong className="font-semibold text-iris-900">high-quality, person-centered care</strong> is rooted
-              in deeply personal experiences since {site.founded}.
+              in deeply personal experiences since {site.since}.
             </p>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Through Open Arms &amp; Heart Services, Shantana and her staff are committed to ensuring that every individual
-              and family served receives compassionate, respectful, and personalized care.
+              Through Open Arms &amp; Heart Services Inc., Shantana and her staff is committed to ensuring that every
+              individual and family served receives compassionate, respectful, and personalized care.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              {[...site.credentials, `Founded ${site.founded}`].map((t) => (
+              {[...site.credentials, sinceLine].map((t) => (
                 <span key={t} className="glass rounded-full px-4 py-2 text-sm font-semibold text-iris-800">
                   {t}
                 </span>
@@ -195,55 +193,6 @@ export function FounderSpotlight() {
             </div>
           </div>
         </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ───────────── The "Open" promises: 3D flip cards ───────────── */
-
-export function FlipPromises() {
-  const [flipped, setFlipped] = useState<number | null>(null);
-  return (
-    <section className="relative overflow-hidden bg-linear-to-b from-paper to-iris-50 py-24 sm:py-32">
-      <div className="container-x">
-        <SectionIntro
-          align="center"
-          eyebrow="Our promise"
-          title="Four ways we keep *everything open.*"
-          text="Hover or tap a card to turn it over."
-        />
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {promises.map((p, i) => (
-            <Reveal key={p.word} delay={i * 0.08}>
-              <button
-                type="button"
-                onClick={() => setFlipped(flipped === i ? null : i)}
-                data-flipped={flipped === i}
-                className="flip-scene block h-[340px] w-full text-left"
-                aria-label={`${p.title}: ${p.text}`}
-              >
-                <div className="flip-inner relative h-full w-full">
-                  <div className="flip-face absolute inset-0 flex flex-col justify-between overflow-hidden rounded-[2rem] bg-linear-to-br from-iris-700 via-iris-600 to-iris-500 p-7 text-white shadow-[0_30px_60px_-30px_rgb(96_52_159/0.7)]">
-                    <div className="absolute -top-16 -right-16 size-48 rounded-full bg-blush-400/30 blur-2xl" />
-                    <p.icon className="relative size-8 text-blush-200" />
-                    <div className="relative">
-                      <p className="font-display text-2xl text-iris-100">Open</p>
-                      <p className="font-display text-6xl leading-none italic">{p.word}</p>
-                    </div>
-                    <span className="relative flex items-center gap-2 text-xs font-semibold tracking-[0.14em] text-iris-100/80 uppercase">
-                      <RotateCw className="size-3.5" /> Turn over
-                    </span>
-                  </div>
-                  <div className="flip-face flip-back absolute inset-0 flex flex-col justify-center rounded-[2rem] bg-white p-7 ring-1 ring-iris-100">
-                    <p className="font-display text-3xl text-gradient italic">{p.title}</p>
-                    <p className="mt-4 text-lg leading-relaxed text-ink-soft">{p.text}</p>
-                  </div>
-                </div>
-              </button>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );

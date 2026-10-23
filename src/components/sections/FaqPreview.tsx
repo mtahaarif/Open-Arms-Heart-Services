@@ -17,7 +17,7 @@ export function FaqPreview({ count = 5 }: { count?: number }) {
             <SectionIntro
               eyebrow="Questions, answered"
               title="Good questions *deserve clear answers.*"
-              text="Here are the ones families ask us most. Don't see yours? We're a phone call away."
+              text="Don't see your question? Open Arms & Heart Services is only a call away!"
             />
             <Reveal delay={0.2} className="mt-8 flex flex-wrap gap-3">
               <Link href="/faq" className="btn-primary">

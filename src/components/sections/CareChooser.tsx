@@ -23,8 +23,8 @@ export function CareChooser() {
       matched.length === 1
         ? { title: matched[0].short, text: matched[0].summary }
         : {
-            title: "A combination of services",
-            text: "More than one of our programs fits — one team can coordinate everything for your family.",
+            title: "Types of care that match",
+            text: "These types of care include the support you selected.",
           };
     return { matched, verdict, any: chosen.length > 0 };
   }, [picked]);
@@ -41,7 +41,7 @@ export function CareChooser() {
           align="center"
           eyebrow="Care finder"
           title="Not sure what kind of care you need? *Let's figure it out.*"
-          text="Tap everything that applies. We'll point you to the right type of care — then our staff can talk it through with your family."
+          text="Tap everything that applies to see which of our types of care include it — then our staff will reach out to discuss how we can help your family."
         />
 
         <LayoutGroup>

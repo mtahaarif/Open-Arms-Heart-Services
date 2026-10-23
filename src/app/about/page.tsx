@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { FlipPromises, FounderSpotlight, NameMeaning, PhotoMarquee, StoryChapters } from "@/components/sections/about/AboutSections";
+import { FounderSpotlight, NameMeaning, PhotoMarquee, StoryChapters } from "@/components/sections/about/AboutSections";
 import { PageHero } from "@/components/ui/PageHero";
 import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   path: "/about",
   title: "About Us & Our Mission",
-  description: `Founded in ${site.founded} by ${site.founder.name}, Open Arms & Heart Services delivers compassionate, person-centered care across Central Florida.`,
+  description: `Our mission, and the story of ${site.owner.name}, proud owner of Open Arms & Heart Services Inc. — delivering high-quality, person-centered care since ${site.since}.`,
 });
 
 export default function AboutPage() {
@@ -18,7 +18,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="Care rooted in *family.*"
-        text={`${site.founder.name} is the proud owner of Open Arms & Heart Services Inc., where her passion for delivering **high-quality, person-centered care** is rooted in deeply personal experiences since ${site.founded}.`}
+        text={`${site.owner.name} is the proud owner of Open Arms & Heart Services Inc., where her passion for delivering **high-quality, person-centered care** is rooted in deeply personal experiences since ${site.since}.`}
         crumbs={[{ label: "About" }]}
         images={["/images/hero-caregiver-laughing.jpg", "/images/founder-shantana-johnson.jpg"]}
       >
@@ -29,7 +29,6 @@ export default function AboutPage() {
       <StoryChapters />
       <NameMeaning />
       <FounderSpotlight />
-      <FlipPromises />
       <PhotoMarquee />
       <CtaBand />
     </>

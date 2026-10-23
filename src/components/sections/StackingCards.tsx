@@ -73,8 +73,8 @@ export function StackingCards() {
           <div className="lg:sticky lg:top-32">
             <SectionIntro
               eyebrow="Peace of mind"
-              title="Questions families *ask us first.*"
-              text="Your safety, trust, and peace of mind are our highest priorities. Here are the answers families look for before anything else."
+              title="Questions & *answers.*"
+              text="Your safety, trust, and peace of mind are our highest priorities."
             />
             <Reveal delay={0.2} className="mt-8 flex flex-wrap gap-3">
               <Magnetic>

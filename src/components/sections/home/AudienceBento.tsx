@@ -24,8 +24,8 @@ export function AudienceBento() {
         <SectionIntro
           align="center"
           eyebrow="Who we care for"
-          title="Every age. Every ability. *Every family.*"
-          text="Our arms are open to seniors, adults and children alike — and to the family members who love them."
+          title="Care for children, adults, *seniors, and families.*"
+          text="Support for children, adults, seniors, veterans, and people with disabilities — and the families who care for them."
         />
 
         <Stagger className="mt-16 grid grid-cols-6 auto-rows-[140px] gap-2.5 sm:auto-rows-[200px] sm:gap-4 md:auto-rows-[260px]" stagger={0.1}>
@@ -57,15 +57,15 @@ export function AudienceBento() {
         <Reveal className="mt-4">
             <GlowCard className="flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-iris-100 bg-linear-to-r from-iris-50 via-white to-blush-50 p-7 sm:flex-row sm:items-center sm:p-9">
               <div className="relative z-10">
-                <p className="font-display text-2xl text-iris-950 sm:text-3xl">Not sure if we can help?</p>
-                <p className="mt-1 text-ink-soft">Call us — if we're not the right fit, we'll point you to someone who is.</p>
+                <p className="font-display text-2xl text-iris-950 sm:text-3xl">Open Arms &amp; Heart Services is only a call away!</p>
+                <p className="mt-1 text-ink-soft">Office: {site.phone.display} · {site.email}</p>
               </div>
               <div className="relative z-10 flex flex-wrap gap-3">
                 <a href={site.phone.href} className="btn-primary">
                   <Phone className="size-4" /> {site.phone.display}
                 </a>
                 <Link href="/services" className="btn-ghost">
-                  All services <ArrowUpRight className="size-4" />
+                  Types of care <ArrowUpRight className="size-4" />
                 </Link>
               </div>
             </GlowCard>

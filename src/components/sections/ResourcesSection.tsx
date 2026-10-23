@@ -10,9 +10,8 @@ export function ResourcesSection() {
     <section className="relative py-24 sm:py-28">
       <div className="container-x">
         <SectionIntro
-          eyebrow="Helpful resources"
-          title="Support beyond *our front door.*"
-          text="Trusted Florida programs for food, housing, healthcare, disability services, elder care, and insurance counseling."
+          eyebrow="Resources"
+          title="Helpful *Florida resources.*"
         />
         <Stagger className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-5" stagger={0.07}>
           {resources.map((r) => (
@@ -32,7 +31,7 @@ export function ResourcesSection() {
                   <ArrowUpRight className="size-4 text-iris-300 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-iris-700" />
                 </div>
                 <h3 className="relative z-10 mt-4 font-display text-lg leading-snug">{r.name}</h3>
-                <p className="relative z-10 mt-1.5 text-sm text-ink-soft">{r.text}</p>
+                {r.text && <p className="relative z-10 mt-1.5 text-sm text-ink-soft">{r.text}</p>}
               </GlowCard>
             </StaggerItem>
           ))}

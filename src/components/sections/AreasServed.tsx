@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight, MapPin, Navigation } from "lucide-react";
-import { allCounties, fullAddress, site } from "@/lib/site";
+import { ArrowUpRight, MapPin } from "lucide-react";
+import { fullAddress, sinceLine, site } from "@/lib/site";
 import { GlowCard } from "../ui/GlowCard";
 import { SectionIntro } from "../ui/SectionIntro";
 import { Reveal, Stagger, StaggerItem } from "../ui/motion";
@@ -19,16 +19,11 @@ export function AreasServed() {
           <SectionIntro
             dark
             eyebrow="Where we serve"
-            title="Serving *Central Florida* since 2017."
-            text={`From our office in ${site.address.city}, our caregivers support families across ${allCounties.length} Central Florida counties.`}
+            title="Proudly serving counties in *Central Florida.*"
+            text={`${sinceLine}. Service areas for each type of care, as published by Open Arms & Heart Services.`}
           />
           <Reveal delay={0.2}>
-            <a
-              href={site.mapsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="glass-dark group flex items-center gap-5 rounded-[1.75rem] p-5 transition hover:bg-white/10 sm:p-6"
-            >
+            <div className="glass-dark flex items-center gap-5 rounded-[1.75rem] p-5 sm:p-6">
               <span className="relative grid size-14 shrink-0 place-items-center rounded-2xl bg-blush-500">
                 <span className="animate-pulse-ring absolute inset-0 rounded-2xl bg-blush-400" />
                 <MapPin className="relative size-6" />
@@ -37,8 +32,7 @@ export function AreasServed() {
                 <span className="block text-sm font-semibold tracking-[0.14em] text-blush-200 uppercase">Our office</span>
                 <span className="mt-0.5 block text-lg text-white">{fullAddress}</span>
               </span>
-              <Navigation className="size-5 text-iris-200 transition group-hover:rotate-12 group-hover:text-white" />
-            </a>
+            </div>
           </Reveal>
         </div>
 
@@ -50,7 +44,7 @@ export function AreasServed() {
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <h3 className="font-display text-lg leading-tight text-white sm:text-3xl">{a.program}</h3>
-                      <p className="mt-1 text-xs text-iris-200/80 sm:text-sm">{a.note}</p>
+                      <p className="mt-1 text-xs text-iris-200/80 sm:text-sm">{a.label}</p>
                     </div>
                     <span className="hidden font-display text-5xl text-white/10 sm:block">0{i + 1}</span>
                   </div>
@@ -76,7 +70,7 @@ export function AreasServed() {
           ))}
         </Stagger>
         <Reveal className="mt-6 text-center text-iris-200/70">
-          Not sure if we serve your area? Call{" "}
+          Office:{" "}
           <a href={site.phone.href} className="font-semibold text-white underline decoration-blush-400 underline-offset-4">
             {site.phone.display}
           </a>{" "}

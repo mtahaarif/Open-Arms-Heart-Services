@@ -6,7 +6,7 @@ import { motion, useInView, useScroll, useTransform } from "motion/react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight, ArrowUpRight, Check, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { homeCare, homeHealth, programs, type PillarSlug, type ProgramSlug } from "@/lib/services";
+import { programs, type ProgramSlug } from "@/lib/services";
 import { EASE, Reveal } from "../../ui/motion";
 import { CareLink } from "@/components/forms/CareLink";
 
@@ -25,47 +25,26 @@ type Item = {
   cardLabel: string;
   cardText: string;
   care: ProgramSlug;
-  page?: string;
 };
 
-function itemsFor(source: "programs" | PillarSlug): { label: string; items: Item[] } {
-  if (source === "programs") {
-    return {
-      label: "Types of care",
-      items: programs.map((p) => ({
-        slug: p.slug,
-        name: p.name,
-        nav: p.short,
-        tag: p.tag,
-        icon: p.icon,
-        image: p.image,
-        imageAlt: p.imageAlt,
-        summary: p.intro,
-        pointsLabel: "Services and support",
-        points: p.points,
-        cardLabel: "Good to know",
-        cardText: p.note,
-        care: p.slug,
-        page: p.href,
-      })),
-    };
-  }
-  const pillar = source === "home-health" ? homeHealth : homeCare;
+/** The six types of care, in the long-form layout. */
+function programItems(): { label: string; items: Item[] } {
   return {
-    label: `${pillar.level} services`,
-    items: pillar.services.map((s) => ({
-      slug: s.slug,
-      name: s.name,
-      nav: s.name,
-      icon: s.icon,
-      image: s.image,
-      imageAlt: s.imageAlt,
-      summary: s.summary,
-      pointsLabel: "What's included",
-      points: s.points,
-      cardLabel: "Who it helps",
-      cardText: s.helps,
-      care: pillar.slug,
+    label: "Types of care",
+    items: programs.map((p) => ({
+      slug: p.slug,
+      name: p.name,
+      nav: p.short,
+      tag: p.tag,
+      icon: p.icon,
+      image: p.image,
+      imageAlt: p.imageAlt,
+      summary: p.intro,
+      pointsLabel: "Services and Support",
+      points: p.points,
+      cardLabel: "Good to know",
+      cardText: p.note,
+      care: p.slug,
     })),
   };
 }
@@ -132,11 +111,6 @@ function Block({ s, i, onActive }: { s: Item; i: number; onActive: (slug: string
             <CareLink care={s.care} className="inline-flex items-center gap-2 text-sm font-semibold text-blush-200 hover:text-white">
               Ask about {s.nav.toLowerCase()} <ArrowRight className="size-4" />
             </CareLink>
-            {s.page && (
-              <Link href={s.page} className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/80 hover:text-white">
-                Full details <ArrowUpRight className="size-4" />
-              </Link>
-            )}
           </div>
         </Reveal>
       </div>
@@ -145,8 +119,8 @@ function Block({ s, i, onActive }: { s: Item; i: number; onActive: (slug: string
 }
 
 /** Sticky sidebar with scroll-spy + long-form sections, for the programs or a pillar's services. */
-export function ServiceScrollspy({ source }: { source: "programs" | PillarSlug }) {
-  const { label, items } = itemsFor(source);
+export function ServiceScrollspy() {
+  const { label, items } = programItems();
   const [active, setActive] = useState(items[0].slug);
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.3", "end 0.7"] });
@@ -174,7 +148,7 @@ export function ServiceScrollspy({ source }: { source: "programs" | PillarSlug }
                       >
                         {on && (
                           <motion.span
-                            layoutId={`spy-${source}`}
+                            layoutId="spy-programs"
                             className="absolute inset-0 rounded-xl bg-white shadow-[0_10px_30px_-15px_rgb(96_52_159/0.4)] ring-1 ring-iris-100"
                             transition={{ type: "spring", stiffness: 380, damping: 32 }}
                           />
