@@ -1,31 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Courgette, Figtree, Fraunces, Quicksand } from "next/font/google";
+import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import Script from "next/script";
-import { LogoDefs } from "@/components/brand/Logo";
-import { MobileCallBar, ScrollProgress } from "@/components/layout/Chrome";
 import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
-import { Providers } from "@/components/layout/Providers";
+import { Header, TopBar } from "@/components/layout/Header";
 import { programs } from "@/lib/services";
-import { allCounties, site } from "@/lib/site";
+import { site } from "@/lib/site";
 import "./globals.css";
 
-// Variable weight axis only — the optional SOFT/WONK/opsz axes roughly doubled the font payload.
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  style: ["normal", "italic"],
-  display: "swap",
-});
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
-const courgette = Courgette({ subsets: ["latin"], weight: "400", variable: "--font-courgette", display: "swap" });
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  weight: "500",
-  variable: "--font-quicksand",
-  display: "swap",
-  preload: false,
-});
+const serif = Source_Serif_4({ subsets: ["latin"], variable: "--font-source-serif", weight: ["600"], display: "swap" });
+const sans = Source_Sans_3({ subsets: ["latin"], variable: "--font-source-sans", display: "swap" });
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -33,7 +16,7 @@ const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.shortName} | Serving Central Florida`,
+    default: `${site.shortName} | ${site.tagline}`,
     template: `%s | ${site.shortName}`,
   },
   description: site.description,
@@ -48,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#60349f",
+  themeColor: "#65318b",
   width: "device-width",
   initialScale: 1,
 };
@@ -58,38 +41,39 @@ const jsonLd = {
   "@type": "MedicalBusiness",
   name: site.name,
   url: site.url,
+  logo: `${site.url}/brand/logo.png`,
   description: site.description,
   telephone: "+1-321-217-2409",
   email: site.email,
   faxNumber: "+1-855-257-1340",
-  // Address exactly as published on the original website (it lists no complete ZIP code).
+  foundingDate: String(site.since),
   address: {
     "@type": "PostalAddress",
-    streetAddress: site.address.line1,
-    addressLocality: "Ocala",
-    addressRegion: "FL",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.zip,
     addressCountry: "US",
   },
-  areaServed: allCounties.map((c) => ({ "@type": "AdministrativeArea", name: `${c} County, Florida` })),
+  areaServed: [
+    ...site.areas[0].counties.map((c) => ({ "@type": "AdministrativeArea", name: `${c} County, Florida` })),
+    { "@type": "AdministrativeArea", name: "Central Florida" },
+  ],
   identifier: site.licenses.map((l) => ({ "@type": "PropertyValue", propertyID: "License", value: l })),
   slogan: site.tagline,
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Types of care",
+    name: "Our services",
     itemListElement: programs.map((p) => ({
       "@type": "Offer",
-      itemOffered: { "@type": "Service", name: p.name, description: p.summary },
+      itemOffered: { "@type": "Service", name: p.name, description: p.intro },
     })),
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${fraunces.variable} ${figtree.variable} ${courgette.variable} ${quicksand.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
       <body>
         {GTM_ID && (
           <noscript>
@@ -102,15 +86,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </noscript>
         )}
-        <LogoDefs />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <Providers>
-          <ScrollProgress />
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-          <MobileCallBar />
-        </Providers>
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:font-semibold focus:text-plum-700">
+          Skip to content
+        </a>
+        <TopBar />
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
         {GTM_ID && (
           <Script id="gtm" strategy="lazyOnload">
             {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}

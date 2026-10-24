@@ -1,6 +1,6 @@
 /**
- * Company facts. Every value is taken from the agency's original website —
- * see docs/original-site-content.md. Do not add facts that are not in that record.
+ * Company facts. Sources, newest first: the owner's mock-up (docs/client-mockup-content.md)
+ * and the agency's original website (docs/original-site-content.md). Do not add facts from elsewhere.
  */
 
 const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
@@ -12,22 +12,28 @@ export const site = {
   shortName: "Open Arms & Heart Services",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? vercelUrl ?? "http://localhost:3000",
   description:
-    "APD Central Region Provider and Licensed Florida Home Health Agency. Dependable, person-centered support serving Central Florida since 2017.",
-  tagline: "Home Is Where The Heart Is",
-  motto: "Where There Is Love, There Is Life",
-  /** "Serving Central Florida since 2017". */
+    "Compassionate home and community support for children, adults, seniors and people with disabilities throughout Central Florida.",
+  tagline: "Care that comes from the heart",
+  motto: "Where there is love, there is life.",
+  closing: "With compassion. With dignity. With open arms.",
   since: 2017,
   owner: { name: "Shantana Johnson", title: "Owner" },
 
-  credentials: ["APD Central Region Provider", "Licensed Florida Home Health Agency"],
+  /** The mock-up's trust strip. */
+  credentials: [
+    "Florida-licensed home health agency",
+    "APD Central Region provider",
+    "VA Community Care Provider",
+    "Community-Based Care (CBC) Provider",
+    "Level 2 Live Scan Provider (BGS)",
+  ],
   licenses: ["2999995365", "235855"],
 
   phone: { display: "321-217-2409", href: "tel:+13212172409" },
   fax: { display: "855-257-1340" },
   email: "openarmsandheartservices@gmail.com",
 
-  /** Published exactly as on the original website (its ZIP code is incomplete — confirm with the client). */
-  address: { line1: "1920 Verano Dr., Ste 105", line2: "Ocala, FL 2345" },
+  address: { street: "1920 Verano Dr., Ste 105", city: "Haines City", region: "FL", zip: "33844" },
 
   /** "Apply Now" on the original Careers page. */
   applicationUrl: "https://form.jotform.com/260676196988075",
@@ -38,33 +44,33 @@ export const site = {
     servicesEntry: "entry.499657858",
   },
 
-  /** Service areas as published, by type of care. */
   areas: [
     {
-      program: "Non-Skilled Home Health Services",
-      label: "Service areas",
+      label: "Home Health Services",
       href: "/services#home-care",
       counties: ["Polk", "Highlands", "Hardee", "Hillsborough", "Manatee"],
+      text: "Polk · Highlands · Hardee · Hillsborough · Manatee",
     },
     {
-      program: "Agency for Persons with Disabilities (APD)",
-      label: "APD Central Region counties",
+      label: "APD Central Region",
       href: "/services#apd",
-      counties: ["Orange", "Brevard", "Sumter", "Lake", "Polk", "Highlands"],
+      counties: [],
+      text: "Serving all of APD’s Central Region",
     },
   ],
+  areaNote:
+    "Availability varies by service, eligibility, authorization and agency capacity. Contact our team to discuss support in your area.",
 } as const;
 
-/** Every county named on the original website, de-duplicated. */
-export const allCounties = [...new Set(site.areas.flatMap((a) => a.counties))];
-
-export const fullAddress = `${site.address.line1}, ${site.address.line2}`;
+export const addressLines = [site.address.street, `${site.address.city}, ${site.address.region} ${site.address.zip}`] as const;
+export const fullAddress = addressLines.join(", ");
+export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.name}, ${fullAddress}`)}`;
 export const licenseLine = site.licenses.map((l) => `Lic# ${l}`).join(" · ");
-export const sinceLine = `Serving Central Florida since ${site.since}`;
+export const sinceLine = `Compassionate care across Central Florida since ${site.since}`;
 
 export const nav = [
-  { href: "/services", label: "Types of Care" },
-  { href: "/about", label: "About Us" },
+  { href: "/about", label: "About us" },
+  { href: "/services", label: "Our services" },
   { href: "/careers", label: "Careers" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },

@@ -6,7 +6,7 @@ import { programs } from "@/lib/services";
 import { site } from "@/lib/site";
 import { CARE_KEY } from "./CareLink";
 
-/** Embed URL, pre-ticking any types of care chosen through <CareLink> (Google Forms "pp_url" prefill). */
+/** Embed URL, pre-ticking any services chosen through <CareLink> (Google Forms "pp_url" prefill). */
 function embedUrl() {
   const params = new URLSearchParams({ embedded: "true" });
   try {
@@ -35,10 +35,10 @@ export function GoogleForm() {
   useEffect(() => setSrc(embedUrl()), []);
 
   return (
-    <div className="glass relative overflow-hidden rounded-[2rem] p-2 sm:p-3">
-      <div className="relative overflow-hidden rounded-[1.6rem] bg-white">
+    <div className="card overflow-hidden">
+      <div className="relative bg-white">
         {/* Sits behind the iframe until the form paints over it (load events aren't reliable for embeds). */}
-        <div className="absolute inset-x-0 top-0 grid h-64 place-items-center text-iris-400" aria-hidden>
+        <div className="absolute inset-x-0 top-0 grid h-64 place-items-center text-plum-400" aria-hidden>
           <LoaderCircle className="size-8 animate-spin" />
         </div>
         {src ? (
@@ -54,12 +54,12 @@ export function GoogleForm() {
           <div className="h-[1660px] min-[420px]:h-[1520px] sm:h-[1420px]" />
         )}
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-3 px-4 pt-4 pb-2 text-sm text-ink-soft">
-        <a href={site.inquiryForm.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-iris-800 hover:text-iris-950">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-plum-50 px-5 py-4 text-sm">
+        <a href={site.inquiryForm.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-plum-700 hover:underline">
           Open the form in a new tab <ArrowUpRight className="size-4" />
         </a>
-        <a href={site.phone.href} className="inline-flex items-center gap-1.5 font-semibold text-iris-800 hover:text-iris-950">
-          <Phone className="size-4" /> Office {site.phone.display}
+        <a href={site.phone.href} className="inline-flex items-center gap-1.5 font-semibold text-plum-700 hover:underline">
+          <Phone className="size-4" /> {site.phone.display}
         </a>
       </div>
     </div>

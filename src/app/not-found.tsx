@@ -1,27 +1,25 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Phone } from "lucide-react";
-import { LogoMark } from "@/components/brand/Logo";
-import { Aurora } from "@/components/brand/Ribbons";
+import { Phone } from "lucide-react";
 import { site } from "@/lib/site";
 
 export default function NotFound() {
   return (
-    <section className="relative isolate grid min-h-[100svh] place-items-center overflow-hidden px-4 pt-28 pb-20 text-center">
-      <Aurora />
-      <div>
-        <LogoMark className="animate-float mx-auto h-28 w-auto" />
-        <p className="mt-8 font-display text-[7rem] leading-none text-gradient italic sm:text-[10rem]">404</p>
-        <h1 className="mt-2 text-4xl font-medium sm:text-5xl">This page wandered off.</h1>
-        <p className="mx-auto mt-4 max-w-md text-lg text-ink-soft">
-          Don&apos;t worry — our arms are still open. Let&apos;s get you back on track.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="/" className="btn-primary">
-            Back to home <ArrowRight className="size-4" />
-          </Link>
-          <a href={site.phone.href} className="btn-ghost">
-            <Phone className="size-4 text-blush-700" /> {site.phone.display}
-          </a>
+    <section className="bg-cream">
+      <div className="wrap grid min-h-[60svh] place-items-center py-20 text-center">
+        <div>
+          <Image src="/brand/logo-mark.png" alt="" width={360} height={278} className="mx-auto h-20 w-auto" />
+          <p className="eyebrow mt-8">Page not found</p>
+          <h1 className="mt-3">We couldn&apos;t find that page.</h1>
+          <p className="lead mx-auto mt-4 max-w-md">Our arms are still open. Let&apos;s get you back on track.</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link href="/" className="btn-primary">
+              Back to home
+            </Link>
+            <a href={site.phone.href} className="btn-outline">
+              <Phone className="size-4" /> {site.phone.display}
+            </a>
+          </div>
         </div>
       </div>
     </section>

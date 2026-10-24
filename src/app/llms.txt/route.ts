@@ -1,11 +1,11 @@
-import { insurances, resources } from "@/lib/content";
+import { insuranceNote, insurances, mission, resources, screening, steps } from "@/lib/content";
 import { faqs } from "@/lib/faqs";
-import { programHref, programs } from "@/lib/services";
+import { comingSoon, programHref, programs } from "@/lib/services";
 import { fullAddress, licenseLine, site } from "@/lib/site";
 
 export const dynamic = "force-static";
 
-/** /llms.txt — a plain-text map of the site for AI answer engines (llmstxt.org). Verified content only. */
+/** /llms.txt — a plain-text map of the site for AI answer engines (llmstxt.org). */
 export function GET() {
   const url = (path: string) => `${site.url}${path}`;
 
@@ -13,47 +13,61 @@ export function GET() {
 
 > ${site.description}
 
-"${site.tagline}" — "${site.motto}"
+"${site.tagline}." — "${site.motto}"
 
 ${site.credentials.join(" | ")} · ${licenseLine} · Serving Central Florida since ${site.since}.
 
-Our Mission: To work in partnership with our consumers to help them achieve their goals of independence, productivity, and meaningful integration within their communities. We are committed to fulfilling the needs of our consumers with excellence and care.
+Our Mission: ${mission}
 
-- Office: ${site.phone.display}
+- Phone: ${site.phone.display}
 - Fax: ${site.fax.display}
 - Email: ${site.email}
-- Address (as published): ${fullAddress}
-${site.areas.map((a) => `- ${a.program} — ${a.label}: ${a.counties.join(", ")}`).join("\n")}
+- Office: ${fullAddress}
+${site.areas.map((a) => `- ${a.label}: ${a.text}`).join("\n")}
 
-## Types of Care
+${site.areaNote}
+
+## Our services
 
 ${programs
   .map(
     (p) => `### ${p.name} — ${url(programHref(p))}
 
-${p.intro}
-
-Services and Support:
+${p.tagline} ${p.intro}
+${p.feature ? `\n${p.feature.title}: ${p.feature.text}\n` : ""}
+Services and support:
 ${p.points.map((pt) => `- ${pt}`).join("\n")}
 
 ${p.note}`,
   )
   .join("\n\n")}
 
-## Insurances we accept
+## Coming soon
 
-${insurances.map((i) => `- ${i}`).join("\n")}
+${comingSoon.items.map((i) => `- ${i.title}: ${i.text}`).join("\n")}
+
+${comingSoon.note}
+
+## Coverage
+
+Contact us about coverage through: ${insurances.join(", ")}. ${insuranceNote}
+
+${screening}
+
+## How to get started
+
+${steps.map((s, i) => `${i + 1}. ${s.title} — ${s.text}`).join("\n")}
 
 ## Pages
 
 - [Home](${url("/")})
-- [Types of Care](${url("/services")})
-- [About Us](${url("/about")}): Our mission and the story of ${site.owner.name}, owner.
-- [Careers](${url("/careers")}): Home Health Aide and Group Home Staff positions — apply at ${site.applicationUrl}
+- [Our services](${url("/services")})
+- [About us](${url("/about")}): Our mission and the story of ${site.owner.name}, owner.
+- [Careers](${url("/careers")}): Home Health Aide and Group Home Staff — apply at ${site.applicationUrl}
 - [FAQ](${url("/faq")})
 - [Contact](${url("/contact")})
 
-## Resources
+## Community resources
 
 ${resources.map((r) => `- [${r.name}](${r.href})${r.text ? `: ${r.text}` : ""}`).join("\n")}
 

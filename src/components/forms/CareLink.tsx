@@ -7,7 +7,7 @@ import type { ProgramSlug } from "@/lib/services";
 export const CARE_KEY = "oa-care-programs";
 
 /**
- * Link to /contact that pre-ticks the given types of care in the embedded Google Form.
+ * Link to the contact form that pre-ticks the given services in the embedded Google Form.
  * The choice travels in sessionStorage rather than a query string, so the
  * contact page stays a single crawlable URL (no duplicate titles/H1s/canonicals).
  */
@@ -18,7 +18,7 @@ export function CareLink({
 }: Omit<ComponentProps<typeof Link>, "href"> & { care: ProgramSlug | ProgramSlug[] }) {
   return (
     <Link
-      href="/contact"
+      href="/contact#request"
       onClick={(e) => {
         try {
           sessionStorage.setItem(CARE_KEY, JSON.stringify(Array.isArray(care) ? care : [care]));

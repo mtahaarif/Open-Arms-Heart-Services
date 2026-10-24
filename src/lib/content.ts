@@ -1,104 +1,101 @@
-import type { LucideIcon } from "lucide-react";
-import { Accessibility, Baby, BadgeCheck, Heart, HandHeart, HouseHeart, Medal, ShieldCheck } from "lucide-react";
-import type { ProgramSlug } from "./services";
 import { site } from "./site";
 
 /*
- * All copy in this file is taken from the agency's original website or the forms it links to
- * (docs/original-site-content.md). Do not add claims that are not in that record.
+ * Site copy. Sources, newest first: the owner's mock-up (docs/client-mockup-content.md)
+ * and the agency's original website (docs/original-site-content.md).
+ * Do not add claims that are in neither record.
  */
 
-/* ───────────────────────── Who we care for ───────────────────────── */
+/* ───────────────────────── About ───────────────────────── */
 
-export const audiences: { title: string; text: string; image: string; alt: string; icon: LucideIcon }[] = [
+export const mission =
+  "To work in partnership with our consumers to help them achieve their goals of independence, productivity, and meaningful integration within their communities. We are committed to fulfilling the needs of our consumers with excellence and care.";
+
+/** The four paragraphs of the original About Us page. */
+export const story = [
+  `${site.owner.name} is the proud owner of Open Arms & Heart Services Inc., where her passion for delivering high-quality, person-centered care is rooted in deeply personal experiences since ${site.since}.`,
+  "Shantana was inspired by her grandmother, who devoted herself to caring for both her mother, who was living with Alzheimer’s disease, and her son with developmental disabilities. Witnessing her grandmother’s selfless dedication and compassion left a lasting impression and inspired Shantana to pursue a life of service to others.",
+  "Although her grandmother has since passed, the patience, love, and exceptional caregiving she demonstrated continue to guide Shantana’s work every day. She carries on that legacy not only through her professional mission but also by continuing to provide care and support to her own uncle.",
+  "Through Open Arms & Heart Services Inc., Shantana and her staff are committed to ensuring that every individual and family served receives compassionate, respectful, and personalized care. The organization strives to treat every person with the same attention and dignity as family, supporting their independence, well-being, and quality of life.",
+];
+
+/** "A personal approach" — the mock-up's home-page about section. */
+export const approach = [
+  "Finding support for someone you love is personal. At Open Arms & Heart Services Inc., we take time to understand each individual’s routines, preferences and goals.",
+  `Since ${site.since}, we have helped Central Florida families navigate home and community-based care with compassion, dignity and a commitment to independence.`,
+];
+
+/* ───────────────────────── Who we serve ───────────────────────── */
+
+export const audiences: { title: string; text: string; image: string; alt: string; href: string }[] = [
+  {
+    title: "Children & families",
+    text: "Support for children with special needs or developmental disabilities, foster families and the caregivers beside them.",
+    image: "/images/family-game-night.jpg",
+    alt: "A family playing a board game together in their living room",
+    href: "/services#cbc",
+  },
+  {
+    title: "Adults with disabilities",
+    text: "Person-centered supports designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
+    image: "/images/adult-wheelchair-community.jpg",
+    alt: "A smiling woman who uses a wheelchair chatting with a support worker at a community centre",
+    href: "/services#apd",
+  },
   {
     title: "Seniors",
-    text: "Caring for a developmentally disabled family member or senior can be extremely challenging, and we are here to help.",
-    image: "/images/senior-portrait.jpg",
-    alt: "Smiling older woman with short grey hair",
-    icon: HandHeart,
+    text: "Everyday help at home — personal care, homemaking, companionship and respite for family caregivers.",
+    image: "/images/senior-conversation.jpg",
+    alt: "A smiling older man talking with a caregiver on his sofa",
+    href: "/services#home-care",
   },
   {
-    title: "Veterans & their families",
-    text: "Respectful, individualized home and community-based assistance.",
-    image: "/images/veteran.jpg",
-    alt: "Older veteran wearing an Army cap",
-    icon: Medal,
-  },
-  {
-    title: "People with disabilities",
-    text: "Person-centered supports designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
-    image: "/images/personal-supports.jpg",
-    alt: "Caregiver talking with a young man who uses a wheelchair",
-    icon: Accessibility,
-  },
-  {
-    title: "Children & foster families",
-    text: "Support for children with special needs or developmental disabilities.",
-    image: "/images/child-smiling.jpg",
-    alt: "Smiling young boy looking at the camera",
-    icon: Baby,
-  },
-  {
-    title: "Family caregivers",
-    text: "Caregiver relief and family support.",
-    image: "/images/family-baking.jpg",
-    alt: "Grandmother and granddaughter baking together in a kitchen",
-    icon: Heart,
+    title: "Veterans",
+    text: "Respectful, individualized home and community-based assistance for eligible veterans and their families.",
+    image: "/images/service-veterans.jpg",
+    alt: "A smiling older veteran wearing a Vietnam veteran cap",
+    href: "/services#va",
   },
 ];
 
-/* ───────────────────────── Care finder ───────────────────────── */
+/* ───────────────────────── Coverage ───────────────────────── */
 
-/** Each need is an item from the published "Services and Support" lists. */
-export type Need = { id: string; label: string; programs: ProgramSlug[] };
-
-export const needs: Need[] = [
-  { id: "personal-care", label: "Personal care, bathing, dressing, grooming, and hygiene", programs: ["home-care"] },
-  { id: "mobility", label: "Mobility and transfer assistance", programs: ["home-care"] },
-  { id: "homemaker", label: "Light housekeeping and meal preparation", programs: ["home-care"] },
-  { id: "companionship", label: "Companionship and socialization", programs: ["home-care", "dcf", "va"] },
-  { id: "respite", label: "Respite care", programs: ["home-care", "apd", "dcf", "va"] },
-  { id: "pediatric", label: "Pediatric personal care", programs: ["home-care", "cbc"] },
-  { id: "personal-supports", label: "Personal Supports or Life Skills Development", programs: ["apd"] },
-  { id: "supported-living", label: "Supported Living Coach or Supported Employment", programs: ["apd"] },
-  { id: "group-home", label: "Residential Habilitation (Group Home)", programs: ["apd"] },
-  { id: "vulnerable-adult", label: "Support for a vulnerable adult (DCF referral)", programs: ["dcf"] },
-  { id: "foster", label: "Foster care respite and family support", programs: ["cbc"] },
-  { id: "veteran", label: "Home care or respite for a veteran", programs: ["va"] },
-  { id: "fingerprint", label: "Live Scan fingerprinting", programs: ["live-scan"] },
-];
-
-/* ───────────────────────── Insurance ───────────────────────── */
-
-/** "Insurances we accept:" — as published. */
 export const insurances = [
   "Sunshine Health",
   "Aetna",
   "Florida Blue",
   "Humana",
-  "Children Medical Services",
+  "Children’s Medical Services",
   "Molina",
-  "Integrated Simply",
+  "Simply Healthcare",
   "OPTUM (VA)",
-  "United Healthcare",
+  "UnitedHealthcare",
   "Florida Community Care",
 ];
 
-/* ───────────────────────── Careers (from the linked employment application) ───────────────────────── */
+export const insuranceNote =
+  "Participation and coverage vary by plan, product and service. Call us to confirm current acceptance and required authorizations before arranging care.";
 
-export const roles = ["Home Health Aide", "Group Home Staff"];
+export const screening =
+  "All direct care personnel undergo Level 2 background screening in accordance with Florida requirements. We are a licensed Florida home health agency and an APD Central Region provider.";
 
-export const applicationChecklist = [
-  "Position applying for",
-  "Caregiving experience",
-  "Certifications (CNA, HHA, CPR)",
-  "Resume & certificate uploads",
-  "Education history",
-  "Employment history",
-  "Three personal references",
-  "Emergency contact & signature",
+/* ───────────────────────── Next steps ───────────────────────── */
+
+export const steps = [
+  { title: "Connect with us", text: "Share the kind of support you or your loved one is looking for." },
+  { title: "Explore your options", text: "Discuss service availability, coverage, referrals and required authorizations." },
+  { title: "Plan the next step", text: "Work with our team to identify appropriate services and coordinate the process." },
 ];
+
+/* ───────────────────────── Careers ───────────────────────── */
+
+export const careersIntro = [
+  "Make a difference in someone’s day—and in your own. Bring your compassion, dedication and skills to Open Arms & Heart Services Inc.",
+  "Help children, adults, seniors and people with disabilities feel supported, respected and connected.",
+];
+
+/** Positions on the agency's online employment application. */
+export const roles = ["Home Health Aide", "Group Home Staff"];
 
 export const requirements = [
   "High School Diploma or GED",
@@ -109,51 +106,17 @@ export const requirements = [
   "90-day probationary period",
 ];
 
-/* ───────────────────────── Home page Q&As (verbatim) ───────────────────────── */
-
-export const trustQAs: {
-  q: string;
-  a: string;
-  icon: LucideIcon;
-  image: string;
-  imageAlt: string;
-  chips?: string[];
-  link?: { href: string; label: string };
-}[] = [
-  {
-    q: "What types of care do you provide?",
-    a: "Caring for a developmentally disabled family member or senior can be extremely challenging, and we are here to help. We provide dedicated, family-oriented care that comes from the heart.",
-    icon: HouseHeart,
-    image: "/images/companion-care.jpg",
-    imageAlt: "Caregiver in green scrubs leaning in to chat with an older woman",
-    link: { href: "/services", label: "Learn more about the types of care we provide" },
-  },
-  {
-    q: "Are care providers background checked?",
-    a: "At Open Arms & Heart Services, Inc., your safety, trust, and peace of mind are our highest priorities. All direct care personnel undergo comprehensive Level 2 background screening in accordance with Florida state requirements. Our compassionate caregivers are committed to providing safe, dependable, and high-quality care to children, seniors, and individuals with disabilities because your family deserves care you can trust.",
-    icon: ShieldCheck,
-    image: "/images/aide-smiling-patient.jpg",
-    imageAlt: "Smiling caregiver sitting close to an older woman",
-  },
-  {
-    q: "Do you accept insurance?",
-    a: "Insurances we accept:",
-    icon: BadgeCheck,
-    image: "/images/breakfast-family.jpg",
-    imageAlt: "Grandmother and granddaughter sharing breakfast at home",
-    chips: insurances,
-  },
-  {
-    q: "Are you licensed?",
-    a: `Yes, Open Arms & Hearts is an APD Central Region provider and a licensed Florida Home Health Agency that has served Central Florida since ${site.since}.`,
-    icon: BadgeCheck,
-    image: "/images/celebration.jpg",
-    imageAlt: "Caregiver celebrating with a group of older adults",
-    chips: site.licenses.map((l) => `Lic# ${l}`),
-  },
+export const applicationChecklist = [
+  "Position applying for",
+  "Caregiving experience",
+  "Certifications (CNA, HHA, CPR)",
+  "Resume & certificate uploads",
+  "Education and employment history",
+  "Three personal references",
+  "Emergency contact & e-signature",
 ];
 
-/* ───────────────────────── Resources (from the original footer) ───────────────────────── */
+/* ───────────────────────── Community resources ───────────────────────── */
 
 export const resources: { name: string; href: string; text?: string }[] = [
   {
@@ -161,9 +124,8 @@ export const resources: { name: string; href: string; text?: string }[] = [
     href: "https://fl211.org/",
     text: "Food, housing utility assistance, transportation, healthcare, childcare, mental health support",
   },
-  // The original site linked this item to the APD page by mistake; this is the department's official site.
-  { name: "Florida Dept of Elder Affairs", href: "https://elderaffairs.org/" },
-  { name: "Florida Agency for Persons with Disabilities", href: "https://apd.myflorida.com/resources.htm" },
+  { name: "Agency for Persons with Disabilities", href: "https://apd.myflorida.com/" },
+  { name: "Florida Department of Elder Affairs", href: "https://elderaffairs.org/" },
   { name: "FloridaHealthFinder", href: "https://quality.healthfinder.fl.gov/" },
   {
     name: "Florida SHINE",

@@ -1,30 +1,32 @@
 import type { LucideIcon } from "lucide-react";
-import { Accessibility, Armchair, Baby, FingerprintPattern, HandHelping, HeartHandshake, HouseHeart, Medal, ShieldCheck } from "lucide-react";
+import { Accessibility, Baby, FingerprintPattern, HeartHandshake, Medal, ShieldCheck } from "lucide-react";
 
-/* ───────────────────────── Types of care ─────────────────────────
- * The six types of care on the agency's original website, with verbatim copy
- * (see docs/original-site-content.md). Only spelling typos are corrected.
+/* ───────────────────────── Our services ─────────────────────────
+ * The six services. Descriptions and lists come from the agency's original website
+ * (docs/original-site-content.md); taglines and the changes the owner made in her
+ * mock-up come from docs/client-mockup-content.md, which takes precedence.
  */
 
 export type ProgramSlug = "home-care" | "apd" | "dcf" | "cbc" | "va" | "live-scan";
 
 export type Program = {
   slug: ProgramSlug;
-  /** Heading as published. */
+  /** Full name, as published. */
   name: string;
-  /** Short label for navigation and chips. */
+  /** Short name used on cards and in menus. */
   short: string;
-  tag: string;
+  /** One-line promise from the owner's mock-up. */
+  tagline: string;
   icon: LucideIcon;
   image: string;
   imageAlt: string;
-  /** First sentence of the published description. */
-  summary: string;
-  /** Full published description. */
+  /** Published description. */
   intro: string;
-  /** "Services and Support" list, as published. */
+  /** A named program within the service (CBC Summer Respite). */
+  feature?: { title: string; text: string };
+  /** "Services and support" list. */
   points: string[];
-  /** Closing note, as published. */
+  /** Closing note. */
   note: string;
   /** Exact option label on the agency's "Request More Information" Google Form. */
   formLabel: string;
@@ -35,60 +37,55 @@ export const programs: Program[] = [
     slug: "home-care",
     name: "Non-Skilled Home Health Services",
     short: "Non-Skilled Home Health",
-    tag: "Non-medical support",
+    tagline: "Everyday help. Greater peace of mind.",
     icon: HeartHandshake,
-    image: "/images/companion-care.jpg",
-    imageAlt: "Caregiver in green scrubs leaning in to chat with an older woman",
-    summary:
-      "Open Arms & Heart Services, Inc. is a Florida-licensed home health agency offering non-medical support to children, adults, seniors, and people with disabilities.",
+    image: "/images/service-home-care.jpg",
+    imageAlt: "A caregiver bringing a cup of tea to a woman resting at home with her crutches nearby",
     intro:
       "Open Arms & Heart Services, Inc. is a Florida-licensed home health agency offering non-medical support to children, adults, seniors, and people with disabilities. Our caregivers help individuals remain comfortable and supported in their homes.",
     points: [
-      "Personal Care, bathing, dressing, grooming, and hygiene assistance",
+      "Personal care, bathing, dressing, grooming and hygiene assistance",
       "Mobility and transfer assistance",
-      "Homemaker services, light housekeeping, and meal preparation",
-      "Companionship, socialization, and respite care",
+      "Homemaker services, light housekeeping and meal preparation",
+      "Companionship, socialization and respite care",
       "Assistance with activities of daily living",
       "Pediatric personal care and support for people with disabilities",
     ],
-    note: "Our caregivers complete applicable background screening and role-appropriate training. Service areas: Polk, Highlands, Hardee, Hillsborough, and Manatee Counties.",
+    note: "Our caregivers complete applicable background screening and role-appropriate training. Serving Polk, Highlands, Hardee, Hillsborough and Manatee Counties.",
     formLabel: "Non-Skilled Home Health Services",
   },
   {
     slug: "apd",
-    name: "Agency for Persons with Disabilities (APD)",
+    name: "Agency for Persons with Disabilities (APD) Services",
     short: "APD Services",
-    tag: "APD Central Region",
+    tagline: "Support for a more independent life.",
     icon: Accessibility,
-    image: "/images/personal-supports.jpg",
-    imageAlt: "Caregiver talking with a smiling young man who uses a wheelchair",
-    summary:
-      "As an APD provider, Open Arms offers person-centered supports designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
+    image: "/images/service-apd.jpg",
+    imageAlt: "A young man who uses a wheelchair relaxing in his kitchen while a support worker prepares a meal",
     intro:
       "As an APD provider, Open Arms offers person-centered supports designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
     points: [
       "Personal Supports",
       "Life Skills Development Level 1 (Companion)",
-      "Supported Living Coach",
+      "Supported Living Coaching",
       "Supported Employment",
       "Residential Habilitation (Group Home)",
       "Respite Care",
       "Community integration and daily living skill development",
     ],
-    note: "We collaborate with individuals, families, and Waiver Support Coordinators to support each person's goals and support plan. APD Central Region counties: Orange, Brevard, Sumter, Lake, Polk, and Highlands.",
+    note: "Working with individuals, families and Waiver Support Coordinators throughout all of APD’s Central Region.",
     formLabel: "Agency for Persons with Disabilities (APD)",
   },
   {
     slug: "dcf",
-    name: "Vulnerable Adult Support Services / DCF Referrals",
+    name: "Vulnerable Adult Support Services",
     short: "Vulnerable Adult Support",
-    tag: "DCF referrals",
+    tagline: "Dignity, safety and connection.",
     icon: ShieldCheck,
-    image: "/images/social-work.jpg",
-    imageAlt: "Caregiver sitting with an older man on a sofa, talking together",
-    summary: "Open Arms supports adults who need assistance maintaining dignity, safety, and independence.",
+    image: "/images/service-vulnerable-adult.jpg",
+    imageAlt: "A woman and an older woman laughing together while gardening outdoors",
     intro:
-      "Open Arms supports adults who need assistance maintaining dignity, safety, and independence. We may coordinate appropriate services with families, social workers, case managers, and community referral partners.",
+      "Open Arms supports adults who need assistance maintaining dignity, safety, and independence. We coordinate with families, social workers, case managers and referral partners.",
     points: [
       "Personal care and homemaker assistance",
       "Companion services and social support",
@@ -97,44 +94,49 @@ export const programs: Program[] = [
       "Support for older adults and adults with disabilities",
       "Referrals and coordination for eligible home-based support",
     ],
-    note: "Open Arms does not conduct DCF Adult Protective Services investigations or represent itself as the state protective services agency. Services depend on eligibility, authorization, and agency capacity.",
+    note: "Open Arms does not conduct DCF Adult Protective Services investigations. Services depend on eligibility, authorization and agency capacity.",
     formLabel: "Vulnerable Adult Support Services/DCF Referrals",
   },
   {
     slug: "cbc",
     name: "Children & Family Support Services (CBC)",
     short: "Children & Family Support",
-    tag: "Community-based care",
+    tagline: "Inclusive respite and meaningful experiences for ages 0–17.",
     icon: Baby,
-    image: "/images/therapy-play.jpg",
-    imageAlt: "Caregiver playing with a young child at a table of toys",
-    summary:
-      "Open Arms has experience working with community-based care organizations and foster families to provide supportive, compassionate services.",
+    image: "/images/service-cbc.jpg",
+    imageAlt: "A group of children laughing and running together outdoors",
     intro:
-      "Open Arms has experience working with community-based care organizations and foster families to provide supportive, compassionate services. Current availability depends on active referral and contracting arrangements.",
+      "Open Arms has experience working with community-based care organizations and foster families to provide supportive, compassionate services.",
+    feature: {
+      title: "CBC Summer Respite Program",
+      text: "A safe, supportive and inclusive program exclusively for CBC agency-referred children and youth ages 0–17. Designed to support children with behavioral challenges, autism, developmental disabilities, trauma-related needs and additional personal care needs, including those who may not thrive in a traditional summer camp setting.",
+    },
     points: [
-      "Foster care respite experience",
-      "Caregiver relief and family support",
-      "Support for children with special needs or developmental disabilities",
-      "Individualized personal care assistance",
-      "Community-based support and supervision",
+      "Caregiver respite, relief and family support",
+      "Individualized personal care assistance and community-based supervision",
+      "Fun-filled community outings and outdoor adventures",
+      "Park adventures and recreation",
+      "Water play days",
+      "Picnics and outdoor eating",
+      "Nature walks and discovery",
+      "Sensory-friendly activities",
+      "Fun and movement",
+      "Meaningful social experiences and connections",
       "Coordination with case managers and child welfare professionals",
     ],
-    note: "We welcome conversations with CBC organizations and community partners about appropriate service opportunities.",
+    note: "Activities and support are tailored to each child’s age and individual needs. Contact our team about seasonal availability, CBC referrals and required authorizations. Current availability depends on active referral and contracting arrangements.",
     formLabel: "Children & Family Support Services (CBC)",
   },
   {
     slug: "va",
     name: "Veterans Home Care & Respite Services (VA)",
-    short: "Veterans Home Care",
-    tag: "VA Community Care",
+    short: "Veterans Home Care & Respite",
+    tagline: "Care that honors your everyday needs.",
     icon: Medal,
-    image: "/images/veteran.jpg",
-    imageAlt: "Older veteran wearing an Army cap",
-    summary:
-      "Open Arms is proud to support eligible veterans and their families through respectful, individualized home and community-based assistance.",
+    image: "/images/service-veterans.jpg",
+    imageAlt: "A smiling older veteran wearing a Vietnam veteran cap, talking with a friend at home",
     intro:
-      "Open Arms is proud to support eligible veterans and their families through respectful, individualized home and community-based assistance, subject to applicable VA Community Care referral and authorization requirements.",
+      "Open Arms is proud to support eligible veterans and their families through respectful, individualized home and community-based assistance.",
     points: [
       "Personal care and homemaker assistance",
       "Companion services and social support",
@@ -143,28 +145,26 @@ export const programs: Program[] = [
       "Support for older adults and adults with disabilities",
       "Referrals and coordination for eligible home-based support",
     ],
-    note: "Veterans and family members may contact Open Arms to discuss available services and required referrals or authorizations.",
+    note: "Services for eligible veterans are subject to applicable VA Community Care referrals and authorizations. Veterans and family members may contact Open Arms to discuss available services.",
     formLabel: "Veterans Home Care & Respite Services (VA)",
   },
   {
     slug: "live-scan",
     name: "Live Scan Fingerprinting & Background Screening",
     short: "Live Scan Fingerprinting",
-    tag: "Background screening",
+    tagline: "A convenient next step for screening.",
     icon: FingerprintPattern,
     image: "/images/live-scan.jpg",
-    imageAlt: "Close-up of a fingerprint on a scanner",
-    summary:
-      "Open Arms offers Live Scan fingerprinting services to assist with applicable Florida background screening and licensing requirements.",
+    imageAlt: "Close-up of a fingerprint on a glowing scanner",
     intro:
       "Open Arms offers Live Scan fingerprinting services to assist with applicable Florida background screening and licensing requirements.",
     points: [
       "Electronic Live Scan fingerprint capture",
       "Florida Level 2 screening submissions, where authorized",
-      "Healthcare, childcare, education, and professional licensing fingerprinting requests, where supported",
+      "Healthcare, childcare, education and professional licensing requests, where supported",
       "Employer and organizational screening requests, where supported",
     ],
-    note: "Contact our office for appointments, fees, identification requirements, and confirmation that we can process your specific agency or ORI submission.",
+    note: "Contact us for appointments, fees, identification requirements and confirmation that we can process your specific agency or ORI submission.",
     formLabel: "Live Scan Fingerprinting & Background Screening",
   },
 ];
@@ -172,33 +172,18 @@ export const programs: Program[] = [
 export const programBySlug = (slug: string) => programs.find((p) => p.slug === slug);
 export const programHref = (p: Program) => `/services#${p.slug}`;
 
-/**
- * The three highlights on the original home page. Their details are the matching
- * items from the published "Services and Support" lists.
- */
-export const highlights = [
-  {
-    slug: "companion-care",
-    name: "Companion Care",
-    image: "/images/aide-smiling-patient.jpg",
-    href: "/services#home-care",
-    tags: ["Companionship, socialization, and respite care", "Life Skills Development Level 1 (Companion)", "Companion services and social support"],
-    icon: Armchair,
-  },
-  {
-    slug: "residential",
-    name: "Residential",
-    image: "/images/residential-habilitation.jpg",
-    href: "/services#apd",
-    tags: ["Residential Habilitation (Group Home)", "Supported Living Coach", "Community integration and daily living skill development"],
-    icon: HouseHeart,
-  },
-  {
-    slug: "personal-support",
-    name: "Personal Support",
-    image: "/images/personal-care.jpg",
-    href: "/services#home-care",
-    tags: ["Personal Supports", "Personal Care, bathing, dressing, grooming, and hygiene assistance", "Mobility and transfer assistance"],
-    icon: HandHelping,
-  },
-];
+/** "More ways to care. Coming soon." — programs in development (owner's mock-up). */
+export const comingSoon = {
+  intro: "We are working to expand the support available to children and families.",
+  items: [
+    {
+      title: "Skilled Home Health Services",
+      text: "Planned services include skilled nursing, private duty nursing through RNs and LPNs, medical social services, and physical, occupational and speech therapy.",
+    },
+    {
+      title: "Prescribed Pediatric Extended Care (PPEC)",
+      text: "Planned pediatric day services for children with complex medical needs.",
+    },
+  ],
+  note: "These programs are in development. Availability will depend on applicable licensure, approvals and program readiness.",
+};
