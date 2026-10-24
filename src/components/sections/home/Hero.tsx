@@ -77,7 +77,7 @@ export function Hero() {
 
           <CssSplitHeading
             delay={80}
-            text="Home is where *the heart is.*"
+            text="Home & Family is where *the heart is.*"
             className="mt-7 text-[3.1rem] leading-[0.98] font-medium text-balance sm:text-7xl lg:text-[5.4rem]"
           />
           <p className="enter mt-4 font-display text-2xl text-blush-700 italic [--d:280ms] sm:text-3xl">

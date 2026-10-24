@@ -287,7 +287,7 @@ Every inner page opens with the shared **`PageHero`** (breadcrumb, eyebrow, word
 
 | # | Section | Component | Content (verified source) & pattern |
 | --- | --- | --- | --- |
-| 1 | Hero | `home/Hero.tsx` | "**Home is where the heart is.** *Where there is love, there is life.*" + the original home paragraph. CSS-first entrance, mouse parallax, arch photo, floating glass cards (Non-Skilled Home Health Services; APD Central Region Provider), rotating text badge, credential ticks. |
+| 1 | Hero | `home/Hero.tsx` | "**Home & Family is where the heart is.** *Where there is love, there is life.*" + the original home paragraph. CSS-first entrance, mouse parallax, arch photo, floating glass cards (Non-Skilled Home Health Services; APD Central Region Provider), rotating text badge, credential ticks. |
 | 2 | Crossing marquees | `home/CrossMarquee.tsx` | Type-of-care names, the three home highlights and published APD services; values drawn from the original copy. |
 | 3 | What we provide | `home/PillarsReveal.tsx` | The original home page's three highlights — **Companion Care, Residential, Personal Support** — each showing matching items from the published service lists. Expanding panels (desktop) / snap carousel (mobile). |
 | 4 | Our mission | `home/Manifesto.tsx` | The **mission statement**, scroll-scrubbed. Count-up stats derived from the published data: since 2017, 6 types of care, 9 counties, 10 insurances. |
