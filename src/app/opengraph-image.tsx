@@ -29,7 +29,7 @@ export default function OpengraphImage() {
           <div style={{ fontSize: 44, color: "#f48bb5" }}>&amp; Heart Services Inc.</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 30, color: "#e1d2f8" }}>
-          <span>Home is where the heart is.</span>
+          <span>Home & Family is where the heart is.</span>
           <span>{site.phone.display}</span>
         </div>
       </div>
