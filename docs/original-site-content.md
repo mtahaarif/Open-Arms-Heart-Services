@@ -3,7 +3,7 @@
 **Source:** https://www.openarmsandheart.org (Google Sites) — pages Home, Types of Care, About Us, Careers, Contact,
 plus the two forms the site links to. Captured 2026-10-23 (text identical to the 2026-10-21 capture).
 
-This file is the **single source of truth** for the new website's content. Every fact, claim and piece of copy on
+This file was the single source of truth until the owner sent her mock-up on 2026-10-24; [`client-mockup-content.md`](client-mockup-content.md) now takes precedence where the two differ. It remains the source for the new website's content. Every fact, claim and piece of copy on
 the new site must trace back to a line below. Text is verbatim; obvious typos are noted, not silently fixed.
 
 ---
