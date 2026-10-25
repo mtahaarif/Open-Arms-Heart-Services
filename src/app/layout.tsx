@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import Script from "next/script";
 import { Footer } from "@/components/layout/Footer";
-import { Header, TopBar } from "@/components/layout/Header";
-import { programs } from "@/lib/services";
+import { Header } from "@/components/layout/Header";
+import { TopBar } from "@/components/layout/TopBar";
+import { programHref, programs } from "@/lib/services";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -41,7 +42,7 @@ const jsonLd = {
   "@type": "MedicalBusiness",
   name: site.name,
   url: site.url,
-  logo: `${site.url}/brand/logo.png`,
+  logo: `${site.url}/brand/logo-640.png`,
   description: site.description,
   telephone: "+1-321-217-2409",
   email: site.email,
@@ -66,7 +67,7 @@ const jsonLd = {
     name: "Our services",
     itemListElement: programs.map((p) => ({
       "@type": "Offer",
-      itemOffered: { "@type": "Service", name: p.name, description: p.intro },
+      itemOffered: { "@type": "Service", name: p.name, description: p.tagline },
     })),
   },
 };
@@ -91,7 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <TopBar />
-        <Header />
+        <Header services={programs.map((p) => ({ href: programHref(p), label: p.short }))} />
         <main id="main">{children}</main>
         <Footer />
         {GTM_ID && (

@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Check } from "lucide-react";
+import Link from "@/components/ui/Link";
 import { ContactBand } from "@/components/sections/ContactBand";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Photo } from "@/components/ui/Photo";
@@ -7,6 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { approach, audiences, mission, screening, story } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { licenseLine, site } from "@/lib/site";
+import { rich } from "@/lib/rich";
 
 export const metadata = pageMetadata({
   path: "/about",
@@ -20,7 +20,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About us"
         title={"Your family.\nYour goals. Our heart."}
-        text={approach.join(" ")}
+        text={rich(approach.join(" "))}
         crumb="About us"
         image="/images/grandmother-granddaughter.jpg"
         imageAlt="A grandmother and her granddaughter smiling cheek to cheek"
@@ -48,7 +48,7 @@ export default function AboutPage() {
             <SectionHeading eyebrow="Our story" title="Inspired by family. Guided by love." />
             <div className="mt-6 space-y-5 text-lg leading-relaxed">
               {story.map((t) => (
-                <p key={t.slice(0, 24)}>{t}</p>
+                <p key={t.slice(0, 24)}>{rich(t)}</p>
               ))}
             </div>
           </div>
@@ -89,12 +89,12 @@ export default function AboutPage() {
       {/* Credentials */}
       <section className="section bg-cream">
         <div className="wrap grid gap-10 lg:grid-cols-2 lg:gap-20">
-          <SectionHeading eyebrow="Licensed & trusted" title="Care you can feel confident about." text={screening} />
+          <SectionHeading eyebrow="Licensed & trusted" title="Care you can feel confident about." text={rich(screening)} />
           <div className="card p-7 sm:p-9">
-            <ul className="space-y-3">
+            <ul className="check-list space-y-3">
               {site.credentials.map((c) => (
-                <li key={c} className="flex items-start gap-3 font-semibold text-ink">
-                  <Check className="mt-1 size-4 shrink-0 text-plum-700" strokeWidth={3} aria-hidden /> {c}
+                <li key={c} className="font-semibold text-ink">
+                  {c}
                 </li>
               ))}
             </ul>

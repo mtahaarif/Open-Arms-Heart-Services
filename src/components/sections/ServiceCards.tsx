@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Photo } from "@/components/ui/Photo";
 import { programHref, programs } from "@/lib/services";
 

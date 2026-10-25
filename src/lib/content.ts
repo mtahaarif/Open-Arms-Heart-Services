@@ -13,7 +13,7 @@ export const mission =
 
 /** The four paragraphs of the original About Us page. */
 export const story = [
-  `${site.owner.name} is the proud owner of Open Arms & Heart Services Inc., where her passion for delivering high-quality, person-centered care is rooted in deeply personal experiences since ${site.since}.`,
+  `${site.owner.name} is the proud owner of Open Arms & Heart Services Inc., where her passion for delivering **high-quality, person-centered care** is rooted in deeply personal experiences since ${site.since}.`,
   "Shantana was inspired by her grandmother, who devoted herself to caring for both her mother, who was living with Alzheimer’s disease, and her son with developmental disabilities. Witnessing her grandmother’s selfless dedication and compassion left a lasting impression and inspired Shantana to pursue a life of service to others.",
   "Although her grandmother has since passed, the patience, love, and exceptional caregiving she demonstrated continue to guide Shantana’s work every day. She carries on that legacy not only through her professional mission but also by continuing to provide care and support to her own uncle.",
   "Through Open Arms & Heart Services Inc., Shantana and her staff are committed to ensuring that every individual and family served receives compassionate, respectful, and personalized care. The organization strives to treat every person with the same attention and dignity as family, supporting their independence, well-being, and quality of life.",
@@ -22,7 +22,7 @@ export const story = [
 /** "A personal approach" — the mock-up's home-page about section. */
 export const approach = [
   "Finding support for someone you love is personal. At Open Arms & Heart Services Inc., we take time to understand each individual’s routines, preferences and goals.",
-  `Since ${site.since}, we have helped Central Florida families navigate home and community-based care with compassion, dignity and a commitment to independence.`,
+  `**Since ${site.since}**, we have helped Central Florida families navigate home and community-based care with compassion, dignity and a commitment to independence.`,
 ];
 
 /* ───────────────────────── Who we serve ───────────────────────── */
@@ -77,7 +77,7 @@ export const insuranceNote =
   "Participation and coverage vary by plan, product and service. Call us to confirm current acceptance and required authorizations before arranging care.";
 
 export const screening =
-  "All direct care personnel undergo Level 2 background screening in accordance with Florida requirements. We are a licensed Florida home health agency and an APD Central Region provider.";
+  "All direct care personnel undergo **Level 2 background screening** in accordance with Florida requirements. We are a licensed Florida home health agency and an APD Central Region provider.";
 
 /* ───────────────────────── Next steps ───────────────────────── */
 
@@ -90,7 +90,7 @@ export const steps = [
 /* ───────────────────────── Careers ───────────────────────── */
 
 export const careersIntro = [
-  "Make a difference in someone’s day—and in your own. Bring your compassion, dedication and skills to Open Arms & Heart Services Inc.",
+  "**Make a difference in someone’s day—and in your own.** Bring your compassion, dedication and skills to Open Arms & Heart Services Inc.",
   "Help children, adults, seniors and people with disabilities feel supported, respected and connected.",
 ];
 

@@ -1,27 +1,20 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/brand/Logo";
-import { programHref, programs } from "@/lib/services";
-import { nav, sinceLine, site } from "@/lib/site";
+import { nav, site } from "@/lib/site";
 
-export function TopBar() {
-  return (
-    <div className="bg-navy-900 text-[0.8rem] text-white">
-      <div className="wrap flex items-center justify-center gap-6 py-2 sm:justify-between">
-        <span className="hidden sm:block">{sinceLine}</span>
-        <a href={site.phone.href} className="font-semibold hover:underline">
-          Call our team: {site.phone.display}
-        </a>
-      </div>
-    </div>
-  );
-}
+type NavItem = { href: string; label: string };
 
-export function Header() {
+/**
+ * Sticky site header (client: mobile-menu state and active-link highlighting).
+ * `services` arrives as plain data from the root layout, so the full service copy
+ * in lib/services.ts never ships in the client bundle.
+ */
+export function Header({ services }: { services: NavItem[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -49,20 +42,16 @@ export function Header() {
                 </Link>
                 <div className="invisible absolute top-full left-1/2 w-[22rem] -translate-x-1/2 opacity-0 transition-opacity duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
                   <ul className="card -mt-3 p-2">
-                    {programs.map((p) => (
-                      <li key={p.slug}>
-                        <Link
-                          href={programHref(p)}
-                          className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[0.95rem] font-semibold text-ink hover:bg-plum-50 hover:text-plum-700"
-                        >
-                          <p.icon className="size-[1.1rem] shrink-0 text-plum-600" aria-hidden />
-                          {p.short}
+                    {services.map((s) => (
+                      <li key={s.href}>
+                        <Link href={s.href} className="block rounded-md px-3 py-2.5 text-[0.95rem] font-semibold text-ink hover:bg-plum-50 hover:text-plum-700">
+                          {s.label}
                         </Link>
                       </li>
                     ))}
                     <li className="mt-1 border-t border-line px-3 pt-3 pb-2">
                       <Link href="/services" className="link-arrow text-sm">
-                        View all services →
+                        View all of our services →
                       </Link>
                     </li>
                   </ul>
@@ -85,8 +74,9 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <a href={site.phone.href} className="grid size-11 place-items-center rounded-md border border-line text-plum-700" aria-label={`Call ${site.phone.display}`}>
-            <Phone className="size-5" />
+          <a href={site.phone.href} className="grid size-11 place-items-center rounded-md border border-line text-plum-700">
+            <Phone className="size-5" aria-hidden />
+            <span className="sr-only">Call {site.phone.display}</span>
           </a>
           <button
             type="button"
@@ -111,10 +101,10 @@ export function Header() {
                 </Link>
                 {item.href === "/services" && (
                   <ul className="-mt-1 grid gap-1 pb-4 pl-4">
-                    {programs.map((p) => (
-                      <li key={p.slug}>
-                        <Link href={programHref(p)} className="block py-1.5 text-body hover:text-plum-700">
-                          {p.short}
+                    {services.map((s) => (
+                      <li key={s.href}>
+                        <Link href={s.href} className="block py-1.5 text-body hover:text-plum-700">
+                          {s.label}
                         </Link>
                       </li>
                     ))}

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Phone } from "lucide-react";
 import { addressLines, mapsUrl, site } from "@/lib/site";
 
@@ -34,7 +34,7 @@ export function ContactBand() {
           <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm font-semibold text-blush-200 underline underline-offset-4 hover:text-white">
             Get directions
           </a>
-          <h3 className="mt-8 text-sm tracking-[0.16em] text-blush-200 uppercase">Connect with us</h3>
+          <h3 className="mt-8 text-sm tracking-[0.16em] text-blush-200 uppercase">Call, fax or email</h3>
           <p className="mt-3 text-lg">
             <a href={site.phone.href} className="font-semibold text-white hover:underline">
               {site.phone.display}

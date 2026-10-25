@@ -59,9 +59,12 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
-    // Cap generated widths at 1920px — nothing on the site renders wider, and the
-    // default 2048/3840 variants were producing 100 KB+ downloads.
-    deviceSizes: [640, 750, 828, 1080, 1280, 1600, 1920],
+    // A short ladder of widths keeps srcset markup small; 1600px covers the widest
+    // rendering (the 60vw home hero on large retina screens).
+    deviceSizes: [640, 828, 1080, 1280, 1600],
+    imageSizes: [384],
+    // Photos use 60 (see components/ui/Photo.tsx); 75 is Next's default.
+    qualities: [60, 75],
     minimumCacheTTL: 60 * 60 * 24 * 31,
   },
   // Removed pages: unverified content, and /thank-you (replaced by the embedded Google Form).

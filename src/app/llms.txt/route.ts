@@ -1,6 +1,7 @@
 import { insuranceNote, insurances, mission, resources, screening, steps } from "@/lib/content";
 import { faqs } from "@/lib/faqs";
 import { comingSoon, programHref, programs } from "@/lib/services";
+import { plain } from "@/lib/rich";
 import { fullAddress, licenseLine, site } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -9,7 +10,7 @@ export const dynamic = "force-static";
 export function GET() {
   const url = (path: string) => `${site.url}${path}`;
 
-  const body = `# ${site.name}
+  const body = plain(`# ${site.name}
 
 > ${site.description}
 
@@ -74,7 +75,7 @@ ${resources.map((r) => `- [${r.name}](${r.href})${r.text ? `: ${r.text}` : ""}`)
 ## Frequently asked questions
 
 ${faqs.map((f) => `### ${f.q}\n\n${f.a}`).join("\n\n")}
-`;
+`);
 
   return new Response(body, {
     headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, max-age=3600" },

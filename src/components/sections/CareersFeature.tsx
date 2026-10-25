@@ -1,6 +1,7 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Photo } from "@/components/ui/Photo";
 import { careersIntro, roles } from "@/lib/content";
+import { rich } from "@/lib/rich";
 
 /** "Great Careers Change Lives." — photo + copy band linking to /careers. */
 export function CareersFeature() {
@@ -17,7 +18,7 @@ export function CareersFeature() {
           </h2>
           {careersIntro.map((t) => (
             <p key={t} className="mt-4">
-              {t}
+              {rich(t)}
             </p>
           ))}
           <Link href="/careers" className="btn-primary mt-8">

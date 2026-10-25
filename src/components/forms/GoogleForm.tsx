@@ -1,19 +1,18 @@
 "use client";
 
 import { ArrowUpRight, LoaderCircle, Phone } from "lucide-react";
-import { useEffect, useState } from "react";
-import { programs } from "@/lib/services";
+import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/site";
 import { CARE_KEY } from "./CareLink";
 
 /** Embed URL, pre-ticking any services chosen through <CareLink> (Google Forms "pp_url" prefill). */
-function embedUrl() {
+function embedUrl(formLabels: Record<string, string>) {
   const params = new URLSearchParams({ embedded: "true" });
   try {
     const raw = sessionStorage.getItem(CARE_KEY);
     sessionStorage.removeItem(CARE_KEY);
     const picked = raw ? (JSON.parse(raw) as string[]) : [];
-    const labels = programs.filter((p) => picked.includes(p.slug)).map((p) => p.formLabel);
+    const labels = picked.map((slug) => formLabels[slug]).filter(Boolean);
     if (labels.length) {
       params.set("usp", "pp_url");
       labels.forEach((l) => params.append(site.inquiryForm.servicesEntry, l));
@@ -28,14 +27,32 @@ function embedUrl() {
  * The agency's "Request More Information" Google Form, embedded as on the original website.
  * The iframe is cross-origin and can't report its height, so it gets fixed heights per
  * breakpoint (measured, with room for validation messages).
+ *
+ * The iframe (and Google's scripts) is only created once the form is about to scroll into
+ * view, so it never competes with the page's own loading. `formLabels` (service slug → exact
+ * checkbox label) is passed in as plain data so the service copy stays out of the client bundle.
  */
-export function GoogleForm() {
+export function GoogleForm({ formLabels }: { formLabels: Record<string, string> }) {
+  const ref = useRef<HTMLDivElement>(null);
   const [src, setSrc] = useState<string | null>(null);
 
-  useEffect(() => setSrc(embedUrl()), []);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setSrc(embedUrl(formLabels));
+        io.disconnect();
+      },
+      { rootMargin: "400px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [formLabels]);
 
   return (
-    <div className="card overflow-hidden">
+    <div ref={ref} className="card overflow-hidden">
       <div className="relative bg-white">
         {/* Sits behind the iframe until the form paints over it (load events aren't reliable for embeds). */}
         <div className="absolute inset-x-0 top-0 grid h-64 place-items-center text-plum-400" aria-hidden>
@@ -45,7 +62,6 @@ export function GoogleForm() {
           <iframe
             src={src}
             title="Request More Information form"
-            loading="lazy"
             className="relative block h-[1660px] w-full min-[420px]:h-[1520px] sm:h-[1420px]"
           >
             Loading…

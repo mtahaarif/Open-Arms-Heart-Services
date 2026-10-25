@@ -4,6 +4,12 @@ import { site } from "./site";
 export const TITLE_SUFFIX = ` | ${site.shortName}`;
 
 /**
+ * The generated social card (app/opengraph-image.tsx). Listed explicitly because a page-level
+ * `openGraph` object replaces the parent's, which would otherwise drop og:image on inner pages.
+ */
+const SHARE_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: `${site.shortName} — ${site.tagline}` };
+
+/**
  * Per-page metadata with a self-referencing canonical, and Open Graph / Twitter
  * tags that carry the page's own title, description and URL.
  * Keep `title` ≤ 31 chars (so title + suffix ≤ 60) and `description` ≤ 155 chars.
@@ -37,7 +43,8 @@ export function pageMetadata({
       url: path,
       title: fullTitle,
       description,
+      images: [SHARE_IMAGE],
     },
-    twitter: { card: "summary_large_image", title: fullTitle, description },
+    twitter: { card: "summary_large_image", title: fullTitle, description, images: [SHARE_IMAGE.url] },
   };
 }

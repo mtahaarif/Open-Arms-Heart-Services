@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { Check, Phone } from "lucide-react";
+import Link from "@/components/ui/Link";
+import { Phone } from "lucide-react";
 import { AreasBand } from "@/components/sections/AreasBand";
 import { CareersFeature } from "@/components/sections/CareersFeature";
 import { ComingSoon } from "@/components/sections/ComingSoon";
@@ -13,6 +13,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { approach } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { rich } from "@/lib/rich";
 
 export const metadata = pageMetadata({
   path: "/",
@@ -65,11 +66,9 @@ export default function HomePage() {
             title={"At home. In the community.\nBy your side."}
             text="From help with daily routines to building independent living skills, our services are centered on the person receiving care—and the family standing beside them."
           >
-            <ul className="mt-7 flex flex-wrap gap-x-7 gap-y-3 text-sm font-bold text-ink">
+            <ul className="check-list mt-7 flex flex-wrap gap-x-7 gap-y-3 text-sm font-bold text-ink">
               {["Children & families", "Adults with disabilities", "Seniors & veterans"].map((t) => (
-                <li key={t} className="flex items-center gap-2">
-                  <Check className="size-4 text-plum-700" strokeWidth={3} aria-hidden /> {t}
-                </li>
+                <li key={t}>{t}</li>
               ))}
             </ul>
           </SectionHeading>
@@ -95,7 +94,7 @@ export default function HomePage() {
             <SectionHeading eyebrow="A personal approach" title={"Your family.\nYour goals. Our heart."} />
             {approach.map((t) => (
               <p key={t} className="mt-5">
-                {t}
+                {rich(t)}
               </p>
             ))}
             <div className="mt-7 flex flex-wrap gap-x-7 gap-y-3">
@@ -132,7 +131,7 @@ export default function HomePage() {
       <AreasBand />
       <ComingSoon />
       <CareersFeature />
-      <Coverage />
+      <Coverage withResources={false} />
       <Steps className="bg-white" />
       <ContactBand />
     </>

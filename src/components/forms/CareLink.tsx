@@ -19,6 +19,7 @@ export function CareLink({
   return (
     <Link
       href="/contact#request"
+      prefetch={false}
       onClick={(e) => {
         try {
           sessionStorage.setItem(CARE_KEY, JSON.stringify(Array.isArray(care) ? care : [care]));

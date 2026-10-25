@@ -95,7 +95,7 @@
 | Language | TypeScript (strict) |
 | Styling | Tailwind CSS v4 with `@theme` tokens and `@utility` classes in `src/app/globals.css` |
 | Icons | `lucide-react` |
-| Images | `next/image` through the `<Photo>` wrapper (AVIF/WebP, responsive `sizes`, average-colour placeholder) |
+| Images | `<Photo>`, built on `next/image`'s `getImageProps` (AVIF/WebP `srcset`, quality 60, mid-size fallback `src`, no inline styles) |
 | Fonts | `next/font/google`, self-hosted at build time with `display: swap` |
 | Forms | Embedded Google Form (no backend) |
 | Runtime dependencies | `next`, `react`, `react-dom`, `lucide-react` — nothing else |
@@ -154,7 +154,7 @@ Inquiries need no configuration: they go through the embedded Google Form (§11)
 │   ├── client-mockup-content.md    Owner's mock-up + feedback (2026-10-24) — newest content source
 │   └── original-site-content.md    Verbatim record of openarmsandheart.org
 ├── public/
-│   ├── brand/                      logo.png (full logo), logo-mark.png (hands + heart)
+│   ├── brand/                      logo.png (240px, ~8 KB, UI), logo-640.png (social card/JSON-LD), logo-mark.png
 │   └── images/                     15 licensed photos + the owner's portrait
 ├── src/
 │   ├── app/
@@ -173,13 +173,14 @@ Inquiries need no configuration: they go through the embedded Google Form (§11)
 │   │   └── llms.txt/route.ts       Plain-text site summary for AI answer engines
 │   ├── components/
 │   │   ├── brand/Logo.tsx          The client's logo (image) linking home
-│   │   ├── layout/Header.tsx       TopBar + sticky Header (dropdown, mobile menu)
+│   │   ├── layout/TopBar.tsx       Navy phone strip (server)
+│   │   ├── layout/Header.tsx       Sticky header: dropdown, mobile menu (client, plain-data props)
 │   │   ├── layout/Footer.tsx       Footer columns, resources, copyright bar
 │   │   ├── forms/GoogleForm.tsx    Embedded Google Form with prefill
 │   │   ├── forms/CareLink.tsx      Link that pre-ticks services in the form
 │   │   ├── sections/               TrustStrip, ServiceCards, AreasBand, ComingSoon,
 │   │   │                           CareersFeature, Coverage, Steps, ContactBand
-│   │   └── ui/                     Photo, PageHeader, SectionHeading (+ Lines)
+│   │   └── ui/                     Photo, Link (no-prefetch next/link), PageHeader, SectionHeading (+ Lines)
 │   └── lib/
 │       ├── site.ts                 Company facts, address, areas, nav
 │       ├── services.ts             The six services + coming-soon programs
@@ -346,10 +347,12 @@ The logo mark, "We couldn't find that page.", a link home and the phone number.
 
 | Component | Kind | Purpose |
 | --- | --- | --- |
-| `brand/Logo` | server | The client's logo image (`/brand/logo.png`) linking home. `withName` adds the "Open Arms & Heart Services Inc." label (from `xl` up). `preload` is used in the header. |
-| `layout/Header` → `TopBar`, `Header` | client | Top bar; sticky header with a CSS hover/focus dropdown for services; mobile phone button and menu (closes on route change); active-link highlighting. |
+| `brand/Logo` | server | The client's logo (`/brand/logo.png`, a pre-compressed static PNG — no optimiser round-trip) linking home. With `withName` the company name labels the link (visible from `xl`, screen-reader text below); otherwise the image alt does. |
+| `layout/TopBar` | server | Navy strip with the since-line and phone number |
+| `layout/Header` | client | Sticky header with a CSS hover/focus dropdown for services; mobile phone button and menu (closes on route change); active-link highlighting. The service list arrives as plain `{ href, label }` props from the root layout, so `lib/services.ts` never ships to the browser. |
 | `layout/Footer` | server | Logo, description and licenses · Our services · Company (+ Apply online) · Visit or call (phone, fax, email, address, directions) · resources row · navy copyright bar with "With compassion. With dignity. With open arms." |
-| `ui/Photo` | server | `next/image` wrapper. It uses real width/height from `lib/photos.ts`, paints the average colour while loading, and requires `sizes`. |
+| `ui/Photo` | server | Photo built on `getImageProps`. It uses real width/height from `lib/photos.ts` and requires `sizes`. It outputs AVIF/WebP `srcset` at quality 60; the fallback `src` is the 828px variant (what crawlers download), not the largest. It adds no inline styles (a `bg-plum-100` placeholder). `preload` (LCP image only) adds a high-priority `<link rel=preload>` plus `fetchpriority="high"` and eager loading. Everything else is lazy. |
+| `ui/Link` | server | `next/link` with `prefetch={false}` by default. Use it for every internal link (§18). |
 | `ui/PageHeader` | server | Inner-page header: breadcrumb, eyebrow, H1, lead, optional actions, optional photo |
 | `ui/SectionHeading` (+ `Lines`) | server | Eyebrow, heading and lead text. A `\n` in the title becomes a line break on desktop only. Takes `tone="light"` on dark bands and `as="h1"` where needed. |
 | `sections/TrustStrip` | server | Five credentials with ticks on lavender |
@@ -360,7 +363,7 @@ The logo mark, "We couldn't find that page.", a link home and the phone number.
 | `sections/Coverage` | server | Insurance, screening and licensing, resources (`withResources`) |
 | `sections/Steps` | server | Three steps (`className` sets the background) |
 | `sections/ContactBand` | server | Navy contact band |
-| `forms/GoogleForm` | client | Embedded Google Form (§11) |
+| `forms/GoogleForm` | client | Embedded Google Form (§11). Takes `formLabels` (slug → checkbox label) as a prop. |
 | `forms/CareLink` | client | `<Link href="/contact#request">` that stores service slugs for prefill |
 
 ---
@@ -376,7 +379,8 @@ All copy and facts live in `src/lib/`, never in components.
 | `content.ts` | `mission`, `story` (4 paragraphs), `approach`, `audiences`, `insurances`, `insuranceNote`, `screening`, `steps`, `careersIntro`, `roles`, `requirements`, `applicationChecklist`, `resources` |
 | `faqs.ts` | `faqs` (13), `faqCategories` (4). Answers are built from the published text above. |
 | `photos.ts` | Generated `[width, height, averageColour]` for each file in `public/images` (§15.3) |
-| `seo.ts` | `pageMetadata({ title, description, path, absoluteTitle? })` |
+| `seo.ts` | `pageMetadata({ title, description, path, absoluteTitle? })`, which always includes the `/opengraph-image` card as `og:image` and `twitter:image` |
+| `rich.tsx` | `rich(text)` renders `**phrase**` as `<strong>`; `plain(text)` strips the markers for JSON-LD, meta tags and `llms.txt` |
 
 `site` itself holds:
 - name, short name and description;
@@ -401,7 +405,7 @@ The Contact and Services pages embed the agency's own **"Request More Informatio
 
 Google handles validation, submission, the thank-you message and response storage. There is no server code.
 
-* **Embed:** `…/viewform?embedded=true` in a lazy-loaded iframe inside a `card`. A spinner sits underneath until the form paints. Below the form are "Open the form in a new tab" and the phone number.
+* **Embed:** `…/viewform?embedded=true` in an iframe inside a `card`. An `IntersectionObserver` creates the iframe only when the form comes within 400px of the viewport, so Google's scripts (several MB) never compete with the page's own loading. A spinner sits underneath until the form paints. Below the form are "Open the form in a new tab" and the phone number.
 * **Height:** a cross-origin iframe can't report its height, so it has fixed heights per breakpoint: `1660px`, then `1520px` from 420 px wide and `1420px` from 640 px. These leave room for Google's validation messages. Re-measure them if questions are added.
 * **Pre-ticking:**
   - `CareLink` ("Discuss your needs →" on each service) saves service slugs in `sessionStorage` (`oa-care-programs`) and opens `/contact#request`.
@@ -421,7 +425,9 @@ Google handles validation, submission, the thank-you message and response storag
 * **Crawlable FAQ answers:** they live in native `<details>`, so the text is in the HTML.
 * **One URL per page:** `CareLink` uses `sessionStorage` instead of query strings, so there are no duplicate URLs.
 * **Sitemap and robots:** `/sitemap.xml` lists the six pages with priorities. `robots.txt` allows everything except `/api/`.
-* **Social card:** `/opengraph-image` is generated at build time on a cream background. It shows "Care that comes from the heart.", the logo, the name and the phone number.
+* **Social card:** `/opengraph-image` is generated at build time on a cream background. It shows "Care that comes from the heart.", the logo, the name and the phone number. `pageMetadata()` lists it explicitly on every page, because a page-level `openGraph` object replaces the parent's.
+* **Emphasis:** each page marks its key terms with `<strong>` via `rich()` (e.g. *non-medical support*, *ages 0–17*, *Level 2 background screening*, the "**Yes.**"/"**No.**" that open FAQ answers).
+* **Anchors:** descriptive link text ("Ask about APD Services", "How to apply as a Home Health Aide", "Careers & open positions"). No two links on a page share the same anchor text, and every image-only link has alt text.
 * **`/llms.txt`:** a plain-text summary for AI answer engines. It includes the credentials, mission, contact details, every service with its full copy, coming-soon programs, coverage, next steps, pages, resources and all FAQs.
 * **Images:** descriptive `alt` text on every content photo; decorative images use `alt=""`.
 
@@ -431,10 +437,38 @@ Google handles validation, submission, the thank-you message and response storag
 
 **Performance**
 * Every page is static and cached on the CDN.
-* Very little client JavaScript (§2), and no animation libraries.
-* Images: AVIF/WebP via `next/image`, widths capped at 1920 px, exact `sizes` on every photo, and an average-colour placeholder. Only above-the-fold images use `preload` (hero, page-header photo, header logo).
-* Fonts: two self-hosted families with `display: swap`; the serif loads only weight 600.
-* The Google Form iframe is created after hydration and lazy-loaded.
+* Very little client JavaScript (§2), and no animation libraries. Client components receive plain-data props, so no content modules end up in the bundle.
+* **No automatic link prefetching** (`ui/Link`). This avoids a background `?_rsc=` request for every link in view. Navigation between the small static pages is still instant.
+* **Images:**
+  - AVIF/WebP at quality 60;
+  - a short width ladder (`deviceSizes` 640/828/1080/1280/1600, `imageSizes` 384);
+  - exact `sizes` on every photo;
+  - a fallback `src` at 828px;
+  - lazy loading everywhere except the LCP image.
+
+  The LCP image (home hero or page-header photo) is preloaded at high priority.
+* **Logo and icons:** pre-compressed static PNGs (logo ~8 KB, favicon ~4 KB).
+* **Fonts:** two self-hosted families with `display: swap`; the serif loads only weight 600.
+* **Google Form:** the iframe is created only when it scrolls near the viewport (§11).
+* **Tailwind** scans only `src/` (`@import "tailwindcss" source("../")`), so class names mentioned in the docs don't generate CSS.
+
+**SiteChecker audit (2026-10-25) — what was fixed**
+
+| Finding | Fix |
+| --- | --- |
+| LCP (critical) / images over 100 KB | Lean `<Photo>` pipeline (above). Mobile Lighthouse A/B on the same machine: page weight −20–25% on every page (Contact 4.9 MB → 0.26 MB); LCP About 2.46 s → 1.88 s, Home 2.79 s → 2.55 s |
+| JS console errors (`net::ERR_FAILED`) | Caused by the crawler blocking Next's automatic `?_rsc=` prefetch requests. Prefetch is now off, so those requests are never made |
+| TBT / INP, JS over 25 KB | Header no longer bundles the services data; the Google Form loads on demand. The remaining >25 KB scripts are the Next.js/React framework chunks |
+| Internal link with no anchor text / image link with no alt | Mobile call button has screen-reader text; footer logo has an alt |
+| og:image missing on inner pages | Added to `pageMetadata()` |
+| Identical headings | "Services and support" labels are no longer headings; ContactBand and footer headings renamed |
+| No `<strong>` | `rich()` emphasis on every page |
+| Inline style attributes | None left (they came from `next/image`) |
+| More than 2 links with the same anchor; one-word anchors; more than 10 external links | Unique "Ask about …" anchors; "Contact us"; home Coverage no longer repeats the footer's resource links; career role buttons link within the page |
+| Text-to-code ratio < 10% | HTML trimmed 8–17% per page (shorter `srcset`s, CSS ticks instead of inline SVG, slimmer JSON-LD). The rest is Next.js's inline RSC payload, which can't be turned off; it isn't padded with filler text, as the audit itself advises |
+| CSS over 15 KB | 42 KB raw / ~8 KB gzipped, made up entirely of used utilities. Lighthouse reports no render-blocking cost |
+| No GTM, GA4 / Search Console not connected, no social links | Need the client's accounts: set `NEXT_PUBLIC_GTM_ID` (§4) and connect Search Console. Social links were removed because they aren't in either content source (§16); re-add them once the client confirms the profiles |
+| Mailto/tel links, fewer than 10 internal backlinks | Intentional / structural (six-page site) |
 
 **Accessibility**
 * Skip link, semantic landmarks (`header`, `nav`, `main`, `footer`, `address`) and breadcrumbs marked with `aria-current`.
@@ -492,7 +526,7 @@ To add a seventh service, also add its slug to `ProgramSlug` and add a matching 
    from PIL import Image; im = Image.open(path).convert("RGB")
    w, h = im.size; r, g, b = im.resize((1, 1), Image.LANCZOS).getpixel((0, 0))
    ```
-3. Use `<Photo src="/images/name.jpg" alt="…" sizes="…" />` inside a positioned parent with a size or aspect ratio.
+3. Use `<Photo src="/images/name.jpg" alt="…" sizes="…" />` inside a positioned parent with a size or aspect ratio. Add `preload` only if it's the page's largest above-the-fold image.
 4. When *replacing* a photo, use a **new file name**, so CDN and image-optimiser caches can't serve the old one.
 5. Add the source to §20.
 
@@ -560,7 +594,10 @@ Any Node host works too (`npm run build && npm start`); the security headers com
 * **Keep it calm.** The client asked for a less busy site. Don't reintroduce scroll-driven animation, marquees, parallax, glow or tilt effects, or smooth-scroll libraries. Use hover colour changes and a simple layout instead.
 * **Content lives in `src/lib/`** and must trace to `docs/` (§16).
 * **Metadata:** always use `pageMetadata()`. Keep `title` ≤ 31 characters and descriptions ≤ 155.
-* **Images:** always use `<Photo>` with an accurate `sizes`. Use `preload` only for above-the-fold images, never the deprecated `priority`. Give replacement images new file names.
+* **Images:** always use `<Photo>` with an accurate `sizes`. Use `preload` only for the LCP image. Give replacement images new file names. If you add another quality value, also add it to `images.qualities` in `next.config.ts`.
+* **Links:** import `Link` from `@/components/ui/Link` (no prefetch), never `next/link` directly.
+* **Emphasis:** wrap a passage's key term in `**…**` in `src/lib/` and render it with `rich()`. Use `plain()` anywhere the text leaves HTML (JSON-LD, metadata, `llms.txt`).
+* **Client components** get plain data via props. Don't import `lib/services.ts` or `lib/content.ts` into a `"use client"` file.
 * **Headings:** one `h1` per page. Section titles use `SectionHeading`; put `\n` in a title for a desktop-only line break.
 * **Client components** must not receive icon components or functions from Server Components. Client components import data from `src/lib/` themselves, as `Header` does.
 * **`check-list`** has no built-in spacing. Pair it with `space-y-*` or a grid gap.
@@ -579,7 +616,8 @@ Any Node host works too (`npm run build && npm start`); the security headers com
 | *Content from original website* | Content rebuilt around openarmsandheart.org; agency's Google Form, JotForm, insurances, licenses, owner story |
 | *Verified content only* | Original site captured in `docs/original-site-content.md`; all unverified facts and pages removed; redirects added |
 | *Embedded Google Form* | Agency's own Google Form embedded with prefill; custom form, `/api/contact` and `/thank-you` removed; fully static |
-| **Clean redesign (this version)** | Per the owner's feedback and mock-up: calm, professional layout and navigation; Source Serif 4 + Source Sans 3; the client's real logo and favicons; 15 new photos reflecting the people served; mock-up content (Haines City address, credentials, taglines, CBC Summer Respite, coming-soon programs, corrected insurance names, steps, careers copy); every motion effect, Lenis and the `motion` dependency removed; new `docs/client-mockup-content.md` |
+| *Clean redesign* | Per the owner's feedback and mock-up: calm, professional layout and navigation; Source Serif 4 + Source Sans 3; the client's real logo and favicons; 15 new photos reflecting the people served; mock-up content (Haines City address, credentials, taglines, CBC Summer Respite, coming-soon programs, corrected insurance names, steps, careers copy); every motion effect, Lenis and the `motion` dependency removed; new `docs/client-mockup-content.md` |
+| **SEO audit fixes (this version)** | SiteChecker audit of 2026-10-25: lean `<Photo>` pipeline and LCP preload, no-prefetch `Link`, on-demand Google Form, plain-data Header, static compressed logo and favicons, og:image on every page, unique headings and anchors, `<strong>` emphasis, no inline styles, fewer duplicate external links, Tailwind source scoping (§13) |
 
 ---
 
@@ -607,7 +645,7 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 | `service-vulnerable-adult.jpg` | https://unsplash.com/photos/an-old-man-and-a-young-woman-are-smiling-c4Fl1BKDJLQ |
 | `live-scan.jpg` | https://images.unsplash.com/photo-1585079374502-415f8516dcc3 |
 | `founder-shantana-johnson.jpg` | **Client-owned** — from the agency's original website (About Us) |
-| `public/brand/logo.png`, `logo-mark.png`, `src/app/icon.png`, `apple-icon.png` | **Client-owned** — the agency's logo (from the owner's mock-up files) |
+| `public/brand/logo.png`, `logo-640.png`, `logo-mark.png`, `src/app/icon.png`, `apple-icon.png` | **Client-owned** — the agency's logo (from the owner's mock-up files) |
 
 </details>
 

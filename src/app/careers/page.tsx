@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { applicationChecklist, careersIntro, requirements, roles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { rich } from "@/lib/rich";
 
 export const metadata = pageMetadata({
   path: "/careers",
@@ -19,7 +20,7 @@ export default function CareersPage() {
       <PageHeader
         eyebrow="Find purpose in what you do"
         title={"Great Careers\nChange Lives."}
-        text={careersIntro.join(" ")}
+        text={rich(careersIntro.join(" "))}
         crumb="Careers"
         image="/images/careers-caregivers.jpg"
         imageAlt="Two smiling caregivers in scrubs standing arm in arm with an older woman they care for"
@@ -46,8 +47,8 @@ export default function CareersPage() {
                   <p className="eyebrow">Position</p>
                   <h3 className="mt-2 font-serif text-2xl font-semibold">{r}</h3>
                 </div>
-                <a href={site.applicationUrl} target="_blank" rel="noopener noreferrer" className="btn-outline shrink-0">
-                  Apply <ArrowUpRight className="size-4" />
+                <a href="#apply" className="btn-outline shrink-0">
+                  How to apply as {r === "Group Home Staff" ? "Group Home Staff" : `a ${r}`}
                 </a>
               </li>
             ))}
@@ -67,7 +68,7 @@ export default function CareersPage() {
               ))}
             </ul>
           </div>
-          <div className="card p-7 sm:p-9">
+          <div id="apply" className="card scroll-mt-32 p-7 sm:p-9">
             <h2 className="text-[1.75rem] sm:text-[2rem]">The application asks for</h2>
             <ul className="check-list mt-6 space-y-3">
               {applicationChecklist.map((r) => (

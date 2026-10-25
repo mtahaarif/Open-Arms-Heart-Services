@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Logo } from "@/components/brand/Logo";
 import { resources } from "@/lib/content";
 import { programHref, programs } from "@/lib/services";
@@ -6,7 +6,7 @@ import { addressLines, licenseLine, mapsUrl, site } from "@/lib/site";
 
 const company = [
   { href: "/about", label: "About us & our mission" },
-  { href: "/careers", label: "Careers" },
+  { href: "/careers", label: "Careers & open positions" },
   { href: "/faq", label: "Frequently asked questions" },
   { href: "/contact", label: "Contact us" },
 ];
@@ -26,7 +26,7 @@ export function Footer() {
         </div>
 
         <div>
-          <Heading>Our services</Heading>
+          <Heading>Services</Heading>
           <ul className="mt-4 space-y-2.5">
             {programs.map((p) => (
               <li key={p.slug}>

@@ -48,7 +48,7 @@ export const faqs: Faq[] = [
   {
     category: "Our services",
     q: "Do you conduct DCF Adult Protective Services investigations?",
-    a: `No. ${p("dcf").note}`,
+    a: `**No.** ${p("dcf").note}`,
   },
   {
     category: "Our services",
@@ -58,7 +58,7 @@ export const faqs: Faq[] = [
   {
     category: "Our services",
     q: "Do you offer skilled nursing?",
-    a: `Not yet. ${comingSoon.items[0].text} We are also planning Prescribed Pediatric Extended Care (PPEC). ${comingSoon.note}`,
+    a: `**Not yet.** ${comingSoon.items[0].text} We are also planning Prescribed Pediatric Extended Care (PPEC). ${comingSoon.note}`,
   },
   {
     category: "Coverage & licensing",
@@ -68,7 +68,7 @@ export const faqs: Faq[] = [
   {
     category: "Coverage & licensing",
     q: "Are you licensed?",
-    a: `Yes. Open Arms & Heart Services is a licensed Florida home health agency and an APD Central Region provider, serving Central Florida since ${site.since}. ${licenseLine}.`,
+    a: `**Yes.** Open Arms & Heart Services is a licensed Florida home health agency and an APD Central Region provider, serving Central Florida since ${site.since}. ${licenseLine}.`,
   },
   {
     category: "Our caregivers",

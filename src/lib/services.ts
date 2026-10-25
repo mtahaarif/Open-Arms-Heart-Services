@@ -42,7 +42,7 @@ export const programs: Program[] = [
     image: "/images/service-home-care.jpg",
     imageAlt: "A caregiver bringing a cup of tea to a woman resting at home with her crutches nearby",
     intro:
-      "Open Arms & Heart Services, Inc. is a Florida-licensed home health agency offering non-medical support to children, adults, seniors, and people with disabilities. Our caregivers help individuals remain comfortable and supported in their homes.",
+      "Open Arms & Heart Services, Inc. is a Florida-licensed home health agency offering **non-medical support** to children, adults, seniors, and people with disabilities. Our caregivers help individuals remain comfortable and supported in their homes.",
     points: [
       "Personal care, bathing, dressing, grooming and hygiene assistance",
       "Mobility and transfer assistance",
@@ -63,7 +63,7 @@ export const programs: Program[] = [
     image: "/images/service-apd.jpg",
     imageAlt: "A young man who uses a wheelchair relaxing in his kitchen while a support worker prepares a meal",
     intro:
-      "As an APD provider, Open Arms offers person-centered supports designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
+      "As an APD provider, Open Arms offers **person-centered supports** designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
     points: [
       "Personal Supports",
       "Life Skills Development Level 1 (Companion)",
@@ -85,7 +85,7 @@ export const programs: Program[] = [
     image: "/images/service-vulnerable-adult.jpg",
     imageAlt: "A woman and an older woman laughing together while gardening outdoors",
     intro:
-      "Open Arms supports adults who need assistance maintaining dignity, safety, and independence. We coordinate with families, social workers, case managers and referral partners.",
+      "Open Arms supports adults who need assistance maintaining **dignity, safety, and independence**. We coordinate with families, social workers, case managers and referral partners.",
     points: [
       "Personal care and homemaker assistance",
       "Companion services and social support",
@@ -94,7 +94,7 @@ export const programs: Program[] = [
       "Support for older adults and adults with disabilities",
       "Referrals and coordination for eligible home-based support",
     ],
-    note: "Open Arms does not conduct DCF Adult Protective Services investigations. Services depend on eligibility, authorization and agency capacity.",
+    note: "Open Arms **does not conduct** DCF Adult Protective Services investigations. Services depend on eligibility, authorization and agency capacity.",
     formLabel: "Vulnerable Adult Support Services/DCF Referrals",
   },
   {
@@ -109,7 +109,7 @@ export const programs: Program[] = [
       "Open Arms has experience working with community-based care organizations and foster families to provide supportive, compassionate services.",
     feature: {
       title: "CBC Summer Respite Program",
-      text: "A safe, supportive and inclusive program exclusively for CBC agency-referred children and youth ages 0–17. Designed to support children with behavioral challenges, autism, developmental disabilities, trauma-related needs and additional personal care needs, including those who may not thrive in a traditional summer camp setting.",
+      text: "A safe, supportive and inclusive program exclusively for CBC agency-referred children and youth **ages 0–17**. Designed to support children with behavioral challenges, autism, developmental disabilities, trauma-related needs and additional personal care needs, including those who may not thrive in a traditional summer camp setting.",
     },
     points: [
       "Caregiver respite, relief and family support",
@@ -136,7 +136,7 @@ export const programs: Program[] = [
     image: "/images/service-veterans.jpg",
     imageAlt: "A smiling older veteran wearing a Vietnam veteran cap, talking with a friend at home",
     intro:
-      "Open Arms is proud to support eligible veterans and their families through respectful, individualized home and community-based assistance.",
+      "Open Arms is proud to support **eligible veterans and their families** through respectful, individualized home and community-based assistance.",
     points: [
       "Personal care and homemaker assistance",
       "Companion services and social support",
@@ -157,7 +157,7 @@ export const programs: Program[] = [
     image: "/images/live-scan.jpg",
     imageAlt: "Close-up of a fingerprint on a glowing scanner",
     intro:
-      "Open Arms offers Live Scan fingerprinting services to assist with applicable Florida background screening and licensing requirements.",
+      "Open Arms offers **Live Scan fingerprinting services** to assist with applicable Florida background screening and licensing requirements.",
     points: [
       "Electronic Live Scan fingerprint capture",
       "Florida Level 2 screening submissions, where authorized",
@@ -171,6 +171,8 @@ export const programs: Program[] = [
 
 export const programBySlug = (slug: string) => programs.find((p) => p.slug === slug);
 export const programHref = (p: Program) => `/services#${p.slug}`;
+/** Service slug → exact checkbox label on the Google Form (plain data for the client-side embed). */
+export const formLabels: Record<string, string> = Object.fromEntries(programs.map((p) => [p.slug, p.formLabel]));
 
 /** "More ways to care. Coming soon." — programs in development (owner's mock-up). */
 export const comingSoon = {

@@ -8,8 +8,9 @@ import { Photo } from "@/components/ui/Photo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { steps } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { programs } from "@/lib/services";
+import { formLabels, programs } from "@/lib/services";
 import { site } from "@/lib/site";
+import { rich } from "@/lib/rich";
 
 export const metadata = pageMetadata({
   path: "/services",
@@ -57,27 +58,27 @@ export default function ServicesPage() {
               </p>
               <h2 className="mt-3">{p.name}</h2>
               <p className="mt-3 font-serif text-xl text-plum-700 italic">{p.tagline}</p>
-              <p className="mt-5">{p.intro}</p>
+              <p className="mt-5">{rich(p.intro)}</p>
 
               {p.feature && (
                 <div className="mt-6 rounded-md border-l-[3px] border-blush-400 bg-white p-5 shadow-[0_6px_20px_-14px_rgb(23_43_72/0.25)]">
                   <h3>{p.feature.title}</h3>
-                  <p className="mt-2">{p.feature.text}</p>
+                  <p className="mt-2">{rich(p.feature.text)}</p>
                 </div>
               )}
 
-              <h3 className="mt-8 text-base tracking-[0.12em] text-plum-700 uppercase">Services and support</h3>
+              <p className="mt-8 text-sm font-bold tracking-[0.12em] text-plum-700 uppercase">Services and support</p>
               <ul className={`check-list mt-4 grid gap-x-8 gap-y-2.5 ${p.points.length > 7 ? "sm:grid-cols-2" : ""}`}>
                 {p.points.map((pt) => (
                   <li key={pt}>{pt}</li>
                 ))}
               </ul>
 
-              <p className="mt-7 border-t border-line pt-5 text-[0.95rem]">{p.note}</p>
+              <p className="mt-7 border-t border-line pt-5 text-[0.95rem]">{rich(p.note)}</p>
 
               <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <CareLink care={p.slug} className="btn-primary">
-                  Discuss your needs <span aria-hidden>→</span>
+                  Ask about {p.short} <span aria-hidden>→</span>
                 </CareLink>
                 <a href={site.phone.href} className="link-arrow">
                   <Phone className="size-4" /> {site.phone.display}
@@ -114,7 +115,7 @@ export default function ServicesPage() {
               ))}
             </ol>
           </div>
-          <GoogleForm />
+          <GoogleForm formLabels={formLabels} />
         </div>
       </section>
     </>

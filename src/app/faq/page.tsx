@@ -1,10 +1,11 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Phone, Plus } from "lucide-react";
 import { ContactBand } from "@/components/sections/ContactBand";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { faqCategories, faqs } from "@/lib/faqs";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { plain, rich } from "@/lib/rich";
 
 export const metadata = pageMetadata({
   path: "/faq",
@@ -18,7 +19,7 @@ const faqJsonLd = {
   mainEntity: faqs.map((f) => ({
     "@type": "Question",
     name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
+    acceptedAnswer: { "@type": "Answer", text: plain(f.a) },
   })),
 };
 
@@ -74,7 +75,7 @@ export default function FaqPage() {
                           {f.q}
                           <Plus className="mt-1 size-5 shrink-0 text-plum-700 transition-transform group-open:rotate-45" aria-hidden />
                         </summary>
-                        <p className="max-w-3xl pb-6">{f.a}</p>
+                        <p className="max-w-3xl pb-6">{rich(f.a)}</p>
                       </details>
                     ))}
                 </div>

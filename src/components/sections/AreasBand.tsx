@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";

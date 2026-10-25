@@ -2,6 +2,7 @@ import { ArrowUpRight, BadgeCheck, ShieldCheck } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { insuranceNote, insurances, resources, screening } from "@/lib/content";
 import { licenseLine } from "@/lib/site";
+import { rich } from "@/lib/rich";
 
 /** "Answers for your family." — insurance, screening & licensing, and community resources. */
 export function Coverage({ withResources = true }: { withResources?: boolean }) {
@@ -28,7 +29,7 @@ export function Coverage({ withResources = true }: { withResources?: boolean }) 
             <h3 className="flex items-center gap-3">
               <ShieldCheck className="size-6 text-plum-700" aria-hidden /> Care you can feel confident about
             </h3>
-            <p className="mt-3">{screening}</p>
+            <p className="mt-3">{rich(screening)}</p>
             <p className="mt-5 text-sm font-semibold text-ink">License numbers: {licenseLine}</p>
           </div>
         </div>

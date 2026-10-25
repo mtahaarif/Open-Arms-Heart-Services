@@ -5,7 +5,9 @@ import { Steps } from "@/components/sections/Steps";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { pageMetadata } from "@/lib/seo";
+import { formLabels } from "@/lib/services";
 import { addressLines, licenseLine, mapsUrl, site } from "@/lib/site";
+import { rich } from "@/lib/rich";
 
 export const metadata = pageMetadata({
   path: "/contact",
@@ -35,7 +37,7 @@ export default function ContactPage() {
       <section id="request" className="section scroll-mt-24">
         <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div className="lg:sticky lg:top-32 lg:self-start">
-            <SectionHeading eyebrow="Contact us" title="Connect with our team." text="Call to discuss service availability or schedule a fingerprinting appointment — or complete the form and a member of our team will contact you." />
+            <SectionHeading eyebrow="Contact us" title="Connect with our team." text={rich("**Call to discuss service availability** or schedule a fingerprinting appointment — or complete the form and a member of our team will contact you.")} />
             <ul className="mt-8 space-y-4">
               <li className="card flex items-start gap-4 p-5">
                 <Phone className="mt-1 size-5 shrink-0 text-plum-700" aria-hidden />
@@ -79,7 +81,7 @@ export default function ContactPage() {
             </ul>
             <p className="mt-6 text-sm">{licenseLine}</p>
           </div>
-          <GoogleForm />
+          <GoogleForm formLabels={formLabels} />
         </div>
       </section>
 

@@ -1,4 +1,5 @@
-@import "tailwindcss";
+/* Scan only src/ for class names (not README/docs), so no unused utilities are generated. */
+@import "tailwindcss" source("../");
 
 /* ───────────────────────── Brand tokens ─────────────────────────
  * From the logo and the owner's mock-up: navy text, logo purple, a soft pink accent,
@@ -116,13 +117,14 @@
 @utility card {
   @apply rounded-lg border border-line bg-white shadow-[0_6px_20px_-12px_rgb(23_43_72/0.18)];
 }
-/* Tick-mark list; spacing is set where it's used (space-y-* or a grid gap). */
+/* Tick-mark list; spacing is set where it's used (space-y-* or a grid gap).
+   The tick scales with the font size and centres on the first line of each item. */
 @utility check-list {
   & > li {
-    @apply relative pl-7;
+    @apply relative pl-[1.6em];
   }
   & > li::before {
     content: "";
-    @apply absolute top-[0.55em] left-0.5 h-2.5 w-[0.4rem] rotate-45 border-r-2 border-b-2 border-plum-700;
+    @apply absolute top-[calc(0.5lh-0.42em)] left-[0.2em] h-[0.62em] w-[0.34em] rotate-45 border-r-2 border-b-2 border-plum-700;
   }
 }
