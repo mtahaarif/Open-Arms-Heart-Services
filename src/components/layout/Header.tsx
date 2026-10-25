@@ -65,6 +65,7 @@ export function Header({ services }: { services: NavItem[] }) {
                 className={`text-[0.95rem] font-semibold transition-colors hover:text-plum-700 ${isActive(item.href) ? "text-plum-700" : "text-ink"}`}
               >
                 {item.label}
+                {item.hint && <span className="sr-only"> {item.hint}</span>}
               </Link>
             ),
           )}
@@ -98,6 +99,7 @@ export function Header({ services }: { services: NavItem[] }) {
               <li key={item.href}>
                 <Link href={item.href} className={`block py-4 text-lg font-semibold ${isActive(item.href) ? "text-plum-700" : "text-ink"}`}>
                   {item.label}
+                  {item.hint && <span className="sr-only"> {item.hint}</span>}
                 </Link>
                 {item.href === "/services" && (
                   <ul className="-mt-1 grid gap-1 pb-4 pl-4">

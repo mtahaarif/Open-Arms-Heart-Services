@@ -29,7 +29,7 @@ export function PageHeader({
             <ol className="flex items-center gap-2">
               <li>
                 <Link href="/" className="hover:text-plum-700 hover:underline">
-                  Home
+                  Home<span className="sr-only"> page</span>
                 </Link>
               </li>
               <li aria-hidden>/</li>

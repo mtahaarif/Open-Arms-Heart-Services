@@ -347,7 +347,7 @@ The logo mark, "We couldn't find that page.", a link home and the phone number.
 
 | Component | Kind | Purpose |
 | --- | --- | --- |
-| `brand/Logo` | server | The client's logo (`/brand/logo.png`, a pre-compressed static PNG — no optimiser round-trip) linking home. With `withName` the company name labels the link (visible from `xl`, screen-reader text below); otherwise the image alt does. |
+| `brand/Logo` | server | The client's logo (`/brand/logo.png`, 240×188) linking home. It's served through the image optimiser as AVIF/WebP at 1×/2× of its ~102px display width (`getImageProps`, no inline style). With `withName` the company name labels the link (visible from `xl`, screen-reader text below); otherwise the image alt does. |
 | `layout/TopBar` | server | Navy strip with the since-line and phone number |
 | `layout/Header` | client | Sticky header with a CSS hover/focus dropdown for services; mobile phone button and menu (closes on route change); active-link highlighting. The service list arrives as plain `{ href, label }` props from the root layout, so `lib/services.ts` never ships to the browser. |
 | `layout/Footer` | server | Logo, description and licenses · Our services · Company (+ Apply online) · Visit or call (phone, fax, email, address, directions) · resources row · navy copyright bar with "With compassion. With dignity. With open arms." |
@@ -447,7 +447,7 @@ Google handles validation, submission, the thank-you message and response storag
   - lazy loading everywhere except the LCP image.
 
   The LCP image (home hero or page-header photo) is preloaded at high priority.
-* **Logo and icons:** pre-compressed static PNGs (logo ~8 KB, favicon ~4 KB).
+* **Logo and icons:** the logo source is a pre-compressed 8 KB PNG served as AVIF/WebP by the optimiser; the favicon is a 4 KB PNG. The 404 page's logo is `loading="lazy"`, so React doesn't preload it on every page.
 * **Fonts:** two self-hosted families with `display: swap`; the serif loads only weight 600.
 * **Google Form:** the iframe is created only when it scrolls near the viewport (§11).
 * **Tailwind** scans only `src/` (`@import "tailwindcss" source("../")`), so class names mentioned in the docs don't generate CSS.
@@ -457,14 +457,17 @@ Google handles validation, submission, the thank-you message and response storag
 | Finding | Fix |
 | --- | --- |
 | LCP (critical) / images over 100 KB | Lean `<Photo>` pipeline (above). Mobile Lighthouse A/B on the same machine: page weight −20–25% on every page (Contact 4.9 MB → 0.26 MB); LCP About 2.46 s → 1.88 s, Home 2.79 s → 2.55 s |
-| JS console errors (`net::ERR_FAILED`) | Caused by the crawler blocking Next's automatic `?_rsc=` prefetch requests. Prefetch is now off, so those requests are never made |
+| JS console errors (`net::ERR_FAILED`) | Normal page loads produce **zero** console errors. The crawler blocks heavy resources (images, fonts, media) to crawl faster, and every blocked request logs `net::ERR_FAILED`. Reproduced exactly with request blocking in headless Chrome. The site keeps the count low by requesting as little as possible: no `?_rsc=` prefetches (`ui/Link`), and no auto-preload of the 404 page's logo (React preloads any non-lazy `<img>`, and the 404 boundary ships in every page's payload) |
 | TBT / INP, JS over 25 KB | Header no longer bundles the services data; the Google Form loads on demand. The remaining >25 KB scripts are the Next.js/React framework chunks |
 | Internal link with no anchor text / image link with no alt | Mobile call button has screen-reader text; footer logo has an alt |
 | og:image missing on inner pages | Added to `pageMetadata()` |
 | Identical headings | "Services and support" labels are no longer headings; ContactBand and footer headings renamed |
 | No `<strong>` | `rich()` emphasis on every page |
-| Inline style attributes | None left (they came from `next/image`) |
-| More than 2 links with the same anchor; one-word anchors; more than 10 external links | Unique "Ask about …" anchors; "Contact us"; home Coverage no longer repeats the footer's resource links; career role buttons link within the page |
+| Inline style attributes | None in the site's markup (they came from `next/image`). The one left in the hydrated DOM is `<next-route-announcer style="position:absolute">`, Next.js's built-in screen-reader route announcer, injected at runtime |
+| More than 2 links with the same anchor; one-word anchors; more than 10 external links | Unique "Ask about …" anchors; "Contact us"; home Coverage no longer repeats the footer's resource links; career role buttons link within the page. The one-word nav labels "Careers" and "FAQ" and the breadcrumb "Home" carry visually hidden context ("Careers and open positions", "FAQ — frequently asked questions", "Home page") via `nav[].hint` / `sr-only` |
+| Raw `<img>` bypasses the optimizer / legacy-format images (2nd audit) | Both were the logo PNG. `Logo` now goes through the optimizer (`getImageProps`, AVIF/WebP at 1×/2× via `imageSizes` 128/256), still with no inline style |
+| Likely LCP image lazy-loaded on `/services` (2nd audit) | The first service photo is `preload`ed (high priority, eager) |
+| LCP / INP still flagged in the 2nd audit | That audit's Core Web Vitals block is cached ("7 measurements · cached") and repeats the first audit's numbers. Fresh mobile Lighthouse on the deployed site after the fixes: LCP 1.5–1.9 s on every page (Home 1.54 s, Contact 1.49 s, Services 1.77 s, About 1.80 s, FAQ 1.94 s), TBT 23–159 ms, performance 96–100 |
 | Text-to-code ratio < 10% | HTML trimmed 8–17% per page (shorter `srcset`s, CSS ticks instead of inline SVG, slimmer JSON-LD). The rest is Next.js's inline RSC payload, which can't be turned off; it isn't padded with filler text, as the audit itself advises |
 | CSS over 15 KB | 42 KB raw / ~8 KB gzipped, made up entirely of used utilities. Lighthouse reports no render-blocking cost |
 | No GTM, GA4 / Search Console not connected, no social links | Need the client's accounts: set `NEXT_PUBLIC_GTM_ID` (§4) and connect Search Console. Social links were removed because they aren't in either content source (§16); re-add them once the client confirms the profiles |
@@ -617,7 +620,8 @@ Any Node host works too (`npm run build && npm start`); the security headers com
 | *Verified content only* | Original site captured in `docs/original-site-content.md`; all unverified facts and pages removed; redirects added |
 | *Embedded Google Form* | Agency's own Google Form embedded with prefill; custom form, `/api/contact` and `/thank-you` removed; fully static |
 | *Clean redesign* | Per the owner's feedback and mock-up: calm, professional layout and navigation; Source Serif 4 + Source Sans 3; the client's real logo and favicons; 15 new photos reflecting the people served; mock-up content (Haines City address, credentials, taglines, CBC Summer Respite, coming-soon programs, corrected insurance names, steps, careers copy); every motion effect, Lenis and the `motion` dependency removed; new `docs/client-mockup-content.md` |
-| **SEO audit fixes (this version)** | SiteChecker audit of 2026-10-25: lean `<Photo>` pipeline and LCP preload, no-prefetch `Link`, on-demand Google Form, plain-data Header, static compressed logo and favicons, og:image on every page, unique headings and anchors, `<strong>` emphasis, no inline styles, fewer duplicate external links, Tailwind source scoping (§13) |
+| *Site-Optimization part ii* | SiteChecker audit of 2026-10-25: lean `<Photo>` pipeline and LCP preload, no-prefetch `Link`, on-demand Google Form, plain-data Header, static compressed logo and favicons, og:image on every page, unique headings and anchors, `<strong>` emphasis, no inline styles, fewer duplicate external links, Tailwind source scoping (§13) |
+| **Second audit fixes (this version)** | Follow-up SiteChecker audit (71/100): logo through the image optimiser (AVIF/WebP), `/services` first photo preloaded, 404 logo no longer auto-preloaded on every page, screen-reader context for one-word nav and breadcrumb links; console errors and the route-announcer style identified as crawler / framework artefacts (§13) |
 
 ---
 

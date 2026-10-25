@@ -50,7 +50,8 @@ export default function ServicesPage() {
         <section key={p.slug} id={p.slug} className={`section scroll-mt-24 ${i % 2 ? "bg-plum-50" : ""}`}>
           <div className="wrap grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
             <div className={`relative aspect-[4/3] overflow-hidden rounded-lg lg:sticky lg:top-32 ${i % 2 ? "lg:order-2" : ""}`}>
-              <Photo src={p.image} alt={p.imageAlt} sizes="(min-width: 1024px) 560px, 100vw" />
+              {/* The first service photo is the page's largest above-the-fold image on desktop. */}
+              <Photo src={p.image} alt={p.imageAlt} sizes="(min-width: 1024px) 560px, 100vw" preload={i === 0} />
             </div>
             <div>
               <p className="eyebrow">

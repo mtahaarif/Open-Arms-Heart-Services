@@ -62,7 +62,8 @@ const nextConfig: NextConfig = {
     // A short ladder of widths keeps srcset markup small; 1600px covers the widest
     // rendering (the 60vw home hero on large retina screens).
     deviceSizes: [640, 828, 1080, 1280, 1600],
-    imageSizes: [384],
+    // 128/256 serve the logo at 1×/2×; photos only draw from 384 upwards.
+    imageSizes: [128, 256, 384],
     // Photos use 60 (see components/ui/Photo.tsx); 75 is Next's default.
     qualities: [60, 75],
     minimumCacheTTL: 60 * 60 * 24 * 31,

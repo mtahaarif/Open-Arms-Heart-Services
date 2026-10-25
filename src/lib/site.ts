@@ -68,10 +68,11 @@ export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encode
 export const licenseLine = site.licenses.map((l) => `Lic# ${l}`).join(" · ");
 export const sinceLine = `Compassionate care across Central Florida since ${site.since}`;
 
-export const nav = [
+/** `hint` completes a one-word label for screen readers and crawlers (visually hidden). */
+export const nav: readonly { href: string; label: string; hint?: string }[] = [
   { href: "/about", label: "About us" },
   { href: "/services", label: "Our services" },
-  { href: "/careers", label: "Careers" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/careers", label: "Careers", hint: "and open positions" },
+  { href: "/faq", label: "FAQ", hint: "— frequently asked questions" },
   { href: "/contact", label: "Contact us" },
-] as const;
+];
