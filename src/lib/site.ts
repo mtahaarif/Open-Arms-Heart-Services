@@ -17,7 +17,7 @@ export const site = {
   motto: "Where there is love, there is life.",
   closing: "With compassion. With dignity. With open arms.",
   since: 2017,
-  owner: { name: "Shantana Johnson", title: "Owner" },
+  owner: { name: "Shantana Johnson", title: "Chief Executive Officer" },
 
   /** The mock-up's trust strip. */
   credentials: [
