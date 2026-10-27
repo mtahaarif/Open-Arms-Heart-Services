@@ -41,8 +41,8 @@
 }
 
 @theme inline {
-  /* Geist for headings — the client's choice (variable font, self-hosted via next/font). */
-  --font-display: var(--font-geist), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Headings — the client's choice: League Spartan, falling back to Manrope (both via next/font). */
+  --font-display: var(--font-league-spartan), var(--font-manrope), ui-sans-serif, sans-serif;
   --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
 }
 

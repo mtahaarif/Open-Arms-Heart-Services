@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Source_Sans_3 } from "next/font/google";
+import { League_Spartan, Manrope, Source_Sans_3 } from "next/font/google";
 import Script from "next/script";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -8,7 +8,9 @@ import { programHref, programs } from "@/lib/services";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const leagueSpartan = League_Spartan({ subsets: ["latin"], variable: "--font-league-spartan", display: "swap" });
+// Fallback only — not preloaded, so it's downloaded only if League Spartan is unavailable.
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap", preload: false });
 const sans = Source_Sans_3({ subsets: ["latin"], variable: "--font-source-sans", display: "swap" });
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
@@ -74,7 +76,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${leagueSpartan.variable} ${manrope.variable} ${sans.variable}`} suppressHydrationWarning>
       <body>
         {GTM_ID && (
           <noscript>

@@ -12,7 +12,7 @@
 | **Repository** | https://github.com/mtahaarif/Open-Arms-Heart-Services |
 | **Framework** | Next.js 16 (App Router, Turbopack) · React 19 · TypeScript 5 (strict) |
 | **Styling** | Tailwind CSS v4 (CSS-first `@theme` / `@utility` config) |
-| **Fonts** | Geist (headings) · Source Sans 3 (body), both self-hosted with `next/font` |
+| **Fonts** | League Spartan → Manrope fallback (headings) · Source Sans 3 (body), all self-hosted with `next/font` |
 | **Hosting** | Vercel. Every page is pre-rendered as static HTML. |
 | **Inquiries** | The agency's own "Request More Information" Google Form, embedded |
 
@@ -79,7 +79,7 @@
 | **Cleaner, less busy** | Every scroll-driven and decorative effect was removed: marquees, stacking and pinned horizontal scroll, glow and tilt cards, glassmorphism, Lenis smooth-scroll hijacking, page-transition curtains, the scroll-progress bar and floating badges. Sections are calm and alternate white, cream, lavender and navy, following the mock-up. |
 | **Polished, professional** | Small corner radii (4–8 px), thin borders, soft shadows, generous spacing, one container width (1180 px) and a consistent heading / eyebrow / body hierarchy. The client's real logo replaces the redrawn SVG mark. |
 | **Easy navigation** | A top bar with the phone number on every page. A sticky header with five plain links, an "Our services" dropdown listing all six services, and a "Let's talk" button. A phone button and a simple menu on mobile. Breadcrumbs on inner pages. A "Jump to a service" menu on `/services`. Topic links on `/faq`. A footer that lists every page and service. |
-| **More professional font** | **Geist** for headings and **Source Sans 3** for everything else. The client chose Geist on 2026-10-27, after rejecting Source Serif 4 and then trying Varela, all-caps headings and Helvetica/Arial. These replace the earlier Fraunces, Figtree, Courgette script and Quicksand mix, and the mock-up's Manrope. |
+| **More professional font** | **League Spartan** (falling back to Manrope) for headings and **Source Sans 3** for everything else. The client chose this stack on 2026-10-27, after rejecting Source Serif 4 and then trying Varela, all-caps headings, Helvetica/Arial and Geist. These replace the earlier Fraunces, Figtree, Courgette script and Quicksand mix, and the mock-up's Manrope. |
 | **Welcoming pictures** | New photography that reflects the people served: Black, Latina and white families, seniors, a veteran, adults with disabilities, children and diverse caregivers. Several photos are in home and garden settings. See §20. |
 | **"More of my idea of my site"** | The home page follows the mock-up's section order and wording (§8.1), and the mock-up's new content is used site-wide (§16). |
 
@@ -211,7 +211,7 @@ All copy is in the initial HTML.
 
 ### 6.2 Root layout (`src/app/layout.tsx`)
 
-* Loads **Geist** (variable weight) and **Source Sans 3** as CSS variables (`--font-geist`, `--font-source-sans`).
+* Loads **League Spartan**, **Manrope** (fallback only, `preload: false`) and **Source Sans 3** as CSS variables (`--font-league-spartan`, `--font-manrope`, `--font-source-sans`). Headings use `--font-display: var(--font-league-spartan), var(--font-manrope), ui-sans-serif, sans-serif`.
 * Sets default metadata ("Open Arms & Heart Services | Care that comes from the heart"; a `%s | Open Arms & Heart Services` template), `themeColor` and optional Search Console verification.
 * Injects **`MedicalBusiness` JSON-LD** with these fields:
   - name, URL, logo and description;
@@ -251,13 +251,13 @@ There are full `navy`, `plum` and `blush` scales for tints. Text on every backgr
 
 | Element | Style |
 | --- | --- |
-| `h1` | Geist medium (500), −0.02 em tracking, 2.2 rem → 3.25 rem (home hero 3.6 rem), `text-balance` |
-| `h2` | Geist medium, 1.8 rem → 2.25 rem |
+| `h1` | League Spartan medium (500), −0.02 em tracking, 2.2 rem → 3.25 rem (home hero 3.6 rem), `text-balance` |
+| `h2` | League Spartan medium, 1.8 rem → 2.25 rem |
 | `h3` | Source Sans 3 bold, 1.25 rem |
 | Body | Source Sans 3, 17 px / 1.7 line height |
 | `.eyebrow` | 12 px, bold, uppercase, 0.18 em tracking, plum |
 | `.lead` | 18–19 px intro paragraphs |
-| Display accents | `font-display` (Geist) for the motto, service taglines, mission quote, step numbers and the owner's name |
+| Display accents | `font-display` (League Spartan) for the motto, service taglines, mission quote, step numbers and the owner's name |
 
 ### 7.3 Utilities (`@utility`)
 
@@ -448,7 +448,7 @@ Google handles validation, submission, the thank-you message and response storag
 
   The LCP image (home hero or page-header photo) is preloaded at high priority.
 * **Logo and icons:** the logo source is a pre-compressed 8 KB PNG served as AVIF/WebP by the optimiser; the favicon is a 4 KB PNG. The 404 page's logo is `loading="lazy"`, so React doesn't preload it on every page.
-* **Fonts:** two self-hosted families with `display: swap`; Geist is a single variable font file.
+* **Fonts:** League Spartan and Source Sans 3 are preloaded with `display: swap`; Manrope is declared but never downloaded unless League Spartan fails.
 * **Google Form:** the iframe is created only when it scrolls near the viewport (§11).
 * **Tailwind** scans only `src/` (`@import "tailwindcss" source("../")`), so class names mentioned in the docs don't generate CSS.
 
@@ -622,7 +622,7 @@ Any Node host works too (`npm run build && npm start`); the security headers com
 | *Clean redesign* | Per the owner's feedback and mock-up: calm, professional layout and navigation; Source Serif 4 + Source Sans 3 (headings later changed to Varela); the client's real logo and favicons; 15 new photos reflecting the people served; mock-up content (Haines City address, credentials, taglines, CBC Summer Respite, coming-soon programs, corrected insurance names, steps, careers copy); every motion effect, Lenis and the `motion` dependency removed; new `docs/client-mockup-content.md` |
 | *Site-Optimization part ii* | SiteChecker audit of 2026-10-25: lean `<Photo>` pipeline and LCP preload, no-prefetch `Link`, on-demand Google Form, plain-data Header, static compressed logo and favicons, og:image on every page, unique headings and anchors, `<strong>` emphasis, no inline styles, fewer duplicate external links, Tailwind source scoping (§13) |
 | *Second audit fixes* | Follow-up SiteChecker audit (71/100): logo through the image optimiser (AVIF/WebP), `/services` first photo preloaded, 404 logo no longer auto-preloaded on every page, screen-reader context for one-word nav and breadcrumb links; console errors and the route-announcer style identified as crawler / framework artefacts (§13) |
-| **Heading font (this version)** | Client disliked the Source Serif headings. After trying Varela, all-caps headings and Helvetica/Arial, headings and other display text now use Geist (medium weight, slightly tight tracking) |
+| **Heading font (this version)** | Client disliked the Source Serif headings. After trying Varela, all-caps headings, Helvetica/Arial and Geist, headings and other display text now use League Spartan with a Manrope fallback (medium weight, slightly tight tracking) |
 
 ---
 
