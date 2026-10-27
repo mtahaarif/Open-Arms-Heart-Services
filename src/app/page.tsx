@@ -32,7 +32,7 @@ export default function HomePage() {
         <div className="wrap relative z-10 py-16 sm:py-20 lg:py-32">
           <div className="max-w-[35rem]">
             <p className="eyebrow">Rooted in compassion · Central Florida</p>
-            <h1 className="mt-4 lg:text-[3.75rem]">
+            <h1 className="mt-4 lg:text-[3.6rem]">
               Care that comes from <span className="text-plum-700">the heart.</span>
             </h1>
             <p className="lead mt-6">
@@ -46,7 +46,7 @@ export default function HomePage() {
                 Connect with our team <span aria-hidden>→</span>
               </Link>
             </div>
-            <p className="mt-10 font-serif text-xl text-plum-700 italic">{site.motto}</p>
+            <p className="mt-10 font-display text-xl text-plum-700">{site.motto}</p>
           </div>
         </div>
         {/* Below the copy on phones; a full-height panel on the right from lg up. */}
@@ -74,7 +74,7 @@ export default function HomePage() {
           </SectionHeading>
           <aside className="rounded-lg border-t-4 border-plum-700 bg-plum-50 p-7 shadow-[0_10px_30px_-18px_rgb(23_43_72/0.3)] sm:p-9">
             <p className="eyebrow">Let&apos;s start a conversation</p>
-            <h3 className="mt-3 font-serif text-2xl font-semibold">Finding care should feel less overwhelming.</h3>
+            <h3 className="mt-3 font-display text-2xl font-normal">Finding care should feel less overwhelming.</h3>
             <p className="mt-3">Tell us what you need. We&apos;ll explain available services and help you understand the next step.</p>
             <a href={site.phone.href} className="btn-primary mt-6 w-full sm:w-auto">
               <Phone className="size-4" /> Call {site.phone.display}

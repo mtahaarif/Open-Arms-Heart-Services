@@ -58,7 +58,7 @@ export default function ServicesPage() {
                 {String(i + 1).padStart(2, "0")} · Our services
               </p>
               <h2 className="mt-3">{p.name}</h2>
-              <p className="mt-3 font-serif text-xl text-plum-700 italic">{p.tagline}</p>
+              <p className="mt-3 font-display text-xl text-plum-700">{p.tagline}</p>
               <p className="mt-5">{rich(p.intro)}</p>
 
               {p.feature && (
@@ -107,7 +107,7 @@ export default function ServicesPage() {
             <ol className="mt-10 space-y-5 border-t border-line pt-8">
               {steps.map((s, i) => (
                 <li key={s.title} className="flex gap-4">
-                  <span className="font-serif text-2xl text-plum-400">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-display text-2xl text-plum-400">{String(i + 1).padStart(2, "0")}</span>
                   <span>
                     <span className="block font-bold text-ink">{s.title}</span>
                     {s.text}

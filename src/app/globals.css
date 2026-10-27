@@ -41,7 +41,8 @@
 }
 
 @theme inline {
-  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  /* Geist for headings — the client's choice (variable font, self-hosted via next/font). */
+  --font-display: var(--font-geist), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
 }
 
@@ -57,13 +58,13 @@
   }
   h1,
   h2 {
-    @apply font-serif font-semibold tracking-[-0.01em] text-balance text-ink;
+    @apply font-display font-medium tracking-[-0.02em] text-balance text-ink;
   }
   h1 {
-    @apply text-[2.4rem] leading-[1.12] sm:text-5xl lg:text-[3.5rem];
+    @apply text-[2.2rem] leading-[1.12] sm:text-[2.8rem] lg:text-[3.25rem];
   }
   h2 {
-    @apply text-[2rem] leading-[1.18] sm:text-[2.5rem];
+    @apply text-[1.8rem] leading-[1.18] sm:text-[2.25rem];
   }
   h3 {
     @apply font-sans text-xl leading-snug font-bold text-ink;

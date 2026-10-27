@@ -38,7 +38,7 @@ export default function AboutPage() {
               />
             </div>
             <p className="mt-5 text-center">
-              <span className="block font-serif text-2xl font-semibold text-ink">{site.owner.name}</span>
+              <span className="block font-display text-2xl text-ink">{site.owner.name}</span>
               <span className="text-sm font-semibold tracking-[0.14em] text-plum-700 uppercase">
                 {site.owner.title} · Since {site.since}
               </span>
@@ -59,8 +59,8 @@ export default function AboutPage() {
       <section className="section bg-plum-50">
         <div className="wrap max-w-4xl text-center">
           <p className="eyebrow">Our mission</p>
-          <blockquote className="mt-5 font-serif text-2xl leading-relaxed font-semibold text-ink sm:text-[1.9rem]">“{mission}”</blockquote>
-          <p className="mt-6 font-serif text-lg text-plum-700 italic">{site.motto}</p>
+          <blockquote className="mt-5 font-display text-2xl leading-relaxed text-ink sm:text-[1.75rem]">“{mission}”</blockquote>
+          <p className="mt-6 font-display text-lg text-plum-700">{site.motto}</p>
         </div>
       </section>
 

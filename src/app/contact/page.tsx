@@ -43,7 +43,7 @@ export default function ContactPage() {
                 <Phone className="mt-1 size-5 shrink-0 text-plum-700" aria-hidden />
                 <span>
                   <span className="block text-xs font-bold tracking-[0.16em] text-plum-700 uppercase">Call our team</span>
-                  <a href={site.phone.href} className="font-serif text-2xl font-semibold text-ink hover:text-plum-700">
+                  <a href={site.phone.href} className="font-display text-2xl text-ink hover:text-plum-700">
                     {site.phone.display}
                   </a>
                 </span>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
+import { Geist, Source_Sans_3 } from "next/font/google";
 import Script from "next/script";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -8,7 +8,7 @@ import { programHref, programs } from "@/lib/services";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const serif = Source_Serif_4({ subsets: ["latin"], variable: "--font-source-serif", weight: ["600"], display: "swap" });
+const display = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
 const sans = Source_Sans_3({ subsets: ["latin"], variable: "--font-source-sans", display: "swap" });
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
@@ -74,7 +74,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${sans.variable}`} suppressHydrationWarning>
       <body>
         {GTM_ID && (
           <noscript>

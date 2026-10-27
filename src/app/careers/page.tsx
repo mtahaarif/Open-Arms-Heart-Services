@@ -45,7 +45,7 @@ export default function CareersPage() {
               <li key={r} className="card flex flex-col justify-between gap-6 p-7 sm:flex-row sm:items-center sm:p-9">
                 <div>
                   <p className="eyebrow">Position</p>
-                  <h3 className="mt-2 font-serif text-2xl font-semibold">{r}</h3>
+                  <h3 className="mt-2 font-display text-2xl font-normal">{r}</h3>
                 </div>
                 <a href="#apply" className="btn-outline shrink-0">
                   How to apply as {r === "Group Home Staff" ? "Group Home Staff" : `a ${r}`}
