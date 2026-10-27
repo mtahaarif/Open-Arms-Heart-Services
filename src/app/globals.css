@@ -58,13 +58,13 @@
   }
   h1,
   h2 {
-    @apply font-display font-medium tracking-[-0.02em] text-balance text-ink;
+    @apply font-display font-medium tracking-[0.01em] text-balance text-ink uppercase;
   }
   h1 {
-    @apply text-[2.2rem] leading-[1.12] sm:text-[2.8rem] lg:text-[3.25rem];
+    @apply text-[2rem] leading-[1.1] sm:text-[2.6rem] lg:text-[3rem];
   }
   h2 {
-    @apply text-[1.8rem] leading-[1.18] sm:text-[2.25rem];
+    @apply text-[1.65rem] leading-[1.15] sm:text-[2.05rem];
   }
   h3 {
     @apply font-sans text-xl leading-snug font-bold text-ink;

@@ -32,7 +32,7 @@ export default function HomePage() {
         <div className="wrap relative z-10 py-16 sm:py-20 lg:py-32">
           <div className="max-w-[35rem]">
             <p className="eyebrow">Rooted in compassion · Central Florida</p>
-            <h1 className="mt-4 lg:text-[3.6rem]">
+            <h1 className="mt-4 lg:text-[3.3rem]">
               Care that comes from <span className="text-plum-700">the heart.</span>
             </h1>
             <p className="lead mt-6">
