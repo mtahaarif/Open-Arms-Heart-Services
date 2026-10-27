@@ -1,12 +1,25 @@
 import type { ReactNode } from "react";
 
-/** Splits "\n" in a heading into line breaks (desktop only, so phones wrap naturally). */
+/**
+ * Renders a heading without full stops (the client's style). Each sentence starts a new line
+ * on every screen size, so sentences don't run together once the punctuation is gone; a plain
+ * "\n" inside a sentence is a desktop-only break, so phones wrap naturally.
+ */
 export function Lines({ text }: { text: string }) {
-  return text.split("\n").map((line, i) => (
+  const sentences = text
+    .split(/\.(?:\s+|$)/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return sentences.map((sentence, i) => (
     <span key={i}>
-      {i > 0 && <br className="hidden sm:block" />}
-      {i > 0 && " "}
-      {line}
+      {i > 0 && <br />}
+      {sentence.split("\n").map((line, j) => (
+        <span key={j}>
+          {j > 0 && <br className="hidden sm:block" />}
+          {j > 0 && " "}
+          {line}
+        </span>
+      ))}
     </span>
   ));
 }

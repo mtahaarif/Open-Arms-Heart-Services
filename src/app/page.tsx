@@ -33,7 +33,7 @@ export default function HomePage() {
           <div className="max-w-[35rem]">
             <p className="eyebrow">Rooted in compassion · Central Florida</p>
             <h1 className="mt-4 lg:text-[3.3rem]">
-              Care that comes from <span className="text-plum-700">the heart.</span>
+              Care that comes from <span className="text-plum-700">the heart</span>
             </h1>
             <p className="lead mt-6">
               Thoughtful support for children, adults, seniors and people with disabilities. Here for your family, through the everyday moments that matter.
@@ -74,7 +74,7 @@ export default function HomePage() {
           </SectionHeading>
           <aside className="rounded-lg border-t-4 border-plum-700 bg-plum-50 p-7 shadow-[0_10px_30px_-18px_rgb(23_43_72/0.3)] sm:p-9">
             <p className="eyebrow">Let&apos;s start a conversation</p>
-            <h3 className="mt-3 font-display text-2xl font-normal">Finding care should feel less overwhelming.</h3>
+            <h3 className="mt-3 font-display text-2xl font-normal">Finding care should feel less overwhelming</h3>
             <p className="mt-3">Tell us what you need. We&apos;ll explain available services and help you understand the next step.</p>
             <a href={site.phone.href} className="btn-primary mt-6 w-full sm:w-auto">
               <Phone className="size-4" /> Call {site.phone.display}

@@ -14,7 +14,7 @@ export function CareersFeature() {
         <div className="px-4 py-12 sm:px-12 sm:py-16">
           <p className="eyebrow">Find purpose in what you do</p>
           <h2 className="mt-3">
-            Great Careers <span className="text-plum-700">Change Lives.</span>
+            Great Careers <span className="text-plum-700">Change Lives</span>
           </h2>
           {careersIntro.map((t) => (
             <p key={t} className="mt-4">

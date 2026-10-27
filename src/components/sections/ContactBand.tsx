@@ -9,7 +9,7 @@ export function ContactBand() {
       <div className="wrap grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
         <div>
           <p className="eyebrow text-blush-300">We&apos;re here to listen</p>
-          <h2 className="mt-3 text-white">Let&apos;s find the support that feels right.</h2>
+          <h2 className="mt-3 text-white">Let&apos;s find the support that feels right</h2>
           <p className="lead mt-5 max-w-xl">
             Whether you&apos;re looking for care, making a referral or asking about screening services, our team can help you take the next step.
           </p>
