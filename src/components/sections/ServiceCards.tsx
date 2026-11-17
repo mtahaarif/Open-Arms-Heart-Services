@@ -1,35 +1,73 @@
 import Link from "@/components/ui/Link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { GlowCard } from "@/components/ui/GlowCard";
 import { Photo } from "@/components/ui/Photo";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { programHref, programs } from "@/lib/services";
 
-/** The six services as photo cards, each linking to its section on /services. */
+/**
+ * Home "Our services" — the six services as a horizontal card track (see `.hs` in globals.css):
+ * pinned and driven by vertical scroll on desktop, a swipeable snap row on phones.
+ * Cards: tall photo, deep-plum overlay, glass number badge, cursor glow, slow zoom on hover.
+ */
 export function ServiceCards() {
   return (
-    <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {programs.map((p, i) => (
-        <li key={p.slug}>
-          <Link href={programHref(p)} className="card group flex h-full flex-col overflow-hidden transition-shadow hover:shadow-[0_14px_34px_-16px_rgb(23_43_72/0.35)]">
-            <div className="relative aspect-[16/10] overflow-hidden bg-plum-100">
-              <Photo
-                src={p.image}
-                alt={p.imageAlt}
-                sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
-                className="object-[center_30%] transition-transform duration-500 group-hover:scale-[1.03]"
-              />
-            </div>
-            <div className="flex flex-1 flex-col p-6 sm:p-7">
-              <span className="grid size-10 place-items-center rounded-full bg-plum-100 text-[0.8rem] font-bold text-plum-700">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-4">{p.short}</h3>
-              <p className="mt-2 flex-1">{p.tagline}</p>
-              <span className="mt-5 text-sm font-bold text-plum-700">
-                Explore services <span aria-hidden>→</span>
-              </span>
-            </div>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <section id="services" aria-labelledby="services-title" className="hs relative bg-linear-to-b from-plum-50 via-cream to-cream [--n:6]">
+      <div className="hs-pin py-20 lg:py-0">
+        <div className="wrap mb-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeading
+            eyebrow="Our services"
+            title={"Care for everyday needs.\n*Support for individual goals*."}
+            text="Explore each service to see how we can help. Our team can discuss availability, referrals and authorization requirements with you."
+          />
+          <div data-reveal className="flex shrink-0 items-center gap-5 [--d:120ms]">
+            <p className="hidden items-center gap-2 text-sm font-semibold text-plum-700 lg:flex" aria-hidden>
+              Scroll to explore <ArrowRight className="size-4 animate-pulse" />
+            </p>
+            <Link href="/services" className="btn-outline">
+              View all services <ArrowRight className="size-4 text-blush-600" />
+            </Link>
+          </div>
+        </div>
+
+        <div className="wrap mb-8 hidden lg:block" aria-hidden>
+          <div className="h-[3px] overflow-hidden rounded-full bg-plum-100">
+            <div className="hs-bar h-full origin-left rounded-full bg-linear-to-r from-plum-600 via-plum-400 to-blush-500" />
+          </div>
+        </div>
+
+        <ul className="hs-track" aria-label="Our services">
+          {programs.map((p, i) => (
+            <li key={p.slug}>
+              <GlowCard
+                href={programHref(p)}
+                className="group relative flex aspect-[4/5] flex-col lg:aspect-auto lg:h-[min(28rem,46svh)] justify-end overflow-hidden rounded-[2rem] bg-plum-900 p-6 text-white shadow-[0_30px_60px_-35px_rgb(51_27_88/0.7)] sm:p-7"
+              >
+                <Photo
+                  src={p.image}
+                  alt={p.imageAlt}
+                  sizes="(min-width: 640px) 384px, 82vw"
+                  className="object-[center_30%] transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-plum-950/95 via-plum-900/45 to-plum-900/5" />
+                <span className="glass-dark absolute top-5 left-5 z-[4] grid size-12 place-items-center rounded-2xl font-display text-lg">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="absolute top-5 right-5 z-[4] grid size-11 place-items-center rounded-full bg-white/15 backdrop-blur-md transition duration-500 group-hover:rotate-45 group-hover:bg-white group-hover:text-plum-800">
+                  <ArrowUpRight className="size-5" aria-hidden />
+                </span>
+                <div className="relative z-[4]">
+                  <h3 className="font-display text-2xl font-medium text-white uppercase">{p.short}</h3>
+                  <p className="mt-2 text-navy-100/85">{p.tagline}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-blush-200">
+                    Explore services <span aria-hidden>→</span>
+                  </span>
+                </div>
+              </GlowCard>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }

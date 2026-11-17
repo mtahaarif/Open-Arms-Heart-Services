@@ -1,3 +1,5 @@
+import type { LucideIcon } from "lucide-react";
+import { Accessibility, Baby, BadgeCheck, HandHeart, Heart, HouseHeart, Medal, ShieldCheck } from "lucide-react";
 import { site } from "./site";
 
 /*
@@ -27,13 +29,14 @@ export const approach = [
 
 /* ───────────────────────── Who we serve ───────────────────────── */
 
-export const audiences: { title: string; text: string; image: string; alt: string; href: string }[] = [
+export const audiences: { title: string; text: string; image: string; alt: string; href: string; icon: LucideIcon }[] = [
   {
     title: "Children & families",
     text: "Support for children with special needs or developmental disabilities, foster families and the caregivers beside them.",
     image: "/images/family-game-night.jpg",
     alt: "A family playing a board game together in their living room",
     href: "/services#cbc",
+    icon: Baby,
   },
   {
     title: "Adults with disabilities",
@@ -41,6 +44,7 @@ export const audiences: { title: string; text: string; image: string; alt: strin
     image: "/images/adult-wheelchair-community.jpg",
     alt: "A smiling woman who uses a wheelchair chatting with a support worker at a community centre",
     href: "/services#apd",
+    icon: Accessibility,
   },
   {
     title: "Seniors",
@@ -48,6 +52,7 @@ export const audiences: { title: string; text: string; image: string; alt: strin
     image: "/images/senior-conversation.jpg",
     alt: "A smiling older man talking with a caregiver on his sofa",
     href: "/services#home-care",
+    icon: HandHeart,
   },
   {
     title: "Veterans",
@@ -55,6 +60,16 @@ export const audiences: { title: string; text: string; image: string; alt: strin
     image: "/images/service-veterans.jpg",
     alt: "A smiling older veteran wearing a Vietnam veteran cap",
     href: "/services#va",
+    icon: Medal,
+  },
+  {
+    // "Caregiver respite, relief and family support" — the services lists (docs/client-mockup-content.md).
+    title: "Family caregivers",
+    text: "Caregiver respite, relief and family support.",
+    image: "/images/family-baking.jpg",
+    alt: "A grandmother and her granddaughter baking together in the kitchen",
+    href: "/services",
+    icon: Heart,
   },
 ];
 
@@ -114,6 +129,59 @@ export const applicationChecklist = [
   "Education and employment history",
   "Three personal references",
   "Emergency contact & e-signature",
+];
+
+/* ───────────────────────── Home page Q&As ─────────────────────────
+ * The "Questions & answers" stacking cards, copied from the earlier design (git 1732445) with
+ * the original website's wording. The insurance chips use `insurances` above (the owner's
+ * corrected plan names take precedence over the original site's spelling).
+ */
+
+export const trustQAs: {
+  q: string;
+  a: string;
+  icon: LucideIcon;
+  image: string;
+  imageAlt: string;
+  /** Static Tailwind object-position class for the card's tall photo crop. */
+  imagePosition?: string;
+  chips?: string[];
+  link?: { href: string; label: string };
+}[] = [
+  {
+    q: "What types of care do you provide?",
+    a: "Caring for a developmentally disabled family member or senior can be extremely challenging, and we are here to help. We provide dedicated, family-oriented care that comes from the heart.",
+    icon: HouseHeart,
+    image: "/images/activities-coloring.jpg",
+    imageAlt: "A caregiver leaning in to help an older woman with a colouring activity",
+    imagePosition: "object-[55%_center]",
+    link: { href: "/services", label: "Learn more about the types of care we provide" },
+  },
+  {
+    q: "Are care providers background checked?",
+    a: "At Open Arms & Heart Services, Inc., your safety, trust, and peace of mind are our highest priorities. All direct care personnel undergo comprehensive Level 2 background screening in accordance with Florida state requirements. Our compassionate caregivers are committed to providing safe, dependable, and high-quality care to children, seniors, and individuals with disabilities because your family deserves care you can trust.",
+    icon: ShieldCheck,
+    image: "/images/caregiver-portrait.jpg",
+    imageAlt: "A smiling caregiver with a stethoscope",
+    imagePosition: "object-[30%_center]",
+  },
+  {
+    q: "Do you accept insurance?",
+    a: "Insurances we accept:",
+    icon: BadgeCheck,
+    image: "/images/nurse-blood-pressure.jpg",
+    imageAlt: "A nurse checking a smiling woman's blood pressure",
+    chips: insurances,
+  },
+  {
+    q: "Are you licensed?",
+    a: `Yes, Open Arms & Hearts is an APD Central Region provider and a licensed Florida Home Health Agency that has served Central Florida since ${site.since}.`,
+    icon: BadgeCheck,
+    image: "/images/nurses-team.jpg",
+    imageAlt: "Two smiling healthcare professionals in scrubs and white coats",
+    imagePosition: "object-top",
+    chips: site.licenses.map((l) => `Lic# ${l}`),
+  },
 ];
 
 /* ───────────────────────── Community resources ───────────────────────── */

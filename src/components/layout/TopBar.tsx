@@ -1,13 +1,16 @@
+import { HeartHandshake, Phone } from "lucide-react";
 import { sinceLine, site } from "@/lib/site";
 
-/** Navy strip above the header: since-line and the office phone number. */
+/** Slim utility line above the floating header: since-line and the office phone number. */
 export function TopBar() {
   return (
-    <div className="bg-navy-900 text-[0.8rem] text-white">
+    <div className="relative z-40 bg-linear-to-r from-plum-50 via-white to-blush-50 text-[0.8rem] text-plum-900">
       <div className="wrap flex items-center justify-center gap-6 py-2 sm:justify-between">
-        <span className="hidden sm:block">{sinceLine}</span>
-        <a href={site.phone.href} className="font-semibold hover:underline">
-          Call our team: {site.phone.display}
+        <span className="hidden items-center gap-2 sm:inline-flex">
+          <HeartHandshake className="size-3.5 text-blush-500" aria-hidden /> {sinceLine}
+        </span>
+        <a href={site.phone.href} className="inline-flex items-center gap-2 font-semibold hover:text-blush-600">
+          <Phone className="size-3.5 text-blush-500" aria-hidden /> Call our team: {site.phone.display}
         </a>
       </div>
     </div>

@@ -4,6 +4,8 @@ import Script from "next/script";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { TopBar } from "@/components/layout/TopBar";
+import { RibbonDefs } from "@/components/brand/Ribbons";
+import { RevealObserver } from "@/components/ui/RevealObserver";
 import { programHref, programs } from "@/lib/services";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -78,6 +80,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${leagueSpartan.variable} ${manrope.variable} ${sans.variable}`} suppressHydrationWarning>
       <body>
+        {/* Marks the page as JS-enabled before any content paints, so reveal-on-scroll never flickers
+            and no-JS visitors / crawlers always see everything (see globals.css). */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <RibbonDefs />
+        <RevealObserver />
         {GTM_ID && (
           <noscript>
             <iframe

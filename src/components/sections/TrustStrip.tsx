@@ -1,14 +1,26 @@
+import { Heart } from "lucide-react";
+import { Fragment } from "react";
+import { Marquee } from "@/components/ui/Marquee";
 import { site } from "@/lib/site";
 
-/** Credentials strip under the hero (owner's mock-up). */
+/**
+ * Credentials ticker under the banner — a slightly tilted deep-purple band with white display type
+ * and pink hearts between the items, in a single row (the loop copy is aria-hidden by <Marquee>).
+ * The band is wider than the screen so the tilt never shows its ends; the section clips it.
+ */
 export function TrustStrip() {
   return (
-    <section aria-label="Credentials" className="bg-plum-100">
-      <ul className="wrap check-list flex flex-wrap items-center gap-x-5 gap-y-3 py-5 xl:gap-x-3 text-[0.8125rem] font-bold text-plum-800 sm:justify-center xl:justify-between">
-        {site.credentials.map((c) => (
-          <li key={c}>{c}</li>
-        ))}
-      </ul>
+    <section aria-label="Credentials" className="enter relative overflow-clip py-8 sm:py-10 [--d:800ms]">
+      <div className="relative left-1/2 w-[110vw] -translate-x-1/2 -rotate-[1.5deg] bg-linear-to-r from-plum-800 via-plum-700 to-plum-800 py-4 shadow-[0_20px_45px_-25px_rgb(51_27_88/0.6)] sm:py-5">
+        <Marquee duration={42} gap="2rem" pauseOnHover={false}>
+          {site.credentials.map((c) => (
+            <Fragment key={c}>
+              <span className="font-display text-xl whitespace-nowrap text-white sm:text-2xl">{c}</span>
+              <Heart className="size-4 shrink-0 fill-blush-400 text-blush-400" aria-hidden />
+            </Fragment>
+          ))}
+        </Marquee>
+      </div>
     </section>
   );
 }

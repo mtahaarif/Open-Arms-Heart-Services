@@ -2,7 +2,7 @@
 
 import Link from "@/components/ui/Link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/brand/Logo";
 import { nav, site } from "@/lib/site";
@@ -10,7 +10,7 @@ import { nav, site } from "@/lib/site";
 type NavItem = { href: string; label: string };
 
 /**
- * Sticky site header (client: mobile-menu state and active-link highlighting).
+ * Floating glass header (client: mobile-menu state and active-link highlighting).
  * `services` arrives as plain data from the root layout, so the full service copy
  * in lib/services.ts never ships in the client bundle.
  */
@@ -22,69 +22,69 @@ export function Header({ services }: { services: NavItem[] }) {
   useEffect(() => setOpen(false), [pathname]);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const linkClass = (href: string) =>
+    `relative py-2 text-[0.95rem] font-semibold transition-colors hover:text-plum-600 after:absolute after:-bottom-0.5 after:left-1/2 after:size-1 after:-translate-x-1/2 after:rounded-full after:bg-blush-500 after:transition-opacity ${
+      isActive(href) ? "text-plum-700 after:opacity-100" : "text-ink after:opacity-0"
+    }`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90">
-      <div className="wrap flex h-20 items-center justify-between gap-6 lg:h-24">
-        <Logo withName preload className="h-14 lg:h-[4.5rem]" />
+    <header className="sticky top-0 z-50 px-3 pt-3">
+      <div className="glass mx-auto flex h-[4.5rem] max-w-[1200px] items-center justify-between gap-6 rounded-full pr-2.5 pl-5 lg:h-20 lg:pl-6">
+        <Logo withName preload className="h-12 lg:h-14" />
 
-        <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
           {nav.map((item) =>
             item.href === "/services" ? (
               <div key={item.href} className="group relative">
-                <Link
-                  href={item.href}
-                  className={`inline-flex items-center gap-1 py-8 text-[0.95rem] font-semibold transition-colors hover:text-plum-700 ${
-                    isActive(item.href) ? "text-plum-700" : "text-ink"
-                  }`}
-                >
+                <Link href={item.href} className={`inline-flex items-center gap-1 ${linkClass(item.href)}`}>
                   {item.label} <ChevronDown className="size-4 transition-transform group-focus-within:rotate-180 group-hover:rotate-180" />
                 </Link>
-                <div className="invisible absolute top-full left-1/2 w-[22rem] -translate-x-1/2 opacity-0 transition-opacity duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <ul className="card -mt-3 p-2">
-                    {services.map((s) => (
+                <div className="invisible absolute top-full left-1/2 w-[23rem] -translate-x-1/2 pt-5 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                  <ul className="glass rounded-[1.75rem] p-2.5">
+                    {services.map((s, i) => (
                       <li key={s.href}>
-                        <Link href={s.href} className="block rounded-md px-3 py-2.5 text-[0.95rem] font-semibold text-ink hover:bg-plum-50 hover:text-plum-700">
+                        <Link
+                          href={s.href}
+                          className="group/item flex items-center gap-3 rounded-2xl px-3 py-2.5 text-[0.95rem] font-semibold text-ink transition hover:bg-white/80 hover:text-plum-700"
+                        >
+                          <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-linear-to-br from-plum-600 to-blush-500 text-[0.7rem] font-bold text-white">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
                           {s.label}
                         </Link>
                       </li>
                     ))}
-                    <li className="mt-1 border-t border-line px-3 pt-3 pb-2">
+                    <li className="mt-1 border-t border-plum-100 px-3 pt-3 pb-2">
                       <Link href="/services" className="link-arrow text-sm">
-                        View all of our services →
+                        View all of our services <ArrowRight className="size-3.5" />
                       </Link>
                     </li>
                   </ul>
                 </div>
               </div>
             ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                className={`text-[0.95rem] font-semibold transition-colors hover:text-plum-700 ${isActive(item.href) ? "text-plum-700" : "text-ink"}`}
-              >
+              <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? "page" : undefined} className={linkClass(item.href)}>
                 {item.label}
                 {item.hint && <span className="sr-only"> {item.hint}</span>}
               </Link>
             ),
           )}
-          <Link href="/contact" className="btn-primary px-5 py-3">
-            Let&apos;s talk
-          </Link>
         </nav>
 
-        <div className="flex items-center gap-2 lg:hidden">
-          <a href={site.phone.href} className="grid size-11 place-items-center rounded-md border border-line text-plum-700">
-            <Phone className="size-5" aria-hidden />
+        <div className="flex items-center gap-2">
+          <a href={site.phone.href} className="grid size-11 place-items-center rounded-full bg-white/80 text-plum-700 ring-1 ring-plum-100 transition hover:text-blush-600">
+            <Phone className="size-[1.1rem]" aria-hidden />
             <span className="sr-only">Call {site.phone.display}</span>
           </a>
+          <Link href="/contact" className="btn-primary hidden px-5 py-3 lg:inline-flex">
+            Let&apos;s talk <ArrowRight className="size-4" />
+          </Link>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="grid size-11 place-items-center rounded-md bg-plum-700 text-white"
+            className="grid size-11 place-items-center rounded-full bg-linear-to-br from-plum-700 to-blush-500 text-white lg:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
             <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
@@ -93,16 +93,24 @@ export function Header({ services }: { services: NavItem[] }) {
       </div>
 
       {open && (
-        <nav id="mobile-menu" aria-label="Mobile" className="max-h-[calc(100svh-5rem)] overflow-y-auto border-t border-line bg-white lg:hidden">
-          <ul className="wrap divide-y divide-line py-2">
+        // Scrim: dims and blurs the page so it can't show through the menu; tap it to close.
+        <div aria-hidden onClick={() => setOpen(false)} className="fixed inset-0 -z-10 animate-[fade-in_0.25s_ease-out_both] bg-plum-950/45 backdrop-blur-sm lg:hidden" />
+      )}
+      {open && (
+        <nav
+          id="mobile-menu"
+          aria-label="Mobile"
+          className="mx-auto mt-2 max-h-[calc(100svh-7rem)] max-w-[1200px] overflow-y-auto overscroll-contain rounded-[2rem] border border-white/80 bg-cream/97 shadow-[0_30px_70px_-30px_rgb(51_27_88/0.55)] backdrop-blur-xl lg:hidden"
+        >
+          <ul className="divide-y divide-plum-100 px-5 py-2">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className={`block py-4 text-lg font-semibold ${isActive(item.href) ? "text-plum-700" : "text-ink"}`}>
+                <Link href={item.href} className={`block py-4 font-display text-xl uppercase ${isActive(item.href) ? "text-plum-700" : "text-ink"}`}>
                   {item.label}
                   {item.hint && <span className="sr-only"> {item.hint}</span>}
                 </Link>
                 {item.href === "/services" && (
-                  <ul className="-mt-1 grid gap-1 pb-4 pl-4">
+                  <ul className="-mt-1 grid gap-1 pb-4 pl-1">
                     {services.map((s) => (
                       <li key={s.href}>
                         <Link href={s.href} className="block py-1.5 text-body hover:text-plum-700">

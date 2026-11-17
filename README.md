@@ -2,7 +2,7 @@
 
 > Production marketing website for **Open Arms & Heart Services Inc.**, a Florida-licensed home health agency and APD Central Region provider serving Central Florida since 2017.
 >
-> **Design direction (October 2026):** a clean, polished, professional site with easy navigation, a professional typeface and welcoming photography of the people the agency serves. It is based on the owner's own mock-up, with Mind & Mobility as a reference (see §1.2).
+> **Design direction (November 2026):** the owner's content and page structure, presented in the project's original dynamic design language — soft lavender gradients, aurora and ribbon heroes, arch photos, glass panels, glowing cards and deep-plum bands — with the busiest effects simplified (see §1.2).
 >
 > **Content policy:** every fact on the site comes from the owner's mock-up ([`docs/client-mockup-content.md`](docs/client-mockup-content.md)) or the agency's original website ([`docs/original-site-content.md`](docs/original-site-content.md)). Where they differ, the mock-up wins. See §16.
 
@@ -72,20 +72,19 @@
 
 ### 1.2 Design brief (owner's feedback, 2026-10-24)
 
-> "The current design feels a little too busy for my taste … I would like a cleaner, more polished design with easy navigation, a more professional font, and welcoming pictures that reflect the people we serve." The owner also provided her own ChatGPT mock-up ("more of my idea of my site", with different pictures and font) and pointed to the Mind & Mobility and Ms. Lynn's websites for inspiration.
+> **2026-10-24:** "The current design feels a little too busy for my taste … I would like a cleaner, more polished design with easy navigation, a more professional font, and welcoming pictures that reflect the people we serve." The owner also provided her own ChatGPT mock-up and pointed to the Mind & Mobility and Ms. Lynn's websites for inspiration.
+>
+> **2026-11 follow-up:** the content of the simplified redesign was right, but the design had become *too* simplified. Bring back the design philosophy of the earlier dynamic version, with some simplifications (e.g. the crossing infinite tickers become one simple ticker), keeping the content exactly the same.
 
-| Request | What changed |
+| Request | Result |
 | --- | --- |
-| **Cleaner, less busy** | Every scroll-driven and decorative effect was removed: marquees, stacking and pinned horizontal scroll, glow and tilt cards, glassmorphism, Lenis smooth-scroll hijacking, page-transition curtains, the scroll-progress bar and floating badges. Sections are calm and alternate white, cream, lavender and navy, following the mock-up. |
-| **Polished, professional** | Small corner radii (4–8 px), thin borders, soft shadows, generous spacing, one container width (1180 px) and a consistent heading / eyebrow / body hierarchy. The client's real logo replaces the redrawn SVG mark. |
-| **Easy navigation** | A top bar with the phone number on every page. A sticky header with five plain links, an "Our services" dropdown listing all six services, and a "Let's talk" button. A phone button and a simple menu on mobile. Breadcrumbs on inner pages. A "Jump to a service" menu on `/services`. Topic links on `/faq`. A footer that lists every page and service. |
-| **More professional font** | **League Spartan** (falling back to Manrope) for headings, set in **capitals**, and **Source Sans 3** for everything else. The client chose this stack on 2026-10-27, after rejecting Source Serif 4 and then trying Varela, all-caps headings, Helvetica/Arial and Geist. These replace the earlier Fraunces, Figtree, Courgette script and Quicksand mix, and the mock-up's Manrope. |
-| **Welcoming pictures** | New photography that reflects the people served: Black, Latina and white families, seniors, a veteran, adults with disabilities, children and diverse caregivers. Several photos are in home and garden settings. See §20. |
-| **"More of my idea of my site"** | The home page follows the mock-up's section order and wording (§8.1), and the mock-up's new content is used site-wide (§16). |
+| **Content exactly the same** | All copy, facts, page structure, the Google Form and the careers JotForm are unchanged from the October redesign (sources: §16). Only visual design changed. |
+| **The earlier design philosophy** | Restored from the dynamic version (git `1732445` and earlier): iris/blush palette on lavender paper; aurora + hairline-grid + ribbon heroes; arch-shaped hero photos with floating glass cards, a circular inset and a rotating text badge; gradient accent words in headings; glass header, panels and cards; cursor-following glow cards; photo cards with deep-plum gradient overlays; deep-plum rounded bands; a dark rounded footer with a giant outlined text ticker; fade-up reveals on scroll. |
+| **Simplified** | One straight credentials ticker instead of two crossing tickers. No smooth-scroll hijacking (Lenis), pinned horizontal scroll, stacking cards, scroll-scrubbed text, mouse parallax, magnetic buttons, 3D tilt or page-transition curtains. No animation library at all — CSS animations plus one tiny `IntersectionObserver`. |
+| **Professional font** | Headings stay as chosen on 2026-10-27: **League Spartan** (Manrope fallback) in **capitals, without full stops**, with **Source Sans 3** for body text. |
+| **Welcoming pictures** | The October photography is kept (§20). |
 
-**References:** Mind & Mobility (mindandmobility.com) showed the polish to aim for: purple branding, mostly white, a single photo hero, a clear top menu and the phone number always visible. "Ms. Lynn's website" couldn't be identified from the name alone. It can be reviewed once the client shares the link.
-
----
+**References:** Mind & Mobility (mindandmobility.com) and the owner's mock-up shaped the content and navigation. "Ms. Lynn's website" couldn't be identified from the name alone.
 
 ## 2. Technology stack
 
@@ -100,7 +99,7 @@
 | Forms | Embedded Google Form (no backend) |
 | Runtime dependencies | `next`, `react`, `react-dom`, `lucide-react` — nothing else |
 
-The only client-side JavaScript is the header's mobile menu and active-link state, `CareLink` and the `GoogleForm` embed. There are no animation or smooth-scroll libraries.
+Client-side JavaScript is limited to: the header (mobile menu, active link), `GlowCard` (sets two CSS variables on pointer move), `RevealObserver` (one `IntersectionObserver` for fade-up reveals), `HeroSlides` (home banner slides), `ServiceStack` (active service on `/services`), `CareLink` and the `GoogleForm` embed. There are no animation or smooth-scroll libraries — every animation is CSS.
 
 ---
 
@@ -158,8 +157,8 @@ Inquiries need no configuration: they go through the embedded Google Form (§11)
 │   └── images/                     15 licensed photos + the owner's portrait
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx              Fonts, metadata defaults, JSON-LD, skip link, TopBar/Header/Footer
-│   │   ├── globals.css             Design tokens, base typography, utilities
+│   │   ├── layout.tsx              Fonts, metadata, JSON-LD, `html.js` flag, RibbonDefs, RevealObserver, TopBar/Header/Footer
+│   │   ├── globals.css             Design tokens, keyframes, base typography, reveal CSS, utilities
 │   │   ├── page.tsx                /            Home (mock-up structure)
 │   │   ├── services/page.tsx       /services    All six services + coming soon + coverage + form
 │   │   ├── about/page.tsx          /about       Story, mission, who we serve, credentials
@@ -173,14 +172,17 @@ Inquiries need no configuration: they go through the embedded Google Form (§11)
 │   │   └── llms.txt/route.ts       Plain-text site summary for AI answer engines
 │   ├── components/
 │   │   ├── brand/Logo.tsx          The client's logo (image) linking home
-│   │   ├── layout/TopBar.tsx       Navy phone strip (server)
-│   │   ├── layout/Header.tsx       Sticky header: dropdown, mobile menu (client, plain-data props)
-│   │   ├── layout/Footer.tsx       Footer columns, resources, copyright bar
+│   │   ├── brand/Ribbons.tsx       RibbonDefs, Ribbons, Aurora, RotatingBadge (CSS-animated SVG/gradients)
+│   │   ├── layout/TopBar.tsx       Slim lavender utility line: since-line + phone (server)
+│   │   ├── layout/Header.tsx       Floating glass pill header: dropdown, mobile menu (client, plain-data props)
+│   │   ├── layout/Footer.tsx       Dark rounded footer: outlined text ticker, columns, resources
 │   │   ├── forms/GoogleForm.tsx    Embedded Google Form with prefill
 │   │   ├── forms/CareLink.tsx      Link that pre-ticks services in the form
-│   │   ├── sections/               TrustStrip, ServiceCards, AreasBand, ComingSoon,
-│   │   │                           CareersFeature, Coverage, Steps, ContactBand
-│   │   └── ui/                     Photo, Link (no-prefetch next/link), PageHeader, SectionHeading (+ Lines)
+│   │   ├── sections/               TrustStrip (ticker), ServiceCards, AreasBand, ComingSoon,
+│   │   │                           CareersFeature, Coverage, Steps, ContactBand, HeroSlides,
+│   │   │                           StackingCards, MissionStatement, ServiceStack
+│   │   └── ui/                     Photo, Link, PageHeader, BannerOverlay, SectionHeading (+ Lines), GlowCard,
+│   │                               Marquee, RevealObserver
 │   └── lib/
 │       ├── site.ts                 Company facts, address, areas, nav
 │       ├── services.ts             The six services + coming-soon programs
@@ -202,10 +204,16 @@ Inquiries need no configuration: they go through the embedded Google Form (§11)
 | `/`, `/about`, `/services`, `/careers`, `/faq`, `/contact` | Static (pre-rendered HTML, served from the CDN) |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt`, `/opengraph-image`, `/icon.png`, `/apple-icon.png` | Static, generated at build time |
 
-Pages and sections are **Server Components**. Only three small Client Components exist:
+Pages and sections are **Server Components**. The small Client Components are:
 - `Header`, for the mobile-menu state and the active link;
+- `GlowCard`, for the cursor-following glow;
+- `RevealObserver`, which reveals `[data-reveal]` elements as they scroll into view;
+- `HeroSlides`, the home banner's photo slides and controls;
+- `ServiceStack`, which tracks the active service on `/services` and swaps its photo;
 - `CareLink`, for its `sessionStorage` hand-off;
 - `GoogleForm`, which builds the iframe URL with the prefill parameters.
+
+Client components receive only plain data (strings, numbers) or already-rendered elements from server pages — never components or functions (e.g. `GlowCard` takes `href` and renders `Link` itself; `ServiceStack` takes each service's photo and card group as rendered JSX).
 
 All copy is in the initial HTML.
 
@@ -221,7 +229,8 @@ All copy is in the initial HTML.
   - `areaServed` (five counties plus Central Florida);
   - license identifiers;
   - an `OfferCatalog` of the six services.
-* Renders a "Skip to content" link, `TopBar`, `Header`, `<main id="main">` and `Footer`, plus optional lazy GTM.
+* Adds `class="js"` to `<html>` with a one-line inline script before any content paints. Reveal-on-scroll only hides elements under `html.js`, so crawlers and no-JS visitors always see everything.
+* Renders `RibbonDefs` (the ribbon gradients, once per page), `RevealObserver`, a "Skip to content" link, `TopBar`, `Header`, `<main id="main">` and `Footer`, plus optional lazy GTM.
 
 ### 6.3 Redirects (`next.config.ts`)
 
@@ -235,134 +244,179 @@ Retired URLs redirect permanently (308): `/services/home-care` → `/services#ho
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `navy-900` / `ink` | `#172b48` | Headings, top bar, navy bands |
-| `navy-950` | `#112039` | Copyright bar |
-| `body` | `#435167` | Body text |
-| `plum-700` | `#65318b` | Logo purple — buttons, links, eyebrows, accents |
-| `plum-800` | `#522772` | Button hover |
-| `plum-50` / `plum-100` | `#f8f5fb` / `#f0eaf5` | Lavender section backgrounds, trust strip |
-| `blush-400` | `#ef8ab5` | Logo pink — accents on dark bands, "coming soon" rules |
-| `cream` | `#faf8f5` | Hero and page-header backgrounds |
-| `line` | `#e6e3eb` | Borders and dividers |
+| `plum-50` … `plum-950` | `#f8f5fe` … `#1d0f35` | The brand iris scale. `plum-700` `#60349f` for links and eyebrows; `plum-500`/`600` in gradients |
+| `blush-50` … `blush-700` | `#fff3f8` … `#b03567` | The logo pink. Gradient ends, accents on dark bands, the eyebrow dot |
+| `navy-100` … `navy-950` | `#e1d2f8` … `#140a26` | Deep-plum scale for dark bands (`navy-900` `#1d0f35`) and light text on them (`navy-100`) |
+| `ink` | `#24173a` | Headings |
+| `body` | `#5e5373` | Body text |
+| `cream` | `#fdfbff` | Page background (lavender paper) |
+| `line` | `#ece4f8` | Borders and dividers |
 
-There are full `navy`, `plum` and `blush` scales for tints. Text on every background meets WCAG AA contrast.
+The signature gradient runs `plum-700 → plum-500 → blush-500` (buttons, accent words, icon tiles, ticker). Text on every background meets WCAG AA contrast (Lighthouse accessibility 100).
 
 ### 7.2 Typography
 
 | Element | Style |
 | --- | --- |
-| `h1` | League Spartan medium (500), UPPERCASE, 0.01 em tracking, 2 rem → 3 rem (home hero 3.3 rem), `text-balance` |
-| `h2` | League Spartan medium, UPPERCASE, 1.65 rem → 2.05 rem |
-| `h3` | Source Sans 3 bold, 1.25 rem |
+| `h1` | League Spartan medium (500), UPPERCASE, 0.01 em tracking, 2.1 rem → 3.4 rem (home hero 4.1 rem), `text-balance` |
+| `h2` | League Spartan medium, UPPERCASE, 1.7 rem → 2.2 rem |
+| `h3` | Source Sans 3 bold, 1.25 rem (card titles use League Spartan uppercase) |
 | Body | Source Sans 3, 17 px / 1.7 line height |
-| `.eyebrow` | 12 px, bold, uppercase, 0.18 em tracking, plum |
+| `.eyebrow` / `.eyebrow-dark` | Pill label: 12 px bold uppercase, rounded-full, pink dot (`::before`) |
 | `.lead` | 18–19 px intro paragraphs |
-| Display accents | `font-display` (League Spartan) for the motto, service taglines, mission quote, step numbers and the owner's name |
+| Accent words | `*phrase*` in a `SectionHeading`/`PageHeader` title renders in the brand gradient (`text-gradient`, or `text-gradient-light` on dark bands). Put the marker inside the full stop: `"Your goals. *Our heart*."` |
+| No full stops | Headings never show a full stop; each sentence starts a new line (`Lines` in `SectionHeading.tsx`) |
+| Display accents | `font-display` (League Spartan) for the motto, service taglines, mission quote, numbers and the owner's name |
 
 ### 7.3 Utilities (`@utility`)
 
 | Class | Purpose |
 | --- | --- |
-| `wrap` | Centred container: max-width 1180 px, 16 px gutter on phones (28 px from `sm`) |
-| `section` | Vertical section padding (64 px → 96 px) |
-| `eyebrow`, `lead` | Text styles above |
-| `btn`, `btn-primary`, `btn-outline`, `btn-light` | Buttons: 6 px radius, solid purple / outlined / white |
-| `link-arrow` | Underlined purple text link (used with "→") |
-| `card` | White, 1 px border, 8 px radius, soft shadow |
-| `check-list` | List with CSS tick marks. Spacing is set where it's used (`space-y-*` or a grid gap). |
+| `wrap` | Centred container: max-width 1200 px, 16 px gutter on phones (28 px from `sm`) |
+| `section` | Vertical section padding (80 px → 112 px) |
+| `eyebrow`, `eyebrow-dark`, `lead` | Text styles above |
+| `text-gradient`, `text-gradient-light` | Gradient text |
+| `glass`, `glass-dark` | Frosted panels (translucent gradient, `backdrop-filter`, hairline border, soft shadow) |
+| `card` | Rounded 28 px white card with a soft lavender shadow |
+| `band-dark` | Deep-plum surface with pink/iris corner glows (bands, footer, dark cards) |
+| `glow-card` | Cursor-following gradient border + spotlight; pair with `<GlowCard>`. Put card content in `relative z-[4]` so it sits above the glow layers |
+| `hairline-grid`, `mask-fade-x` | Faint grid background; edge fade for the ticker |
+| `enter` | Above-the-fold entrance (`--enter` picks the keyframe: `enter-up`, `rise`, `enter-pop`; `--d` sets the delay) |
+| `btn`, `btn-primary`, `btn-outline`, `btn-light`, `btn-outline-light` | Pill buttons: gradient (shifts on hover) / glass / white / outlined-on-dark |
+| `link-arrow` | Underlined purple text link |
+| `check-list` | Gradient-circle tick list. Spacing is set where it's used (`space-y-*` or a grid gap) |
 
 ### 7.4 Interaction
 
-Only quiet states: colour changes on links and buttons, a slight shadow and image zoom (3%) on service cards, a fading "Our services" dropdown, and native `<details>` accordions. `scroll-behavior: smooth` is disabled when the visitor has reduced motion turned on. Focus rings are a 3 px pink outline.
+All motion is CSS and respects `prefers-reduced-motion` (animations and reveals are switched off).
 
----
+* **Reveal on scroll:** add `data-reveal` to any element (optionally `[--d:120ms]` for a stagger). `RevealObserver` adds `.is-in` and the element fades up. `SectionHeading` reveals itself.
+* **Above the fold:** heroes use the `enter` utility so they animate from the first paint. Headlines use `rise` (movement only, so they count as painted immediately for LCP). The arch photo settles in with a transform.
+* **Horizontal track (`.hs` in `globals.css`):** `section.hs[--n:<cards>] › .hs-pin › ul.hs-track`. Everywhere it's a native scroll-snap row (hidden scrollbar). On desktop (≥1024px) in browsers with scroll-driven animations (`animation-timeline: view()`) and no reduced-motion preference, the section's height grows by the overflow width, `.hs-pin` sticks to the viewport, and the track's `transform` follows the section's view timeline (`animation-range: contain`); `.hs-bar` grows in step. Pure CSS, compositor-only. Other browsers keep the swipe row.
+* **Stacking cards (`.qa-*`):** each card wrapper is `sticky` with a slightly lower `top`; with scroll-driven animation support, cards shrink (`--qa-s`) and dim (`--qa-dim`) over per-card `animation-range`s of the stack's view timeline. Otherwise they simply stack.
+* **Ticker:** `Marquee` — one straight row, content duplicated once (copy `aria-hidden`), pauses on hover. Used for the credentials strip and the footer's outlined lines.
+* **Ambient:** aurora blobs drift (`animate-blob`), ribbons fade in, floating hero cards bob (`animate-float`), the hero badge rotates (`animate-spin-slow`), the owner's portrait ring rotates.
+* **Hover:** glow cards follow the cursor; photo cards zoom slowly; arrow buttons rotate 45°; gradient buttons shift.
+* **Performance rule:** only animate `transform` and `opacity`. A stroke "draw-in" on the ribbons and a `clip-path` reveal on the arch photo were tried and removed: neither runs on the compositor, and together they added over 1 s of main-thread blocking on mobile.
 
 ## 8. Pages — section by section
 
+### 8.0 Page banners (every page)
+
+Modelled on the About banner of lovethyneighborhhc.com:
+- A full-bleed photo under a dark plum treatment (`BannerOverlay`) that runs up behind the floating header.
+- Everything centred on top: a breadcrumb (home icon › page), an eyebrow led by a short blush rule, the H1 in white with light accent words, the intro, and any actions.
+- `PageHeader` builds it on the inner pages.
+- The home banner uses the same structure, keeping its four cross-fading photos and slide controls (no breadcrumb).
+- The banner photos are placeholders until the generated images arrive. Prompts, sizes and the people in each are in `docs/banner-image-prompts.md`.
+
 ### 8.1 Home — `/` (mirrors the owner's mock-up)
 
-| # | Section | Notes |
+| # | Section | Design |
 | --- | --- | --- |
-| 1 | Top bar + header | "Compassionate care across Central Florida since 2017" · "Call our team: 321-217-2409" |
-| 2 | Hero | "Care that comes from the heart." and the lead text, with the buttons "Find your care" (→ `/services`) and "Connect with our team →". Tagline: "Where there is love, there is life." The photo fills the right 60% on desktop and fades into cream; on phones it sits below the text. |
-| 3 | Trust strip | The five credentials |
-| 4 | Welcome | "At home. In the community. By your side." with three audience ticks, beside the "Finding care should feel less overwhelming." call panel |
-| 5 | A personal approach | Photo, "Your family. Your goals. Our heart.", and links to the story and to contact |
-| 6 | Our services | Six photo cards (number, name, tagline, "Explore services →") linking to `/services#slug` |
-| 7 | Service areas | Navy band: Home Health counties and "all of APD's Central Region" |
-| 8 | Coming soon | Skilled Home Health and PPEC |
-| 9 | Careers | "Great Careers Change Lives." with a photo, linking to `/careers` |
-| 10 | Coverage | Insurance list and note, screening and licenses, community resources |
-| 11 | Next steps | "A simple path to support." — three steps |
-| 12 | Contact band | Navy: "Let's find the support that feels right." with phone, form link and office details |
+| 1 | Top bar + header | Slim lavender utility line ("Compassionate care across Central Florida since 2017" · "Call our team: 321-217-2409") above the floating glass pill header |
+| 2 | Banner | The site-wide banner structure (§8.0): four full-bleed photos cross-fading every 7 s with a slow zoom under the dark plum treatment, behind the floating header; centred ruled eyebrow "Rooted in compassion · Central Florida", the white headline revealed line by line, lead, gradient (shine-on-hover) and outline buttons, the motto; a glass control pill with progress bars, counter and previous/next (`HeroSlides`, client). Autoplay is off for reduced motion |
+| 3 | Credentials ticker | Light frosted band of icon chips — one per credential — in a single scrolling row |
+| 4 | Welcome | "At home. In the community. *By your side*." with audience pills, beside the glass "Finding care should feel less overwhelming" call card |
+| 5 | A personal approach | Arch photo with a glass "2017 · Central Florida" chip; "Your family. Your goals. *Our heart*." and gradient/glass buttons |
+| 6 | Our services | Horizontal card track (modelled on mourningdovehomecare.com "What we offer"): on desktop the section pins and scrolling down slides the six photo cards sideways, with a progress bar and "Scroll to explore" hint; on phones a swipeable row that snaps to each card |
+| 6b | Questions & answers | Copied from the earlier design: "Questions & *answers*" intro (sticky on desktop, phone + "All FAQs") beside four sticky stacking Q&A cards (number, icon, question, answer, insurance or licence chips, photo on desktop). Earlier cards shrink and dim as later ones slide over them (CSS scroll-driven, `.qa-*`) |
+| 7 | Service areas | Rounded deep-plum band with ribbons and two glass area cards |
+| 8 | Coming soon | Arch photo + glow cards with gradient "Coming soon" pills |
+| 9 | Careers | Rounded lavender panel: photo with glass role chips + copy |
+| 10 | Coverage | Insurance tiles with monograms (glow) and a deep-plum screening/licence card |
+| 11 | Next steps | Three glass step cards with gradient number circles joined by a gradient line |
+| 12 | Contact band | Deep-plum card with a photo wash, ribbons and a glass office card |
 
 ### 8.2 Our services — `/services`
 
-- **Page header:** "Jump to a service" grid of the six services.
-- **One section per service:** alternating backgrounds, and a photo that stays in view (sticky) on desktop. Each section has:
-  - name, tagline and description;
-  - the CBC Summer Respite Program block, for CBC only;
-  - a "Services and support" tick list;
-  - a closing note;
-  - "Discuss your needs →" (`CareLink`, which pre-ticks that service in the form) and the phone number.
-- **Then:** Coming soon, Coverage, and **Request more information** (`#request`) with the three steps beside the Google Form.
+- **Page banner** (see §8.0).
+- **Services (`ServiceStack`):** a sticky photo with each service's description as stacking cards. The sizes live in `.svc` in globals.css.
+  - **Phones (under 640px), top and bottom:**
+    - The photo (number and title on it) sticks at the top under the header (`--photo-top`, `--photo-h`). It sits on a cream backing, so departing cards slide under it.
+    - The cards stack just below it (`--stick`), all one size (`--card-h`, filling the rest of the screen, up to 26rem).
+  - **From 640px, side by side:**
+    - The photo card and every stacking card share one size (`--card-h`, up to 34rem, never taller than the space below the header). On desktop the width is `--card-w` = 0.8 × height, and the pair sits centred.
+    - Both stick at `--stick`, centred in the space below the header.
+  - **Photo (sticky):** a large number and the service title on the photo, plus a glass name pill from `sm`. The service whose cards cross the middle of the screen is active. Its photo uses the exact transition from the earlier About page's story section (git `1732445`): it wipes up from the bottom over the previous photo while easing from a 1.08 zoom and fading in (0.9 s, ease-out-expo; CSS `.svc-layer`).
+  - **Stacking cards:** each service's published description (identical to openarmsandheart.org/services) split into cards. Each card sticks a little lower than the one before, and the next slides over it. The cards are:
+    - Overview (tagline and description);
+    - Program (CBC Summer Respite only);
+    - "Services and support", at most 4 items per card so every card fits a phone screen;
+    - Next step (note, "Ask about …" and phone).
+  - **Stacking:** each card sticks 8px lower than the one before. The cards keep their own content centred, and nothing overflows down to 280 × 653 and 320 × 568.
+  - **Release:** the gaps between cards are spacer elements, not margins on the sticky cards. A sticky card's own margin lets the cards beneath it slip away early. With spacers, including one after the last card, the whole stack (Next step on top) holds and then releases together when the service ends.
+  - **Headings and links:** every service has a visually hidden `h2`. The group carries the slug as its id, so `/services#slug` links land on it.
+- **Then:** Coming soon, Coverage, and **Request more information** (`#request`) with glass step cards beside the Google Form.
 
 ### 8.3 About us — `/about`
 
-- **Page header:** "Your family. Your goals. Our heart."
-- **Our story:** the owner's portrait with the four original About Us paragraphs.
-- **Mission:** set as a pull quote.
-- **Who we serve:** four photo cards (Children & families, Adults with disabilities, Seniors, Veterans), each linking to the matching service.
-- **Licensed & trusted:** credentials and licenses.
+- **Page banner:** "Your family. Your goals. *Our heart*." (see §8.0).
+- **Our mission:** copied from the earlier design's home-page manifesto — the mission statement in large type, each word brightening as it scrolls up the screen (CSS `.mission-word`), beside a "Serving Central Florida since 2017" photo card and stat cards (6 types of care, 5 home-health counties, 10 insurances) (`MissionStatement`).
+- **Meet the owner (`#story`):** one rounded lavender panel like the earlier design — portrait in a rotating gradient ring with a "since 2017" badge, name, title, the four story paragraphs as plain prose, and credential pills.
+- **Who we serve:** the bento from the earlier design's home page ("Who we care for", `AudienceBento` at git `1732445`), with the same layout at every screen size:
+  - **Grid:** 6 columns — a tall lead card, then 3 + 3 and 4 + 2. Rows are 140px on phones, 200px from `sm` and 260px from `md`. It uses that version's container (`max-w-7xl`, 16/24/32px gutters) so the card sizes match exactly.
+  - **Cards:** five photo cards with a cursor tilt (`GlowCard tilt`), a zoom on hover, a deep-plum overlay and a frosted icon tile. Each links to its service.
+  - **Card text:** on mouse devices from `md` up, the title rises and the description fades in on hover. Touch screens always show the description. On `sm`–`md` the description is limited to two lines so it never spills out of the shorter cards.
+  - **Audiences:** Children & families, Adults with disabilities, Seniors, Veterans, and Family caregivers ("Caregiver respite, relief and family support").
+  - **Below the grid:** the "Open Arms & Heart Services is only a call away!" strip, with the phone number and a link to Our services.
+- **Licensed & trusted:** glass credentials card with a gradient licence chip.
 - **Contact band.**
 
 ### 8.4 Careers — `/careers`
 
-- **Page header:** "Great Careers Change Lives.", with "Apply online" (the agency's JotForm) and "Ask about current openings" (phone).
-- **Positions:** Home Health Aide and Group Home Staff, each with an Apply button.
-- **Requirements** and **The application asks for** cards, with the EEO/ADA note.
+- **Page header:** "Great Careers *Change Lives*." with "Apply online" (the agency's JotForm) and "Ask about current openings".
+- **Positions:** bento — a photo card plus a glow card per role, each linking to the application details.
+- **Requirements** (glass card) beside **The application asks for** (deep-plum panel with ribbons, EEO/ADA note and "Start your application").
 - **Contact band.**
 
 ### 8.5 FAQ — `/faq`
 
 - **Page header.**
-- **Topic sidebar** (sticky on desktop) with a "Still have questions?" call card.
-- **13 questions** in four groups (Getting started, Our services, Coverage & licensing, Our caregivers), as native `<details>` accordions.
+- **Topic sidebar** (glass, sticky on desktop) with a deep-plum "Still have questions?" card.
+- **13 questions** in four groups as glass `<details>` accordions; the plus button turns into a gradient circle when open.
 - **`FAQPage` JSON-LD.**
 - **Contact band.**
 
 ### 8.6 Contact — `/contact`
 
-- **Page header:** "Let's find the support that feels right."
-- **Contact details:** cards for Call our team, Email, Fax, and Visit our office with "Get directions" (Google Maps search link), plus the licenses. The **Google Form** sits beside them (`#request`).
+- **Page banner:** "Let's find the support that *feels right*." (see §8.0).
+- **Contact details:** glass glow cards with gradient icon tiles (Call our team, Email, Fax, Visit our office + directions) and a gradient licence chip, beside the **Google Form** (`#request`).
 - **Next steps** and **service areas.**
 
 ### 8.7 404
 
-The logo mark, "We couldn't find that page.", a link home and the phone number.
-
----
+The page banner without a photo (the 404 markup ships with every route, so nothing is preloaded): breadcrumb "404", "Page not found", "We couldn't find that page", a link home and the phone number.
 
 ## 9. Component reference
 
 | Component | Kind | Purpose |
 | --- | --- | --- |
 | `brand/Logo` | server | The client's logo (`/brand/logo.png`, 240×188) linking home. It's served through the image optimiser as AVIF/WebP at 1×/2× of its ~102px display width (`getImageProps`, no inline style). With `withName` the company name labels the link (visible from `xl`, screen-reader text below); otherwise the image alt does. |
-| `layout/TopBar` | server | Navy strip with the since-line and phone number |
-| `layout/Header` | client | Sticky header with a CSS hover/focus dropdown for services; mobile phone button and menu (closes on route change); active-link highlighting. The service list arrives as plain `{ href, label }` props from the root layout, so `lib/services.ts` never ships to the browser. |
-| `layout/Footer` | server | Logo, description and licenses · Our services · Company (+ Apply online) · Visit or call (phone, fax, email, address, directions) · resources row · navy copyright bar with "With compassion. With dignity. With open arms." |
+| `layout/TopBar` | server | Slim lavender utility line with the since-line and phone number |
+| `layout/Header` | client | Floating glass pill header (sticky) with a glass hover/focus dropdown for services (numbered gradient tiles); mobile phone button and menu (closes on route change); active-link highlighting. The service list arrives as plain `{ href, label }` props from the root layout, so `lib/services.ts` never ships to the browser. |
+| `layout/Footer` | server | Dark rounded footer: giant outlined ticker of the tagline, motto and closing line · logo (on a white tile), description and licences · Services · Company (+ Apply online) · Visit or call · resources row · copyright |
 | `ui/Photo` | server | Photo built on `getImageProps`. It uses real width/height from `lib/photos.ts` and requires `sizes`. It outputs AVIF/WebP `srcset` at quality 60; the fallback `src` is the 828px variant (what crawlers download), not the largest. It adds no inline styles (a `bg-plum-100` placeholder). `preload` (LCP image only) adds a high-priority `<link rel=preload>` plus `fetchpriority="high"` and eager loading. Everything else is lazy. |
 | `ui/Link` | server | `next/link` with `prefetch={false}` by default. Use it for every internal link (§18). |
-| `ui/PageHeader` | server | Inner-page header: breadcrumb, eyebrow, H1, lead, optional actions, optional photo |
-| `ui/SectionHeading` (+ `Lines`) | server | Eyebrow, heading and lead text. A `\n` in the title becomes a line break on desktop only. Takes `tone="light"` on dark bands and `as="h1"` where needed. |
-| `sections/TrustStrip` | server | Five credentials with ticks on lavender |
-| `sections/ServiceCards` | server | Six service photo cards |
-| `sections/AreasBand` | server | Navy service-areas band |
+| `ui/PageHeader` | server | Page banner: full-bleed photo (`focus` = object-position class) under `BannerOverlay`, behind the header; centred breadcrumb (home icon), ruled eyebrow, white H1 (light accent words), intro and optional actions |
+| `ui/BannerOverlay` | server | The shared dark banner treatment: plum tint, top/bottom gradients, dark pool behind the copy, glowing blobs, faint grid, bottom hairline |
+| `ui/SectionHeading` (+ `Lines`) | server | Eyebrow pill, heading and lead text, revealed on scroll. Full stops are dropped and each sentence starts a new line; `\n` is a desktop-only break; `*phrase*` is a gradient accent. Takes `tone="light"` on dark bands. |
+| `ui/GlowCard` | client | Card with the cursor-following glow. `as` = `div`/`li`/`article`/`a`, or pass `href` for an internal link |
+| `ui/Marquee` | server | Simple single-row CSS ticker |
+| `ui/RevealObserver` | client | One `IntersectionObserver` that reveals `[data-reveal]` elements; re-scans on navigation |
+| `brand/Ribbons` | server | `RibbonDefs` (gradients, once in the layout), `Ribbons`, `Aurora`, `RotatingBadge` |
+| `sections/TrustStrip` | server | Credentials as a single straight gradient ticker |
+| `sections/ServiceCards` | server | The whole home "Our services" section: heading + `.hs` horizontal track of six photo glow cards |
+| `sections/AreasBand` | server | Rounded deep-plum band with glass area cards |
 | `sections/ComingSoon` | server | Skilled Home Health and PPEC |
 | `sections/CareersFeature` | server | Photo and careers copy band |
 | `sections/Coverage` | server | Insurance, screening and licensing, resources (`withResources`) |
-| `sections/Steps` | server | Three steps (`className` sets the background) |
-| `sections/ContactBand` | server | Navy contact band |
+| `sections/Steps` | server | Three glass step cards joined by a gradient line |
+| `sections/ContactBand` | server | Deep-plum closing card with photo wash, ribbons and glass office card |
+| `sections/StackingCards` | server | Home "Questions & answers": sticky stacking Q&A cards from `trustQAs` (`lib/content.ts`) |
+| `sections/HeroSlides` | client | Home banner photos (cross-fade, slow zoom) under `BannerOverlay`, and the glass slide controls |
+| `sections/MissionStatement` | server | About "Our mission" manifesto + stat cards |
+| `sections/ServiceStack` | client | `/services`: sticky photo + title (old About story transition) beside each service's stacking description cards |
 | `forms/GoogleForm` | client | Embedded Google Form (§11). Takes `formLabels` (slug → checkbox label) as a prop. |
 | `forms/CareLink` | client | `<Link href="/contact#request">` that stores service slugs for prefill |
 
@@ -594,7 +648,8 @@ Any Node host works too (`npm run build && npm start`); the security headers com
 
 ## 18. Conventions & gotchas
 
-* **Keep it calm.** The client asked for a less busy site. Don't reintroduce scroll-driven animation, marquees, parallax, glow or tilt effects, or smooth-scroll libraries. Use hover colour changes and a simple layout instead.
+* **Dynamic, but simplified.** The client wants the earlier dynamic design language without its heaviest effects. Fine: glass, glow, gradients, ribbons, one straight ticker, CSS reveals. Avoid: smooth-scroll libraries, JS scroll hijacking (the one pinned section, the home services track, is CSS-only), crossing tickers, parallax, tilt, page curtains, animation libraries. Only animate `transform`/`opacity`.
+* **Headings:** League Spartan capitals, never a full stop (`Lines` drops them); mark gradient accent words with `*…*`.
 * **Content lives in `src/lib/`** and must trace to `docs/` (§16).
 * **Metadata:** always use `pageMetadata()`. Keep `title` ≤ 31 characters and descriptions ≤ 155.
 * **Images:** always use `<Photo>` with an accurate `sizes`. Use `preload` only for the LCP image. Give replacement images new file names. If you add another quality value, also add it to `images.qualities` in `next.config.ts`.
@@ -622,7 +677,8 @@ Any Node host works too (`npm run build && npm start`); the security headers com
 | *Clean redesign* | Per the owner's feedback and mock-up: calm, professional layout and navigation; Source Serif 4 + Source Sans 3 (headings later changed to Varela); the client's real logo and favicons; 15 new photos reflecting the people served; mock-up content (Haines City address, credentials, taglines, CBC Summer Respite, coming-soon programs, corrected insurance names, steps, careers copy); every motion effect, Lenis and the `motion` dependency removed; new `docs/client-mockup-content.md` |
 | *Site-Optimization part ii* | SiteChecker audit of 2026-10-25: lean `<Photo>` pipeline and LCP preload, no-prefetch `Link`, on-demand Google Form, plain-data Header, static compressed logo and favicons, og:image on every page, unique headings and anchors, `<strong>` emphasis, no inline styles, fewer duplicate external links, Tailwind source scoping (§13) |
 | *Second audit fixes* | Follow-up SiteChecker audit (71/100): logo through the image optimiser (AVIF/WebP), `/services` first photo preloaded, 404 logo no longer auto-preloaded on every page, screen-reader context for one-word nav and breadcrumb links; console errors and the route-announcer style identified as crawler / framework artefacts (§13) |
-| **Heading font (this version)** | Client disliked the Source Serif headings. After trying Varela, all-caps headings, Helvetica/Arial and Geist, headings and other display text now use League Spartan with a Manrope fallback (medium weight); h1/h2 are in capitals |
+| *Heading font* | Client disliked the Source Serif headings. After trying Varela, all-caps headings, Helvetica/Arial and Geist, headings and other display text now use League Spartan with a Manrope fallback (medium weight); h1/h2 are in capitals |
+| **Dynamic design restored (this version)** | Client feedback: the content was right but the design too simplified. Brought back the earlier design philosophy (iris/blush palette, aurora/ribbon heroes, arch photos, glass, glow cards, photo overlays, deep-plum bands, scroll-spy sidebar, dark footer with outlined ticker) with simplifications: one straight ticker, CSS-only motion, no smooth-scroll/parallax; the home services cards later became a CSS-only pinned horizontal track. Content unchanged; League Spartan capital headings without full stops kept |
 
 ---
 
@@ -630,7 +686,7 @@ Any Node host works too (`npm run build && npm start`); the security headers com
 
 The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license): free for commercial use, no attribution required. They are self-hosted in `public/images/` and should be replaced with the agency's own photography when it's available.
 
-<details><summary>Source of each image (16 photos + logo)</summary>
+<details><summary>Source of each image (24 photos + logo)</summary>
 
 | File | Source |
 | --- | --- |
@@ -640,7 +696,6 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 | `family-game-night.jpg` | https://unsplash.com/photos/family-playing-board-games-VJVsEnR_vNE |
 | `friends-smiling.jpg` | https://unsplash.com/photos/two-women-pose-arm-in-arm-smiling-LTgaxUAGNUk |
 | `grandmother-granddaughter.jpg` | https://unsplash.com/photos/woman-in-blue-tank-top-wearing-eyeglasses-smiling-Ig4-rFIl7as |
-| `hero-home.jpg` | https://unsplash.com/photos/a-man-and-woman-sitting-on-a-couch-looking-at-a-tablet-UWZNnNQjraI |
 | `nurse-home-visit.jpg` | https://unsplash.com/photos/a-doctor-checking-a-patients-blood-pressure-dcBO4nt4MRE |
 | `senior-conversation.jpg` | https://unsplash.com/photos/a-man-sitting-on-a-couch-talking-to-another-man-N5GljcLSmK4 |
 | `service-apd.jpg` | https://unsplash.com/photos/a-man-in-a-wheel-chair-in-a-kitchen-75xbITy2szk |
@@ -648,6 +703,16 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 | `service-home-care.jpg` | https://unsplash.com/photos/a-man-and-a-woman-in-a-living-room-HscUZd52tQk |
 | `service-veterans.jpg` | https://unsplash.com/photos/two-men-talking-one-wears-a-veteran-hat-ydAyN8eRIDw |
 | `service-vulnerable-adult.jpg` | https://unsplash.com/photos/an-old-man-and-a-young-woman-are-smiling-c4Fl1BKDJLQ |
+| `therapy-play.jpg` (banner) | https://images.unsplash.com/photo-1708686816818-2b018e0c1296 |
+| `personal-supports.jpg` (banner) | https://images.unsplash.com/photo-1709127347874-3f4674be5bc8 |
+| `grandpa-granddaughter.jpg` (banner) | https://images.unsplash.com/photo-1609113006359-1e9c378ab54d |
+| `friends-talking.jpg` (banner) | https://images.unsplash.com/photo-1773227059784-c1e36cc8c8c9 |
+| `family-baking.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1758874960394-afd9ead46eba |
+| `activities-coloring.jpg` (Q&A) | https://images.unsplash.com/photo-1762955911431-4c44c7c3f408 |
+| `caregiver-portrait.jpg` (Q&A) | https://images.unsplash.com/photo-1585842378054-ee2e52f94ba2 |
+| `nurse-blood-pressure.jpg` (Q&A) | https://images.unsplash.com/photo-1631815590058-860e4f83c1e8 |
+| `nurses-team.jpg` (Q&A) | https://unsplash.com/photos/AZq99Wqunjs |
+| `hands-mission.jpg` (About mission card) | https://images.unsplash.com/photo-1454875392665-2ac2c85e8d3e |
 | `live-scan.jpg` | https://images.unsplash.com/photo-1585079374502-415f8516dcc3 |
 | `founder-shantana-johnson.jpg` | **Client-owned** — from the agency's original website (About Us) |
 | `public/brand/logo.png`, `logo-640.png`, `logo-mark.png`, `src/app/icon.png`, `apple-icon.png` | **Client-owned** — the agency's logo (from the owner's mock-up files) |

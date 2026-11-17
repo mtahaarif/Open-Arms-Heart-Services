@@ -1,29 +1,18 @@
 import Link from "@/components/ui/Link";
 import { Phone } from "lucide-react";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { site } from "@/lib/site";
 
+/* This boundary ships in every page's payload, so its banner has no photo (nothing to preload). */
 export default function NotFound() {
   return (
-    <section className="bg-cream">
-      <div className="wrap grid min-h-[60svh] place-items-center py-20 text-center">
-        <div>
-          {/* This boundary ships in every page's payload; loading="lazy" stops React from
-              auto-preloading the image on pages that never show it. */}
-          {/* eslint-disable-next-line @next/next/no-img-element -- tiny static PNG */}
-          <img src="/brand/logo-mark.png" alt="" width={200} height={154} loading="lazy" className="mx-auto h-20 w-auto" />
-          <p className="eyebrow mt-8">Page not found</p>
-          <h1 className="mt-3">We couldn&apos;t find that page</h1>
-          <p className="lead mx-auto mt-4 max-w-md">Our arms are still open. Let&apos;s get you back on track.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/" className="btn-primary">
-              Back to home
-            </Link>
-            <a href={site.phone.href} className="btn-outline">
-              <Phone className="size-4" /> {site.phone.display}
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <PageHeader eyebrow="Page not found" title="We couldn't find that page" text="Our arms are still open. Let's get you back on track." crumb="404" preload={false}>
+      <Link href="/" className="btn-primary">
+        Back to home
+      </Link>
+      <a href={site.phone.href} className="btn-outline-light">
+        <Phone className="size-4 text-blush-300" /> {site.phone.display}
+      </a>
+    </PageHeader>
   );
 }

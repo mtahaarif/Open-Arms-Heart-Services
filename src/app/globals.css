@@ -2,42 +2,103 @@
 @import "tailwindcss" source("../");
 
 /* ───────────────────────── Brand tokens ─────────────────────────
- * From the logo and the owner's mock-up: navy text, logo purple, a soft pink accent,
- * and cream / lavender section backgrounds.
+ * The logo's iris purple and blush pink, on a soft lavender paper. `plum` is the brand scale,
+ * `navy` the deep-plum scale used for dark bands and the footer.
  */
+/* Devices with a real hover (mouse / trackpad): hover-reveal effects only hide content there. */
+@custom-variant can-hover (@media (hover: hover) and (pointer: fine));
+
 @theme {
-  --color-navy-50: #f4f6f9;
-  --color-navy-100: #dce2ec;
-  --color-navy-200: #c8d0db;
-  --color-navy-300: #9aa6b8;
-  --color-navy-600: #43536b;
-  --color-navy-700: #2c3e5c;
-  --color-navy-800: #1f3352;
-  --color-navy-900: #172b48;
-  --color-navy-950: #112039;
+  --color-plum-50: #f8f5fe;
+  --color-plum-100: #f0e9fc;
+  --color-plum-200: #e1d2f8;
+  --color-plum-300: #c9aff1;
+  --color-plum-400: #aa86e4;
+  --color-plum-500: #8b60d3;
+  --color-plum-600: #7446bd;
+  --color-plum-700: #60349f;
+  --color-plum-800: #4b2a7d;
+  --color-plum-900: #331b58;
+  --color-plum-950: #1d0f35;
 
-  --color-plum-50: #f8f5fb;
-  --color-plum-100: #f0eaf5;
-  --color-plum-200: #e2d3ec;
-  --color-plum-300: #c9b0dc;
-  --color-plum-400: #9e80b3;
-  --color-plum-500: #7f4fa3;
-  --color-plum-600: #713c98;
-  --color-plum-700: #65318b;
-  --color-plum-800: #522772;
-  --color-plum-900: #3d1d55;
+  --color-navy-100: #e1d2f8;
+  --color-navy-200: #c9b9e6;
+  --color-navy-300: #a597c2;
+  --color-navy-600: #4b3a6e;
+  --color-navy-700: #3a2a5c;
+  --color-navy-800: #2a1b47;
+  --color-navy-900: #1d0f35;
+  --color-navy-950: #140a26;
 
-  --color-blush-100: #fde8f1;
-  --color-blush-200: #fad0e2;
-  --color-blush-300: #f5b3cf;
-  --color-blush-400: #ef8ab5;
-  --color-blush-500: #e0659a;
-  --color-blush-600: #c94b82;
+  --color-blush-50: #fff3f8;
+  --color-blush-100: #fee5ef;
+  --color-blush-200: #fdcbe0;
+  --color-blush-300: #f9a8c9;
+  --color-blush-400: #f48bb5;
+  --color-blush-500: #ea6a9c;
+  --color-blush-600: #d34b82;
+  --color-blush-700: #b03567;
 
-  --color-ink: #172b48;
-  --color-body: #435167;
-  --color-cream: #faf8f5;
-  --color-line: #e6e3eb;
+  --color-ink: #24173a;
+  --color-body: #5e5373;
+  --color-cream: #fdfbff;
+  --color-line: #ece4f8;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee var(--duration, 40s) linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 10s ease-in-out infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+  --animate-blob: blob 18s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - var(--gap, 0px) / 2)); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--r, 0deg)); }
+    50% { transform: translate3d(0, -12px, 0) rotate(var(--r, 0deg)); }
+  }
+  @keyframes blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(6%, -8%) scale(1.08); }
+    66% { transform: translate(-6%, 6%) scale(0.94); }
+  }
+  /* Above-the-fold entrances: CSS so they run at first paint, without waiting for JavaScript. */
+  @keyframes enter-up {
+    from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  }
+  /* Movement only — used on headlines so they count as painted immediately (LCP). */
+  @keyframes rise {
+    from { transform: translate3d(0, 0.45em, 0); }
+  }
+  @keyframes enter-pop {
+    from { opacity: 0; transform: scale(0.8); }
+  }
+  /* The hero photo is painted from the first frame (fast LCP); it only settles into place
+     (transform-only, so it runs on the compositor). */
+  @keyframes arch-reveal {
+    from { transform: translate3d(0, 24px, 0) scale(0.96); }
+  }
+  /* Home banner: slow zoom on the active photo, the slide progress bar, and the headline's
+     line-by-line reveal (each line slides up from behind its own mask). */
+  @keyframes shine {
+    to { transform: translateX(300%) skewX(-20deg); }
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.08); }
+    to { transform: scale(1.02); }
+  }
+  @keyframes hero-progress {
+    from { transform: scaleX(0); }
+  }
+  @keyframes mask-up {
+    from { transform: translate3d(0, 105%, 0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+  }
 }
 
 @theme inline {
@@ -50,31 +111,52 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 7rem;
+    scroll-padding-top: 7.5rem;
     -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
   }
   body {
-    @apply bg-white font-sans text-[1.0625rem] leading-[1.7] text-body antialiased;
+    @apply bg-cream font-sans text-[1.0625rem] leading-[1.7] text-body antialiased;
+    overflow-x: clip;
   }
   h1,
   h2 {
     @apply font-display font-medium tracking-[0.01em] text-balance text-ink uppercase;
   }
   h1 {
-    @apply text-[2rem] leading-[1.1] sm:text-[2.6rem] lg:text-[3rem];
+    @apply text-[2.1rem] leading-[1.05] sm:text-[2.9rem] lg:text-[3.4rem];
   }
   h2 {
-    @apply text-[1.65rem] leading-[1.15] sm:text-[2.05rem];
+    @apply text-[1.7rem] leading-[1.1] sm:text-[2.2rem];
   }
   h3 {
     @apply font-sans text-xl leading-snug font-bold text-ink;
   }
   ::selection {
-    @apply bg-plum-200 text-ink;
+    @apply bg-blush-200 text-plum-900;
   }
   :focus-visible {
-    @apply rounded-sm outline-3 outline-offset-4 outline-blush-500;
+    @apply rounded-md outline-3 outline-offset-4 outline-blush-500;
   }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Reveal-on-scroll: only hidden once JavaScript has marked the page (`html.js`), so crawlers
+     and no-JS visitors always see everything. components/ui/RevealObserver.tsx adds `.is-in`. */
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+    transition:
+      opacity 0.9s var(--ease-out-expo),
+      transform 0.9s var(--ease-out-expo);
+    transition-delay: var(--d, 0ms);
+  }
+  html.js [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -82,50 +164,369 @@
     *,
     *::before,
     *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+    html.js [data-reveal] {
+      opacity: 1;
+      transform: none;
     }
   }
 }
 
-/* ───────────────────────── Utilities ───────────────────────── */
+/* ───────────────────────── Horizontal scroll track ─────────────────────────
+ * `.hs` section › `.hs-pin` › `.hs-track` (list of cards); set `--n` to the card count.
+ * Everywhere: a native, swipeable row that snaps to each card. On desktop browsers that support
+ * scroll-driven animations, the section pins to the viewport and vertical scrolling slides the
+ * track sideways (`.hs-bar` shows progress) — pure CSS, compositor-only (transform).
+ */
+@layer components {
+  .hs {
+    --hs-card: min(82vw, 24rem);
+    --hs-gap: 1.25rem;
+    --hs-pad: max(1rem, calc((100vw - 1200px) / 2 + 1.75rem));
+  }
+  .hs-track {
+    display: flex;
+    gap: var(--hs-gap);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--hs-pad);
+    scrollbar-width: none;
+    padding-inline: var(--hs-pad);
+    padding-block: 0.5rem 2rem;
+  }
+  .hs-track::-webkit-scrollbar {
+    display: none;
+  }
+  .hs-track > * {
+    flex: 0 0 auto;
+    width: var(--hs-card);
+    scroll-snap-align: start;
+  }
+  @supports (animation-timeline: view()) {
+    @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+      .hs {
+        --hs-track-w: calc(var(--n) * var(--hs-card) + (var(--n) - 1) * var(--hs-gap) + 2 * var(--hs-pad));
+        --hs-distance: max(0px, calc(var(--hs-track-w) - 100vw));
+        height: calc(100svh + var(--hs-distance));
+        view-timeline-name: --hs;
+      }
+      .hs-pin {
+        position: sticky;
+        top: 0;
+        display: flex;
+        height: 100svh;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        padding-top: 6.5rem; /* clear the floating header */
+      }
+      .hs-track {
+        width: max-content;
+        overflow: visible;
+        animation: hs-scroll linear both;
+        animation-duration: auto;
+        animation-timeline: --hs;
+        animation-range: contain;
+      }
+      .hs-bar {
+        animation: grow-x linear both;
+        animation-duration: auto;
+        animation-timeline: --hs;
+        animation-range: contain;
+      }
+    }
+  }
+}
+/* Stacking cards (home "Questions & answers"): each card sticks; as the stack scrolls, earlier
+   cards shrink (`--qa-s`) and dim (`--qa-dim`) over per-card `animation-range`s set in
+   StackingCards.tsx. Pure CSS, compositor-only; elsewhere the cards simply stack. */
+@layer components {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .qa-stack {
+        view-timeline-name: --qa;
+      }
+      .qa-card {
+        transform-origin: top center;
+        animation: qa-shrink linear both;
+        animation-duration: auto;
+        animation-timeline: --qa;
+      }
+      .qa-dim {
+        animation: qa-dim linear both;
+        animation-duration: auto;
+        animation-timeline: --qa;
+      }
+    }
+  }
+}
+/* "Our mission" (About): each word brightens as it rises through the lower part of the screen. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* The paragraph is the timeline: the reveal runs from its top at 85% of the screen to its bottom
+       at 45%, and each word (--i of --n) takes its own slice in reading order. */
+    .mission-text {
+      view-timeline-name: --mission;
+    }
+    .mission-word {
+      --a: calc(15vh + (100% - 60vh) * var(--i) / var(--n));
+      --b: calc(15vh + (100% - 60vh) * (var(--i) + 1) / var(--n));
+      animation: mission-word linear both;
+      animation-duration: auto;
+      animation-timeline: --mission;
+      animation-range: cover var(--a) cover var(--b);
+    }
+  }
+}
+@keyframes mission-word {
+  from {
+    opacity: 0.14;
+    transform: translate3d(0, 6px, 0);
+  }
+}
+@keyframes qa-shrink {
+  to {
+    transform: scale(var(--qa-s, 1));
+  }
+}
+@keyframes qa-dim {
+  to {
+    opacity: var(--qa-dim, 0);
+  }
+}
+@keyframes hs-scroll {
+  to {
+    transform: translate3d(calc(-1 * var(--hs-distance)), 0, 0);
+  }
+}
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* ───────────────────────── Layout & type ───────────────────────── */
 @utility wrap {
-  @apply mx-auto w-full max-w-[1180px] px-4 sm:px-7;
+  @apply mx-auto w-full max-w-[1200px] px-4 sm:px-7;
 }
 @utility section {
-  @apply py-16 sm:py-24;
+  @apply py-20 sm:py-28;
 }
+/* Small pill label above headings, with a pink dot. */
 @utility eyebrow {
-  @apply text-xs font-bold tracking-[0.18em] text-plum-700 uppercase;
+  @apply inline-flex items-center gap-2 rounded-full border border-plum-200/80 bg-white/70 px-3.5 py-1.5 text-xs font-bold tracking-[0.16em] text-plum-700 uppercase backdrop-blur-md;
+  &::before {
+    content: "";
+    @apply size-1.5 shrink-0 rounded-full bg-blush-500;
+  }
+}
+@utility eyebrow-dark {
+  @apply eyebrow border-white/15 bg-white/5 text-blush-200;
 }
 @utility lead {
   @apply text-lg leading-relaxed sm:text-[1.1875rem];
 }
-@utility btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-md px-6 py-3.5 text-[0.95rem] font-semibold whitespace-nowrap transition-colors duration-200;
+@utility text-gradient {
+  @apply bg-linear-to-r from-plum-700 via-plum-500 to-blush-500 bg-clip-text text-transparent;
 }
-@utility btn-primary {
-  @apply btn bg-plum-700 text-white hover:bg-plum-800;
+@utility text-gradient-light {
+  @apply bg-linear-to-r from-blush-200 via-white to-plum-200 bg-clip-text text-transparent;
 }
-@utility btn-outline {
-  @apply btn border border-plum-700 text-plum-700 hover:bg-plum-50;
+
+/* ───────────────────────── Surfaces ───────────────────────── */
+@utility glass {
+  background: linear-gradient(140deg, rgb(255 255 255 / 0.78), rgb(255 255 255 / 0.48));
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  border: 1px solid rgb(255 255 255 / 0.75);
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.8) inset,
+    0 20px 50px -22px rgb(51 27 88 / 0.28);
 }
-@utility btn-light {
-  @apply btn bg-white text-plum-700 hover:bg-plum-50;
-}
-@utility link-arrow {
-  @apply inline-flex items-center gap-1.5 font-semibold text-plum-700 underline decoration-plum-300 underline-offset-[5px] transition-colors hover:text-plum-800 hover:decoration-plum-700;
+@utility glass-dark {
+  background: linear-gradient(140deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.03));
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgb(255 255 255 / 0.13);
+  box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.08) inset;
 }
 @utility card {
-  @apply rounded-lg border border-line bg-white shadow-[0_6px_20px_-12px_rgb(23_43_72/0.18)];
+  @apply rounded-[1.75rem] border border-line bg-white/85 shadow-[0_20px_50px_-30px_rgb(51_27_88/0.35)];
 }
-/* Tick-mark list; spacing is set where it's used (space-y-* or a grid gap).
-   The tick scales with the font size and centres on the first line of each item. */
+/* Deep-plum band with soft colour glows. */
+@utility band-dark {
+  @apply relative isolate overflow-hidden bg-navy-900 text-navy-100;
+  background-image:
+    radial-gradient(circle at 85% 0%, rgb(234 106 156 / 0.22), transparent 42%),
+    radial-gradient(circle at 0% 100%, rgb(139 96 211 / 0.35), transparent 48%);
+}
+@utility hairline-grid {
+  background-image:
+    linear-gradient(to right, rgb(116 70 189 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(116 70 189 / 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+@utility mask-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+/* Above-the-fold entrance (pair with --d for a delay). */
+@utility enter {
+  animation: var(--enter, enter-up) 0.9s var(--ease-out-expo) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Cursor-following gradient border + spotlight (pairs with <GlowCard>). */
+@utility glow-card {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(420px circle at var(--mx) var(--my), rgb(234 106 156 / 0.85), rgb(139 96 211 / 0.6) 35%, transparent 65%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 3;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(520px circle at var(--mx) var(--my), rgb(201 175 241 / 0.22), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+  &:hover::before,
+  &:hover::after,
+  &:focus-within::before {
+    opacity: 1;
+  }
+}
+
+/* ───────────────────────── Buttons & links ───────────────────────── */
+@utility btn {
+  @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[0.95rem] font-semibold whitespace-nowrap transition-all duration-300 select-none;
+}
+@utility btn-primary {
+  @apply btn text-white;
+  background-image: linear-gradient(120deg, var(--color-plum-700), var(--color-plum-500) 55%, var(--color-blush-500));
+  background-size: 160% 100%;
+  background-position: 0% 0;
+  box-shadow:
+    0 10px 30px -10px rgb(116 70 189 / 0.65),
+    inset 0 1px 0 rgb(255 255 255 / 0.25);
+  &:hover {
+    background-position: 100% 0;
+    box-shadow:
+      0 16px 40px -12px rgb(234 106 156 / 0.6),
+      inset 0 1px 0 rgb(255 255 255 / 0.25);
+  }
+}
+/* A light sweep across the button on hover. */
+@utility btn-shine {
+  overflow: hidden;
+  isolation: isolate;
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 50%;
+    transform: translateX(-150%) skewX(-20deg);
+    background: rgb(255 255 255 / 0.28);
+    pointer-events: none;
+  }
+  &:hover::after {
+    animation: shine 0.9s ease;
+  }
+}
+@utility btn-outline {
+  @apply btn glass text-plum-800 hover:text-plum-950;
+}
+@utility btn-light {
+  @apply btn bg-white text-plum-900 shadow-[0_10px_30px_-10px_rgb(0_0_0/0.35)] hover:bg-blush-50;
+}
+@utility btn-outline-light {
+  @apply btn border border-white/30 text-white hover:border-white/70 hover:bg-white/10;
+}
+@utility link-arrow {
+  @apply inline-flex items-center gap-1.5 font-semibold text-plum-700 underline decoration-plum-300 underline-offset-[5px] transition-colors hover:text-blush-600 hover:decoration-blush-400;
+}
+
+/* Gradient-circle tick list; spacing is set where it's used (space-y-* or a grid gap). */
 @utility check-list {
   & > li {
-    @apply relative pl-[1.6em];
+    @apply relative pl-[1.9em];
   }
   & > li::before {
     content: "";
-    @apply absolute top-[calc(0.5lh-0.42em)] left-[0.2em] h-[0.62em] w-[0.34em] rotate-45 border-r-2 border-b-2 border-plum-700;
+    @apply absolute top-[calc(0.5lh-0.6em)] left-0 size-[1.2em] rounded-full bg-linear-to-br from-plum-600 to-blush-500;
+  }
+  & > li::after {
+    content: "";
+    @apply absolute top-[calc(0.5lh-0.3em)] left-[0.45em] h-[0.5em] w-[0.28em] rotate-45 border-r-2 border-b-2 border-white;
+  }
+}
+
+/* /services (<ServiceStack>): the photo stack beside the service cards, with the exact transition
+   of the earlier About page's story section — the active photo wipes up from the bottom over the
+   previous one while easing from a 1.08 zoom and fading in (0.9 s, ease-out-expo). */
+@layer components {
+  /* Phones (< 640px): the photo sticks at the top, under the header, and the cards stack below it
+     — `--photo-top` / `--photo-h` place the photo, `--stick` is where the cards stick (just under
+     it) and `--card-h` fills what is left of the screen (leaving room for the stack's peeks).
+     From 640px: photo and cards side by side, one shared size, both sticking centred below the
+     header; `--card-w` (desktop) keeps them a 4 : 5 pair. */
+  .svc {
+    --hdr: 5.5rem;
+    --photo-top: calc(var(--hdr) - 0.25rem);
+    --photo-h: clamp(7.5rem, 22svh, 15rem);
+    --stick: calc(var(--photo-top) + 0.5rem + var(--photo-h) + 0.75rem);
+    --card-h: min(26rem, calc(100svh - var(--stick) - 2.75rem));
+  }
+  @media (min-width: 640px) {
+    .svc {
+      --card-h: min(34rem, calc(100svh - var(--hdr) - 5rem));
+      --stick: calc(var(--hdr) + (100svh - var(--hdr) - var(--card-h)) / 2 - 1.25rem);
+    }
+  }
+  @media (min-width: 1024px) {
+    .svc {
+      --hdr: 6rem;
+      --card-w: calc(var(--card-h) * 0.8);
+    }
+  }
+  .svc-layer {
+    opacity: 0;
+    transform: scale(1.08);
+    clip-path: inset(100% 0 0 0);
+    transition:
+      opacity 0.9s var(--ease-out-expo),
+      transform 0.9s var(--ease-out-expo),
+      clip-path 0.9s var(--ease-out-expo);
+  }
+  .svc-layer[data-state="past"] {
+    clip-path: inset(0 0 0 0);
+  }
+  .svc-layer[data-state="on"] {
+    opacity: 1;
+    transform: scale(1);
+    clip-path: inset(0 0 0 0);
   }
 }

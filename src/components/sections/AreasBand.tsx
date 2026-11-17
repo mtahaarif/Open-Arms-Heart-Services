@@ -1,28 +1,36 @@
 import Link from "@/components/ui/Link";
-import { MapPin } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
+import { Ribbons } from "@/components/brand/Ribbons";
+import { GlowCard } from "@/components/ui/GlowCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
 
-/** "Proudly serving Central Florida." — navy band with the two service-area statements. */
+/** "Proudly serving Central Florida." — rounded deep-plum band with ribbons and glass area cards. */
 export function AreasBand() {
   return (
-    <section className="section bg-navy-900 text-navy-100">
+    <section className="py-10 sm:py-14">
       <div className="wrap">
-        <SectionHeading eyebrow="Close to home" title="Proudly serving Central Florida." tone="light" />
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 sm:gap-12">
-          {site.areas.map((a) => (
-            <div key={a.label} className="border-t border-navy-600 pt-6">
-              <h3 className="flex items-center gap-2.5 text-white">
-                <MapPin className="size-5 text-blush-300" aria-hidden /> {a.label}
-              </h3>
-              <p className="mt-3 text-lg">{a.text}</p>
-              <Link href={a.href} className="mt-4 inline-block text-sm font-semibold text-blush-200 underline underline-offset-4 hover:text-white">
-                About this service
-              </Link>
-            </div>
-          ))}
+        <div className="band-dark rounded-[2.5rem] px-6 py-14 sm:px-12 sm:py-20 lg:px-16">
+          <Ribbons className="absolute -right-20 -bottom-10 -z-10 h-full w-[80%] opacity-60" />
+          <SectionHeading eyebrow="Close to home" title="Proudly serving *Central Florida*." tone="light" />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2">
+            {site.areas.map((a, i) => (
+              <GlowCard key={a.label} className={`glass-dark rounded-[1.75rem] p-7 sm:p-8 ${i ? "[--d:120ms]" : ""}`} data-reveal>
+                <div className="relative z-[4]">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-linear-to-br from-plum-500 to-blush-500 text-white shadow-lg shadow-blush-500/25">
+                    <MapPin className="size-5" aria-hidden />
+                  </span>
+                  <h3 className="mt-5 font-display text-2xl font-medium text-white uppercase">{a.label}</h3>
+                  <p className="mt-2 text-lg text-navy-100/85">{a.text}</p>
+                  <Link href={a.href} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-blush-200 hover:text-white">
+                    About this service <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </GlowCard>
+            ))}
+          </div>
+          <p className="mt-10 border-t border-white/10 pt-6 text-sm text-navy-100/70">{site.areaNote}</p>
         </div>
-        <p className="mt-10 border-t border-navy-600 pt-6 text-sm">{site.areaNote}</p>
       </div>
     </section>
   );
