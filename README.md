@@ -320,7 +320,7 @@ Modelled on the About banner of lovethyneighborhhc.com:
 | 4 | Welcome | "At home. In the community. *By your side*." with audience pills, beside the glass "Finding care should feel less overwhelming" call card |
 | 5 | A personal approach | Arch photo with a glass "2017 · Central Florida" chip; "Your family. Your goals. *Our heart*." and gradient/glass buttons |
 | 6 | Our services | Horizontal card track (modelled on mourningdovehomecare.com "What we offer"): on desktop the section pins and scrolling down slides the six photo cards sideways, with a progress bar and "Scroll to explore" hint; on phones a swipeable row that snaps to each card |
-| 6b | Questions & answers | Copied from the earlier design: "Questions & *answers*" intro (sticky on desktop, phone + "All FAQs") beside four sticky stacking Q&A cards (number, icon, question, answer, insurance or licence chips, photo on desktop). Earlier cards shrink and dim as later ones slide over them (CSS scroll-driven, `.qa-*`) |
+| 6b | Questions & answers | Copied from the earlier design: "Questions & *answers*" intro (sticky on desktop, phone + "All FAQs") beside four sticky stacking Q&A cards (number, icon, question, answer, insurance or licence chips, and a photo: the right column from md, the top half of the card on phones). Earlier cards shrink and dim as later ones slide over them (CSS scroll-driven, `.qa-*`) |
 | 7 | Service areas | Rounded deep-plum band with ribbons and two glass area cards |
 | 8 | Coming soon | Arch photo + glow cards with gradient "Coming soon" pills |
 | 9 | Careers | Rounded lavender panel: photo with glass role chips + copy |
