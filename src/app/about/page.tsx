@@ -34,7 +34,7 @@ export default function AboutPage() {
         title={"Your family.\nYour goals. *Our heart*."}
         text={rich(approach.join(" "))}
         crumb="About us"
-        image="/images/banners/about.jpg"
+        image="/images/banners/about.webp"
         imageAlt="An older man and his adult son laughing over a family photo album at the kitchen table"
         focus="object-[55%_25%]"
       />
@@ -49,13 +49,13 @@ export default function AboutPage() {
             className="relative isolate grid items-center gap-12 overflow-hidden rounded-[2.5rem] bg-linear-to-br from-plum-50 via-white to-blush-50 p-6 ring-1 ring-plum-100 sm:p-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14"
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- decorative tiny static PNG */}
-            <img src="/brand/logo-mark.png" alt="" width={200} height={154} loading="lazy" className="absolute -right-10 -bottom-10 -z-10 h-72 w-auto opacity-[0.06]" />
+            <img src="/brand/logo-mark.webp" alt="" width={200} height={154} loading="lazy" className="absolute -right-10 -bottom-10 -z-10 h-72 w-auto opacity-[0.06]" />
             <div className="relative mx-auto w-full max-w-sm lg:self-start">
               <div className="relative isolate overflow-hidden rounded-[2.3rem] p-[6px] shadow-[0_30px_70px_-30px_rgb(96_52_159/0.6)]">
                 <div className="animate-spin-slow absolute -inset-1/2 -z-10 bg-[conic-gradient(from_0deg,var(--color-plum-500),var(--color-blush-400),var(--color-plum-200),var(--color-blush-500),var(--color-plum-500))]" />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-white">
                   <Photo
-                    src="/images/founder-shantana-johnson.jpg"
+                    src="/images/founder-shantana-johnson.webp"
                     alt={`${site.owner.name}, ${site.owner.title.toLowerCase()} of ${site.name}`}
                     sizes="(min-width: 1024px) 384px, 90vw"
                     className="object-top"
@@ -95,23 +95,23 @@ export default function AboutPage() {
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading align="center" eyebrow="Who we serve" title="Support for *every stage of life*." />
 
-          <ul className="mt-16 grid auto-rows-[140px] grid-cols-6 gap-2.5 sm:auto-rows-[200px] sm:gap-4 md:auto-rows-[260px]">
+          <ul className="mt-16 grid auto-rows-[140px] grid-cols-6 gap-2.5 sm:auto-rows-[200px] sm:gap-4 md:auto-rows-[260px] lg:mx-auto lg:max-w-[min(100%,61rem)] lg:auto-rows-[208px] lg:gap-3.5">
             {audiences.map((a, i) => (
               <li key={a.title} data-reveal className={bento[i]}>
                 <GlowCard tilt href={a.href} className="group relative isolate block h-full overflow-hidden rounded-[1.4rem] sm:rounded-[2rem]">
                   <Photo
                     src={a.image}
                     alt={a.alt}
-                    sizes="(min-width: 768px) 50vw, 100vw"
+                    sizes="(min-width: 1024px) 660px, (min-width: 768px) 810px, 115vw"
                     className="-z-10 transition duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110"
                   />
                   <div className="absolute inset-0 -z-10 bg-linear-to-t from-plum-950/90 via-plum-950/30 to-transparent transition-opacity duration-700 group-hover:opacity-95" />
-                  <div className="relative z-10 flex h-full flex-col justify-between p-3 sm:p-6">
-                    <span className="glass-dark grid size-9 place-items-center rounded-xl text-blush-200 sm:size-12 sm:rounded-2xl">
+                  <div className="relative z-10 flex h-full flex-col justify-between p-3 sm:p-6 lg:p-5">
+                    <span className="glass-dark grid size-9 place-items-center rounded-xl text-blush-200 sm:size-12 sm:rounded-2xl lg:size-10 lg:rounded-xl">
                       <a.icon className="size-4 sm:size-5" aria-hidden />
                     </span>
                     <div className="transition-transform duration-700 ease-[var(--ease-out-expo)] md:can-hover:translate-y-10 md:can-hover:group-hover:translate-y-0">
-                      <h3 className="font-display text-[0.95rem] leading-tight font-medium text-white uppercase hyphens-auto max-[359px]:text-[0.72rem] sm:text-2xl md:text-3xl">{a.title}</h3>
+                      <h3 className="font-display text-[0.95rem] leading-tight font-medium text-white uppercase hyphens-auto max-[359px]:text-[0.72rem] sm:text-2xl md:text-3xl lg:text-2xl">{a.title}</h3>
                       <p className="mt-2 hidden max-w-sm text-white/80 transition-opacity duration-700 sm:line-clamp-2 md:line-clamp-none md:can-hover:opacity-0 md:can-hover:group-hover:opacity-100">
                         {a.text}
                       </p>
@@ -122,15 +122,15 @@ export default function AboutPage() {
             ))}
           </ul>
 
-          <div data-reveal className="mt-4 [--d:150ms]">
-            <GlowCard className="flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-plum-100 bg-linear-to-r from-plum-50 via-white to-blush-50 p-7 sm:flex-row sm:items-center sm:p-9">
+          <div data-reveal className="mt-4 [--d:150ms] lg:mx-auto lg:mt-3.5 lg:max-w-[min(100%,61rem)]">
+            <GlowCard className="flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-plum-100 bg-linear-to-r from-plum-50 via-white to-blush-50 p-7 sm:flex-row sm:items-center sm:p-9 lg:rounded-[1.6rem] lg:px-8 lg:py-7">
               <div className="relative z-10">
-                <p className="font-display text-2xl text-plum-950 sm:text-3xl">Open Arms &amp; Heart Services is only a call away!</p>
+                <p className="font-display text-2xl text-plum-950 sm:text-3xl lg:text-2xl">Open Arms &amp; Heart Services is only a call away!</p>
                 <p className="mt-1">
                   Office: {site.phone.display} · {site.email}
                 </p>
               </div>
-              <div className="relative z-10 flex flex-wrap gap-3">
+              <div className="relative z-10 flex flex-wrap gap-3 lg:shrink-0 lg:flex-nowrap">
                 <a href={site.phone.href} className="btn-primary">
                   <Phone className="size-4" /> {site.phone.display}
                 </a>

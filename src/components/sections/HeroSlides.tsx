@@ -42,7 +42,7 @@ export function HeroSlides({ slides }: { slides: Slide[] }) {
             aria-hidden={i !== active}
           >
             <div className={`absolute inset-0 ${i === active ? "animate-[kenburns_9s_ease-out_both]" : ""}`}>
-              <Photo src={s.src} alt={s.alt} preload={i === 0} sizes="100vw" className={s.position ?? "object-[65%_center]"} />
+              <Photo src={s.src} alt={s.alt} preload={i === 0} sizes="2200px" className={s.position ?? "object-[65%_center]"} />
             </div>
           </div>
         ))}

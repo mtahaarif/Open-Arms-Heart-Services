@@ -25,7 +25,7 @@ export default function CareersPage() {
         title={"Great Careers\n*Change Lives*."}
         text={rich(careersIntro.join(" "))}
         crumb="Careers"
-        image="/images/banners/careers.jpg"
+        image="/images/banners/careers.webp"
         imageAlt="Two caregivers in scrubs smiling at each other on their way to a client's home"
         focus="object-[34%_30%]"
       >
@@ -47,7 +47,7 @@ export default function CareersPage() {
           />
           <div className="mt-12 grid gap-5 lg:grid-cols-[1.1fr_1fr_1fr]">
             <div data-reveal className="relative min-h-[20rem] overflow-hidden rounded-[2rem] shadow-[0_30px_60px_-35px_rgb(51_27_88/0.7)]">
-              <Photo src="/images/caregiver-companion.jpg" alt="A caregiver chatting with an older man in his backyard garden" sizes="(min-width: 1024px) 420px, 100vw" />
+              <Photo src="/images/caregiver-companion.webp" alt="A caregiver chatting with an older man in his backyard garden" sizes="(min-width: 1024px) 640px, 125vw" />
               <div className="absolute inset-0 bg-linear-to-t from-plum-950/80 via-plum-900/20 to-transparent" />
             </div>
             {roles.map((r, i) => (

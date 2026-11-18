@@ -39,7 +39,7 @@ export const programs: Program[] = [
     short: "Non-Skilled Home Health",
     tagline: "Everyday help. Greater peace of mind.",
     icon: HeartHandshake,
-    image: "/images/service-home-care.jpg",
+    image: "/images/service-home-care.webp",
     imageAlt: "A caregiver bringing a cup of tea to a woman resting at home with her crutches nearby",
     intro:
       "Open Arms & Heart Services, Inc. is a Florida-licensed home health agency offering **non-medical support** to children, adults, seniors, and people with disabilities. Our caregivers help individuals remain comfortable and supported in their homes.",
@@ -60,7 +60,7 @@ export const programs: Program[] = [
     short: "APD Services",
     tagline: "Support for a more independent life.",
     icon: Accessibility,
-    image: "/images/service-apd.jpg",
+    image: "/images/service-apd.webp",
     imageAlt: "A young man who uses a wheelchair relaxing in his kitchen while a support worker prepares a meal",
     intro:
       "As an APD provider, Open Arms offers **person-centered supports** designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
@@ -82,7 +82,7 @@ export const programs: Program[] = [
     short: "Vulnerable Adult Support",
     tagline: "Dignity, safety and connection.",
     icon: ShieldCheck,
-    image: "/images/service-vulnerable-adult.jpg",
+    image: "/images/service-vulnerable-adult.webp",
     imageAlt: "A woman and an older woman laughing together while gardening outdoors",
     intro:
       "Open Arms supports adults who need assistance maintaining **dignity, safety, and independence**. We coordinate with families, social workers, case managers and referral partners.",
@@ -103,7 +103,7 @@ export const programs: Program[] = [
     short: "Children & Family Support",
     tagline: "Inclusive respite and meaningful experiences for ages 0–17.",
     icon: Baby,
-    image: "/images/service-cbc.jpg",
+    image: "/images/service-cbc.webp",
     imageAlt: "A group of children laughing and running together outdoors",
     intro:
       "Open Arms has experience working with community-based care organizations and foster families to provide supportive, compassionate services.",
@@ -133,7 +133,7 @@ export const programs: Program[] = [
     short: "Veterans Home Care & Respite",
     tagline: "Care that honors your everyday needs.",
     icon: Medal,
-    image: "/images/service-veterans.jpg",
+    image: "/images/service-veterans.webp",
     imageAlt: "A smiling older veteran wearing a Vietnam veteran cap, talking with a friend at home",
     intro:
       "Open Arms is proud to support **eligible veterans and their families** through respectful, individualized home and community-based assistance.",
@@ -154,7 +154,7 @@ export const programs: Program[] = [
     short: "Live Scan Fingerprinting",
     tagline: "A convenient next step for screening.",
     icon: FingerprintPattern,
-    image: "/images/live-scan.jpg",
+    image: "/images/live-scan.webp",
     imageAlt: "Close-up of a fingerprint on a glowing scanner",
     intro:
       "Open Arms offers **Live Scan fingerprinting services** to assist with applicable Florida background screening and licensing requirements.",

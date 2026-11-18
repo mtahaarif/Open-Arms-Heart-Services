@@ -13,7 +13,7 @@ export function CareersFeature() {
         <div className="relative isolate grid overflow-hidden rounded-[2.5rem] bg-linear-to-br from-plum-100 via-white to-blush-50 ring-1 ring-plum-100 lg:grid-cols-2">
           <div className="relative min-h-[22rem] lg:min-h-[34rem]">
             <Photo
-              src="/images/careers-caregivers.jpg"
+              src="/images/careers-caregivers.webp"
               alt="Two smiling caregivers in scrubs standing arm in arm with an older woman they care for"
               sizes="(min-width: 1024px) 600px, 100vw"
             />

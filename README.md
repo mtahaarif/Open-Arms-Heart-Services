@@ -94,7 +94,7 @@
 | Language | TypeScript (strict) |
 | Styling | Tailwind CSS v4 with `@theme` tokens and `@utility` classes in `src/app/globals.css` |
 | Icons | `lucide-react` |
-| Images | `<Photo>`, built on `next/image`'s `getImageProps` (AVIF/WebP `srcset`, quality 60, mid-size fallback `src`, no inline styles) |
+| Images | `<Photo>`, built on `next/image`'s `getImageProps` (WebP `srcset` up to 2560px, quality 80, mid-size fallback `src`, no inline styles). Every source image in `public/images` is WebP |
 | Fonts | `next/font/google`, self-hosted at build time with `display: swap` |
 | Forms | Embedded Google Form (no backend) |
 | Runtime dependencies | `next`, `react`, `react-dom`, `lucide-react` — nothing else |
@@ -318,7 +318,7 @@ Modelled on the About banner of lovethyneighborhhc.com:
 | 2 | Banner | The site-wide banner structure (§8.0): four full-bleed photos cross-fading every 7 s with a slow zoom under the dark plum treatment, behind the floating header; centred ruled eyebrow "Rooted in compassion · Central Florida", the white headline revealed line by line, lead, gradient (shine-on-hover) and outline buttons, the motto; a glass control pill with progress bars, counter and previous/next (`HeroSlides`, client). Autoplay is off for reduced motion |
 | 3 | Credentials ticker | Straight, full-width deep-purple band: credentials in white display type with pink hearts between them, in a single scrolling row |
 | 4 | Welcome | "At home. In the community. *By your side*." with audience pills, beside the glass "Finding care should feel less overwhelming" call card |
-| 5 | A personal approach | Arch photo with a glass "2017 · Central Florida" chip; "Your family. Your goals. *Our heart*." and gradient/glass buttons |
+| 5 | A personal approach | Rounded-square photo with a glass "2017 · Central Florida" chip; "Your family. Your goals. *Our heart*." and gradient/glass buttons |
 | 6 | Our services | Horizontal card track (modelled on mourningdovehomecare.com "What we offer"): on desktop the section pins and scrolling down slides the six photo cards sideways, with a progress bar and "Scroll to explore" hint; on phones a swipeable row that snaps to each card |
 | 6b | Questions & answers | Copied from the earlier design: "Questions & *answers*" intro (sticky on desktop, phone + "All FAQs") beside four sticky stacking Q&A cards (number, icon, question, answer, insurance or licence chips, and a photo: the right column from md, the top half of the card on phones). Earlier cards shrink and dim as later ones slide over them (CSS scroll-driven, `.qa-*`) |
 | 7 | Service areas | Rounded deep-plum band with ribbons and two glass area cards |
@@ -355,10 +355,10 @@ Modelled on the About banner of lovethyneighborhhc.com:
 - **Our mission:** copied from the earlier design's home-page manifesto — the mission statement in large type, each word brightening as it scrolls up the screen (CSS `.mission-word`), beside a "Serving Central Florida since 2017" photo card and stat cards (6 types of care, 5 home-health counties, 10 insurances) (`MissionStatement`).
 - **Meet the owner (`#story`):** one rounded lavender panel like the earlier design — portrait in a rotating gradient ring with a "since 2017" badge, name, title, the four story paragraphs as plain prose, and credential pills.
 - **Who we serve:** the bento from the earlier design's home page ("Who we care for", `AudienceBento` at git `1732445`), with the same layout at every screen size:
-  - **Grid:** 6 columns — a tall lead card, then 3 + 3 and 4 + 2. Rows are 140px on phones, 200px from `sm` and 260px from `md`. It uses that version's container (`max-w-7xl`, 16/24/32px gutters) so the card sizes match exactly.
+  - **Grid:** 6 columns — a tall lead card, then 3 + 3 and 4 + 2. Rows are 140px on phones, 200px from `sm` and 260px from `md`. It uses that version's container (`max-w-7xl`, 16/24/32px gutters) so the card sizes match exactly up to tablet size. From `lg` (desktop) the grid and the strip below it are scaled to 80%: 61rem wide at most, 208px rows, with slightly smaller titles, icon tiles and padding.
   - **Cards:** five photo cards with a cursor tilt (`GlowCard tilt`), a zoom on hover, a deep-plum overlay and a frosted icon tile. Each links to its service.
   - **Card text:** on mouse devices from `md` up, the title rises and the description fades in on hover. Touch screens always show the description. On `sm`–`md` the description is limited to two lines so it never spills out of the shorter cards.
-  - **Cards (same order, photos and copy as that version):** Seniors (the tall lead card, `senior-portrait.jpg`), Veterans & their families (`veteran.jpg`), People with disabilities (`personal-supports.jpg`), Children & foster families (`child-smiling.jpg`) and Family caregivers (`family-baking.jpg`). Titles keep this site's League Spartan capitals; under 360px wide they shrink so "Caregivers" fits the narrow card.
+  - **Cards (same order, photos and copy as that version):** Seniors (the tall lead card, `senior-portrait.webp`), Veterans & their families (`veteran.webp`), People with disabilities (`personal-supports.webp`), Children & foster families (`child-smiling.webp`) and Family caregivers (`family-baking.webp`). Titles keep this site's League Spartan capitals; under 360px wide they shrink so "Caregivers" fits the narrow card.
   - **Below the grid:** the "Open Arms & Heart Services is only a call away!" strip, with the phone number and a link to Our services.
 - **Licensed & trusted:** glass credentials card with a gradient licence chip.
 - **Contact band.**
@@ -392,11 +392,11 @@ The page banner without a photo (the 404 markup ships with every route, so nothi
 
 | Component | Kind | Purpose |
 | --- | --- | --- |
-| `brand/Logo` | server | The client's logo (`/brand/logo.png`, 240×188) linking home. It's served through the image optimiser as AVIF/WebP at 1×/2× of its ~102px display width (`getImageProps`, no inline style). With `withName` the company name labels the link (visible from `xl`, screen-reader text below); otherwise the image alt does. |
+| `brand/Logo` | server | The client's logo (`/brand/logo.webp`, 640×501, lossless, made from `logo-640.png`) linking home. It's served through the image optimiser as WebP at 1×/2× of its ~102px display width (`getImageProps`, no inline style). With `withName` the company name labels the link (visible from `xl`, screen-reader text below); otherwise the image alt does. |
 | `layout/TopBar` | server | Slim lavender utility line with the since-line and phone number |
 | `layout/Header` | client | Floating glass pill header (sticky) with a glass hover/focus dropdown for services (numbered gradient tiles); mobile phone button and menu (closes on route change); active-link highlighting. The service list arrives as plain `{ href, label }` props from the root layout, so `lib/services.ts` never ships to the browser. |
 | `layout/Footer` | server | Dark rounded footer: giant outlined ticker of the tagline, motto and closing line · logo (on a white tile), description and licences · Services · Company (+ Apply online) · Visit or call · resources row · copyright |
-| `ui/Photo` | server | Photo built on `getImageProps`. It uses real width/height from `lib/photos.ts` and requires `sizes`. It outputs AVIF/WebP `srcset` at quality 60; the fallback `src` is the 828px variant (what crawlers download), not the largest. It adds no inline styles (a `bg-plum-100` placeholder). `preload` (LCP image only) adds a high-priority `<link rel=preload>` plus `fetchpriority="high"` and eager loading. Everything else is lazy. |
+| `ui/Photo` | server | Photo built on `getImageProps`. It uses real width/height from `lib/photos.ts` and requires `sizes`. It outputs a WebP `srcset` at quality 80; the fallback `src` is the 828px variant (what crawlers download), not the largest. It adds no inline styles (a `bg-plum-100` placeholder). `preload` (LCP image only) adds a high-priority `<link rel=preload>` plus `fetchpriority="high"` and eager loading. Everything else is lazy. |
 | `ui/Link` | server | `next/link` with `prefetch={false}` by default. Use it for every internal link (§18). |
 | `ui/PageHeader` | server | Page banner: full-bleed photo (`focus` = object-position class) under `BannerOverlay`, behind the header; centred breadcrumb (home icon), ruled eyebrow, white H1 (light accent words), intro and optional actions |
 | `ui/BannerOverlay` | server | The shared dark banner treatment: plum tint, top/bottom gradients, dark pool behind the copy, glowing blobs, faint grid, bottom hairline |
@@ -494,14 +494,14 @@ Google handles validation, submission, the thank-you message and response storag
 * Very little client JavaScript (§2), and no animation libraries. Client components receive plain-data props, so no content modules end up in the bundle.
 * **No automatic link prefetching** (`ui/Link`). This avoids a background `?_rsc=` request for every link in view. Navigation between the small static pages is still instant.
 * **Images:**
-  - AVIF/WebP at quality 60;
+  - WebP at quality 80, with `sizes` set to the width each photo is actually drawn at (cover-cropped photos in tall boxes are drawn wider than the box), so the browser never stretches a small file;
   - a short width ladder (`deviceSizes` 640/828/1080/1280/1600, `imageSizes` 384);
   - exact `sizes` on every photo;
   - a fallback `src` at 828px;
   - lazy loading everywhere except the LCP image.
 
   The LCP image (home hero or page-header photo) is preloaded at high priority.
-* **Logo and icons:** the logo source is a pre-compressed 8 KB PNG served as AVIF/WebP by the optimiser; the favicon is a 4 KB PNG. The 404 page's logo is `loading="lazy"`, so React doesn't preload it on every page.
+* **Logo and icons:** the logo source is a lossless WebP served as WebP by the optimiser; `logo-640.png` stays PNG for the share image (`opengraph-image.tsx` can't read WebP) and the JSON-LD logo; the favicon is a 4 KB PNG. The 404 page's logo is `loading="lazy"`, so React doesn't preload it on every page.
 * **Fonts:** League Spartan and Source Sans 3 are preloaded with `display: swap`; Manrope is declared but never downloaded unless League Spartan fails.
 * **Google Form:** the iframe is created only when it scrolls near the viewport (§11).
 * **Tailwind** scans only `src/` (`@import "tailwindcss" source("../")`), so class names mentioned in the docs don't generate CSS.
@@ -583,7 +583,7 @@ To add a seventh service, also add its slug to `ProgramSlug` and add a matching 
    from PIL import Image; im = Image.open(path).convert("RGB")
    w, h = im.size; r, g, b = im.resize((1, 1), Image.LANCZOS).getpixel((0, 0))
    ```
-3. Use `<Photo src="/images/name.jpg" alt="…" sizes="…" />` inside a positioned parent with a size or aspect ratio. Add `preload` only if it's the page's largest above-the-fold image.
+3. Save it as WebP (quality ~90) and use `<Photo src="/images/name.webp" alt="…" sizes="…" />` inside a positioned parent with a size or aspect ratio. Add `preload` only if it's the page's largest above-the-fold image.
 4. When *replacing* a photo, use a **new file name**, so CDN and image-optimiser caches can't serve the old one.
 5. Add the source to §20.
 
@@ -690,36 +690,36 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 
 | File | Source |
 | --- | --- |
-| `adult-wheelchair-community.jpg` (not used since the About bento was restored) | https://unsplash.com/photos/two-women-talking-in-a-gymnasium-c-LWLkJIV6Q |
-| `careers-caregivers.jpg` | https://unsplash.com/photos/a-group-of-women-standing-next-to-each-other-ykiy5Zyv7k0 |
-| `caregiver-companion.jpg` | https://unsplash.com/photos/a-man-and-woman-sitting-on-a-bench-9__g_UfBXOA |
-| `family-game-night.jpg` (not used since the About bento was restored) | https://unsplash.com/photos/family-playing-board-games-VJVsEnR_vNE |
-| `friends-smiling.jpg` | https://unsplash.com/photos/two-women-pose-arm-in-arm-smiling-LTgaxUAGNUk |
-| `grandmother-granddaughter.jpg` (not used since the generated banners) | https://unsplash.com/photos/woman-in-blue-tank-top-wearing-eyeglasses-smiling-Ig4-rFIl7as |
-| `nurse-home-visit.jpg` | https://unsplash.com/photos/a-doctor-checking-a-patients-blood-pressure-dcBO4nt4MRE |
-| `senior-conversation.jpg` (not used since the About bento was restored) | https://unsplash.com/photos/a-man-sitting-on-a-couch-talking-to-another-man-N5GljcLSmK4 |
-| `service-apd.jpg` | https://unsplash.com/photos/a-man-in-a-wheel-chair-in-a-kitchen-75xbITy2szk |
-| `service-cbc.jpg` | https://unsplash.com/photos/girl-running-while-laughing-xtd3zYWxEs4 |
-| `service-home-care.jpg` | https://unsplash.com/photos/a-man-and-a-woman-in-a-living-room-HscUZd52tQk |
-| `service-veterans.jpg` | https://unsplash.com/photos/two-men-talking-one-wears-a-veteran-hat-ydAyN8eRIDw |
-| `service-vulnerable-adult.jpg` | https://unsplash.com/photos/an-old-man-and-a-young-woman-are-smiling-c4Fl1BKDJLQ |
-| `therapy-play.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1708686816818-2b018e0c1296 |
-| `personal-supports.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1709127347874-3f4674be5bc8 |
-| `grandpa-granddaughter.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1609113006359-1e9c378ab54d |
-| `friends-talking.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1773227059784-c1e36cc8c8c9 |
-| `family-baking.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1758874960394-afd9ead46eba |
-| `senior-portrait.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1566616213894-2d4e1baee5d8 |
-| `veteran.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1698671114507-6ae8567cb895 |
-| `child-smiling.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1646250852980-e2beba095e97 |
-| `activities-coloring.jpg` (Q&A) | https://images.unsplash.com/photo-1762955911431-4c44c7c3f408 |
-| `caregiver-portrait.jpg` (Q&A) | https://images.unsplash.com/photo-1585842378054-ee2e52f94ba2 |
-| `nurse-blood-pressure.jpg` (Q&A) | https://images.unsplash.com/photo-1631815590058-860e4f83c1e8 |
-| `nurses-team.jpg` (Q&A) | https://unsplash.com/photos/AZq99Wqunjs |
-| `hands-mission.jpg` (About mission card) | https://images.unsplash.com/photo-1454875392665-2ac2c85e8d3e |
+| `adult-wheelchair-community.webp` (not used since the About bento was restored) | https://unsplash.com/photos/two-women-talking-in-a-gymnasium-c-LWLkJIV6Q |
+| `careers-caregivers.webp` | https://unsplash.com/photos/a-group-of-women-standing-next-to-each-other-ykiy5Zyv7k0 |
+| `caregiver-companion.webp` | https://unsplash.com/photos/a-man-and-woman-sitting-on-a-bench-9__g_UfBXOA |
+| `family-game-night.webp` (not used since the About bento was restored) | https://unsplash.com/photos/family-playing-board-games-VJVsEnR_vNE |
+| `friends-smiling.webp` | https://unsplash.com/photos/two-women-pose-arm-in-arm-smiling-LTgaxUAGNUk |
+| `grandmother-granddaughter.webp` (not used since the generated banners) | https://unsplash.com/photos/woman-in-blue-tank-top-wearing-eyeglasses-smiling-Ig4-rFIl7as |
+| `nurse-home-visit.webp` | https://unsplash.com/photos/a-doctor-checking-a-patients-blood-pressure-dcBO4nt4MRE |
+| `senior-conversation.webp` (not used since the About bento was restored) | https://unsplash.com/photos/a-man-sitting-on-a-couch-talking-to-another-man-N5GljcLSmK4 |
+| `service-apd.webp` | https://unsplash.com/photos/a-man-in-a-wheel-chair-in-a-kitchen-75xbITy2szk |
+| `service-cbc.webp` | https://unsplash.com/photos/girl-running-while-laughing-xtd3zYWxEs4 |
+| `service-home-care.webp` | https://unsplash.com/photos/a-man-and-a-woman-in-a-living-room-HscUZd52tQk |
+| `service-veterans.webp` | https://unsplash.com/photos/two-men-talking-one-wears-a-veteran-hat-ydAyN8eRIDw |
+| `service-vulnerable-adult.webp` | https://unsplash.com/photos/an-old-man-and-a-young-woman-are-smiling-c4Fl1BKDJLQ |
+| `therapy-play.webp` (not used since the generated banners) | https://images.unsplash.com/photo-1708686816818-2b018e0c1296 |
+| `personal-supports.webp` (About "Who we serve") | https://images.unsplash.com/photo-1709127347874-3f4674be5bc8 |
+| `grandpa-granddaughter.webp` (not used since the generated banners) | https://images.unsplash.com/photo-1609113006359-1e9c378ab54d |
+| `friends-talking.webp` (not used since the generated banners) | https://images.unsplash.com/photo-1773227059784-c1e36cc8c8c9 |
+| `family-baking.webp` (About "Who we serve") | https://images.unsplash.com/photo-1758874960394-afd9ead46eba |
+| `senior-portrait.webp` (About "Who we serve") | https://images.unsplash.com/photo-1566616213894-2d4e1baee5d8 |
+| `veteran.webp` (About "Who we serve") | https://images.unsplash.com/photo-1698671114507-6ae8567cb895 |
+| `child-smiling.webp` (About "Who we serve") | https://images.unsplash.com/photo-1646250852980-e2beba095e97 |
+| `activities-coloring.webp` (Q&A) | https://images.unsplash.com/photo-1762955911431-4c44c7c3f408 |
+| `caregiver-portrait.webp` (Q&A) | https://images.unsplash.com/photo-1585842378054-ee2e52f94ba2 |
+| `nurse-blood-pressure.webp` (Q&A) | https://images.unsplash.com/photo-1631815590058-860e4f83c1e8 |
+| `nurses-team.webp` (Q&A) | https://unsplash.com/photos/AZq99Wqunjs |
+| `hands-mission.webp` (About mission card) | https://images.unsplash.com/photo-1454875392665-2ac2c85e8d3e |
 
-**Page banners** (`public/images/banners/`): AI-generated for this site from the prompts in [docs/banner-image-prompts.md](docs/banner-image-prompts.md), 2172 × 724, saved as JPG (quality 82). `home-1` to `home-4` cross-fade on the home page; `about`, `services`, `careers`, `contact` and `faq` sit behind each page's banner. Each page sets a `focus` (object-position) so the people stay in frame on narrow phone crops.
-| `live-scan.jpg` | https://images.unsplash.com/photo-1585079374502-415f8516dcc3 |
-| `founder-shantana-johnson.jpg` | **Client-owned** — from the agency's original website (About Us) |
+**Page banners** (`public/images/banners/`): AI-generated for this site from the prompts in [docs/banner-image-prompts.md](docs/banner-image-prompts.md), 2172 × 724, saved as WebP (quality 90, from the lossless PNG originals). `home-1` to `home-4` cross-fade on the home page; `about`, `services`, `careers`, `contact` and `faq` sit behind each page's banner. Each page sets a `focus` (object-position) so the people stay in frame on narrow phone crops.
+| `live-scan.webp` | https://images.unsplash.com/photo-1585079374502-415f8516dcc3 |
+| `founder-shantana-johnson.webp` | **Client-owned** — from the agency's original website (About Us) |
 | `public/brand/logo.png`, `logo-640.png`, `logo-mark.png`, `src/app/icon.png`, `apple-icon.png` | **Client-owned** — the agency's logo (from the owner's mock-up files) |
 
 </details>

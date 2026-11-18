@@ -2,15 +2,23 @@ import { getImageProps } from "next/image";
 import { preload as preloadResource } from "react-dom";
 import { photoMeta } from "@/lib/photos";
 
-/** JPEG quality for photos (must be listed in `images.qualities` in next.config.ts). */
-const QUALITY = 60;
+/**
+ * WebP quality for photos (must be listed in `images.qualities` in next.config.ts). 80 keeps skin,
+ * hair and fabric detail; 60 smeared it.
+ */
+const QUALITY = 80;
 /** Width of the fallback `src` — what non-srcset clients (crawlers, feed readers) download. */
 const FALLBACK_WIDTH = 828;
 
 type PhotoProps = {
   src: string;
   alt?: string;
-  /** Required so the browser never falls back to the 1x/2x full-width srcset. */
+  /**
+   * Required so the browser never falls back to the 1x/2x full-width srcset. Photos are cover-cropped,
+   * so give the width the image is DRAWN at, not the box width: in a box taller than the photo's own
+   * shape the photo is drawn wider than the box (box height × photo aspect ratio). Undersized hints
+   * make the browser download a small file and stretch it.
+   */
   sizes: string;
   className?: string;
   /** Above-the-fold LCP image: preloaded with high fetch priority and loaded eagerly. */
@@ -19,7 +27,7 @@ type PhotoProps = {
 
 /**
  * Cover-fit photo for a positioned, sized parent. Built on getImageProps so the markup stays lean:
- * real width/height from lib/photos.ts (no layout shift), a responsive AVIF/WebP srcset for
+ * real width/height from lib/photos.ts (no layout shift), a responsive WebP srcset for
  * browsers, a mid-size `src` fallback instead of the largest variant, and no inline styles.
  */
 export function Photo({ src, alt = "", sizes, className = "", preload = false }: PhotoProps) {

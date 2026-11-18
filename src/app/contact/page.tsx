@@ -39,7 +39,7 @@ export default function ContactPage() {
         title="Let's find the support that *feels right*."
         text="Whether you're looking for care, making a referral or asking about screening services, our team can help you take the next step."
         crumb="Contact"
-        image="/images/banners/contact.jpg"
+        image="/images/banners/contact.webp"
         imageAlt="A care coordinator on the phone at her laptop while an older woman smiles over her tea"
         focus="object-[40%_25%]"
       >

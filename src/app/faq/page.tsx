@@ -34,7 +34,7 @@ export default function FaqPage() {
         title="Answers for *your family*."
         text="Common questions about our services, coverage, licensing and caregivers. Don't see your question? Our team is only a call away."
         crumb="FAQ"
-        image="/images/banners/faq.jpg"
+        image="/images/banners/faq.webp"
         imageAlt="A mother and her daughter smiling as they look something up together on a laptop"
         focus="object-[48%_25%]"
       />

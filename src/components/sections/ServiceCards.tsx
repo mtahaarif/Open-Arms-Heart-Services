@@ -46,7 +46,7 @@ export function ServiceCards() {
                 <Photo
                   src={p.image}
                   alt={p.imageAlt}
-                  sizes="(min-width: 640px) 384px, 82vw"
+                  sizes="(min-width: 640px) 720px, 155vw"
                   className="object-[center_30%] transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-plum-950/95 via-plum-900/45 to-plum-900/5" />

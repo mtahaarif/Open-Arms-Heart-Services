@@ -29,7 +29,7 @@ export default function ServicesPage() {
         title={"Care for everyday needs.\n*Support for individual goals*."}
         text="Explore each service to see how we can help. Our team can discuss availability, referrals and authorization requirements with you."
         crumb="Our services"
-        image="/images/banners/services.jpg"
+        image="/images/banners/services.webp"
         imageAlt="A caregiver steadying an older woman as she walks with her walker at home"
         focus="object-[42%_25%]"
       />
@@ -40,7 +40,7 @@ export default function ServicesPage() {
           <ServiceStack
             items={programs.map((p) => ({ slug: p.slug, name: p.name, short: p.short }))}
             photos={programs.map((p) => (
-              <Photo key={p.slug} src={p.image} alt="" sizes="(min-width: 1024px) 480px, 42vw" />
+              <Photo key={p.slug} src={p.image} alt="" sizes="(min-width: 640px) 900px, 100vw" />
             ))}
             groups={programs.map((p, i) => (
               <ServiceCards key={p.slug} program={p} index={i} />

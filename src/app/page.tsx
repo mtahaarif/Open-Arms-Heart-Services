@@ -27,10 +27,10 @@ export const metadata = pageMetadata({
 
 /** Banner photos (cross-fade). The first is the LCP image. */
 const heroSlides = [
-  { src: "/images/banners/home-1.jpg", alt: "A caregiver building a tower of colourful blocks with a laughing little boy", position: "object-[70%_35%]" },
-  { src: "/images/banners/home-2.jpg", alt: "A caregiver helping a young man in a wheelchair cook in his kitchen", position: "object-[60%_30%]" },
-  { src: "/images/banners/home-3.jpg", alt: "A grandmother reading a picture book with her granddaughter on a porch swing", position: "object-[66%_30%]" },
-  { src: "/images/banners/home-4.jpg", alt: "A caregiver chatting with a smiling older woman over tea on her sofa", position: "object-[50%_25%]" },
+  { src: "/images/banners/home-1.webp", alt: "A caregiver building a tower of colourful blocks with a laughing little boy", position: "object-[70%_35%]" },
+  { src: "/images/banners/home-2.webp", alt: "A caregiver helping a young man in a wheelchair cook in his kitchen", position: "object-[60%_30%]" },
+  { src: "/images/banners/home-3.webp", alt: "A grandmother reading a picture book with her granddaughter on a porch swing", position: "object-[66%_30%]" },
+  { src: "/images/banners/home-4.webp", alt: "A caregiver chatting with a smiling older woman over tea on her sofa", position: "object-[50%_25%]" },
 ];
 
 export default function HomePage() {
@@ -116,12 +116,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* A personal approach — arch photo with a tilted inset */}
+      {/* A personal approach — rounded-square photo with a glass "since" badge */}
       <section className="pb-20 sm:pb-28">
         <div className="wrap grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-          <div data-reveal className="relative mx-auto h-[26rem] w-full max-w-md sm:h-[30rem]">
-            <div className="absolute inset-0 overflow-hidden rounded-t-full rounded-b-[2.5rem] shadow-[0_40px_90px_-35px_rgb(51_27_88/0.55)] sm:right-10">
-              <Photo src="/images/caregiver-companion.jpg" alt="A caregiver chatting with an older man in his backyard garden" sizes="(min-width: 1024px) 420px, 92vw" />
+          <div data-reveal className="relative mx-auto w-full max-w-md sm:pr-10">
+            <div className="relative aspect-square overflow-hidden rounded-[2rem] shadow-[0_40px_90px_-35px_rgb(51_27_88/0.55)] sm:rounded-[2.5rem]">
+              <Photo src="/images/caregiver-companion.webp" alt="A caregiver chatting with an older man in his backyard garden" sizes="(min-width: 1024px) 640px, 165vw" />
             </div>
             <div className="glass absolute -right-2 bottom-10 rounded-[1.5rem] px-5 py-4 sm:right-0">
               <p className="font-display text-4xl leading-none text-gradient">{site.since}</p>

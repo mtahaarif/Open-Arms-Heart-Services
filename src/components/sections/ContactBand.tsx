@@ -11,7 +11,7 @@ export function ContactBand() {
     <section className="py-16 sm:py-24">
       <div className="wrap">
         <div className="band-dark rounded-[2.5rem] px-6 py-14 sm:px-12 sm:py-20 lg:px-16">
-          <Photo src="/images/friends-smiling.jpg" alt="" sizes="(min-width: 1024px) 1150px, 100vw" className="-z-20 opacity-25" />
+          <Photo src="/images/friends-smiling.webp" alt="" sizes="1600px" className="-z-20 opacity-25" />
           <div className="absolute inset-0 -z-10 bg-linear-to-br from-navy-900 via-plum-900/90 to-blush-700/60" />
           <Ribbons className="absolute -right-20 -bottom-10 -z-10 h-full w-[80%] opacity-60" />
 

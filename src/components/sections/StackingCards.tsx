@@ -83,7 +83,7 @@ export function StackingCards() {
                 </div>
                 {/* Phones/tablets: the photo is the top half of the card; from md it is the right column. */}
                 <div className="relative order-first min-h-0 md:order-none">
-                  <Photo src={item.image} alt={item.imageAlt} sizes="(min-width: 1280px) 400px, (min-width: 768px) 45vw, 100vw" className={item.imagePosition} />
+                  <Photo src={item.image} alt={item.imageAlt} sizes="(min-width: 768px) 900px, 140vw" className={item.imagePosition} />
                   <div className="absolute inset-0 bg-linear-to-t from-white/40 to-transparent to-40% md:bg-linear-to-r md:from-white/30 md:to-100%" />
                 </div>
                 <div className={`qa-dim pointer-events-none absolute inset-0 bg-plum-950 opacity-0 ${dim[i]}`} />

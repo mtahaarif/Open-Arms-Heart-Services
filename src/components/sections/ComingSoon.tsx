@@ -14,9 +14,9 @@ export function ComingSoon() {
           <SectionHeading eyebrow="Growing with our community" title={"More ways to care.\n*Coming soon*."} text={comingSoon.intro} />
           <div data-reveal className="relative mt-10 h-72 max-w-md overflow-hidden rounded-t-full rounded-b-[2.5rem] shadow-[0_40px_90px_-35px_rgb(51_27_88/0.55)] sm:h-80">
             <Photo
-              src="/images/nurse-home-visit.jpg"
+              src="/images/nurse-home-visit.webp"
               alt="A nurse checking an older man's blood pressure at his dining table"
-              sizes="(min-width: 1024px) 440px, 92vw"
+              sizes="(min-width: 1024px) 640px, 115vw"
             />
             <div className="absolute inset-0 bg-linear-to-t from-plum-900/35 to-transparent" />
           </div>
