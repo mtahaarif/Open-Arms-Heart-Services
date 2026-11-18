@@ -111,7 +111,7 @@ export default function AboutPage() {
                       <a.icon className="size-4 sm:size-5" aria-hidden />
                     </span>
                     <div className="transition-transform duration-700 ease-[var(--ease-out-expo)] md:can-hover:translate-y-10 md:can-hover:group-hover:translate-y-0">
-                      <h3 className="font-display text-[0.95rem] leading-tight font-medium text-white uppercase sm:text-2xl md:text-3xl">{a.title}</h3>
+                      <h3 className="font-display text-[0.95rem] leading-tight font-medium text-white uppercase hyphens-auto max-[359px]:text-[0.72rem] sm:text-2xl md:text-3xl">{a.title}</h3>
                       <p className="mt-2 hidden max-w-sm text-white/80 transition-opacity duration-700 sm:line-clamp-2 md:line-clamp-none md:can-hover:opacity-0 md:can-hover:group-hover:opacity-100">
                         {a.text}
                       </p>

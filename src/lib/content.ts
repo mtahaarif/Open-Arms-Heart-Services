@@ -30,42 +30,42 @@ export const approach = [
 /* ───────────────────────── Who we serve ───────────────────────── */
 
 export const audiences: { title: string; text: string; image: string; alt: string; href: string; icon: LucideIcon }[] = [
-  {
-    title: "Children & families",
-    text: "Support for children with special needs or developmental disabilities, foster families and the caregivers beside them.",
-    image: "/images/family-game-night.jpg",
-    alt: "A family playing a board game together in their living room",
-    href: "/services#cbc",
-    icon: Baby,
-  },
-  {
-    title: "Adults with disabilities",
-    text: "Person-centered supports designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
-    image: "/images/adult-wheelchair-community.jpg",
-    alt: "A smiling woman who uses a wheelchair chatting with a support worker at a community centre",
-    href: "/services#apd",
-    icon: Accessibility,
-  },
+  // Same cards, order, photos and copy as the home "Who we care for" bento of the earlier design (git 1732445).
   {
     title: "Seniors",
-    text: "Everyday help at home — personal care, homemaking, companionship and respite for family caregivers.",
-    image: "/images/senior-conversation.jpg",
-    alt: "A smiling older man talking with a caregiver on his sofa",
+    text: "Caring for a developmentally disabled family member or senior can be extremely challenging, and we are here to help.",
+    image: "/images/senior-portrait.jpg",
+    alt: "A smiling older woman with short grey hair",
     href: "/services#home-care",
     icon: HandHeart,
   },
   {
-    title: "Veterans",
-    text: "Respectful, individualized home and community-based assistance for eligible veterans and their families.",
-    image: "/images/service-veterans.jpg",
-    alt: "A smiling older veteran wearing a Vietnam veteran cap",
+    title: "Veterans & their families",
+    text: "Respectful, individualized home and community-based assistance.",
+    image: "/images/veteran.jpg",
+    alt: "An older veteran wearing an Army cap",
     href: "/services#va",
     icon: Medal,
   },
   {
-    // "Caregiver respite, relief and family support" — the services lists (docs/client-mockup-content.md).
+    title: "People with disabilities",
+    text: "Person-centered supports designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
+    image: "/images/personal-supports.jpg",
+    alt: "A caregiver talking with a young man who uses a wheelchair",
+    href: "/services#apd",
+    icon: Accessibility,
+  },
+  {
+    title: "Children & foster families",
+    text: "Support for children with special needs or developmental disabilities.",
+    image: "/images/child-smiling.jpg",
+    alt: "A smiling young boy looking at the camera",
+    href: "/services#cbc",
+    icon: Baby,
+  },
+  {
     title: "Family caregivers",
-    text: "Caregiver respite, relief and family support.",
+    text: "Caregiver relief and family support.",
     image: "/images/family-baking.jpg",
     alt: "A grandmother and her granddaughter baking together in the kitchen",
     href: "/services",

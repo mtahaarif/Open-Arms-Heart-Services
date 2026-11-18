@@ -358,7 +358,7 @@ Modelled on the About banner of lovethyneighborhhc.com:
   - **Grid:** 6 columns — a tall lead card, then 3 + 3 and 4 + 2. Rows are 140px on phones, 200px from `sm` and 260px from `md`. It uses that version's container (`max-w-7xl`, 16/24/32px gutters) so the card sizes match exactly.
   - **Cards:** five photo cards with a cursor tilt (`GlowCard tilt`), a zoom on hover, a deep-plum overlay and a frosted icon tile. Each links to its service.
   - **Card text:** on mouse devices from `md` up, the title rises and the description fades in on hover. Touch screens always show the description. On `sm`–`md` the description is limited to two lines so it never spills out of the shorter cards.
-  - **Audiences:** Children & families, Adults with disabilities, Seniors, Veterans, and Family caregivers ("Caregiver respite, relief and family support").
+  - **Cards (same order, photos and copy as that version):** Seniors (the tall lead card, `senior-portrait.jpg`), Veterans & their families (`veteran.jpg`), People with disabilities (`personal-supports.jpg`), Children & foster families (`child-smiling.jpg`) and Family caregivers (`family-baking.jpg`). Titles keep this site's League Spartan capitals; under 360px wide they shrink so "Caregivers" fits the narrow card.
   - **Below the grid:** the "Open Arms & Heart Services is only a call away!" strip, with the phone number and a link to Our services.
 - **Licensed & trusted:** glass credentials card with a gradient licence chip.
 - **Contact band.**
@@ -686,18 +686,18 @@ Any Node host works too (`npm run build && npm start`); the security headers com
 
 The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license): free for commercial use, no attribution required. They are self-hosted in `public/images/` and should be replaced with the agency's own photography when it's available.
 
-<details><summary>Source of each image (24 photos + logo)</summary>
+<details><summary>Source of each image (27 photos + logo)</summary>
 
 | File | Source |
 | --- | --- |
-| `adult-wheelchair-community.jpg` | https://unsplash.com/photos/two-women-talking-in-a-gymnasium-c-LWLkJIV6Q |
+| `adult-wheelchair-community.jpg` (not used since the About bento was restored) | https://unsplash.com/photos/two-women-talking-in-a-gymnasium-c-LWLkJIV6Q |
 | `careers-caregivers.jpg` | https://unsplash.com/photos/a-group-of-women-standing-next-to-each-other-ykiy5Zyv7k0 |
 | `caregiver-companion.jpg` | https://unsplash.com/photos/a-man-and-woman-sitting-on-a-bench-9__g_UfBXOA |
-| `family-game-night.jpg` | https://unsplash.com/photos/family-playing-board-games-VJVsEnR_vNE |
+| `family-game-night.jpg` (not used since the About bento was restored) | https://unsplash.com/photos/family-playing-board-games-VJVsEnR_vNE |
 | `friends-smiling.jpg` | https://unsplash.com/photos/two-women-pose-arm-in-arm-smiling-LTgaxUAGNUk |
 | `grandmother-granddaughter.jpg` (not used since the generated banners) | https://unsplash.com/photos/woman-in-blue-tank-top-wearing-eyeglasses-smiling-Ig4-rFIl7as |
 | `nurse-home-visit.jpg` | https://unsplash.com/photos/a-doctor-checking-a-patients-blood-pressure-dcBO4nt4MRE |
-| `senior-conversation.jpg` | https://unsplash.com/photos/a-man-sitting-on-a-couch-talking-to-another-man-N5GljcLSmK4 |
+| `senior-conversation.jpg` (not used since the About bento was restored) | https://unsplash.com/photos/a-man-sitting-on-a-couch-talking-to-another-man-N5GljcLSmK4 |
 | `service-apd.jpg` | https://unsplash.com/photos/a-man-in-a-wheel-chair-in-a-kitchen-75xbITy2szk |
 | `service-cbc.jpg` | https://unsplash.com/photos/girl-running-while-laughing-xtd3zYWxEs4 |
 | `service-home-care.jpg` | https://unsplash.com/photos/a-man-and-a-woman-in-a-living-room-HscUZd52tQk |
@@ -708,6 +708,9 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 | `grandpa-granddaughter.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1609113006359-1e9c378ab54d |
 | `friends-talking.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1773227059784-c1e36cc8c8c9 |
 | `family-baking.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1758874960394-afd9ead46eba |
+| `senior-portrait.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1566616213894-2d4e1baee5d8 |
+| `veteran.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1698671114507-6ae8567cb895 |
+| `child-smiling.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1646250852980-e2beba095e97 |
 | `activities-coloring.jpg` (Q&A) | https://images.unsplash.com/photo-1762955911431-4c44c7c3f408 |
 | `caregiver-portrait.jpg` (Q&A) | https://images.unsplash.com/photo-1585842378054-ee2e52f94ba2 |
 | `nurse-blood-pressure.jpg` (Q&A) | https://images.unsplash.com/photo-1631815590058-860e4f83c1e8 |
