@@ -25,8 +25,9 @@ export default function CareersPage() {
         title={"Great Careers\n*Change Lives*."}
         text={rich(careersIntro.join(" "))}
         crumb="Careers"
-        image="/images/careers-caregivers.jpg"
-        imageAlt="Two smiling caregivers in scrubs standing arm in arm with an older woman they care for"
+        image="/images/banners/careers.jpg"
+        imageAlt="Two caregivers in scrubs smiling at each other on their way to a client's home"
+        focus="object-[34%_30%]"
       >
         <a href={site.applicationUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
           Apply online <ArrowUpRight className="size-4" />

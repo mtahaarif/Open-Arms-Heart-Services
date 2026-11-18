@@ -34,8 +34,9 @@ export default function FaqPage() {
         title="Answers for *your family*."
         text="Common questions about our services, coverage, licensing and caregivers. Don't see your question? Our team is only a call away."
         crumb="FAQ"
-        image="/images/nurse-home-visit.jpg"
-        imageAlt="A caregiver checking an older man's blood pressure at home"
+        image="/images/banners/faq.jpg"
+        imageAlt="A mother and her daughter smiling as they look something up together on a laptop"
+        focus="object-[48%_25%]"
       />
 
       <section className="section">

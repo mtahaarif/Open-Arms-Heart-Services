@@ -39,8 +39,9 @@ export default function ContactPage() {
         title="Let's find the support that *feels right*."
         text="Whether you're looking for care, making a referral or asking about screening services, our team can help you take the next step."
         crumb="Contact"
-        image="/images/friends-smiling.jpg"
-        imageAlt="Two women smiling together outdoors"
+        image="/images/banners/contact.jpg"
+        imageAlt="A care coordinator on the phone at her laptop while an older woman smiles over her tea"
+        focus="object-[40%_25%]"
       >
         <a href={site.phone.href} className="btn-primary">
           <Phone className="size-4" /> Call {site.phone.display}

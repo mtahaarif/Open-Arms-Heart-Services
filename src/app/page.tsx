@@ -27,10 +27,10 @@ export const metadata = pageMetadata({
 
 /** Banner photos (cross-fade). The first is the LCP image. */
 const heroSlides = [
-  { src: "/images/therapy-play.jpg", alt: "A caregiver playing with a smiling little boy and his toys", position: "object-[65%_0%]" },
-  { src: "/images/personal-supports.jpg", alt: "A caregiver beside a smiling young man in a wheelchair at home", position: "object-[70%_55%]" },
-  { src: "/images/grandpa-granddaughter.jpg", alt: "A grandfather and his granddaughter sharing a moment at home", position: "object-[60%_25%]" },
-  { src: "/images/friends-talking.jpg", alt: "An older woman smiling as she chats with a visitor in her living room", position: "object-[78%_20%]" },
+  { src: "/images/banners/home-1.jpg", alt: "A caregiver building a tower of colourful blocks with a laughing little boy", position: "object-[70%_35%]" },
+  { src: "/images/banners/home-2.jpg", alt: "A caregiver helping a young man in a wheelchair cook in his kitchen", position: "object-[60%_30%]" },
+  { src: "/images/banners/home-3.jpg", alt: "A grandmother reading a picture book with her granddaughter on a porch swing", position: "object-[66%_30%]" },
+  { src: "/images/banners/home-4.jpg", alt: "A caregiver chatting with a smiling older woman over tea on her sofa", position: "object-[50%_25%]" },
 ];
 
 export default function HomePage() {

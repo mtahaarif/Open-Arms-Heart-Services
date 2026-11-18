@@ -316,7 +316,7 @@ Modelled on the About banner of lovethyneighborhhc.com:
 | --- | --- | --- |
 | 1 | Top bar + header | Slim lavender utility line ("Compassionate care across Central Florida since 2017" · "Call our team: 321-217-2409") above the floating glass pill header |
 | 2 | Banner | The site-wide banner structure (§8.0): four full-bleed photos cross-fading every 7 s with a slow zoom under the dark plum treatment, behind the floating header; centred ruled eyebrow "Rooted in compassion · Central Florida", the white headline revealed line by line, lead, gradient (shine-on-hover) and outline buttons, the motto; a glass control pill with progress bars, counter and previous/next (`HeroSlides`, client). Autoplay is off for reduced motion |
-| 3 | Credentials ticker | Light frosted band of icon chips — one per credential — in a single scrolling row |
+| 3 | Credentials ticker | Straight, full-width deep-purple band: credentials in white display type with pink hearts between them, in a single scrolling row |
 | 4 | Welcome | "At home. In the community. *By your side*." with audience pills, beside the glass "Finding care should feel less overwhelming" call card |
 | 5 | A personal approach | Arch photo with a glass "2017 · Central Florida" chip; "Your family. Your goals. *Our heart*." and gradient/glass buttons |
 | 6 | Our services | Horizontal card track (modelled on mourningdovehomecare.com "What we offer"): on desktop the section pins and scrolling down slides the six photo cards sideways, with a progress bar and "Scroll to explore" hint; on phones a swipeable row that snaps to each card |
@@ -695,7 +695,7 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 | `caregiver-companion.jpg` | https://unsplash.com/photos/a-man-and-woman-sitting-on-a-bench-9__g_UfBXOA |
 | `family-game-night.jpg` | https://unsplash.com/photos/family-playing-board-games-VJVsEnR_vNE |
 | `friends-smiling.jpg` | https://unsplash.com/photos/two-women-pose-arm-in-arm-smiling-LTgaxUAGNUk |
-| `grandmother-granddaughter.jpg` | https://unsplash.com/photos/woman-in-blue-tank-top-wearing-eyeglasses-smiling-Ig4-rFIl7as |
+| `grandmother-granddaughter.jpg` (not used since the generated banners) | https://unsplash.com/photos/woman-in-blue-tank-top-wearing-eyeglasses-smiling-Ig4-rFIl7as |
 | `nurse-home-visit.jpg` | https://unsplash.com/photos/a-doctor-checking-a-patients-blood-pressure-dcBO4nt4MRE |
 | `senior-conversation.jpg` | https://unsplash.com/photos/a-man-sitting-on-a-couch-talking-to-another-man-N5GljcLSmK4 |
 | `service-apd.jpg` | https://unsplash.com/photos/a-man-in-a-wheel-chair-in-a-kitchen-75xbITy2szk |
@@ -703,16 +703,18 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 | `service-home-care.jpg` | https://unsplash.com/photos/a-man-and-a-woman-in-a-living-room-HscUZd52tQk |
 | `service-veterans.jpg` | https://unsplash.com/photos/two-men-talking-one-wears-a-veteran-hat-ydAyN8eRIDw |
 | `service-vulnerable-adult.jpg` | https://unsplash.com/photos/an-old-man-and-a-young-woman-are-smiling-c4Fl1BKDJLQ |
-| `therapy-play.jpg` (banner) | https://images.unsplash.com/photo-1708686816818-2b018e0c1296 |
-| `personal-supports.jpg` (banner) | https://images.unsplash.com/photo-1709127347874-3f4674be5bc8 |
-| `grandpa-granddaughter.jpg` (banner) | https://images.unsplash.com/photo-1609113006359-1e9c378ab54d |
-| `friends-talking.jpg` (banner) | https://images.unsplash.com/photo-1773227059784-c1e36cc8c8c9 |
+| `therapy-play.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1708686816818-2b018e0c1296 |
+| `personal-supports.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1709127347874-3f4674be5bc8 |
+| `grandpa-granddaughter.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1609113006359-1e9c378ab54d |
+| `friends-talking.jpg` (not used since the generated banners) | https://images.unsplash.com/photo-1773227059784-c1e36cc8c8c9 |
 | `family-baking.jpg` (About "Who we serve") | https://images.unsplash.com/photo-1758874960394-afd9ead46eba |
 | `activities-coloring.jpg` (Q&A) | https://images.unsplash.com/photo-1762955911431-4c44c7c3f408 |
 | `caregiver-portrait.jpg` (Q&A) | https://images.unsplash.com/photo-1585842378054-ee2e52f94ba2 |
 | `nurse-blood-pressure.jpg` (Q&A) | https://images.unsplash.com/photo-1631815590058-860e4f83c1e8 |
 | `nurses-team.jpg` (Q&A) | https://unsplash.com/photos/AZq99Wqunjs |
 | `hands-mission.jpg` (About mission card) | https://images.unsplash.com/photo-1454875392665-2ac2c85e8d3e |
+
+**Page banners** (`public/images/banners/`): AI-generated for this site from the prompts in [docs/banner-image-prompts.md](docs/banner-image-prompts.md), 2172 × 724, saved as JPG (quality 82). `home-1` to `home-4` cross-fade on the home page; `about`, `services`, `careers`, `contact` and `faq` sit behind each page's banner. Each page sets a `focus` (object-position) so the people stay in frame on narrow phone crops.
 | `live-scan.jpg` | https://images.unsplash.com/photo-1585079374502-415f8516dcc3 |
 | `founder-shantana-johnson.jpg` | **Client-owned** — from the agency's original website (About Us) |
 | `public/brand/logo.png`, `logo-640.png`, `logo-mark.png`, `src/app/icon.png`, `apple-icon.png` | **Client-owned** — the agency's logo (from the owner's mock-up files) |

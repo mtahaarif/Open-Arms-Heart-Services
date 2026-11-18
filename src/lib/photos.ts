@@ -5,6 +5,15 @@
  * Regenerate if photos are added or replaced.
  */
 export const photoMeta: Record<string, readonly [width: number, height: number, color: string]> = {
+  "/images/banners/about.jpg": [2172, 724, "#a07d74"],
+  "/images/banners/careers.jpg": [2172, 724, "#947960"],
+  "/images/banners/contact.jpg": [2172, 724, "#a59386"],
+  "/images/banners/faq.jpg": [2172, 724, "#988881"],
+  "/images/banners/home-1.jpg": [2172, 724, "#998180"],
+  "/images/banners/home-2.jpg": [2172, 724, "#ac8d82"],
+  "/images/banners/home-3.jpg": [2172, 724, "#9a7f68"],
+  "/images/banners/home-4.jpg": [2169, 725, "#ba9c94"],
+  "/images/banners/services.jpg": [2172, 724, "#b99b8d"],
   "/images/adult-wheelchair-community.jpg": [1600, 1067, "#7c6b6a"],
   "/images/careers-caregivers.jpg": [1800, 1200, "#8d7a6a"],
   "/images/caregiver-companion.jpg": [1600, 1067, "#7b767f"],

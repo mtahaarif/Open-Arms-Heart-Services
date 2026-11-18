@@ -29,9 +29,9 @@ export default function ServicesPage() {
         title={"Care for everyday needs.\n*Support for individual goals*."}
         text="Explore each service to see how we can help. Our team can discuss availability, referrals and authorization requirements with you."
         crumb="Our services"
-        image="/images/senior-conversation.jpg"
-        imageAlt="A smiling older man talking with a caregiver on his sofa"
-        focus="object-[60%_center]"
+        image="/images/banners/services.jpg"
+        imageAlt="A caregiver steadying an older woman as she walks with her walker at home"
+        focus="object-[42%_25%]"
       />
 
       {/* Each service: a sticky photo + title (left) beside its description as stacking cards (right) */}

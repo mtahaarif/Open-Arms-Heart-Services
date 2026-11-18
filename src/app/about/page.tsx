@@ -34,9 +34,9 @@ export default function AboutPage() {
         title={"Your family.\nYour goals. *Our heart*."}
         text={rich(approach.join(" "))}
         crumb="About us"
-        image="/images/grandmother-granddaughter.jpg"
-        imageAlt="A grandmother and her granddaughter smiling cheek to cheek"
-        focus="object-[30%_center]"
+        image="/images/banners/about.jpg"
+        imageAlt="An older man and his adult son laughing over a family photo album at the kitchen table"
+        focus="object-[55%_25%]"
       />
 
       <MissionStatement />
