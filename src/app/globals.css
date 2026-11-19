@@ -102,35 +102,36 @@
 }
 
 @theme inline {
-  /* Headings — the client's choice: League Spartan, falling back to Manrope (both via next/font). */
+  /* The reference site's pairing (lovethyneighborhhc.com): League Spartan bold headings, Manrope text. */
   --font-display: var(--font-league-spartan), var(--font-manrope), ui-sans-serif, sans-serif;
-  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
 }
 
 /* ───────────────────────── Base ───────────────────────── */
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 7.5rem;
+    scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
     overflow-x: clip;
   }
   body {
-    @apply bg-cream font-sans text-[1.0625rem] leading-[1.7] text-body antialiased;
+    @apply bg-cream font-sans text-[1.0625rem] leading-[1.65] text-body antialiased;
     overflow-x: clip;
   }
+  /* Headings: League Spartan bold, sentence case, tight tracking (the reference site's style). */
   h1,
   h2 {
-    @apply font-display font-medium tracking-[0.01em] text-balance text-ink uppercase;
+    @apply font-display font-bold tracking-[-0.025em] text-balance text-ink;
   }
   h1 {
-    @apply text-[2.1rem] leading-[1.05] sm:text-[2.9rem] lg:text-[3.4rem];
+    @apply text-[2.4rem] leading-[1.02] sm:text-[3.2rem] lg:text-[3.9rem];
   }
   h2 {
-    @apply text-[1.7rem] leading-[1.1] sm:text-[2.2rem];
+    @apply text-[2rem] leading-[1.05] sm:text-[2.6rem] lg:text-[3rem];
   }
   h3 {
-    @apply font-sans text-xl leading-snug font-bold text-ink;
+    @apply font-display text-[1.4rem] leading-[1.2] font-bold tracking-[-0.01em] text-ink;
   }
   ::selection {
     @apply bg-blush-200 text-plum-900;
@@ -309,6 +310,29 @@
   }
 }
 
+@keyframes sheet-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+/* Header scroll-progress bar: grows with the page's scroll position where scroll-driven animations
+   exist; hidden elsewhere. */
+.scroll-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    display: block;
+    animation: grow-x linear both;
+    animation-timeline: scroll(root);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-progress {
+      display: none;
+    }
+  }
+}
+
 /* ───────────────────────── Layout & type ───────────────────────── */
 @utility wrap {
   @apply mx-auto w-full max-w-[1200px] px-4 sm:px-7;
@@ -316,16 +340,16 @@
 @utility section {
   @apply py-20 sm:py-28;
 }
-/* Small pill label above headings, with a pink dot. */
+/* Label above headings: a short rule, then small tracked capitals. */
 @utility eyebrow {
-  @apply inline-flex items-center gap-2 rounded-full border border-plum-200/80 bg-white/70 px-3.5 py-1.5 text-xs font-bold tracking-[0.16em] text-plum-700 uppercase backdrop-blur-md;
+  @apply inline-flex items-center gap-3 text-xs font-bold tracking-[0.2em] text-plum-700 uppercase;
   &::before {
     content: "";
-    @apply size-1.5 shrink-0 rounded-full bg-blush-500;
+    @apply h-px w-8 shrink-0 bg-current opacity-60;
   }
 }
 @utility eyebrow-dark {
-  @apply eyebrow border-white/15 bg-white/5 text-blush-200;
+  @apply eyebrow text-blush-200;
 }
 @utility lead {
   @apply text-lg leading-relaxed sm:text-[1.1875rem];
@@ -425,7 +449,7 @@
 
 /* ───────────────────────── Buttons & links ───────────────────────── */
 @utility btn {
-  @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[0.95rem] font-semibold whitespace-nowrap transition-all duration-300 select-none;
+  @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[0.95rem] font-bold whitespace-nowrap transition-all duration-300 select-none;
 }
 @utility btn-primary {
   @apply btn text-white;
@@ -461,7 +485,7 @@
   }
 }
 @utility btn-outline {
-  @apply btn glass text-plum-800 hover:text-plum-950;
+  @apply btn border border-plum-100 bg-white text-plum-800 shadow-[0_8px_24px_-14px_rgb(102_45_145/0.35)] hover:border-plum-200 hover:text-plum-950;
 }
 @utility btn-light {
   @apply btn bg-white text-plum-900 shadow-[0_10px_30px_-10px_rgb(0_0_0/0.35)] hover:bg-blush-50;
@@ -488,49 +512,3 @@
   }
 }
 
-/* /services (<ServiceStack>): the photo stack beside the service cards, with the exact transition
-   of the earlier About page's story section — the active photo wipes up from the bottom over the
-   previous one while easing from a 1.08 zoom and fading in (0.9 s, ease-out-expo). */
-@layer components {
-  /* Phones (< 640px): the photo sticks at the top, under the header, and the cards stack below it
-     — `--photo-top` / `--photo-h` place the photo, `--stick` is where the cards stick (just under
-     it) and `--card-h` fills what is left of the screen (leaving room for the stack's peeks).
-     From 640px: photo and cards side by side, one shared size, both sticking centred below the
-     header; `--card-w` (desktop) keeps them a 4 : 5 pair. */
-  .svc {
-    --hdr: 5.5rem;
-    --photo-top: calc(var(--hdr) - 0.25rem);
-    --photo-h: clamp(7.5rem, 22svh, 15rem);
-    --stick: calc(var(--photo-top) + 0.5rem + var(--photo-h) + 0.75rem);
-    --card-h: min(26rem, calc(100svh - var(--stick) - 2.75rem));
-  }
-  @media (min-width: 640px) {
-    .svc {
-      --card-h: min(34rem, calc(100svh - var(--hdr) - 5rem));
-      --stick: calc(var(--hdr) + (100svh - var(--hdr) - var(--card-h)) / 2 - 1.25rem);
-    }
-  }
-  @media (min-width: 1024px) {
-    .svc {
-      --hdr: 6rem;
-      --card-w: calc(var(--card-h) * 0.8);
-    }
-  }
-  .svc-layer {
-    opacity: 0;
-    transform: scale(1.08);
-    clip-path: inset(100% 0 0 0);
-    transition:
-      opacity 0.9s var(--ease-out-expo),
-      transform 0.9s var(--ease-out-expo),
-      clip-path 0.9s var(--ease-out-expo);
-  }
-  .svc-layer[data-state="past"] {
-    clip-path: inset(0 0 0 0);
-  }
-  .svc-layer[data-state="on"] {
-    opacity: 1;
-    transform: scale(1);
-    clip-path: inset(0 0 0 0);
-  }
-}

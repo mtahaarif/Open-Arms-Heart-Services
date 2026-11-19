@@ -28,7 +28,7 @@ export function ComingSoon() {
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-plum-600 to-blush-500 px-3.5 py-1.5 text-[0.7rem] font-bold tracking-[0.14em] text-white uppercase shadow-md shadow-blush-500/25">
                   <Sparkles className="size-3.5" aria-hidden /> Coming soon
                 </span>
-                <h3 className="mt-5 font-display text-2xl font-medium uppercase">{item.title}</h3>
+                <h3 className="mt-5 font-display text-2xl font-bold">{item.title}</h3>
                 <p className="mt-3">{item.text}</p>
               </div>
             </GlowCard>

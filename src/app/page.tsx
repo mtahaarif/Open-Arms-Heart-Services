@@ -1,5 +1,5 @@
 import Link from "@/components/ui/Link";
-import { ArrowRight, Heart, Phone } from "lucide-react";
+import { ArrowRight, CircleCheck, Phone } from "lucide-react";
 import { HeroSlides } from "@/components/sections/HeroSlides";
 import { AreasBand } from "@/components/sections/AreasBand";
 import { CareersFeature } from "@/components/sections/CareersFeature";
@@ -36,46 +36,56 @@ const heroSlides = [
 export default function HomePage() {
   return (
     <>
-      {/* Banner — the site-wide banner structure (see <PageHeader>): cross-fading photos under the dark
-          plum treatment, running up behind the header, with the copy centred on top */}
-      <section className="relative isolate -mt-[5.25rem] flex items-center overflow-hidden bg-plum-700 pt-[6.75rem] [text-shadow:0_2px_18px_rgb(43_17_64/0.5)] pb-[4.5rem] text-white sm:pb-20 lg:-mt-[5.75rem] lg:pt-[7.5rem] lg:pb-[4.5rem]">
-        <HeroSlides slides={heroSlides} />
+      {/* Banner (the reference site's home hero): light background; headline, intro, two pill buttons
+          and credential ticks on the left; the photo card (cross-fading photos, location chip, slide
+          bars, call card) on the right. Stacks text-first on phones. */}
+      <section className="relative isolate overflow-hidden bg-linear-to-br from-plum-50 via-cream to-blush-50/70">
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(rgb(102_45_145/0.08)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+        <div aria-hidden className="absolute -top-48 -left-40 -z-10 size-[36rem] rounded-full bg-plum-200/45 blur-3xl" />
+        <div aria-hidden className="absolute -right-40 -bottom-48 -z-10 size-[32rem] rounded-full bg-blush-200/45 blur-3xl" />
 
-        <div className="wrap relative text-center">
-          <p className="enter inline-flex items-center gap-3 text-xs font-bold tracking-[0.22em] text-blush-200 uppercase">
-            <span aria-hidden className="h-px w-8 bg-blush-300/70" />
-            Rooted in compassion · Central Florida
-          </p>
-
-          <h1 className="mx-auto mt-4 text-[2rem] leading-[1] text-white sm:text-5xl xl:text-[3.6rem]">
-            <span className="-mb-[0.12em] block overflow-hidden pb-[0.12em]">
-              <span className="block animate-[mask-up_0.9s_var(--ease-out-expo)_both] [animation-delay:200ms]">Care that comes</span>
-            </span>
-            <span className="-mb-[0.12em] block overflow-hidden pb-[0.12em]">
-              <span className="block animate-[mask-up_0.9s_var(--ease-out-expo)_both] [animation-delay:300ms]">
-                from <span className="text-gradient-light">the heart</span>
+        <div className="wrap grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:py-20">
+          <div>
+            <h1 className="text-[2.6rem] sm:text-[3.5rem] lg:text-[4.1rem]">
+              <span className="-mb-[0.12em] block overflow-hidden pb-[0.12em]">
+                <span className="block animate-[mask-up_0.9s_var(--ease-out-expo)_both] [animation-delay:100ms]">Care that comes</span>
               </span>
-            </span>
-          </h1>
+              <span className="-mb-[0.12em] block overflow-hidden pb-[0.12em]">
+                <span className="block animate-[mask-up_0.9s_var(--ease-out-expo)_both] [animation-delay:200ms]">
+                  from <span className="text-gradient">the heart</span>
+                </span>
+              </span>
+            </h1>
 
-          <p className="enter mx-auto mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-white/80 [--d:450ms] sm:mt-5 sm:text-lg">
-            Thoughtful support for children, adults, seniors and people with disabilities. Here for your family, through{" "}
-            <strong className="font-semibold text-white">the everyday moments that matter</strong>.
-          </p>
+            <p className="enter mt-6 max-w-xl text-[1.05rem] leading-relaxed [--d:350ms] sm:text-[1.15rem]">
+              Thoughtful support for children, adults, seniors and people with disabilities. Here for your family, through{" "}
+              <strong className="font-semibold text-ink">the everyday moments that matter</strong>.
+            </p>
 
-          <div className="enter mt-6 flex flex-wrap items-center justify-center gap-2.5 [--d:550ms] sm:mt-7 sm:gap-3">
-            <Link href="/services" className="btn-primary btn-shine h-11 px-6 hover:-translate-y-0.5 sm:h-12 sm:px-8 sm:text-base">
-              Find your care <ArrowRight className="size-4" />
-            </Link>
-            <Link href="/contact" className="btn-outline-light h-11 px-6 backdrop-blur sm:h-12 sm:px-8 sm:text-base">
-              Connect with our team <ArrowRight className="size-4" />
-            </Link>
+            <div className="enter mt-8 flex flex-wrap items-center gap-3 [--d:450ms]">
+              <a href={site.phone.href} className="btn-primary btn-shine gap-2.5 py-3 pr-6 pl-3 text-base">
+                <span className="grid size-8 place-items-center rounded-full bg-white/20">
+                  <Phone className="size-4" aria-hidden />
+                </span>
+                Call us
+              </a>
+              <Link href="/#services" className="btn-outline py-3.5 text-base">
+                Find your care <ArrowRight className="size-4 text-blush-600" aria-hidden />
+              </Link>
+            </div>
+
+            <ul className="enter mt-8 flex flex-wrap gap-x-6 gap-y-2.5 text-[0.92rem] font-medium text-ink/80 [--d:550ms]">
+              {site.credentials.slice(0, 3).map((c) => (
+                <li key={c} className="inline-flex items-center gap-2">
+                  <CircleCheck className="size-[1.1rem] text-plum-600" aria-hidden /> {c}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <p className="enter mt-5 flex items-center justify-center gap-2.5 font-display text-base text-blush-200 [--d:650ms] sm:mt-6 sm:text-lg">
-            <Heart className="size-4 fill-blush-400 text-blush-400" aria-hidden />
-            {site.motto}
-          </p>
+          <div className="enter [--d:200ms]">
+            <HeroSlides slides={heroSlides} location={`${site.address.city}, ${site.address.region}`} phone={site.phone} />
+          </div>
         </div>
       </section>
 
@@ -105,7 +115,7 @@ export default function HomePage() {
                 <Phone className="size-6" aria-hidden />
               </span>
               <p className="eyebrow mt-6">Let&apos;s start a conversation</p>
-              <h3 className="mt-4 font-display text-2xl font-medium uppercase">Finding care should feel less overwhelming</h3>
+              <h3 className="mt-4 font-display text-2xl font-bold">Finding care should feel less overwhelming</h3>
               <p className="mt-3">Tell us what you need. We&apos;ll explain available services and help you understand the next step.</p>
               <a href={site.phone.href} className="btn-primary mt-7 w-full sm:w-auto">
                 <Phone className="size-4" /> Call {site.phone.display}
@@ -125,7 +135,7 @@ export default function HomePage() {
             </div>
             <div className="glass absolute -right-2 bottom-10 rounded-[1.5rem] px-5 py-4 sm:right-0">
               <p className="font-display text-4xl leading-none text-gradient">{site.since}</p>
-              <p className="mt-1 text-xs font-bold tracking-[0.14em] text-plum-800 uppercase">Central Florida</p>
+              <p className="mt-1 text-xs font-bold tracking-[0.14em] text-plum-800 uppercase">Central Region</p>
             </div>
           </div>
           <div>

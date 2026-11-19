@@ -68,7 +68,7 @@ export const faqs: Faq[] = [
   {
     category: "Coverage & licensing",
     q: "Are you licensed?",
-    a: `**Yes.** Open Arms & Heart Services is a licensed Florida home health agency and an APD Central Region provider, serving Central Florida since ${site.since}. ${licenseLine}.`,
+    a: `**Yes.** Open Arms & Heart Services is a licensed Florida home health agency and an APD Central Region provider, serving Central Region since ${site.since}. ${licenseLine}.`,
   },
   {
     category: "Our caregivers",

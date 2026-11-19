@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { League_Spartan, Manrope, Source_Sans_3 } from "next/font/google";
+import { League_Spartan, Manrope } from "next/font/google";
 import Script from "next/script";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -11,9 +11,8 @@ import { site } from "@/lib/site";
 import "./globals.css";
 
 const leagueSpartan = League_Spartan({ subsets: ["latin"], variable: "--font-league-spartan", display: "swap" });
-// Fallback only — not preloaded, so it's downloaded only if League Spartan is unavailable.
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap", preload: false });
-const sans = Source_Sans_3({ subsets: ["latin"], variable: "--font-source-sans", display: "swap" });
+// Body text (and the heading fallback) — the reference site's pairing.
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -62,7 +61,7 @@ const jsonLd = {
   },
   areaServed: [
     ...site.areas[0].counties.map((c) => ({ "@type": "AdministrativeArea", name: `${c} County, Florida` })),
-    { "@type": "AdministrativeArea", name: "Central Florida" },
+    { "@type": "AdministrativeArea", name: "Central Region" },
   ],
   identifier: site.licenses.map((l) => ({ "@type": "PropertyValue", propertyID: "License", value: l })),
   slogan: site.tagline,
@@ -78,7 +77,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${leagueSpartan.variable} ${manrope.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${leagueSpartan.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body>
         {/* Marks the page as JS-enabled before any content paints, so reveal-on-scroll never flickers
             and no-JS visitors / crawlers always see everything (see globals.css). */}
@@ -101,7 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <TopBar />
-        <Header services={programs.map((p) => ({ href: programHref(p), label: p.short }))} />
+        <Header services={programs.map((p) => ({ href: programHref(p), label: p.short, slug: p.slug }))} />
         <main id="main">{children}</main>
         <Footer />
         {GTM_ID && (

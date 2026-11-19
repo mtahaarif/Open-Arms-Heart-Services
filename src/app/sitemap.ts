@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
+import { programHref, programs } from "@/lib/services";
 import { site } from "@/lib/site";
 
 const routes = [
   { path: "/", priority: 1 },
-  { path: "/services", priority: 0.9 },
+  ...programs.map((p) => ({ path: programHref(p), priority: 0.9 })),
   { path: "/about", priority: 0.7 },
   { path: "/careers", priority: 0.6 },
   { path: "/faq", priority: 0.6 },

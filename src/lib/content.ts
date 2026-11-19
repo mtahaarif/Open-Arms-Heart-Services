@@ -24,7 +24,7 @@ export const story = [
 /** "A personal approach" — the mock-up's home-page about section. */
 export const approach = [
   "Finding support for someone you love is personal. At Open Arms & Heart Services Inc., we take time to understand each individual’s routines, preferences and goals.",
-  `**Since ${site.since}**, we have helped Central Florida families navigate home and community-based care with compassion, dignity and a commitment to independence.`,
+  `**Since ${site.since}**, we have helped Central Region families navigate home and community-based care with compassion, dignity and a commitment to independence.`,
 ];
 
 /* ───────────────────────── Who we serve ───────────────────────── */
@@ -36,7 +36,7 @@ export const audiences: { title: string; text: string; image: string; alt: strin
     text: "Caring for a developmentally disabled family member or senior can be extremely challenging, and we are here to help.",
     image: "/images/senior-portrait.webp",
     alt: "A smiling older woman with short grey hair",
-    href: "/services#home-care",
+    href: "/services/home-care",
     icon: HandHeart,
   },
   {
@@ -44,7 +44,7 @@ export const audiences: { title: string; text: string; image: string; alt: strin
     text: "Respectful, individualized home and community-based assistance.",
     image: "/images/veteran.webp",
     alt: "An older veteran wearing an Army cap",
-    href: "/services#va",
+    href: "/services/va",
     icon: Medal,
   },
   {
@@ -52,7 +52,7 @@ export const audiences: { title: string; text: string; image: string; alt: strin
     text: "Person-centered supports designed to strengthen daily living skills, increase independence, and encourage community inclusion.",
     image: "/images/personal-supports.webp",
     alt: "A caregiver talking with a young man who uses a wheelchair",
-    href: "/services#apd",
+    href: "/services/apd",
     icon: Accessibility,
   },
   {
@@ -60,7 +60,7 @@ export const audiences: { title: string; text: string; image: string; alt: strin
     text: "Support for children with special needs or developmental disabilities.",
     image: "/images/child-smiling.webp",
     alt: "A smiling young boy looking at the camera",
-    href: "/services#cbc",
+    href: "/services/cbc",
     icon: Baby,
   },
   {
@@ -68,7 +68,7 @@ export const audiences: { title: string; text: string; image: string; alt: strin
     text: "Caregiver relief and family support.",
     image: "/images/family-baking.webp",
     alt: "A grandmother and her granddaughter baking together in the kitchen",
-    href: "/services",
+    href: "/services/home-care",
     icon: Heart,
   },
 ];
@@ -155,7 +155,7 @@ export const trustQAs: {
     image: "/images/activities-coloring.webp",
     imageAlt: "A caregiver leaning in to help an older woman with a colouring activity",
     imagePosition: "object-[55%_center]",
-    link: { href: "/services", label: "Learn more about the types of care we provide" },
+    link: { href: "/#services", label: "Learn more about the types of care we provide" },
   },
   {
     q: "Are care providers background checked?",
@@ -175,7 +175,7 @@ export const trustQAs: {
   },
   {
     q: "Are you licensed?",
-    a: `Yes, Open Arms & Hearts is an APD Central Region provider and a licensed Florida Home Health Agency that has served Central Florida since ${site.since}.`,
+    a: `Yes, Open Arms & Hearts is an APD Central Region provider and a licensed Florida Home Health Agency that has served Central Region since ${site.since}.`,
     icon: BadgeCheck,
     image: "/images/nurses-team.webp",
     imageAlt: "Two smiling healthcare professionals in scrubs and white coats",

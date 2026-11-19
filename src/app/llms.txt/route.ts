@@ -16,7 +16,7 @@ export function GET() {
 
 "${site.tagline}." — "${site.motto}"
 
-${site.credentials.join(" | ")} · ${licenseLine} · Serving Central Florida since ${site.since}.
+${site.credentials.join(" | ")} · ${licenseLine} · Serving Central Region since ${site.since}.
 
 Our Mission: ${mission}
 
@@ -62,7 +62,7 @@ ${steps.map((s, i) => `${i + 1}. ${s.title} — ${s.text}`).join("\n")}
 ## Pages
 
 - [Home](${url("/")})
-- [Our services](${url("/services")})
+- [Our services](${url("/#services")})
 - [About us](${url("/about")}): Our mission and the story of ${site.owner.name}, owner.
 - [Careers](${url("/careers")}): Home Health Aide and Group Home Staff — apply at ${site.applicationUrl}
 - [FAQ](${url("/faq")})

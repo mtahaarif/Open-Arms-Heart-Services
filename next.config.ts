@@ -72,8 +72,9 @@ const nextConfig: NextConfig = {
   // Removed pages: unverified content, and /thank-you (replaced by the embedded Google Form).
   async redirects() {
     return [
-      { source: "/services/home-care", destination: "/services#home-care", permanent: true },
-      { source: "/services/home-health", destination: "/services", permanent: true },
+      // Each service has its own page (/services/<slug>); there is no overview page.
+      { source: "/services", destination: "/#services", permanent: true },
+      { source: "/services/home-health", destination: "/services/home-care", permanent: true },
       { source: "/getting-started", destination: "/contact", permanent: true },
       { source: "/thank-you", destination: "/contact", permanent: true },
     ];

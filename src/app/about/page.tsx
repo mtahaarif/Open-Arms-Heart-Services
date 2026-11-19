@@ -14,7 +14,7 @@ import { rich } from "@/lib/rich";
 export const metadata = pageMetadata({
   path: "/about",
   title: "About Us & Our Mission",
-  description: `Our mission, and the story of ${site.owner.name}, owner of Open Arms & Heart Services Inc. — compassionate, person-centered care in Central Florida since ${site.since}.`,
+  description: `Our mission, and the story of ${site.owner.name}, owner of Open Arms & Heart Services Inc. — compassionate, person-centered care in Central Region since ${site.since}.`,
 });
 
 /** Bento spans (6-column grid, every breakpoint): tall lead card, then 3 + 3 and 4 + 2. */
@@ -55,15 +55,15 @@ export default function AboutPage() {
                 <div className="animate-spin-slow absolute -inset-1/2 -z-10 bg-[conic-gradient(from_0deg,var(--color-plum-500),var(--color-blush-400),var(--color-plum-200),var(--color-blush-500),var(--color-plum-500))]" />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-white">
                   <Photo
-                    src="/images/founder-shantana-johnson.webp"
+                    src="/images/founder.webp"
                     alt={`${site.owner.name}, ${site.owner.title.toLowerCase()} of ${site.name}`}
-                    sizes="(min-width: 1024px) 384px, 90vw"
-                    className="object-top"
+                    sizes="(min-width: 1024px) 480px, 115vw"
+                    className="object-center"
                   />
                 </div>
               </div>
               <div className="glass absolute -bottom-5 left-1/2 z-10 w-max max-w-[92%] -translate-x-1/2 rounded-full px-5 py-2.5 text-center text-sm font-semibold text-plum-900">
-                Serving Central Florida since {site.since}
+                Serving Central Region since {site.since}
               </div>
             </div>
             <div>
@@ -76,7 +76,7 @@ export default function AboutPage() {
                 ))}
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
-                {[site.credentials[1], site.credentials[0], `Serving Central Florida since ${site.since}`].map((t) => (
+                {[site.credentials[1], site.credentials[0], `Serving Central Region since ${site.since}`].map((t) => (
                   <span key={t} className="glass rounded-full px-4 py-2 text-sm font-semibold text-plum-800">
                     {t}
                   </span>
@@ -111,7 +111,7 @@ export default function AboutPage() {
                       <a.icon className="size-4 sm:size-5" aria-hidden />
                     </span>
                     <div className="transition-transform duration-700 ease-[var(--ease-out-expo)] md:can-hover:translate-y-10 md:can-hover:group-hover:translate-y-0">
-                      <h3 className="font-display text-[0.95rem] leading-tight font-medium text-white uppercase hyphens-auto max-[359px]:text-[0.72rem] sm:text-2xl md:text-3xl lg:text-2xl">{a.title}</h3>
+                      <h3 className="font-display text-[0.95rem] leading-tight font-bold text-white hyphens-auto max-[359px]:text-[0.72rem] sm:text-2xl md:text-3xl lg:text-2xl">{a.title}</h3>
                       <p className="mt-2 hidden max-w-sm text-white/80 transition-opacity duration-700 sm:line-clamp-2 md:line-clamp-none md:can-hover:opacity-0 md:can-hover:group-hover:opacity-100">
                         {a.text}
                       </p>
@@ -134,7 +134,7 @@ export default function AboutPage() {
                 <a href={site.phone.href} className="btn-primary">
                   <Phone className="size-4" /> {site.phone.display}
                 </a>
-                <Link href="/services" className="btn-outline">
+                <Link href="/#services" className="btn-outline">
                   Our services <ArrowUpRight className="size-4" />
                 </Link>
               </div>

@@ -6,8 +6,8 @@ import { Photo } from "./Photo";
 import { Lines } from "./SectionHeading";
 
 /**
- * Page banner (every inner page): a full-bleed photo under a dark plum treatment (<BannerOverlay>),
- * running up behind the floating header, with everything centred on top — breadcrumb, an eyebrow
+ * Page banner (inner pages): a full-bleed photo under a light neutral shade (<BannerOverlay>), below
+ * the header, with everything centred on top — breadcrumb, an eyebrow
  * led by a short rule, the H1 in white and the intro. `focus` is a static Tailwind object-position
  * class that keeps the people in frame (mostly matters on phones, where the crop is narrow).
  * Entrances are CSS so the headline and photo paint at first render.
@@ -35,7 +35,7 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative isolate -mt-[5.25rem] flex min-h-[31rem] items-center overflow-hidden bg-plum-700 pt-[8.25rem] [text-shadow:0_2px_18px_rgb(43_17_64/0.5)] pb-16 text-white lg:-mt-[5.75rem] lg:min-h-[35rem] lg:pt-[9.5rem] lg:pb-20">
+    <section className="relative isolate flex min-h-[26rem] items-center overflow-hidden bg-neutral-700 py-16 text-white [text-shadow:0_2px_16px_rgb(0_0_0/0.45)] lg:min-h-[30rem] lg:py-20">
       <div className="absolute inset-0 -z-10">
         {image && <Photo src={image} alt={imageAlt} preload={preload} sizes="2200px" className={focus} />}
         <BannerOverlay />

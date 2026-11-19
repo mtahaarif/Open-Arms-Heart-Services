@@ -57,7 +57,7 @@ export default function CareersPage() {
                     <BriefcaseMedical className="size-6" aria-hidden />
                   </span>
                   <p className="eyebrow mt-6">Position</p>
-                  <h3 className="mt-4 font-display text-3xl font-medium uppercase">{r}</h3>
+                  <h3 className="mt-4 font-display text-3xl font-bold">{r}</h3>
                 </div>
                 <a href="#apply" className="link-arrow relative z-[4] mt-8">
                   How to apply as {r === "Group Home Staff" ? "Group Home Staff" : `a ${r}`} <ArrowRight className="size-4" />

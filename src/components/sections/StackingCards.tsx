@@ -51,7 +51,7 @@ export function StackingCards() {
           {trustQAs.map((item, i) => (
             <div key={item.q} className={`sticky h-[calc(min(36rem,calc(100svh-8.25rem))+4rem)] md:h-[calc(clamp(22rem,calc(100svh-12rem),31rem)+5rem)] ${stick[i]}`}>
               <article
-                className={`qa-card relative grid h-[min(36rem,calc(100svh-8.25rem))] grid-rows-[minmax(5.5rem,1fr)_auto] max-[359px]:grid-rows-[minmax(3.5rem,1fr)_auto] overflow-hidden rounded-[2rem] border border-white bg-linear-to-br shadow-[0_30px_80px_-40px_rgb(51_27_88/0.45)] md:h-[clamp(22rem,calc(100svh-12rem),31rem)] md:grid-cols-[1.45fr_1fr] md:grid-rows-none ${tints[i % tints.length]} ${shrink[i]}`}
+                className={`qa-card relative grid h-[min(36rem,calc(100svh-8.25rem))] grid-rows-[minmax(5.5rem,1fr)_auto] max-[359px]:grid-rows-[minmax(2.25rem,1fr)_auto] overflow-hidden rounded-[2rem] border border-white bg-linear-to-br shadow-[0_30px_80px_-40px_rgb(51_27_88/0.45)] md:h-[clamp(22rem,calc(100svh-12rem),31rem)] md:grid-cols-[1.45fr_1fr] md:grid-rows-none ${tints[i % tints.length]} ${shrink[i]}`}
               >
                 <div className="flex flex-col justify-center px-5 pt-4 pb-6 max-[359px]:px-4 max-[359px]:pt-3 max-[359px]:pb-4 sm:p-8 xl:p-9 [@media(max-height:720px)]:pb-5 md:[@media(max-height:720px)]:py-6">
                   <div className="flex items-center gap-3">
@@ -62,7 +62,7 @@ export function StackingCards() {
                       {String(i + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3 className="mt-3 font-display text-[1.15rem] max-[359px]:mt-2 max-[359px]:text-[1.02rem] leading-[1.12] font-medium text-balance uppercase sm:mt-5 sm:text-[clamp(1.35rem,1.05rem+1.1vw,1.85rem)] sm:[@media(max-height:720px)]:mt-4 sm:[@media(max-height:720px)]:text-[1.35rem]">
+                  <h3 className="mt-3 font-display text-[1.15rem] max-[359px]:mt-2 max-[359px]:text-[1.02rem] leading-[1.12] font-bold text-balance sm:mt-5 sm:text-[clamp(1.35rem,1.05rem+1.1vw,1.85rem)] sm:[@media(max-height:720px)]:mt-4 sm:[@media(max-height:720px)]:text-[1.35rem]">
                     {item.q}
                   </h3>
                   <p className="mt-2 text-[0.88rem] leading-relaxed max-[359px]:text-[0.8rem] max-[359px]:leading-normal sm:mt-3 sm:text-[0.95rem] xl:text-base [@media(max-height:720px)]:text-sm">{item.a}</p>

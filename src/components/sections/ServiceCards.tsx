@@ -24,8 +24,8 @@ export function ServiceCards() {
             <p className="hidden items-center gap-2 text-sm font-semibold text-plum-700 lg:flex" aria-hidden>
               Scroll to explore <ArrowRight className="size-4 animate-pulse" />
             </p>
-            <Link href="/services" className="btn-outline">
-              View all services <ArrowRight className="size-4 text-blush-600" />
+            <Link href="/contact" className="btn-outline">
+              Talk to our team <ArrowRight className="size-4 text-blush-600" />
             </Link>
           </div>
         </div>
@@ -57,7 +57,7 @@ export function ServiceCards() {
                   <ArrowUpRight className="size-5" aria-hidden />
                 </span>
                 <div className="relative z-[4]">
-                  <h3 className="font-display text-2xl font-medium text-white uppercase">{p.short}</h3>
+                  <h3 className="font-display text-2xl font-bold text-white">{p.short}</h3>
                   <p className="mt-2 text-navy-100/85">{p.tagline}</p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-blush-200">
                     Explore services <span aria-hidden>→</span>

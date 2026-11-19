@@ -1,8 +1,7 @@
 "use client";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
-import { BannerOverlay } from "@/components/ui/BannerOverlay";
 import { Photo } from "@/components/ui/Photo";
 
 /** `position` is a static Tailwind object-position class that keeps the faces in frame. */
@@ -12,12 +11,12 @@ type Slide = { src: string; alt: string; position?: string };
 const DURATION = 7000;
 
 /**
- * Home banner background: full-bleed photos that cross-fade (with a slow zoom on the active one)
- * under the site-wide dark banner treatment (<BannerOverlay>), and a glass control pill
- * (progress bars, counter, previous / next). Autoplay is off for reduced-motion visitors.
- * Slides are plain data from the server page; the first photo is the LCP image (preloaded).
+ * Home banner photo card (the reference site's hero card): a large rounded photo that cross-fades
+ * between the banner photos with a slow zoom, a location chip in the top corner, slide bars along
+ * the bottom, and a "Call our team" card overlapping its lower-left edge. Autoplay is off for
+ * reduced-motion visitors. Slides are plain data from the server page; the first is the LCP image.
  */
-export function HeroSlides({ slides }: { slides: Slide[] }) {
+export function HeroSlides({ slides, location, phone }: { slides: Slide[]; location: string; phone: { display: string; href: string } }) {
   const [active, setActive] = useState(0);
   const [auto, setAuto] = useState(false);
   const n = slides.length;
@@ -30,11 +29,9 @@ export function HeroSlides({ slides }: { slides: Slide[] }) {
     return () => window.clearTimeout(t);
   }, [active, auto, n]);
 
-  const go = (i: number) => setActive((i + n) % n);
-
   return (
-    <>
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+    <div className="relative pb-8 sm:pb-0">
+      <div className="relative aspect-[4/3.3] overflow-hidden rounded-[2rem] bg-plum-100 shadow-[0_40px_90px_-40px_rgb(102_45_145/0.55)] sm:aspect-[5/4] lg:rounded-[2.25rem]">
         {slides.map((s, i) => (
           <div
             key={s.src}
@@ -42,58 +39,49 @@ export function HeroSlides({ slides }: { slides: Slide[] }) {
             aria-hidden={i !== active}
           >
             <div className={`absolute inset-0 ${i === active ? "animate-[kenburns_9s_ease-out_both]" : ""}`}>
-              <Photo src={s.src} alt={s.alt} preload={i === 0} sizes="2200px" className={s.position ?? "object-[65%_center]"} />
+              <Photo src={s.src} alt={s.alt} preload={i === 0} sizes="(min-width: 1024px) 1500px, 270vw" className={s.position ?? "object-center"} />
             </div>
           </div>
         ))}
-        <BannerOverlay />
-      </div>
+        <div aria-hidden className="absolute inset-x-0 bottom-0 h-28 bg-linear-to-t from-black/30 to-transparent" />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-3 z-10 sm:bottom-5 lg:bottom-6">
-        <div className="wrap flex justify-end">
-          <div className="glass-dark enter pointer-events-auto flex items-center gap-3 rounded-full py-1.5 pr-1.5 pl-4 [--d:900ms]">
-            <div className="flex items-center gap-1.5" role="tablist" aria-label="Banner photos">
-              {slides.map((s, i) => (
-                <button
-                  key={s.src}
-                  type="button"
-                  role="tab"
-                  aria-selected={i === active}
-                  aria-label={`Show photo ${i + 1}`}
-                  onClick={() => go(i)}
-                  className={`relative h-1.5 overflow-hidden rounded-full bg-white/25 transition-all duration-500 ${i === active ? "w-10" : "w-4 hover:bg-white/45"}`}
-                >
-                  {i === active && (
-                    <span
-                      key={`${active}-${auto}`}
-                      className={`absolute inset-0 origin-left rounded-full bg-linear-to-r from-plum-700 to-blush-500 ${auto ? "animate-[hero-progress_7s_linear_both]" : ""}`}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-            <span className="w-12 text-center text-xs font-bold text-white/80 tabular-nums">
-              {String(active + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
-            </span>
+        <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3.5 py-2 text-[0.82rem] font-bold text-ink shadow-sm backdrop-blur sm:top-5 sm:right-5">
+          <MapPin className="size-4 text-blush-500" aria-hidden /> {location}
+        </span>
+
+        <div className="absolute right-4 bottom-4 flex items-center sm:right-5 sm:bottom-5" role="tablist" aria-label="Banner photos">
+          {slides.map((s, i) => (
             <button
+              key={s.src}
               type="button"
-              aria-label="Previous photo"
-              onClick={() => go(active - 1)}
-              className="grid size-9 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white hover:text-plum-900"
+              role="tab"
+              aria-selected={i === active}
+              aria-label={`Show photo ${i + 1}`}
+              onClick={() => setActive(i)}
+              className="grid h-6 cursor-pointer place-items-center px-1"
             >
-              <ChevronLeft className="size-4" />
+              <span className={`relative block h-1 overflow-hidden rounded-full bg-white/50 transition-all duration-500 ${i === active ? "w-9" : "w-6 hover:bg-white/80"}`}>
+                {i === active && (
+                  <span key={`${active}-${auto}`} className={`absolute inset-0 origin-left rounded-full bg-white ${auto ? "animate-[hero-progress_7s_linear_both]" : ""}`} />
+                )}
+              </span>
             </button>
-            <button
-              type="button"
-              aria-label="Next photo"
-              onClick={() => go(active + 1)}
-              className="grid size-9 place-items-center rounded-full bg-linear-to-br from-plum-700 to-blush-500 text-white transition-transform hover:scale-105"
-            >
-              <ChevronRight className="size-4" />
-            </button>
-          </div>
+          ))}
         </div>
       </div>
-    </>
+
+      <a
+        href={phone.href}
+        className="enter absolute bottom-0 left-4 inline-flex items-center gap-3 rounded-2xl bg-white py-3 pr-5 pl-3 shadow-[0_20px_50px_-20px_rgb(102_45_145/0.5)] ring-1 ring-plum-100 transition-transform [--d:500ms] hover:-translate-y-0.5 sm:-bottom-6 sm:-left-6"
+      >
+        <span className="grid size-11 place-items-center rounded-xl bg-linear-to-br from-plum-700 to-blush-500 text-white">
+          <Phone className="size-5" aria-hidden />
+        </span>
+        <span>
+          <span className="block text-[0.7rem] font-bold tracking-[0.14em] text-body uppercase">Call our team</span>
+          <span className="block font-display text-lg leading-tight font-bold text-ink">{phone.display}</span>
+        </span>
+      </a>
+    </div>
   );
 }

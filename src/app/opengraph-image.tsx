@@ -17,7 +17,7 @@ export default async function OpengraphImage() {
         <div style={{ width: 14, height: "100%", background: "#65318b" }} />
         <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "64px 72px" }}>
           <div style={{ display: "flex", fontSize: 24, letterSpacing: 4, textTransform: "uppercase", color: "#65318b", fontFamily: "Arial" }}>
-            Central Florida · Since {site.since}
+            Central Region · Since {site.since}
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 76, lineHeight: 1.08, color: "#172b48" }}>Care that comes</div>

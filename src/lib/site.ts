@@ -12,7 +12,7 @@ export const site = {
   shortName: "Open Arms & Heart Services",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? vercelUrl ?? "http://localhost:3000",
   description:
-    "Compassionate home and community support for children, adults, seniors and people with disabilities throughout Central Florida.",
+    "Compassionate home and community support for children, adults, seniors and people with disabilities throughout Central Region.",
   tagline: "Care that comes from the heart",
   motto: "Where there is love, there is life.",
   closing: "With compassion. With dignity. With open arms.",
@@ -27,7 +27,8 @@ export const site = {
     "Community-Based Care (CBC) Provider",
     "Level 2 Live Scan Provider (BGS)",
   ],
-  licenses: ["2999995365", "235855"],
+  // The three licence numbers on the agency's trifold.
+  licenses: ["2999995365", "235855", "234841"],
 
   phone: { display: "321-217-2409", href: "tel:+13212172409" },
   fax: { display: "855-257-1340" },
@@ -47,13 +48,13 @@ export const site = {
   areas: [
     {
       label: "Home Health Services",
-      href: "/services#home-care",
+      href: "/services/home-care",
       counties: ["Polk", "Highlands", "Hardee", "Hillsborough", "Manatee"],
       text: "Polk · Highlands · Hardee · Hillsborough · Manatee",
     },
     {
       label: "APD Central Region",
-      href: "/services#apd",
+      href: "/services/apd",
       counties: [],
       text: "Serving all of APD’s Central Region",
     },
@@ -66,7 +67,7 @@ export const addressLines = [site.address.street, `${site.address.city}, ${site.
 export const fullAddress = addressLines.join(", ");
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.name}, ${fullAddress}`)}`;
 export const licenseLine = site.licenses.map((l) => `Lic# ${l}`).join(" · ");
-export const sinceLine = `Compassionate care across Central Florida since ${site.since}`;
+export const sinceLine = `Compassionate care across Central Region since ${site.since}`;
 
 /** `hint` completes a one-word label for screen readers and crawlers (visually hidden). */
 export const nav: readonly { href: string; label: string; hint?: string }[] = [

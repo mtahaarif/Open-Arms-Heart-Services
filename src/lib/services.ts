@@ -170,7 +170,8 @@ export const programs: Program[] = [
 ];
 
 export const programBySlug = (slug: string) => programs.find((p) => p.slug === slug);
-export const programHref = (p: Program) => `/services#${p.slug}`;
+/** Each service has its own page; there is no /services overview (it redirects to the home page's services section). */
+export const programHref = (p: Program) => `/services/${p.slug}`;
 /** Service slug → exact checkbox label on the Google Form (plain data for the client-side embed). */
 export const formLabels: Record<string, string> = Object.fromEntries(programs.map((p) => [p.slug, p.formLabel]));
 
