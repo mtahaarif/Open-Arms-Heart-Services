@@ -35,7 +35,7 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative isolate -mt-[5.25rem] flex min-h-[31rem] items-center overflow-hidden bg-plum-950 pt-[8.25rem] pb-16 text-white lg:-mt-[5.75rem] lg:min-h-[35rem] lg:pt-[9.5rem] lg:pb-20">
+    <section className="relative isolate -mt-[5.25rem] flex min-h-[31rem] items-center overflow-hidden bg-plum-700 pt-[8.25rem] [text-shadow:0_2px_18px_rgb(43_17_64/0.5)] pb-16 text-white lg:-mt-[5.75rem] lg:min-h-[35rem] lg:pt-[9.5rem] lg:pb-20">
       <div className="absolute inset-0 -z-10">
         {image && <Photo src={image} alt={imageAlt} preload={preload} sizes="2200px" className={focus} />}
         <BannerOverlay />

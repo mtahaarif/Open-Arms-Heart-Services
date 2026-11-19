@@ -17,7 +17,7 @@ export function CareersFeature() {
               alt="Two smiling caregivers in scrubs standing arm in arm with an older woman they care for"
               sizes="(min-width: 1024px) 600px, 100vw"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-plum-950/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-plum-900/50 via-transparent to-transparent" />
             <ul className="absolute right-5 bottom-5 left-5 flex flex-wrap gap-2">
               {roles.map((r) => (
                 <li key={r} className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-plum-900">

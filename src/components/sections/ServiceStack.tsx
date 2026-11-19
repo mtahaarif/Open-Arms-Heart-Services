@@ -50,7 +50,7 @@ export function ServiceStack({ items, photos, groups }: { items: Item[]; photos:
                 {photo}
               </div>
             ))}
-            <div className="absolute inset-0 bg-linear-to-t from-plum-950/85 via-plum-950/15 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-plum-900/75 via-plum-800/10 to-transparent" />
             <span className="glass absolute top-4 left-4 hidden max-w-[calc(100%-2rem)] truncate rounded-full px-4 py-2 text-sm font-semibold text-plum-900 sm:top-6 sm:left-6 sm:inline-block">
               {cur.short}
             </span>

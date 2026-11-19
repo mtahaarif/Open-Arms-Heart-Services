@@ -2,42 +2,42 @@
 @import "tailwindcss" source("../");
 
 /* ───────────────────────── Brand tokens ─────────────────────────
- * The logo's iris purple and blush pink, on a soft lavender paper. `plum` is the brand scale,
- * `navy` the deep-plum scale used for dark bands and the footer.
+ * Matched to the logo: `plum-700` is the logo's violet (#662d91) and `blush-400` its pink (#ff7bac),
+ * on a soft lavender paper. `navy` holds the light tints used for text on the violet bands.
  */
 /* Devices with a real hover (mouse / trackpad): hover-reveal effects only hide content there. */
 @custom-variant can-hover (@media (hover: hover) and (pointer: fine));
 
 @theme {
-  --color-plum-50: #f8f5fe;
-  --color-plum-100: #f0e9fc;
-  --color-plum-200: #e1d2f8;
-  --color-plum-300: #c9aff1;
-  --color-plum-400: #aa86e4;
-  --color-plum-500: #8b60d3;
-  --color-plum-600: #7446bd;
-  --color-plum-700: #60349f;
-  --color-plum-800: #4b2a7d;
-  --color-plum-900: #331b58;
-  --color-plum-950: #1d0f35;
+  --color-plum-50: #fbf6fe;
+  --color-plum-100: #f5eafb;
+  --color-plum-200: #ead3f6;
+  --color-plum-300: #d8b0ee;
+  --color-plum-400: #bf83e0;
+  --color-plum-500: #a259cb;
+  --color-plum-600: #8a3db4;
+  --color-plum-700: #662d91;
+  --color-plum-800: #55257a;
+  --color-plum-900: #421c5f;
+  --color-plum-950: #2b1140;
 
-  --color-navy-100: #e1d2f8;
-  --color-navy-200: #c9b9e6;
-  --color-navy-300: #a597c2;
-  --color-navy-600: #4b3a6e;
-  --color-navy-700: #3a2a5c;
-  --color-navy-800: #2a1b47;
-  --color-navy-900: #1d0f35;
-  --color-navy-950: #140a26;
+  --color-navy-100: #f3e6fb;
+  --color-navy-200: #e4ccf3;
+  --color-navy-300: #cfa9e6;
+  --color-navy-600: #7a3aa6;
+  --color-navy-700: #6a3196;
+  --color-navy-800: #5a2883;
+  --color-navy-900: #4a2070;
+  --color-navy-950: #3a185a;
 
-  --color-blush-50: #fff3f8;
-  --color-blush-100: #fee5ef;
-  --color-blush-200: #fdcbe0;
-  --color-blush-300: #f9a8c9;
-  --color-blush-400: #f48bb5;
-  --color-blush-500: #ea6a9c;
-  --color-blush-600: #d34b82;
-  --color-blush-700: #b03567;
+  --color-blush-50: #fff5f9;
+  --color-blush-100: #ffe7f0;
+  --color-blush-200: #ffcfe1;
+  --color-blush-300: #ffaccb;
+  --color-blush-400: #ff7bac;
+  --color-blush-500: #f65e98;
+  --color-blush-600: #de4583;
+  --color-blush-700: #b9306a;
 
   --color-ink: #24173a;
   --color-body: #5e5373;
@@ -333,8 +333,10 @@
 @utility text-gradient {
   @apply bg-linear-to-r from-plum-700 via-plum-500 to-blush-500 bg-clip-text text-transparent;
 }
+/* Accent words on banner photos: solid light pink (a clipped gradient turns muddy under the banners'
+   text shadow, which keeps white text legible on bright photos). */
 @utility text-gradient-light {
-  @apply bg-linear-to-r from-blush-200 via-white to-plum-200 bg-clip-text text-transparent;
+  color: var(--color-blush-200);
 }
 
 /* ───────────────────────── Surfaces ───────────────────────── */
@@ -357,12 +359,14 @@
 @utility card {
   @apply rounded-[1.75rem] border border-line bg-white/85 shadow-[0_20px_50px_-30px_rgb(51_27_88/0.35)];
 }
-/* Deep-plum band with soft colour glows. */
+/* Bright brand band: the logo's violet blending into magenta, with soft pink and lilac glows. */
 @utility band-dark {
-  @apply relative isolate overflow-hidden bg-navy-900 text-navy-100;
+  @apply relative isolate overflow-hidden text-navy-100;
+  background-color: var(--color-plum-700);
   background-image:
-    radial-gradient(circle at 85% 0%, rgb(234 106 156 / 0.22), transparent 42%),
-    radial-gradient(circle at 0% 100%, rgb(139 96 211 / 0.35), transparent 48%);
+    radial-gradient(circle at 88% 0%, rgb(255 123 172 / 0.3), transparent 45%),
+    radial-gradient(circle at 0% 100%, rgb(191 131 224 / 0.35), transparent 50%),
+    linear-gradient(125deg, #662d91 0%, #7b34a6 50%, #9c3a9c 100%);
 }
 @utility hairline-grid {
   background-image:

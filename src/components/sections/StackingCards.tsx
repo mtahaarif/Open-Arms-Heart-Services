@@ -86,7 +86,7 @@ export function StackingCards() {
                   <Photo src={item.image} alt={item.imageAlt} sizes="(min-width: 768px) 900px, 140vw" className={item.imagePosition} />
                   <div className="absolute inset-0 bg-linear-to-t from-white/40 to-transparent to-40% md:bg-linear-to-r md:from-white/30 md:to-100%" />
                 </div>
-                <div className={`qa-dim pointer-events-none absolute inset-0 bg-plum-950 opacity-0 ${dim[i]}`} />
+                <div className={`qa-dim pointer-events-none absolute inset-0 bg-plum-900 opacity-0 ${dim[i]}`} />
               </article>
             </div>
           ))}

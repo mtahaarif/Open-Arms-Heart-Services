@@ -10,7 +10,7 @@ export function RibbonDefs() {
         <linearGradient id="rib-a" x1="0" y1="1" x2="1" y2="0">
           <stop offset="0" stopColor="#c9aff1" stopOpacity="0" />
           <stop offset="0.45" stopColor="#8b60d3" />
-          <stop offset="1" stopColor="#60349f" />
+          <stop offset="1" stopColor="#662d91" />
         </linearGradient>
         <linearGradient id="rib-b" x1="0" y1="1" x2="1" y2="0">
           <stop offset="0" stopColor="#fdcbe0" stopOpacity="0" />

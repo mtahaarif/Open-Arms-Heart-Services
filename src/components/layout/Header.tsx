@@ -94,7 +94,7 @@ export function Header({ services }: { services: NavItem[] }) {
 
       {open && (
         // Scrim: dims and blurs the page so it can't show through the menu; tap it to close.
-        <div aria-hidden onClick={() => setOpen(false)} className="fixed inset-0 -z-10 animate-[fade-in_0.25s_ease-out_both] bg-plum-950/45 backdrop-blur-sm lg:hidden" />
+        <div aria-hidden onClick={() => setOpen(false)} className="fixed inset-0 -z-10 animate-[fade-in_0.25s_ease-out_both] bg-plum-900/35 backdrop-blur-sm lg:hidden" />
       )}
       {open && (
         <nav

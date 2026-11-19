@@ -48,7 +48,7 @@ export default function CareersPage() {
           <div className="mt-12 grid gap-5 lg:grid-cols-[1.1fr_1fr_1fr]">
             <div data-reveal className="relative min-h-[20rem] overflow-hidden rounded-[2rem] shadow-[0_30px_60px_-35px_rgb(51_27_88/0.7)]">
               <Photo src="/images/caregiver-companion.webp" alt="A caregiver chatting with an older man in his backyard garden" sizes="(min-width: 1024px) 640px, 125vw" />
-              <div className="absolute inset-0 bg-linear-to-t from-plum-950/80 via-plum-900/20 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-plum-900/70 via-plum-800/15 to-transparent" />
             </div>
             {roles.map((r, i) => (
               <GlowCard key={r} as="article" className={`glass flex flex-col justify-between rounded-[2rem] p-7 sm:p-8 ${i ? "[--d:200ms]" : "[--d:100ms]"}`} data-reveal>

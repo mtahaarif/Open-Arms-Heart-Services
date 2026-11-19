@@ -49,7 +49,7 @@ export function ServiceCards() {
                   sizes="(min-width: 640px) 720px, 155vw"
                   className="object-[center_30%] transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-plum-950/95 via-plum-900/45 to-plum-900/5" />
+                <div className="absolute inset-0 bg-linear-to-t from-plum-900/85 via-plum-800/35 to-transparent" />
                 <span className="glass-dark absolute top-5 left-5 z-[4] grid size-12 place-items-center rounded-2xl font-display text-lg">
                   {String(i + 1).padStart(2, "0")}
                 </span>

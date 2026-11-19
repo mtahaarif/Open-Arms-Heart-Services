@@ -2,7 +2,10 @@
 
 > Production marketing website for **Open Arms & Heart Services Inc.**, a Florida-licensed home health agency and APD Central Region provider serving Central Florida since 2017.
 >
-> **Design direction (November 2026):** the owner's content and page structure, presented in the project's original dynamic design language — soft lavender gradients, aurora and ribbon heroes, arch photos, glass panels, glowing cards and deep-plum bands — with the busiest effects simplified (see §1.2).
+> **Design direction (November 2026):** the owner's content and page structure, presented in the project's original dynamic design language — soft lavender gradients, aurora and ribbon heroes, arch photos, glass panels, glowing cards and violet bands — with the busiest effects simplified (see §1.2).
+
+> **Bright palette (November 2026):** the client found the site dark and gloomy (especially the ticker and the banner filter). The palette was re-matched to the logo (violet `#662d91`, pink `#ff7bac`); the near-black bands, footer and cards became a bright violet-to-magenta gradient; the banner filter was cut to a light wash; and the ticker became a violet-to-pink band.
+
 >
 > **Content policy:** every fact on the site comes from the owner's mock-up ([`docs/client-mockup-content.md`](docs/client-mockup-content.md)) or the agency's original website ([`docs/original-site-content.md`](docs/original-site-content.md)). Where they differ, the mock-up wins. See §16.
 
@@ -79,7 +82,7 @@
 | Request | Result |
 | --- | --- |
 | **Content exactly the same** | All copy, facts, page structure, the Google Form and the careers JotForm are unchanged from the October redesign (sources: §16). Only visual design changed. |
-| **The earlier design philosophy** | Restored from the dynamic version (git `1732445` and earlier): iris/blush palette on lavender paper; aurora + hairline-grid + ribbon heroes; arch-shaped hero photos with floating glass cards, a circular inset and a rotating text badge; gradient accent words in headings; glass header, panels and cards; cursor-following glow cards; photo cards with deep-plum gradient overlays; deep-plum rounded bands; a dark rounded footer with a giant outlined text ticker; fade-up reveals on scroll. |
+| **The earlier design philosophy** | Restored from the dynamic version (git `1732445` and earlier): iris/blush palette on lavender paper; aurora + hairline-grid + ribbon heroes; arch-shaped hero photos with floating glass cards, a circular inset and a rotating text badge; gradient accent words in headings; glass header, panels and cards; cursor-following glow cards; photo cards with violet gradient overlays; violet rounded bands; a dark rounded footer with a giant outlined text ticker; fade-up reveals on scroll. |
 | **Simplified** | One straight credentials ticker instead of two crossing tickers. No smooth-scroll hijacking (Lenis), pinned horizontal scroll, stacking cards, scroll-scrubbed text, mouse parallax, magnetic buttons, 3D tilt or page-transition curtains. No animation library at all — CSS animations plus one tiny `IntersectionObserver`. |
 | **Professional font** | Headings stay as chosen on 2026-10-27: **League Spartan** (Manrope fallback) in **capitals, without full stops**, with **Source Sans 3** for body text. |
 | **Welcoming pictures** | The October photography is kept (§20). |
@@ -244,9 +247,9 @@ Retired URLs redirect permanently (308): `/services/home-care` → `/services#ho
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `plum-50` … `plum-950` | `#f8f5fe` … `#1d0f35` | The brand iris scale. `plum-700` `#60349f` for links and eyebrows; `plum-500`/`600` in gradients |
-| `blush-50` … `blush-700` | `#fff3f8` … `#b03567` | The logo pink. Gradient ends, accents on dark bands, the eyebrow dot |
-| `navy-100` … `navy-950` | `#e1d2f8` … `#140a26` | Deep-plum scale for dark bands (`navy-900` `#1d0f35`) and light text on them (`navy-100`) |
+| `plum-50` … `plum-950` | `#fbf6fe` … `#2b1140` | The brand violet scale, matched to the logo: `plum-700` `#662d91` is the logo's violet (links, eyebrows, the bright bands); `plum-500`/`600` in gradients |
+| `blush-50` … `blush-700` | `#fff5f9` … `#b9306a` | The logo pink (`blush-400` `#ff7bac`). Gradient ends, accents on the violet bands, the eyebrow dot |
+| `navy-100` … `navy-950` | `#f3e6fb` … `#3a185a` | Light tints for text on the violet bands (`navy-100`) |
 | `ink` | `#24173a` | Headings |
 | `body` | `#5e5373` | Body text |
 | `cream` | `#fdfbff` | Page background (lavender paper) |
@@ -278,7 +281,7 @@ The signature gradient runs `plum-700 → plum-500 → blush-500` (buttons, acce
 | `text-gradient`, `text-gradient-light` | Gradient text |
 | `glass`, `glass-dark` | Frosted panels (translucent gradient, `backdrop-filter`, hairline border, soft shadow) |
 | `card` | Rounded 28 px white card with a soft lavender shadow |
-| `band-dark` | Deep-plum surface with pink/iris corner glows (bands, footer, dark cards) |
+| `band-dark` | Bright brand surface: the logo's violet blending into magenta, with pink and lilac glows (bands, footer, feature cards). White text |
 | `glow-card` | Cursor-following gradient border + spotlight; pair with `<GlowCard>`. Put card content in `relative z-[4]` so it sits above the glow layers |
 | `hairline-grid`, `mask-fade-x` | Faint grid background; edge fade for the ticker |
 | `enter` | Above-the-fold entrance (`--enter` picks the keyframe: `enter-up`, `rise`, `enter-pop`; `--d` sets the delay) |
@@ -304,7 +307,7 @@ All motion is CSS and respects `prefers-reduced-motion` (animations and reveals 
 ### 8.0 Page banners (every page)
 
 Modelled on the About banner of lovethyneighborhhc.com:
-- A full-bleed photo under a dark plum treatment (`BannerOverlay`) that runs up behind the floating header.
+- A full-bleed photo under a light violet treatment (`BannerOverlay`: a faint wash, soft shading at the top and bottom and a gentle pool behind the text, plus a soft text shadow) that runs up behind the floating header.
 - Everything centred on top: a breadcrumb (home icon › page), an eyebrow led by a short blush rule, the H1 in white with light accent words, the intro, and any actions.
 - `PageHeader` builds it on the inner pages.
 - The home banner uses the same structure, keeping its four cross-fading photos and slide controls (no breadcrumb).
@@ -315,18 +318,18 @@ Modelled on the About banner of lovethyneighborhhc.com:
 | # | Section | Design |
 | --- | --- | --- |
 | 1 | Top bar + header | Slim lavender utility line ("Compassionate care across Central Florida since 2017" · "Call our team: 321-217-2409") above the floating glass pill header |
-| 2 | Banner | The site-wide banner structure (§8.0): four full-bleed photos cross-fading every 7 s with a slow zoom under the dark plum treatment, behind the floating header; centred ruled eyebrow "Rooted in compassion · Central Florida", the white headline revealed line by line, lead, gradient (shine-on-hover) and outline buttons, the motto; a glass control pill with progress bars, counter and previous/next (`HeroSlides`, client). Autoplay is off for reduced motion |
+| 2 | Banner | The site-wide banner structure (§8.0): four full-bleed photos cross-fading every 7 s with a slow zoom under the light violet treatment, behind the floating header; centred ruled eyebrow "Rooted in compassion · Central Florida", the white headline revealed line by line, lead, gradient (shine-on-hover) and outline buttons, the motto; a glass control pill with progress bars, counter and previous/next (`HeroSlides`, client). Autoplay is off for reduced motion |
 | 3 | Credentials ticker | Straight, full-width deep-purple band: credentials in white display type with pink hearts between them, in a single scrolling row |
 | 4 | Welcome | "At home. In the community. *By your side*." with audience pills, beside the glass "Finding care should feel less overwhelming" call card |
 | 5 | A personal approach | Rounded-square photo with a glass "2017 · Central Florida" chip; "Your family. Your goals. *Our heart*." and gradient/glass buttons |
 | 6 | Our services | Horizontal card track (modelled on mourningdovehomecare.com "What we offer"): on desktop the section pins and scrolling down slides the six photo cards sideways, with a progress bar and "Scroll to explore" hint; on phones a swipeable row that snaps to each card |
 | 6b | Questions & answers | Copied from the earlier design: "Questions & *answers*" intro (sticky on desktop, phone + "All FAQs") beside four sticky stacking Q&A cards (number, icon, question, answer, insurance or licence chips, and a photo: the right column from md, the top half of the card on phones). Earlier cards shrink and dim as later ones slide over them (CSS scroll-driven, `.qa-*`) |
-| 7 | Service areas | Rounded deep-plum band with ribbons and two glass area cards |
+| 7 | Service areas | Rounded violet band with ribbons and two glass area cards |
 | 8 | Coming soon | Arch photo + glow cards with gradient "Coming soon" pills |
 | 9 | Careers | Rounded lavender panel: photo with glass role chips + copy |
-| 10 | Coverage | Insurance tiles with monograms (glow) and a deep-plum screening/licence card |
+| 10 | Coverage | Insurance tiles with monograms (glow) and a violet screening/licence card |
 | 11 | Next steps | Three glass step cards with gradient number circles joined by a gradient line |
-| 12 | Contact band | Deep-plum card with a photo wash, ribbons and a glass office card |
+| 12 | Contact band | Violet card with a photo wash, ribbons and a glass office card |
 
 ### 8.2 Our services — `/services`
 
@@ -356,7 +359,7 @@ Modelled on the About banner of lovethyneighborhhc.com:
 - **Meet the owner (`#story`):** one rounded lavender panel like the earlier design — portrait in a rotating gradient ring with a "since 2017" badge, name, title, the four story paragraphs as plain prose, and credential pills.
 - **Who we serve:** the bento from the earlier design's home page ("Who we care for", `AudienceBento` at git `1732445`), with the same layout at every screen size:
   - **Grid:** 6 columns — a tall lead card, then 3 + 3 and 4 + 2. Rows are 140px on phones, 200px from `sm` and 260px from `md`. It uses that version's container (`max-w-7xl`, 16/24/32px gutters) so the card sizes match exactly up to tablet size. From `lg` (desktop) the grid and the strip below it are scaled to 80%: 61rem wide at most, 208px rows, with slightly smaller titles, icon tiles and padding.
-  - **Cards:** five photo cards with a cursor tilt (`GlowCard tilt`), a zoom on hover, a deep-plum overlay and a frosted icon tile. Each links to its service.
+  - **Cards:** five photo cards with a cursor tilt (`GlowCard tilt`), a zoom on hover, a violet overlay and a frosted icon tile. Each links to its service.
   - **Card text:** on mouse devices from `md` up, the title rises and the description fades in on hover. Touch screens always show the description. On `sm`–`md` the description is limited to two lines so it never spills out of the shorter cards.
   - **Cards (same order, photos and copy as that version):** Seniors (the tall lead card, `senior-portrait.webp`), Veterans & their families (`veteran.webp`), People with disabilities (`personal-supports.webp`), Children & foster families (`child-smiling.webp`) and Family caregivers (`family-baking.webp`). Titles keep this site's League Spartan capitals; under 360px wide they shrink so "Caregivers" fits the narrow card.
   - **Below the grid:** the "Open Arms & Heart Services is only a call away!" strip, with the phone number and a link to Our services.
@@ -367,13 +370,13 @@ Modelled on the About banner of lovethyneighborhhc.com:
 
 - **Page header:** "Great Careers *Change Lives*." with "Apply online" (the agency's JotForm) and "Ask about current openings".
 - **Positions:** bento — a photo card plus a glow card per role, each linking to the application details.
-- **Requirements** (glass card) beside **The application asks for** (deep-plum panel with ribbons, EEO/ADA note and "Start your application").
+- **Requirements** (glass card) beside **The application asks for** (violet panel with ribbons, EEO/ADA note and "Start your application").
 - **Contact band.**
 
 ### 8.5 FAQ — `/faq`
 
 - **Page header.**
-- **Topic sidebar** (glass, sticky on desktop) with a deep-plum "Still have questions?" card.
+- **Topic sidebar** (glass, sticky on desktop) with a violet "Still have questions?" card.
 - **13 questions** in four groups as glass `<details>` accordions; the plus button turns into a gradient circle when open.
 - **`FAQPage` JSON-LD.**
 - **Contact band.**
@@ -407,12 +410,12 @@ The page banner without a photo (the 404 markup ships with every route, so nothi
 | `brand/Ribbons` | server | `RibbonDefs` (gradients, once in the layout), `Ribbons`, `Aurora`, `RotatingBadge` |
 | `sections/TrustStrip` | server | Credentials as a single straight gradient ticker |
 | `sections/ServiceCards` | server | The whole home "Our services" section: heading + `.hs` horizontal track of six photo glow cards |
-| `sections/AreasBand` | server | Rounded deep-plum band with glass area cards |
+| `sections/AreasBand` | server | Rounded violet band with glass area cards |
 | `sections/ComingSoon` | server | Skilled Home Health and PPEC |
 | `sections/CareersFeature` | server | Photo and careers copy band |
 | `sections/Coverage` | server | Insurance, screening and licensing, resources (`withResources`) |
 | `sections/Steps` | server | Three glass step cards joined by a gradient line |
-| `sections/ContactBand` | server | Deep-plum closing card with photo wash, ribbons and glass office card |
+| `sections/ContactBand` | server | Violet closing card with photo wash, ribbons and glass office card |
 | `sections/StackingCards` | server | Home "Questions & answers": sticky stacking Q&A cards from `trustQAs` (`lib/content.ts`) |
 | `sections/HeroSlides` | client | Home banner photos (cross-fade, slow zoom) under `BannerOverlay`, and the glass slide controls |
 | `sections/MissionStatement` | server | About "Our mission" manifesto + stat cards |
@@ -678,7 +681,7 @@ Any Node host works too (`npm run build && npm start`); the security headers com
 | *Site-Optimization part ii* | SiteChecker audit of 2026-10-25: lean `<Photo>` pipeline and LCP preload, no-prefetch `Link`, on-demand Google Form, plain-data Header, static compressed logo and favicons, og:image on every page, unique headings and anchors, `<strong>` emphasis, no inline styles, fewer duplicate external links, Tailwind source scoping (§13) |
 | *Second audit fixes* | Follow-up SiteChecker audit (71/100): logo through the image optimiser (AVIF/WebP), `/services` first photo preloaded, 404 logo no longer auto-preloaded on every page, screen-reader context for one-word nav and breadcrumb links; console errors and the route-announcer style identified as crawler / framework artefacts (§13) |
 | *Heading font* | Client disliked the Source Serif headings. After trying Varela, all-caps headings, Helvetica/Arial and Geist, headings and other display text now use League Spartan with a Manrope fallback (medium weight); h1/h2 are in capitals |
-| **Dynamic design restored (this version)** | Client feedback: the content was right but the design too simplified. Brought back the earlier design philosophy (iris/blush palette, aurora/ribbon heroes, arch photos, glass, glow cards, photo overlays, deep-plum bands, scroll-spy sidebar, dark footer with outlined ticker) with simplifications: one straight ticker, CSS-only motion, no smooth-scroll/parallax; the home services cards later became a CSS-only pinned horizontal track. Content unchanged; League Spartan capital headings without full stops kept |
+| **Dynamic design restored (this version)** | Client feedback: the content was right but the design too simplified. Brought back the earlier design philosophy (iris/blush palette, aurora/ribbon heroes, arch photos, glass, glow cards, photo overlays, violet bands, scroll-spy sidebar, dark footer with outlined ticker) with simplifications: one straight ticker, CSS-only motion, no smooth-scroll/parallax; the home services cards later became a CSS-only pinned horizontal track. Content unchanged; League Spartan capital headings without full stops kept |
 
 ---
 

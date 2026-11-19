@@ -55,7 +55,7 @@ export function MissionStatement() {
         </div>
 
         <div className="flex flex-col gap-4 lg:col-span-4 lg:pt-16">
-          <div data-reveal className="relative isolate overflow-hidden rounded-[2rem] bg-plum-900 p-7 text-white">
+          <div data-reveal className="relative isolate overflow-hidden rounded-[2rem] band-dark p-7 text-white">
             <Photo src="/images/hands-mission.webp" alt="" sizes="720px" className="-z-10 opacity-25" />
             <p className="text-sm font-semibold tracking-[0.16em] text-blush-200 uppercase">Serving Central Florida since</p>
             <p className="mt-1 font-display text-7xl">{site.since}</p>

@@ -38,7 +38,7 @@ export default function HomePage() {
     <>
       {/* Banner — the site-wide banner structure (see <PageHeader>): cross-fading photos under the dark
           plum treatment, running up behind the header, with the copy centred on top */}
-      <section className="relative isolate -mt-[5.25rem] flex items-center overflow-hidden bg-plum-950 pt-[6.75rem] pb-[4.5rem] text-white sm:pb-20 lg:-mt-[5.75rem] lg:pt-[7.5rem] lg:pb-[4.5rem]">
+      <section className="relative isolate -mt-[5.25rem] flex items-center overflow-hidden bg-plum-700 pt-[6.75rem] [text-shadow:0_2px_18px_rgb(43_17_64/0.5)] pb-[4.5rem] text-white sm:pb-20 lg:-mt-[5.75rem] lg:pt-[7.5rem] lg:pb-[4.5rem]">
         <HeroSlides slides={heroSlides} />
 
         <div className="wrap relative text-center">
