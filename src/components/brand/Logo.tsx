@@ -25,7 +25,7 @@ export function Logo({ className = "", withName = false, preload = false }: { cl
         className="h-full w-auto"
       />
       {withName && (
-        <span className="text-[0.72rem] leading-snug font-bold tracking-[0.12em] text-ink uppercase max-xl:sr-only">
+        <span className="text-[0.72rem] leading-snug font-bold tracking-[0.12em] text-ink uppercase max-[359px]:sr-only lg:max-xl:sr-only">
           Open Arms &amp; Heart
           <br />
           Services Inc.

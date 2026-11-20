@@ -75,7 +75,7 @@ export function Header({ services }: { services: NavService[] }) {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const pill = (active: boolean) =>
-    `inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-[0.9rem] font-semibold transition-colors ${
+    `inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-[0.875rem] font-semibold whitespace-nowrap transition-colors ${
       active ? "bg-plum-50 text-plum-700" : "text-ink/80 hover:bg-plum-50/70 hover:text-plum-700"
     }`;
 
@@ -89,9 +89,13 @@ export function Header({ services }: { services: NavService[] }) {
       <span aria-hidden className="scroll-progress absolute inset-x-0 top-0 h-[3px] origin-left bg-linear-to-r from-plum-600 via-plum-400 to-blush-400" />
 
       <div className={`mx-auto flex max-w-[1320px] items-center gap-4 px-4 transition-[height] duration-300 sm:px-6 lg:px-8 ${scrolled ? "h-16" : "h-[72px]"}`}>
-        <Logo withName preload className={`transition-[height] duration-300 ${scrolled ? "h-11" : "h-[52px]"}`} />
+        <Logo withName preload className={`shrink-0 transition-[height] duration-300 ${scrolled ? "h-11" : "h-[52px]"}`} />
 
-        <nav aria-label="Main" className="ml-auto hidden items-center gap-1 lg:flex">
+        {/* Links centred between the logo and the actions, Home first (as on the reference site) */}
+        <nav aria-label="Main" className="hidden flex-1 items-center justify-center gap-0.5 lg:flex">
+          <Link href="/" aria-current={pathname === "/" ? "page" : undefined} className={pill(pathname === "/")}>
+            Home
+          </Link>
           {nav.map((item) =>
             item.href === "/services" ? (
               <div key={item.href} className="group relative">
@@ -132,7 +136,7 @@ export function Header({ services }: { services: NavService[] }) {
           )}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2 lg:ml-3">
+        <div className="ml-auto flex shrink-0 items-center gap-2 lg:ml-0">
           <a href={site.phone.href} className="grid size-10 place-items-center rounded-full bg-plum-50 text-plum-700 transition-colors hover:bg-plum-100">
             <Phone className="size-[1.05rem]" aria-hidden />
             <span className="sr-only">Call {site.phone.display}</span>

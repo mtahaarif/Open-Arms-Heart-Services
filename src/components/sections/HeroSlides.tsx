@@ -44,12 +44,14 @@ export function HeroSlides({ slides, location, phone }: { slides: Slide[]; locat
           </div>
         ))}
         <div aria-hidden className="absolute inset-x-0 bottom-0 h-28 bg-linear-to-t from-black/30 to-transparent" />
+        {/* Phones: the slide bars sit top-left (the call card covers the bottom edge), on a faint shade */}
+        <div aria-hidden className="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-black/30 to-transparent sm:hidden" />
 
         <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3.5 py-2 text-[0.82rem] font-bold text-ink shadow-sm backdrop-blur sm:top-5 sm:right-5">
           <MapPin className="size-4 text-blush-500" aria-hidden /> {location}
         </span>
 
-        <div className="absolute right-4 bottom-4 flex items-center sm:right-5 sm:bottom-5" role="tablist" aria-label="Banner photos">
+        <div className="absolute top-3 left-2.5 flex items-center sm:top-auto sm:right-4 sm:bottom-3.5 sm:left-auto" role="tablist" aria-label="Banner photos">
           {slides.map((s, i) => (
             <button
               key={s.src}
@@ -58,7 +60,7 @@ export function HeroSlides({ slides, location, phone }: { slides: Slide[]; locat
               aria-selected={i === active}
               aria-label={`Show photo ${i + 1}`}
               onClick={() => setActive(i)}
-              className="grid h-6 cursor-pointer place-items-center px-1"
+              className="grid h-8 min-w-8 cursor-pointer place-items-center px-1.5"
             >
               <span className={`relative block h-1 overflow-hidden rounded-full bg-white/50 transition-all duration-500 ${i === active ? "w-9" : "w-6 hover:bg-white/80"}`}>
                 {i === active && (
