@@ -1,5 +1,6 @@
 import Link from "@/components/ui/Link";
 import { ArrowUpRight, Phone } from "lucide-react";
+import { Fragment } from "react";
 import { ContactBand } from "@/components/sections/ContactBand";
 import { MissionStatement } from "@/components/sections/MissionStatement";
 import { GlowCard } from "@/components/ui/GlowCard";
@@ -14,7 +15,7 @@ import { rich } from "@/lib/rich";
 export const metadata = pageMetadata({
   path: "/about",
   title: "About Us & Our Mission",
-  description: `Our mission, and the story of ${site.owner.name}, owner of Open Arms & Heart Services Inc. — compassionate, person-centered care in Central Region since ${site.since}.`,
+  description: `Our mission, and the story of ${site.owner.name}, owner of Open Arms & Heart Services Inc. — compassionate, person-centered care in the Central Region since ${site.since}.`,
 });
 
 /** Bento spans (6-column grid, every breakpoint): tall lead card, then 3 + 3 and 4 + 2. */
@@ -46,7 +47,7 @@ export default function AboutPage() {
         <div className="wrap">
           <div
             data-reveal
-            className="relative isolate grid items-center gap-12 overflow-hidden rounded-[2.5rem] bg-linear-to-br from-plum-50 via-white to-blush-50 p-6 ring-1 ring-plum-100 sm:p-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14"
+            className="relative isolate grid items-center gap-12 overflow-hidden rounded-[2.5rem] bg-linear-to-br from-sand via-cream to-rose p-6 ring-1 ring-sand-200 sm:p-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14"
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- decorative tiny static PNG */}
             <img src="/brand/logo-mark.webp" alt="" width={200} height={154} loading="lazy" className="absolute -right-10 -bottom-10 -z-10 h-72 w-auto opacity-[0.06]" />
@@ -63,7 +64,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="glass absolute -bottom-5 left-1/2 z-10 w-max max-w-[92%] -translate-x-1/2 rounded-full px-5 py-2.5 text-center text-sm font-semibold text-plum-900">
-                Serving Central Region since {site.since}
+                Serving the Central Region since {site.since}
               </div>
             </div>
             <div>
@@ -71,12 +72,27 @@ export default function AboutPage() {
               <h2 className="mt-5">{site.owner.name}</h2>
               <p className="mt-2 font-display text-xl text-blush-700">{site.owner.title}</p>
               <div className="mt-6 space-y-4 text-lg leading-relaxed">
-                {story.map((t) => (
-                  <p key={t.slice(0, 24)}>{rich(t)}</p>
+                {story.map((t, i) => (
+                  <Fragment key={t.slice(0, 24)}>
+                    <p>{rich(t)}</p>
+                    {/* After the two paragraphs about her grandmother: the family's photo of her */}
+                    {i === 2 && (
+                      <figure className="!mt-8 !mb-8">
+                        <div className="relative aspect-[1426/1103] overflow-hidden rounded-[1.75rem] bg-blush-100 shadow-[0_30px_70px_-35px_rgb(102_45_145/0.55)] ring-1 ring-blush-200">
+                          <Photo
+                            src="/images/owner-grandmother.webp"
+                            alt={`${site.owner.name}'s grandmother, smiling in a pink dress and tiara, in a heart-framed family photo`}
+                            sizes="(min-width: 1024px) 700px, 100vw"
+                          />
+                        </div>
+                        <figcaption className="mt-3 text-center text-sm font-semibold text-plum-700">{site.owner.name}&apos;s grandmother</figcaption>
+                      </figure>
+                    )}
+                  </Fragment>
                 ))}
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
-                {[site.credentials[1], site.credentials[0], `Serving Central Region since ${site.since}`].map((t) => (
+                {[site.credentials[1], site.credentials[0], `Serving the Central Region since ${site.since}`].map((t) => (
                   <span key={t} className="glass rounded-full px-4 py-2 text-sm font-semibold text-plum-800">
                     {t}
                   </span>
@@ -123,7 +139,7 @@ export default function AboutPage() {
           </ul>
 
           <div data-reveal className="mt-4 [--d:150ms] lg:mx-auto lg:mt-3.5 lg:max-w-[min(100%,61rem)]">
-            <GlowCard className="flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-plum-100 bg-linear-to-r from-plum-50 via-white to-blush-50 p-7 sm:flex-row sm:items-center sm:p-9 lg:rounded-[1.6rem] lg:px-8 lg:py-7">
+            <GlowCard className="flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-sand-200 bg-linear-to-r from-sand via-cream to-sage p-7 sm:flex-row sm:items-center sm:p-9 lg:rounded-[1.6rem] lg:px-8 lg:py-7">
               <div className="relative z-10">
                 <p className="font-display text-2xl text-plum-950 sm:text-3xl lg:text-2xl">Open Arms &amp; Heart Services is only a call away!</p>
                 <p className="mt-1">

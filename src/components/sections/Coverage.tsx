@@ -41,16 +41,16 @@ export function Coverage({ withResources = true }: { withResources?: boolean }) 
             </ul>
             <p className="mt-6 text-sm">{insuranceNote}</p>
           </div>
-          <div data-reveal className="band-dark rounded-[1.75rem] p-7 [--d:120ms] sm:p-9">
-            <h3 className="flex items-center gap-3 text-white">
-              <span className="grid size-11 place-items-center rounded-2xl bg-white/10 text-blush-200 ring-1 ring-white/15">
+          <div data-reveal className="rounded-[1.75rem] bg-rose p-7 ring-1 ring-rose-200 [--d:120ms] sm:p-9">
+            <h3 className="flex items-center gap-3">
+              <span className="grid size-11 place-items-center rounded-2xl bg-white text-plum-700 ring-1 ring-rose-200">
                 <ShieldCheck className="size-5" aria-hidden />
               </span>
               Care you can feel confident about
             </h3>
-            <p className="mt-5 text-navy-100/85 [&_strong]:text-white">{rich(screening)}</p>
-            <p className="mt-8 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-blush-200">
-              License numbers: {licenseLine}
+            <p className="mt-5">{rich(screening)}</p>
+            <p className="mt-8 inline-flex rounded-full border border-plum-200 bg-white px-4 py-2 text-sm font-semibold text-plum-700">
+              {licenseLine}
             </p>
           </div>
         </div>

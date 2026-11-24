@@ -7,7 +7,7 @@ export const TITLE_SUFFIX = ` | ${site.shortName}`;
  * The generated social card (app/opengraph-image.tsx). Listed explicitly because a page-level
  * `openGraph` object replaces the parent's, which would otherwise drop og:image on inner pages.
  */
-const SHARE_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: `${site.shortName} — ${site.tagline}` };
+const SHARE_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: `${site.shortName} — ${site.message}` };
 
 /**
  * Per-page metadata with a self-referencing canonical, and Open Graph / Twitter

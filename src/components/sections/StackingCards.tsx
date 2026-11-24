@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
  * 1 − (n − i) × 0.035 and dims from its own start (i / n) to the end of the stack. See `.qa-*`
  * in globals.css. Four cards.
  */
-const tints = ["from-white to-plum-50", "from-white to-blush-50", "from-plum-50 to-white", "from-blush-50 to-white"];
+const tints = ["from-white to-sand", "from-white to-rose", "from-white to-sage", "from-white to-sand"];
 const stick = ["top-[7rem]", "top-[calc(7rem+14px)]", "top-[calc(7rem+28px)]", "top-[calc(7rem+42px)]"];
 const shrink = [
   "[--qa-s:0.86] [animation-range:contain_0%_contain_100%]",

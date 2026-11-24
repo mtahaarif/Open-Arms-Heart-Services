@@ -8,11 +8,11 @@ import { programHref, programs } from "@/lib/services";
 /**
  * Home "Our services" — the six services as a horizontal card track (see `.hs` in globals.css):
  * pinned and driven by vertical scroll on desktop, a swipeable snap row on phones.
- * Cards: tall photo, deep-plum overlay, glass number badge, cursor glow, slow zoom on hover.
+ * Cards: tall photo, a neutral dark fade at the bottom (no colour cast), glass number badge, cursor glow, slow zoom on hover.
  */
 export function ServiceCards() {
   return (
-    <section id="services" aria-labelledby="services-title" className="hs relative bg-linear-to-b from-plum-50 via-cream to-cream [--n:6]">
+    <section id="services" aria-labelledby="services-title" className="hs relative bg-linear-to-b from-sand via-cream to-cream [--n:6]">
       <div className="hs-pin py-20 lg:py-0">
         <div className="wrap mb-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
@@ -41,7 +41,7 @@ export function ServiceCards() {
             <li key={p.slug}>
               <GlowCard
                 href={programHref(p)}
-                className="group relative flex aspect-[4/5] flex-col lg:aspect-auto lg:h-[min(28rem,46svh)] justify-end overflow-hidden rounded-[2rem] bg-plum-900 p-6 text-white shadow-[0_30px_60px_-35px_rgb(51_27_88/0.7)] sm:p-7"
+                className="group relative flex aspect-[4/5] flex-col lg:aspect-auto lg:h-[min(28rem,46svh)] justify-end overflow-hidden rounded-[2rem] bg-neutral-800 p-6 text-white shadow-[0_30px_60px_-35px_rgb(51_27_88/0.7)] sm:p-7"
               >
                 <Photo
                   src={p.image}
@@ -49,7 +49,8 @@ export function ServiceCards() {
                   sizes="(min-width: 640px) 720px, 155vw"
                   className="object-[center_30%] transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-plum-900/85 via-plum-800/35 to-transparent" />
+                {/* Neutral shade (no colour cast) only at the bottom, so the white title stays readable */}
+                <div className="absolute inset-x-0 bottom-0 h-3/5 bg-linear-to-t from-black/75 via-black/35 to-transparent" />
                 <span className="glass-dark absolute top-5 left-5 z-[4] grid size-12 place-items-center rounded-2xl font-display text-lg">
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -58,7 +59,7 @@ export function ServiceCards() {
                 </span>
                 <div className="relative z-[4]">
                   <h3 className="font-display text-2xl font-bold text-white">{p.short}</h3>
-                  <p className="mt-2 text-navy-100/85">{p.tagline}</p>
+                  <p className="mt-2 text-white/90">{p.tagline}</p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-blush-200">
                     Explore services <span aria-hidden>→</span>
                   </span>

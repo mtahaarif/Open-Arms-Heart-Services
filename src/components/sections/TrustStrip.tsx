@@ -10,12 +10,12 @@ import { site } from "@/lib/site";
 export function TrustStrip() {
   return (
     <section aria-label="Credentials" className="enter relative overflow-clip py-6 sm:py-8 [--d:800ms]">
-      <div className="bg-linear-to-r from-plum-600 via-plum-500 to-blush-500 py-4 shadow-[0_20px_45px_-25px_rgb(102_45_145/0.55)] sm:py-5">
+      <div className="border-y border-sage-200 bg-sage py-4 sm:py-5">
         <Marquee duration={42} gap="2rem" pauseOnHover={false}>
           {site.credentials.map((c) => (
             <Fragment key={c}>
-              <span className="font-display text-xl whitespace-nowrap text-white sm:text-2xl">{c}</span>
-              <Heart className="size-4 shrink-0 fill-blush-200 text-blush-200" aria-hidden />
+              <span className="font-display text-xl font-bold whitespace-nowrap text-plum-700 sm:text-2xl">{c}</span>
+              <Heart className="size-4 shrink-0 fill-blush-500 text-blush-500" aria-hidden />
             </Fragment>
           ))}
         </Marquee>

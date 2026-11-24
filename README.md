@@ -8,6 +8,9 @@
 
 > **Reference-site restyle (November 2026):** the header, home banner, headings and fonts, service pages and footer were re-modelled on lovethyneighborhhc.com (§8.0–8.2): League Spartan bold sentence-case headings with Manrope text; a white sticky header with a slide-in phone menu; a light split home banner with a photo card; one page per service at `/services/<slug>` (no overview page); a footer with a service-name ticker on solid violet `#5f2d8f` with lavender text `#e9dcf7`, later in frosted liquid-glass panels. Inner-page banners lost their purple shade. "Central Florida" became "Central Region" across the site, and the third licence number from the agency's trifold (234841) was added.
 
+> **Bright brand pass (November 2026):** brief from the client: bright, welcoming, premium home and community care — not dark, institutional or clinical. Surfaces are warm white `#FFFDF8` (`cream`, ~70%), soft cream `#F7F2EA` (`sand`), pale sage `#E8F0EA` (`sage`) and soft blush `#F7E9E7` (`rose`); the logo violet (`#662d91`, sampled from the logo, `plum-700`) is used for headings, buttons, icons, thin rules and badges only. The only dark surface left is the closing "Let's find the support" call to action. Site-wide facts: phone 863-695-2124; "the Central Region"; company name "Open Arms & Heart Services Inc."; primary message "Care that comes from the heart"; tagline "Where there is love, there is life". Licences as recorded on Florida Health Finder: HHA Lic. 299995365 · HCS Reg. 235855 · HCS Reg. 234841 (the old site's 299995365 had an extra 9). The footer was simplified to four columns (company + mission, Care services, Company, Contact) and a licence / copyright line.
+
+
 
 >
 > **Content policy:** every fact on the site comes from the owner's mock-up ([`docs/client-mockup-content.md`](docs/client-mockup-content.md)) or the agency's original website ([`docs/original-site-content.md`](docs/original-site-content.md)). Where they differ, the mock-up wins. See §16.
@@ -57,9 +60,9 @@
 
 - **Owner:** Shantana Johnson. The agency has served Central Florida since **2017**.
 - **Credentials:** Florida-licensed home health agency · APD Central Region provider · VA Community Care Provider · Community-Based Care (CBC) Provider · Level 2 Live Scan Provider (BGS).
-- **Licenses:** Lic# 2999995365 · Lic# 235855.
+- **Licenses:** Lic# 299995365 · Lic# 235855.
 - **Office:** 1920 Verano Dr., Ste 105, Haines City, FL 33844.
-- **Contact:** phone 321-217-2409 · fax 855-257-1340 · openarmsandheartservices@gmail.com.
+- **Contact:** phone 863-695-2124 · fax 855-257-1340 · openarmsandheartservices@gmail.com.
 
 **Mission:** *To work in partnership with our consumers to help them achieve their goals of independence, productivity, and meaningful integration within their communities. We are committed to fulfilling the needs of our consumers with excellence and care.*
 
@@ -319,7 +322,7 @@ All motion is CSS and respects `prefers-reduced-motion` (animations and reveals 
 
 | # | Section | Design |
 | --- | --- | --- |
-| 1 | Top bar + header | Slim lavender utility line ("Compassionate care across Central Region since 2017" · "Call our team: 321-217-2409") above the white header (§8.0) |
+| 1 | Top bar + header | Slim lavender utility line ("Compassionate care across Central Region since 2017" · "Call our team: 863-695-2124") above the white header (§8.0) |
 | 2 | Banner | The reference site's home hero on a light lavender-to-blush background with a faint dot grid: "Care that comes from *the heart*" (revealed line by line), lead, a "Call us" pill (phone in a circle) and "Find your care", and three credential ticks; beside it the photo card (`HeroSlides`, client): the four banner photos cross-fading every 7 s with a slow zoom, a "Haines City, FL" chip, slide bars, and a "Call our team" card overlapping its corner. Stacks text-first on phones; autoplay is off for reduced motion |
 | 3 | Credentials ticker | Straight, full-width deep-purple band: credentials in white display type with pink hearts between them, in a single scrolling row |
 | 4 | Welcome | "At home. In the community. *By your side*." with audience pills, beside the glass "Finding care should feel less overwhelming" call card |
@@ -388,7 +391,7 @@ The page banner without a photo (the 404 markup ships with every route, so nothi
 | `brand/Logo` | server | The client's logo (`/brand/logo.webp`, 640×501, lossless, made from `logo-640.png`) linking home. It's served through the image optimiser as WebP at 1×/2× of its ~102px display width (`getImageProps`, no inline style). With `withName` the company name labels the link (visible from `xl`, screen-reader text below); otherwise the image alt does. |
 | `layout/TopBar` | server | Slim lavender utility line with the since-line and phone number |
 | `layout/Header` | client | White sticky header (§8.0): pill links, services dropdown with icon tiles, phone button and "Let's talk"; slide-in menu sheet below `lg`; scroll-progress bar. The service list arrives as plain `{ href, label, slug }` props from the root layout (the slug picks the icon), so `lib/services.ts` never ships to the browser. |
-| `layout/Footer` | server | Modelled on lovethyneighborhhc.com, in frosted liquid glass (`liquid-glass`): on solid violet `#5f2d8f`, three slowly drifting pink / lilac / magenta glows and a faint dot grid give the glass colour to refract. A glass strip carries the ticker of the six service names (sparkle separators); one large glass panel holds the logo (white tile), the three licence numbers, description and motto, Quick links, Services and Contact us (icons in small glass discs); a slim glass bar holds community resources and the copyright. Lavender text `#e9dcf7` |
+| `layout/Footer` | server | Bright, simplified: warm cream (`sand`) with sage and blush glows and a thin violet-to-pink top rule. Four columns — logo, "Open Arms & Heart Services", the first sentence of the mission and the tagline; Care services (the six service pages); Company (About us, Careers, Referral partners → contact form, FAQ); Contact (address, phone, fax, email, 24/7 on-call service) — then `licenseLine` and the copyright |
 | `ui/Photo` | server | Photo built on `getImageProps`. It uses real width/height from `lib/photos.ts` and requires `sizes`. It outputs a WebP `srcset` at quality 80; the fallback `src` is the 828px variant (what crawlers download), not the largest. It adds no inline styles (a `bg-plum-100` placeholder). `preload` (LCP image only) adds a high-priority `<link rel=preload>` plus `fetchpriority="high"` and eager loading. Everything else is lazy. |
 | `ui/Link` | server | `next/link` with `prefetch={false}` by default. Use it for every internal link (§18). |
 | `ui/PageHeader` | server | Page banner: full-bleed photo (`focus` = object-position class) under `BannerOverlay`, behind the header; centred breadcrumb (home icon), ruled eyebrow, white H1 (light accent words), intro and optional actions |
@@ -712,6 +715,7 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 **Page banners** (`public/images/banners/`): AI-generated for this site from the prompts in [docs/banner-image-prompts.md](docs/banner-image-prompts.md), 2172 × 724, saved as WebP (quality 90, from the lossless PNG originals). `home-1` to `home-4` cross-fade on the home page; `about`, `services`, `careers`, `contact` and `faq` sit behind each page's banner. Each page sets a `focus` (object-position) so the people stay in frame on narrow phone crops.
 | `live-scan.webp` | https://images.unsplash.com/photo-1585079374502-415f8516dcc3 |
 | `founder.webp` | **Client-owned** — portrait supplied by the client (November 2026) |
+| `owner-grandmother.webp` (About, after the owner's story of her grandmother) | **Client-owned** — family photo supplied by the client (November 2026) |
 | `public/brand/logo.png`, `logo-640.png`, `logo-mark.png`, `src/app/icon.png`, `apple-icon.png` | **Client-owned** — the agency's logo (from the owner's mock-up files) |
 
 </details>

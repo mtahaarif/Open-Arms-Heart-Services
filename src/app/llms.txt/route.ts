@@ -14,9 +14,9 @@ export function GET() {
 
 > ${site.description}
 
-"${site.tagline}." — "${site.motto}"
+"${site.message}." — "${site.tagline}."
 
-${site.credentials.join(" | ")} · ${licenseLine} · Serving Central Region since ${site.since}.
+${site.credentials.join(" | ")} · ${licenseLine} · Serving the Central Region since ${site.since}.
 
 Our Mission: ${mission}
 

@@ -50,16 +50,16 @@ export function MissionStatement() {
               </span>
               <ArrowRight className="size-5 transition group-hover:translate-x-1" aria-hidden />
             </Link>
-            <span className="font-display text-xl text-blush-700">{site.motto}</span>
+            <span className="font-display text-xl text-blush-700">{site.tagline}</span>
           </div>
         </div>
 
         <div className="flex flex-col gap-4 lg:col-span-4 lg:pt-16">
-          <div data-reveal className="relative isolate overflow-hidden rounded-[2rem] band-dark p-7 text-white">
-            <Photo src="/images/hands-mission.webp" alt="" sizes="720px" className="-z-10 opacity-25" />
-            <p className="text-sm font-semibold tracking-[0.16em] text-blush-200 uppercase">Serving Central Region since</p>
-            <p className="mt-1 font-display text-7xl">{site.since}</p>
-            <p className="mt-2 text-navy-100/80">
+          <div data-reveal className="relative isolate overflow-hidden rounded-[2rem] bg-sand p-7 ring-1 ring-sand-200">
+            <Photo src="/images/hands-mission.webp" alt="" sizes="720px" className="-z-10 opacity-15" />
+            <p className="text-sm font-semibold tracking-[0.16em] text-blush-700 uppercase">Serving the Central Region since</p>
+            <p className="mt-1 font-display text-7xl font-bold text-plum-700">{site.since}</p>
+            <p className="mt-2">
               {site.credentials[1]} · {site.credentials[0]}.
             </p>
           </div>

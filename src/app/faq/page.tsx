@@ -57,12 +57,12 @@ export default function FaqPage() {
                 ))}
               </ul>
             </nav>
-            <div className="band-dark mt-5 hidden rounded-[1.75rem] p-6 lg:block">
-              <p className="font-bold text-white">Still have questions?</p>
-              <a href={site.phone.href} className="btn-light mt-4 w-full">
+            <div className="mt-5 hidden rounded-[1.75rem] bg-sage p-6 ring-1 ring-sage-200 lg:block">
+              <p className="font-display text-lg font-bold text-plum-700">Still have questions?</p>
+              <a href={site.phone.href} className="btn-primary mt-4 w-full">
                 <Phone className="size-4" /> {site.phone.display}
               </a>
-              <Link href="/contact#request" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-blush-200 hover:text-white">
+              <Link href="/contact#request" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-plum-700 hover:text-blush-600">
                 Request more information <ArrowRight className="size-4" />
               </Link>
             </div>

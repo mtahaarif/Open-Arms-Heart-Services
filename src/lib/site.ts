@@ -9,12 +9,14 @@ const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 export const site = {
   name: "Open Arms & Heart Services Inc.",
-  shortName: "Open Arms & Heart Services",
+  shortName: "Open Arms & Heart Services Inc.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? vercelUrl ?? "http://localhost:3000",
   description:
-    "Compassionate home and community support for children, adults, seniors and people with disabilities throughout Central Region.",
-  tagline: "Care that comes from the heart",
-  motto: "Where there is love, there is life.",
+    "Compassionate home and community support for children, adults, seniors and people with disabilities throughout the Central Region.",
+  /** Primary message — the home headline and the site's default title. */
+  message: "Care that comes from the heart",
+  /** Tagline. */
+  tagline: "Where there is love, there is life",
   closing: "With compassion. With dignity. With open arms.",
   since: 2017,
   owner: { name: "Shantana Johnson", title: "Chief Executive Officer" },
@@ -27,10 +29,14 @@ export const site = {
     "Community-Based Care (CBC) Provider",
     "Level 2 Live Scan Provider (BGS)",
   ],
-  // The three licence numbers on the agency's trifold.
-  licenses: ["2999995365", "235855", "234841"],
+  /** As recorded on Florida Health Finder (quality.healthfinder.fl.gov). */
+  licenses: [
+    { short: "HHA Lic.", number: "299995365", name: "Home Health Agency license" },
+    { short: "HCS Reg.", number: "235855", name: "Homemaker and Companion Service registration" },
+    { short: "HCS Reg.", number: "234841", name: "Homemaker and Companion Service registration" },
+  ],
 
-  phone: { display: "321-217-2409", href: "tel:+13212172409" },
+  phone: { display: "863-695-2124", href: "tel:+18636952124" },
   fax: { display: "855-257-1340" },
   email: "openarmsandheartservices@gmail.com",
 
@@ -66,8 +72,9 @@ export const site = {
 export const addressLines = [site.address.street, `${site.address.city}, ${site.address.region} ${site.address.zip}`] as const;
 export const fullAddress = addressLines.join(", ");
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.name}, ${fullAddress}`)}`;
-export const licenseLine = site.licenses.map((l) => `Lic# ${l}`).join(" · ");
-export const sinceLine = `Compassionate care across Central Region since ${site.since}`;
+/** "HHA Lic. 299995365 · HCS Reg. 235855 · HCS Reg. 234841" */
+export const licenseLine = site.licenses.map((l) => `${l.short} ${l.number}`).join(" · ");
+export const sinceLine = `Compassionate care across the Central Region since ${site.since}`;
 
 /** `hint` completes a one-word label for screen readers and crawlers (visually hidden). */
 export const nav: readonly { href: string; label: string; hint?: string }[] = [

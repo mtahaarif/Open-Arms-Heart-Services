@@ -42,7 +42,7 @@ export const programs: Program[] = [
     image: "/images/service-home-care.webp",
     imageAlt: "A caregiver bringing a cup of tea to a woman resting at home with her crutches nearby",
     intro:
-      "Open Arms & Heart Services, Inc. is a Florida-licensed home health agency offering **non-medical support** to children, adults, seniors, and people with disabilities. Our caregivers help individuals remain comfortable and supported in their homes.",
+      "Open Arms & Heart Services Inc. is a Florida-licensed home health agency offering **non-medical support** to children, adults, seniors, and people with disabilities. Our caregivers help individuals remain comfortable and supported in their homes.",
     points: [
       "Personal care, bathing, dressing, grooming and hygiene assistance",
       "Mobility and transfer assistance",

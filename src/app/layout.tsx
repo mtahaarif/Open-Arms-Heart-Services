@@ -20,7 +20,7 @@ const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.shortName} | ${site.tagline}`,
+    default: `${site.shortName} | ${site.message}`,
     template: `%s | ${site.shortName}`,
   },
   description: site.description,
@@ -47,7 +47,7 @@ const jsonLd = {
   url: site.url,
   logo: `${site.url}/brand/logo-640.png`,
   description: site.description,
-  telephone: "+1-321-217-2409",
+  telephone: "+1-863-695-2124",
   email: site.email,
   faxNumber: "+1-855-257-1340",
   foundingDate: String(site.since),
@@ -63,8 +63,9 @@ const jsonLd = {
     ...site.areas[0].counties.map((c) => ({ "@type": "AdministrativeArea", name: `${c} County, Florida` })),
     { "@type": "AdministrativeArea", name: "Central Region" },
   ],
-  identifier: site.licenses.map((l) => ({ "@type": "PropertyValue", propertyID: "License", value: l })),
+  identifier: site.licenses.map((l) => ({ "@type": "PropertyValue", propertyID: l.name, value: l.number })),
   slogan: site.tagline,
+  // Florida Health Finder records
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Our services",

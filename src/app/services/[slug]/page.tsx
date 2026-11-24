@@ -47,10 +47,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       {/* Banner: light, split — copy left, framed photo right */}
-      <section className="relative isolate overflow-hidden bg-linear-to-br from-plum-50 via-cream to-blush-50/70">
+      <section className="relative isolate overflow-hidden bg-linear-to-br from-cream via-cream to-sand">
         <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(rgb(102_45_145/0.08)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent)]" />
-        <div aria-hidden className="absolute -top-40 -left-40 -z-10 size-[32rem] rounded-full bg-plum-200/40 blur-3xl" />
-        <div aria-hidden className="absolute -right-32 -bottom-40 -z-10 size-[28rem] rounded-full bg-blush-200/40 blur-3xl" />
+        <div aria-hidden className="absolute -top-40 -left-40 -z-10 size-[32rem] rounded-full bg-sage blur-3xl" />
+        <div aria-hidden className="absolute -right-32 -bottom-40 -z-10 size-[28rem] rounded-full bg-rose blur-3xl" />
 
         <div className="wrap grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:py-20">
           <div>
@@ -117,7 +117,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="py-16 sm:py-20 lg:py-24">
         <div className="wrap grid gap-10 lg:grid-cols-[18.5rem_1fr] lg:gap-14">
           <aside className="order-2 space-y-5 lg:order-1 lg:sticky lg:top-24 lg:self-start">
-            <nav aria-label="Our services" className="rounded-[1.5rem] bg-plum-50/70 p-3 ring-1 ring-plum-100">
+            <nav aria-label="Our services" className="rounded-[1.5rem] bg-sand p-3 ring-1 ring-sand-200">
               <p className="px-3 pt-2 pb-3 text-xs font-bold tracking-[0.2em] text-plum-700 uppercase">Our services</p>
               <ul className="space-y-1">
                 {programs.map((o) => {
@@ -140,24 +140,24 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </ul>
             </nav>
 
-            <div className="band-dark rounded-[1.5rem] p-6 text-white">
-              <p className="font-display text-xl leading-snug font-bold text-white">Open Arms &amp; Heart Services is only a call away!</p>
-              <a href={site.phone.href} className="mt-4 flex items-center gap-2.5 font-display text-xl font-bold text-blush-200 hover:text-white">
+            <div className="relative overflow-hidden rounded-[1.5rem] bg-white p-6 ring-1 ring-plum-200 before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-linear-to-r before:from-plum-700 before:to-blush-500">
+              <p className="font-display text-xl leading-snug font-bold text-plum-700">Open Arms &amp; Heart Services is only a call away!</p>
+              <a href={site.phone.href} className="mt-4 flex items-center gap-2.5 font-display text-xl font-bold text-ink hover:text-plum-700">
                 <Phone className="size-5" aria-hidden /> {site.phone.display}
               </a>
-              <ul className="mt-5 space-y-3 border-t border-white/15 pt-5 text-[0.9rem] text-navy-100">
+              <ul className="mt-5 space-y-3 border-t border-line pt-5 text-[0.9rem]">
                 <li className="flex gap-3">
-                  <Printer className="mt-0.5 size-4 shrink-0 text-blush-200" aria-hidden /> Fax: {site.fax.display}
+                  <Printer className="mt-0.5 size-4 shrink-0 text-plum-600" aria-hidden /> Fax: {site.fax.display}
                 </li>
                 <li className="flex gap-3">
-                  <Mail className="mt-0.5 size-4 shrink-0 text-blush-200" aria-hidden />
-                  <a href={`mailto:${site.email}`} className="[overflow-wrap:anywhere] hover:text-white">
+                  <Mail className="mt-0.5 size-4 shrink-0 text-plum-600" aria-hidden />
+                  <a href={`mailto:${site.email}`} className="[overflow-wrap:anywhere] hover:text-plum-700">
                     {site.email}
                   </a>
                 </li>
                 <li className="flex gap-3">
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-blush-200" aria-hidden />
-                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-plum-600" aria-hidden />
+                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-plum-700">
                     {addressLines[0]}, {addressLines[1]}
                   </a>
                 </li>
@@ -173,7 +173,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               Services and support
             </h2>
             {p.feature && (
-              <div data-reveal className="mt-8 rounded-[1.5rem] border border-blush-200 bg-linear-to-br from-blush-50 to-white p-6 sm:p-8">
+              <div data-reveal className="mt-8 rounded-[1.5rem] border border-rose-200 bg-rose p-6 sm:p-8">
                 <p className="text-xs font-bold tracking-[0.2em] text-blush-700 uppercase">Program</p>
                 <h3 className="mt-2 text-2xl">{p.feature.title}</h3>
                 <p className="mt-3 leading-relaxed">{rich(p.feature.text)}</p>
@@ -186,8 +186,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               ))}
             </ul>
 
-            <p data-reveal className="mt-8 flex max-w-3xl gap-3 rounded-2xl bg-plum-50/70 p-5 text-[0.98rem] leading-relaxed ring-1 ring-plum-100">
-              <Info className="mt-1 size-5 shrink-0 text-plum-600" aria-hidden />
+            <p data-reveal className="mt-8 flex max-w-3xl gap-3 rounded-2xl bg-sage p-5 text-[0.98rem] leading-relaxed ring-1 ring-sage-200">
+              <Info className="mt-1 size-5 shrink-0 text-sage-700" aria-hidden />
               <span>{rich(p.note)}</span>
             </p>
 
@@ -210,7 +210,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* The other services: a swipeable row of photo cards */}
-      <section aria-labelledby="more-services" className="overflow-hidden bg-linear-to-b from-plum-50/70 to-cream py-16 sm:py-20">
+      <section aria-labelledby="more-services" className="overflow-hidden bg-linear-to-b from-sage/70 to-cream py-16 sm:py-20">
         <div className="wrap">
           <div className="flex items-end justify-between gap-6">
             <div>

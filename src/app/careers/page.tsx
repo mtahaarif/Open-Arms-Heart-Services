@@ -81,21 +81,21 @@ export default function CareersPage() {
               ))}
             </ul>
           </div>
-          <div id="apply" data-reveal className="band-dark scroll-mt-32 rounded-[2rem] p-7 [--d:120ms] sm:p-10">
-            <Ribbons className="absolute -right-24 -bottom-16 -z-10 h-full w-[85%] opacity-50" />
-            <span className="eyebrow-dark">
+          <div id="apply" data-reveal className="relative isolate scroll-mt-32 overflow-hidden rounded-[2rem] bg-rose p-7 ring-1 ring-rose-200 [--d:120ms] sm:p-10">
+            <Ribbons className="absolute -right-24 -bottom-16 -z-10 h-full w-[85%] opacity-20" />
+            <span className="eyebrow">
               <ClipboardList className="size-3.5" aria-hidden /> Employment application
             </span>
-            <h2 className="mt-5 text-[1.6rem] text-white sm:text-[1.9rem]">The application asks for</h2>
-            <ul className="check-list mt-7 grid gap-x-8 gap-y-3.5 text-navy-100 sm:grid-cols-2">
+            <h2 className="mt-5 text-[1.6rem] sm:text-[1.9rem]">The application asks for</h2>
+            <ul className="check-list mt-7 grid gap-x-8 gap-y-3.5 text-ink sm:grid-cols-2">
               {applicationChecklist.map((r) => (
                 <li key={r}>{r}</li>
               ))}
             </ul>
-            <p className="mt-8 border-t border-white/10 pt-6 text-sm text-navy-100/70">
+            <p className="mt-8 border-t border-rose-200 pt-6 text-sm">
               The application includes an equal-opportunity and ADA notice to applicants.
             </p>
-            <a href={site.applicationUrl} target="_blank" rel="noopener noreferrer" className="btn-light mt-6">
+            <a href={site.applicationUrl} target="_blank" rel="noopener noreferrer" className="btn-primary mt-6">
               Start your application <ArrowUpRight className="size-4" />
             </a>
           </div>

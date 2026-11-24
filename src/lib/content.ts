@@ -159,7 +159,7 @@ export const trustQAs: {
   },
   {
     q: "Are care providers background checked?",
-    a: "At Open Arms & Heart Services, Inc., your safety, trust, and peace of mind are our highest priorities. All direct care personnel undergo comprehensive Level 2 background screening in accordance with Florida state requirements. Our compassionate caregivers are committed to providing safe, dependable, and high-quality care to children, seniors, and individuals with disabilities because your family deserves care you can trust.",
+    a: "At Open Arms & Heart Services Inc., your safety, trust, and peace of mind are our highest priorities. All direct care personnel undergo comprehensive Level 2 background screening in accordance with Florida state requirements. Our compassionate caregivers are committed to providing safe, dependable, and high-quality care to children, seniors, and individuals with disabilities because your family deserves care you can trust.",
     icon: ShieldCheck,
     image: "/images/caregiver-portrait.webp",
     imageAlt: "A smiling caregiver with a stethoscope",
@@ -175,12 +175,12 @@ export const trustQAs: {
   },
   {
     q: "Are you licensed?",
-    a: `Yes, Open Arms & Hearts is an APD Central Region provider and a licensed Florida Home Health Agency that has served Central Region since ${site.since}.`,
+    a: `Yes, Open Arms & Heart Services Inc. is an APD Central Region provider and a licensed Florida Home Health Agency that has served the Central Region since ${site.since}.`,
     icon: BadgeCheck,
     image: "/images/nurses-team.webp",
     imageAlt: "Two smiling healthcare professionals in scrubs and white coats",
     imagePosition: "object-top",
-    chips: site.licenses.map((l) => `Lic# ${l}`),
+    chips: site.licenses.map((l) => `${l.short} ${l.number}`),
   },
 ];
 
