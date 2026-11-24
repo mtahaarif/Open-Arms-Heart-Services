@@ -180,13 +180,16 @@
      ease-in-out, as each block scrolls into view. Only hidden once JavaScript has marked the page
      (`html.js`), so crawlers and no-JS visitors always see everything.
      components/ui/RevealObserver.tsx adds `.is-in`; `--d` staggers neighbours. */
+  /* It works in both scroll directions: the observer removes `.is-in` once a block has left the
+     screen, and the hidden state has no transition, so the block resets instantly while off-screen
+     and fades in from nothing every time it comes back. */
   html.js [data-reveal] {
     opacity: 0;
-    transition: opacity 0.9s ease-in-out;
-    transition-delay: var(--d, 0ms);
   }
   html.js [data-reveal].is-in {
     opacity: 1;
+    transition: opacity 0.9s ease-in-out;
+    transition-delay: var(--d, 0ms);
   }
 
   @media (prefers-reduced-motion: reduce) {
