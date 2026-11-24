@@ -121,7 +121,7 @@ export default function AboutPage() {
                     sizes="(min-width: 1024px) 660px, (min-width: 768px) 810px, 115vw"
                     className="-z-10 transition duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 -z-10 bg-linear-to-t from-plum-900/80 via-plum-800/20 to-transparent transition-opacity duration-700 group-hover:opacity-95" />
+                  <div className="absolute inset-x-0 bottom-0 -z-10 h-3/4 bg-linear-to-t from-black/70 via-black/25 to-transparent transition-opacity duration-700 group-hover:opacity-95" />
                   <div className="relative z-10 flex h-full flex-col justify-between p-3 sm:p-6 lg:p-5">
                     <span className="glass-dark grid size-9 place-items-center rounded-xl text-blush-200 sm:size-12 sm:rounded-2xl lg:size-10 lg:rounded-xl">
                       <a.icon className="size-4 sm:size-5" aria-hidden />
