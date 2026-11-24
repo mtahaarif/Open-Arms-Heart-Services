@@ -39,10 +39,7 @@ export default function HomePage() {
       {/* Banner (the reference site's home hero): light background; headline, intro, two pill buttons
           and credential ticks on the left; the photo card (cross-fading photos, location chip, slide
           bars, call card) on the right. Stacks text-first on phones. */}
-      <section className="relative isolate overflow-hidden bg-linear-to-br from-cream via-cream to-sand">
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(rgb(102_45_145/0.08)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent)]" />
-        <div aria-hidden className="absolute -top-48 -left-40 -z-10 size-[36rem] rounded-full bg-sage blur-3xl" />
-        <div aria-hidden className="absolute -right-40 -bottom-48 -z-10 size-[32rem] rounded-full bg-rose blur-3xl" />
+      <section className="relative isolate overflow-hidden bg-white">
 
         <div className="wrap grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:py-20">
           <div>

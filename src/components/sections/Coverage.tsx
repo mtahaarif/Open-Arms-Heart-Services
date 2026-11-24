@@ -19,7 +19,6 @@ const monogram = (name: string) =>
 export function Coverage({ withResources = true }: { withResources?: boolean }) {
   return (
     <section className="section relative overflow-hidden">
-      <div className="absolute -right-40 top-0 -z-10 size-[40rem] rounded-full bg-[radial-gradient(closest-side,rgb(253_203_224/0.55),transparent)]" />
       <div className="wrap">
         <SectionHeading eyebrow="Coverage & helpful information" title="Answers for *your family*." />
         <div className="mt-12 grid gap-5 lg:grid-cols-[1.35fr_1fr]">

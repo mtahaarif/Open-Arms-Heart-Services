@@ -12,7 +12,7 @@ import { programHref, programs } from "@/lib/services";
  */
 export function ServiceCards() {
   return (
-    <section id="services" aria-labelledby="services-title" className="hs relative bg-linear-to-b from-sand via-cream to-cream [--n:6]">
+    <section id="services" aria-labelledby="services-title" className="hs relative bg-sand [--n:6]">
       <div className="hs-pin py-20 lg:py-0">
         <div className="wrap mb-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading

@@ -10,6 +10,9 @@
 
 > **Bright brand pass (November 2026):** brief from the client: bright, welcoming, premium home and community care — not dark, institutional or clinical. Surfaces are warm white `#FFFDF8` (`cream`, ~70%), soft cream `#F7F2EA` (`sand`), pale sage `#E8F0EA` (`sage`) and soft blush `#F7E9E7` (`rose`); the logo violet (`#662d91`, sampled from the logo, `plum-700`) is used for headings, buttons, icons, thin rules and badges only. The only dark surface left is the closing "Let's find the support" call to action. Site-wide facts: phone 863-695-2124; "the Central Region"; company name "Open Arms & Heart Services Inc."; primary message "Care that comes from the heart"; tagline "Where there is love, there is life". Licences as recorded on Florida Health Finder: HHA Lic. 299995365 · HCS Reg. 235855 · HCS Reg. 234841 (the old site's 299995365 had an extra 9). The footer was simplified to four columns (company + mission, Care services, Company, Contact) and a licence / copyright line.
 
+> **Ultra-white minimal base (November 2026):** backgrounds moved to an Apple-style white theme: pure white `#FFFFFF` pages, light grey `#F5F5F7` for alternate sections, cards and the footer, `#E8E8ED` / `#D2D2D7` hairlines, near-black `#1D1D1F` text and `#6E6E73` secondary text. The earlier cream / sage / blush tokens (`cream`, `sand`, `sage`, `rose`) keep their names but now map to white and that grey. Decorative colour glows, dot grids and tinted gradients were removed; photo cards (home services, About "Who we serve", service-page "More ways we can help") use a neutral dark fade at the bottom instead of a violet overlay. The logo violet remains for headings, buttons, icons and badges.
+
+
 
 
 >

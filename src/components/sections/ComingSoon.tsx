@@ -8,7 +8,6 @@ import { comingSoon } from "@/lib/services";
 export function ComingSoon() {
   return (
     <section className="section relative overflow-hidden">
-      <div className="absolute -top-40 -left-40 -z-10 size-[36rem] rounded-full bg-[radial-gradient(closest-side,rgb(225_210_248/0.7),transparent)]" />
       <div className="wrap grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div>
           <SectionHeading eyebrow="Growing with our community" title={"More ways to care.\n*Coming soon*."} text={comingSoon.intro} />

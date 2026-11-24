@@ -47,10 +47,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       {/* Banner: light, split — copy left, framed photo right */}
-      <section className="relative isolate overflow-hidden bg-linear-to-br from-cream via-cream to-sand">
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(rgb(102_45_145/0.08)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent)]" />
-        <div aria-hidden className="absolute -top-40 -left-40 -z-10 size-[32rem] rounded-full bg-sage blur-3xl" />
-        <div aria-hidden className="absolute -right-32 -bottom-40 -z-10 size-[28rem] rounded-full bg-rose blur-3xl" />
+      <section className="relative isolate overflow-hidden bg-white">
 
         <div className="wrap grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:py-20">
           <div>
@@ -210,7 +207,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* The other services: a swipeable row of photo cards */}
-      <section aria-labelledby="more-services" className="overflow-hidden bg-linear-to-b from-sage/70 to-cream py-16 sm:py-20">
+      <section aria-labelledby="more-services" className="overflow-hidden bg-sand py-16 sm:py-20">
         <div className="wrap">
           <div className="flex items-end justify-between gap-6">
             <div>
@@ -227,7 +224,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <li key={o.slug} className="w-[min(78vw,19rem)] shrink-0 snap-start">
                 <Link href={programHref(o)} className="group relative isolate flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-[1.75rem] p-6 text-white shadow-[0_24px_50px_-28px_rgb(102_45_145/0.6)]">
                   <Photo src={o.image} alt="" sizes="(min-width: 640px) 460px, 120vw" className="-z-20 transition duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 -z-10 bg-linear-to-t from-plum-900/85 via-plum-800/25 to-transparent" />
+                  {/* Neutral shade (no colour cast) only at the bottom, so the white title stays readable */}
+                  <div className="absolute inset-x-0 bottom-0 -z-10 h-3/5 bg-linear-to-t from-black/75 via-black/30 to-transparent" />
                   <span className="absolute top-5 left-5 rounded-full bg-white/85 px-2.5 py-1 text-xs font-bold text-plum-800">{n(programs.indexOf(o))}</span>
                   <span className="absolute top-5 right-5 grid size-10 place-items-center rounded-full bg-white text-plum-700 transition-transform group-hover:rotate-45">
                     <ArrowUpRight className="size-4" aria-hidden />

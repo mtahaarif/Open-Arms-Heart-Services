@@ -47,7 +47,7 @@ export default function AboutPage() {
         <div className="wrap">
           <div
             data-reveal
-            className="relative isolate grid items-center gap-12 overflow-hidden rounded-[2.5rem] bg-linear-to-br from-sand via-cream to-rose p-6 ring-1 ring-sand-200 sm:p-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14"
+            className="relative isolate grid items-center gap-12 overflow-hidden rounded-[2.5rem] bg-sand p-6 sm:p-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14"
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- decorative tiny static PNG */}
             <img src="/brand/logo-mark.webp" alt="" width={200} height={154} loading="lazy" className="absolute -right-10 -bottom-10 -z-10 h-72 w-auto opacity-[0.06]" />
@@ -139,7 +139,7 @@ export default function AboutPage() {
           </ul>
 
           <div data-reveal className="mt-4 [--d:150ms] lg:mx-auto lg:mt-3.5 lg:max-w-[min(100%,61rem)]">
-            <GlowCard className="flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-sand-200 bg-linear-to-r from-sand via-cream to-sage p-7 sm:flex-row sm:items-center sm:p-9 lg:rounded-[1.6rem] lg:px-8 lg:py-7">
+            <GlowCard className="flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-line bg-white p-7 sm:flex-row sm:items-center sm:p-9 lg:rounded-[1.6rem] lg:px-8 lg:py-7">
               <div className="relative z-10">
                 <p className="font-display text-2xl text-plum-950 sm:text-3xl lg:text-2xl">Open Arms &amp; Heart Services is only a call away!</p>
                 <p className="mt-1">

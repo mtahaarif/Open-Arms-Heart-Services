@@ -37,10 +37,7 @@ function Row({ icon: Icon, children }: { icon: typeof Phone; children: React.Rea
  */
 export function Footer() {
   return (
-    <footer className="relative isolate mt-10 overflow-hidden border-t border-sand-200 bg-sand text-[0.95rem] text-body">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-plum-700 via-plum-500 to-blush-500" />
-      <div aria-hidden className="absolute -top-40 -left-32 -z-10 size-[30rem] rounded-full bg-sage blur-3xl" />
-      <div aria-hidden className="absolute -right-32 -bottom-40 -z-10 size-[28rem] rounded-full bg-rose blur-3xl" />
+    <footer className="relative isolate mt-10 overflow-hidden border-t border-line bg-sand text-[0.95rem] text-body">
 
       <div className="wrap grid gap-10 pt-14 pb-12 sm:grid-cols-2 sm:pt-16 lg:grid-cols-[1.35fr_1fr_0.8fr_1.25fr] lg:gap-12">
         <div>

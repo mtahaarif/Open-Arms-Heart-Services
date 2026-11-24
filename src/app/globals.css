@@ -39,18 +39,20 @@
   --color-blush-600: #de4583;
   --color-blush-700: #b9306a;
 
-  --color-ink: #2a1f33;
-  --color-body: #5b5560;
-  /* Bright base (approx. 70 / 15 / 5 / 5 %): warm white page, soft cream, pale sage, soft blush. */
-  --color-cream: #fffdf8;
-  --color-sand: #f7f2ea;
-  --color-sand-200: #ebe2d3;
-  --color-sage: #e8f0ea;
-  --color-sage-200: #d3e2d7;
-  --color-sage-700: #3f6a52;
-  --color-rose: #f7e9e7;
-  --color-rose-200: #efd5d1;
-  --color-line: #ece5da;
+  /* Ultra-white minimalist base (Apple-style): pure white page, one light-grey surface for alternate
+     sections and cards, fine grey hairlines, near-black text. The logo violet stays the only colour.
+     `sand`, `sage` and `rose` are kept as names (used across the components) but all map to the grey. */
+  --color-ink: #1d1d1f;
+  --color-body: #6e6e73;
+  --color-cream: #ffffff;
+  --color-sand: #f5f5f7;
+  --color-sand-200: #e8e8ed;
+  --color-sage: #f5f5f7;
+  --color-sage-200: #e8e8ed;
+  --color-sage-700: #6e6e73;
+  --color-rose: #f5f5f7;
+  --color-rose-200: #e8e8ed;
+  --color-line: #d2d2d7;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
