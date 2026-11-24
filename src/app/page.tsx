@@ -43,7 +43,7 @@ export default function HomePage() {
 
         <div className="wrap grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:py-20">
           <div>
-            <h1 className="text-[2.6rem] sm:text-[3.5rem] lg:text-[4.1rem]">
+            <h1 className="text-[2.6rem] md:text-[3.75rem] lg:text-[4.1rem]">
               <span className="-mb-[0.12em] block overflow-hidden pb-[0.12em]">
                 <span className="block animate-[mask-up_0.9s_var(--ease-out-expo)_both] [animation-delay:100ms]">Care that comes</span>
               </span>

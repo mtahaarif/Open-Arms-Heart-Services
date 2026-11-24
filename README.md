@@ -12,7 +12,7 @@
 
 > **Ultra-white minimal base (November 2026):** backgrounds moved to an Apple-style white theme: pure white `#FFFFFF` pages, light grey `#F5F5F7` for alternate sections, cards and the footer, `#E8E8ED` / `#D2D2D7` hairlines, near-black `#1D1D1F` text and `#6E6E73` secondary text. The earlier cream / sage / blush tokens (`cream`, `sand`, `sage`, `rose`) keep their names but now map to white and that grey. Decorative colour glows, dot grids and tinted gradients were removed; photo cards (home services, About "Who we serve", service-page "More ways we can help") use a neutral dark fade at the bottom instead of a violet overlay. The logo violet remains for headings, buttons, icons and badges.
 
-> **Typography, motion & CTA (November 2026, from benevolencehomeservices.com):** one typeface, **Quicksand** (Google Fonts via `next/font`), for headings (semibold) and text (regular), replacing League Spartan + Manrope. Motion copied from the same site: blocks marked `data-reveal` fade in (opacity only, 0.9 s ease-in-out) as they scroll into view, and every page fades in over 0.4 s on navigation (`src/app/template.tsx`, `.page-fade-in`); both are off for reduced motion. The closing call to action (`ContactBand`) is now their style: a pale brand-tint band with rounded top corners, a large centred heading and paragraph, a solid violet uppercase pill with an arrow and a white uppercase "Call" pill. Running text (`p`, `.lead`) is justified site-wide with automatic hyphenation; centred blocks stay centred, and labels (eyebrows, uppercase / tracked captions, display-font lines, `data-label`) keep normal alignment. The phone footer puts Care services and Company side by side.
+> **Typography, motion & CTA (November 2026, from benevolencehomeservices.com):** Quicksand was tried for all text and then reverted to League Spartan headings + Manrope text at the client's request. Motion copied from the same site: blocks marked `data-reveal` fade in (opacity only, 0.9 s ease-in-out) as they scroll into view, and every page fades in over 0.4 s on navigation (`src/app/template.tsx`, `.page-fade-in`); both are off for reduced motion. The closing call to action (`ContactBand`) is now their style: a pale brand-tint band with rounded top corners, a large centred heading and paragraph, a solid violet uppercase pill with an arrow and a white uppercase "Call" pill. Running text (`p`, `.lead`) is justified site-wide with automatic hyphenation; centred blocks stay centred, and labels (eyebrows, uppercase / tracked captions, display-font lines, `data-label`) keep normal alignment. The phone footer puts Care services and Company side by side.
 
 
 
@@ -270,16 +270,16 @@ The signature gradient runs `plum-700 → plum-500 → blush-500` (buttons, acce
 
 ### 7.2 Typography
 
-One typeface, Quicksand (as on benevolencehomeservices.com): semibold headings, regular text, justified paragraphs.
+lovethyneighborhhc.com's type scale: League Spartan 700 headings in title case (first letter of each word capitalised, not all caps) with Manrope 400 text; paragraphs are justified.
 
 | Element | Style |
 | --- | --- |
-| `h1` | Quicksand semibold, −0.02 em tracking, 2.4 rem → 3.9 rem (home hero 4.1 rem), `text-balance` |
-| `h2` | Quicksand semibold, −0.02 em, 2 rem → 3 rem |
-| `h3` | Quicksand semibold, 1.4 rem |
-| Body | Quicksand, 17 px / 1.65 line height, justified with automatic hyphenation |
+| `h1` | League Spartan 700, title case, −0.025 em, 41.6 → 60 → 65.6 px (phone → md → lg), `text-balance` |
+| `h2` | League Spartan 700, title case, −0.025 em, 36 → 60 px (phone → md) |
+| `h3` | League Spartan 700, title case, 24 → 28 px |
+| Body | Manrope 400, 17 px / 1.625 line height, justified with automatic hyphenation |
 | `.eyebrow` / `.eyebrow-dark` | A short rule, then 12 px bold tracked capitals |
-| Buttons | Rounded-full pills, Quicksand bold; primary in the brand gradient, outline in white |
+| Buttons | Rounded-full pills, Manrope bold; primary in the brand gradient, outline in white |
 | `.lead` | 18–19 px intro paragraphs |
 | Accent words | `*phrase*` in a `SectionHeading`/`PageHeader` title renders in the brand gradient (`text-gradient`, or light pink `text-gradient-light` on photos). Put the marker inside the full stop: `"Your goals. *Our heart*."` |
 | No full stops | Headings never show a full stop; each sentence starts a new line (`Lines` in `SectionHeading.tsx`) |

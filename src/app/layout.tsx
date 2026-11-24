@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Quicksand } from "next/font/google";
+import { League_Spartan, Manrope } from "next/font/google";
 import Script from "next/script";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -10,8 +10,9 @@ import { programHref, programs } from "@/lib/services";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-// One typeface for headings and text, as on benevolencehomeservices.com (variable font, 300–700).
-const quicksand = Quicksand({ subsets: ["latin"], variable: "--font-quicksand", display: "swap" });
+const leagueSpartan = League_Spartan({ subsets: ["latin"], variable: "--font-league-spartan", display: "swap" });
+// Body text (and the heading fallback).
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -77,7 +78,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={quicksand.variable} suppressHydrationWarning>
+    <html lang="en" className={`${leagueSpartan.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body>
         {/* Marks the page as JS-enabled before any content paints, so reveal-on-scroll never flickers
             and no-JS visitors / crawlers always see everything (see globals.css). */}
