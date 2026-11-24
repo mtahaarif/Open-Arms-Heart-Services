@@ -112,9 +112,9 @@
 }
 
 @theme inline {
-  /* The reference site's pairing (lovethyneighborhhc.com): League Spartan bold headings, Manrope text. */
-  --font-display: var(--font-league-spartan), var(--font-manrope), ui-sans-serif, sans-serif;
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  /* Quicksand for everything — headings semibold, text regular (benevolencehomeservices.com). */
+  --font-display: var(--font-quicksand), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-quicksand), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
 }
 
 /* ───────────────────────── Base ───────────────────────── */
@@ -129,10 +129,10 @@
     @apply bg-cream font-sans text-[1.0625rem] leading-[1.65] text-body antialiased;
     overflow-x: clip;
   }
-  /* Headings: League Spartan bold, sentence case, tight tracking (the reference site's style). */
+  /* Headings: Quicksand semibold, sentence case, slightly tight tracking on the large sizes. */
   h1,
   h2 {
-    @apply font-display font-bold tracking-[-0.025em] text-balance text-plum-700;
+    @apply font-display font-semibold tracking-[-0.02em] text-balance text-plum-700;
   }
   h1 {
     @apply text-[2.4rem] leading-[1.02] sm:text-[3.2rem] lg:text-[3.9rem];
@@ -141,7 +141,28 @@
     @apply text-[2rem] leading-[1.05] sm:text-[2.6rem] lg:text-[3rem];
   }
   h3 {
-    @apply font-display text-[1.4rem] leading-[1.2] font-bold tracking-[-0.01em] text-plum-700;
+    @apply font-display text-[1.4rem] leading-[1.25] font-semibold tracking-normal text-plum-700;
+  }
+  /* Running text is justified (the client's preference, especially on phones), with automatic
+     hyphenation so narrow columns don't open wide gaps between words. Deliberately centred blocks
+     (banners, centred section intros, the closing call to action) stay centred. */
+  p,
+  .lead {
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  .text-center p,
+  .text-center .lead {
+    text-align: center;
+  }
+  /* Labels, not prose: eyebrows, tracked / uppercase captions, display-font lines (taglines, names)
+     and "·"-separated lines keep normal
+     alignment (justifying a short label only spreads its words apart). */
+  p:where(.eyebrow, .eyebrow-dark, [class*="uppercase"], [class*="tracking-"], [class*="font-display"], [data-label]) {
+    text-align: start;
+    -webkit-hyphens: manual;
+    hyphens: manual;
   }
   ::selection {
     @apply bg-blush-200 text-plum-900;
@@ -153,19 +174,17 @@
     display: none;
   }
 
-  /* Reveal-on-scroll: only hidden once JavaScript has marked the page (`html.js`), so crawlers
-     and no-JS visitors always see everything. components/ui/RevealObserver.tsx adds `.is-in`. */
+  /* Reveal-on-scroll, as on benevolencehomeservices.com: a pure fade (no movement), 0.9 s
+     ease-in-out, as each block scrolls into view. Only hidden once JavaScript has marked the page
+     (`html.js`), so crawlers and no-JS visitors always see everything.
+     components/ui/RevealObserver.tsx adds `.is-in`; `--d` staggers neighbours. */
   html.js [data-reveal] {
     opacity: 0;
-    transform: translate3d(0, 26px, 0);
-    transition:
-      opacity 0.9s var(--ease-out-expo),
-      transform 0.9s var(--ease-out-expo);
+    transition: opacity 0.9s ease-in-out;
     transition-delay: var(--d, 0ms);
   }
   html.js [data-reveal].is-in {
     opacity: 1;
-    transform: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -181,9 +200,21 @@
     }
     html.js [data-reveal] {
       opacity: 1;
-      transform: none;
+    }
+    .page-fade-in {
+      animation: none;
     }
   }
+}
+
+/* Page transition (benevolencehomeservices.com): each page fades in over 0.4 s (app/template.tsx). */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.page-fade-in {
+  animation: page-fade-in 0.4s ease-out both;
 }
 
 /* ───────────────────────── Horizontal scroll track ─────────────────────────

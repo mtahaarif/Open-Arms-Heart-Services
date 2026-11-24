@@ -30,28 +30,31 @@ function Row({ icon: Icon, children }: { icon: typeof Phone; children: React.Rea
 }
 
 /**
- * Simplified, bright footer: four short columns — the company with a one-line mission, Care
- * services, Company (About, Careers, Referral partners, FAQ) and Contact (address, phone, fax, email,
- * hours) — and a bottom line with the Florida licence / registration numbers and the copyright.
- * Warm cream with soft sage and blush glows; the logo violet for headings, icons and a thin top rule.
+ * Simplified footer on the light-grey surface: the company with a one-line mission, Care services,
+ * Company (About, Careers, Referral partners, FAQ) and Contact (address, phone, fax, email, hours),
+ * then the Florida licence / registration numbers and the copyright. Four columns on desktop; on
+ * phones and tablets two — the intro and Contact span the full width, with Care services and
+ * Company side by side between them. The logo violet for headings and icons.
  */
 export function Footer() {
   return (
     <footer className="relative isolate mt-10 overflow-hidden border-t border-line bg-sand text-[0.95rem] text-body">
-
-      <div className="wrap grid gap-10 pt-14 pb-12 sm:grid-cols-2 sm:pt-16 lg:grid-cols-[1.35fr_1fr_0.8fr_1.25fr] lg:gap-12">
-        <div>
-          <div className="inline-flex rounded-2xl bg-white p-2.5 shadow-sm ring-1 ring-sand-200">
-            <Logo className="h-14" />
+      <div className="wrap grid grid-cols-2 gap-x-6 gap-y-9 pt-12 pb-10 sm:gap-x-10 sm:pt-16 sm:pb-12 lg:grid-cols-[1.35fr_1fr_0.8fr_1.25fr] lg:gap-12">
+        <div className="col-span-2 lg:col-span-1">
+          {/* Logo beside the name on phones and tablets (saves height), above it on desktop */}
+          <div className="flex items-center gap-4 lg:block">
+            <div className="inline-flex shrink-0 rounded-2xl bg-white p-2 shadow-sm ring-1 ring-sand-200 lg:p-2.5">
+              <Logo className="h-11 lg:h-14" />
+            </div>
+            <p className="font-display text-lg leading-tight font-bold text-plum-700 lg:mt-5">Open Arms &amp; Heart Services</p>
           </div>
-          <p className="mt-5 font-display text-lg font-bold text-plum-700">Open Arms &amp; Heart Services</p>
-          <p className="mt-2 max-w-xs leading-relaxed">{missionLine}</p>
+          <p className="mt-3 max-w-md leading-relaxed lg:mt-2 lg:max-w-xs">{missionLine}</p>
           <p className="mt-4 font-display text-[0.95rem] font-bold text-blush-700">{site.tagline}</p>
         </div>
 
         <div>
           <Heading>Care services</Heading>
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-3.5 space-y-2 text-[0.9rem] sm:mt-4 sm:space-y-2.5 sm:text-[0.95rem]">
             {programs.map((p) => (
               <li key={p.slug}>
                 <Link href={programHref(p)} className="transition-colors hover:text-plum-700">
@@ -64,7 +67,7 @@ export function Footer() {
 
         <div>
           <Heading>Company</Heading>
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-3.5 space-y-2 text-[0.9rem] sm:mt-4 sm:space-y-2.5 sm:text-[0.95rem]">
             {company.map((l) => (
               <li key={l.label}>
                 <Link href={l.href} className="transition-colors hover:text-plum-700">
@@ -75,7 +78,7 @@ export function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="col-span-2 lg:col-span-1">
           <Heading>Contact</Heading>
           <address className="not-italic">
             <ul className="mt-4 space-y-3">
@@ -103,7 +106,7 @@ export function Footer() {
 
       <div className="wrap">
         <div className="flex flex-col gap-2 border-t border-sand-200 py-6 text-[0.85rem] sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-semibold text-ink">{licenseLine}</p>
+          <p data-label className="font-semibold text-ink">{licenseLine}</p>
           <p>
             © {new Date().getFullYear()} {site.name}
           </p>
