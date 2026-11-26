@@ -29,21 +29,32 @@ export const approach = [
 
 /* ───────────────────────── Who we serve ───────────────────────── */
 
-export const audiences: { title: string; text: string; image: string; alt: string; href: string; icon: LucideIcon }[] = [
+export const audiences: {
+  title: string;
+  text: string;
+  image: string;
+  alt: string;
+  /** Static Tailwind object-position class for the crop. */
+  imagePosition?: string;
+  href: string;
+  icon: LucideIcon;
+}[] = [
   // Same cards, order, photos and copy as the home "Who we care for" bento of the earlier design (git 1732445).
   {
     title: "Seniors",
     text: "Caring for a developmentally disabled family member or senior can be extremely challenging, and we are here to help.",
-    image: "/images/senior-portrait.webp",
-    alt: "A smiling older woman with short grey hair",
+    image: "/images/senior-conversation.webp",
+    alt: "A smiling older man chatting with a caregiver on his sofa",
+    imagePosition: "object-[68%_center]",
     href: "/services/home-care",
     icon: HandHeart,
   },
   {
     title: "Veterans & their families",
     text: "Respectful, individualized home and community-based assistance.",
-    image: "/images/veteran.webp",
-    alt: "An older veteran wearing an Army cap",
+    image: "/images/service-veterans.webp",
+    alt: "A smiling older veteran in a Veteran cap, at home with family",
+    imagePosition: "object-[30%_35%]",
     href: "/services/va",
     icon: Medal,
   },

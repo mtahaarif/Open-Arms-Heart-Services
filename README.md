@@ -8,7 +8,7 @@
 
 > **Reference-site restyle (November 2026):** the header, home banner, headings and fonts, service pages and footer were re-modelled on lovethyneighborhhc.com (§8.0–8.2): League Spartan bold sentence-case headings with Manrope text; a white sticky header with a slide-in phone menu; a light split home banner with a photo card; one page per service at `/services/<slug>` (no overview page); a footer with a service-name ticker on solid violet `#5f2d8f` with lavender text `#e9dcf7`, later in frosted liquid-glass panels. Inner-page banners lost their purple shade. "Central Florida" became "Central Region" across the site, and the third licence number from the agency's trifold (234841) was added.
 
-> **Bright brand pass (November 2026):** brief from the client: bright, welcoming, premium home and community care — not dark, institutional or clinical. Surfaces are warm white `#FFFDF8` (`cream`, ~70%), soft cream `#F7F2EA` (`sand`), pale sage `#E8F0EA` (`sage`) and soft blush `#F7E9E7` (`rose`); the logo violet (`#662d91`, sampled from the logo, `plum-700`) is used for headings, buttons, icons, thin rules and badges only. The only dark surface left is the closing "Let's find the support" call to action. Site-wide facts: phone 863-695-2124; "the Central Region"; company name "Open Arms & Heart Services Inc."; primary message "Care that comes from the heart"; tagline "Where there is love, there is life". Licences as recorded on Florida Health Finder: HHA Lic. 299995365 · HCS Reg. 235855 · HCS Reg. 234841 (the old site's 299995365 had an extra 9). The footer was simplified to four columns (company + mission, Care services, Company, Contact) and a licence / copyright line.
+> **Bright brand pass (November 2026):** brief from the client: bright, welcoming, premium home and community care — not dark, institutional or clinical. Surfaces are warm white `#FFFDF8` (`cream`, ~70%), soft cream `#F7F2EA` (`sand`), pale sage `#E8F0EA` (`sage`) and soft blush `#F7E9E7` (`rose`); the logo violet (`#662d91`, sampled from the logo, `plum-700`) is used for headings, buttons, icons, thin rules and badges only. The only dark surface left is the closing "Let's find the support" call to action. Site-wide facts: phone 863-695-2124; "the Central Region"; company name "Open Arms & Heart Services Inc."; primary message "Care that comes from the heart"; tagline "Where there is love, there is life". Licences as recorded on Florida Health Finder: License #: 299995365 · License #: 235855 · License #: 234841 (the old site's 299995365 had an extra 9). The footer was simplified to four columns (company + mission, Care services, Company, Contact) and a licence / copyright line.
 
 > **Ultra-white minimal base (November 2026):** backgrounds moved to an Apple-style white theme: pure white `#FFFFFF` pages, light grey `#F5F5F7` for alternate sections, cards and the footer, `#E8E8ED` / `#D2D2D7` hairlines, near-black `#1D1D1F` text and `#6E6E73` secondary text. The earlier cream / sage / blush tokens (`cream`, `sand`, `sage`, `rose`) keep their names but now map to white and that grey. Decorative colour glows, dot grids and tinted gradients were removed; photo cards (home services, About "Who we serve", service-page "More ways we can help") use a neutral dark fade at the bottom instead of a violet overlay. The logo violet remains for headings, buttons, icons and badges.
 
@@ -360,7 +360,7 @@ Each service has its own page (`src/app/services/[slug]/page.tsx`, one per entry
   - **Grid:** 6 columns — a tall lead card, then 3 + 3 and 4 + 2. Rows are 140px on phones, 200px from `sm` and 260px from `md`. It uses that version's container (`max-w-7xl`, 16/24/32px gutters) so the card sizes match exactly up to tablet size. From `lg` (desktop) the grid and the strip below it are scaled to 80%: 61rem wide at most, 208px rows, with slightly smaller titles, icon tiles and padding.
   - **Cards:** five photo cards with a cursor tilt (`GlowCard tilt`), a zoom on hover, a neutral dark fade at the bottom (no colour cast) and a frosted icon tile. Each links to its service.
   - **Card text:** on mouse devices from `md` up, the title rises and the description fades in on hover. Touch screens always show the description. On `sm`–`md` the description is limited to two lines so it never spills out of the shorter cards.
-  - **Cards (same order, photos and copy as that version):** Seniors (the tall lead card, `senior-portrait.webp`), Veterans & their families (`veteran.webp`), People with disabilities (`personal-supports.webp`), Children & foster families (`child-smiling.webp`) and Family caregivers (`family-baking.webp`). Titles keep this site's League Spartan capitals; under 360px wide they shrink so "Caregivers" fits the narrow card.
+  - **Cards (same order, photos and copy as that version):** Seniors (the tall lead card, `senior-conversation.webp`), Veterans & their families (`service-veterans.webp`, shared with the Veterans service page), People with disabilities (`personal-supports.webp`), Children & foster families (`child-smiling.webp`) and Family caregivers (`family-baking.webp`). Titles keep this site's League Spartan capitals; under 360px wide they shrink so "Caregivers" fits the narrow card.
   - **Below the grid:** the "Open Arms & Heart Services is only a call away!" strip, with the phone number and a link to Our services.
 - **Licensed & trusted:** glass credentials card with a gradient licence chip.
 - **Contact band.**
@@ -691,14 +691,14 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 
 | File | Source |
 | --- | --- |
-| `adult-wheelchair-community.webp` (not used since the About bento was restored) | https://unsplash.com/photos/two-women-talking-in-a-gymnasium-c-LWLkJIV6Q |
+| `adult-wheelchair-community.webp` (Vulnerable Adult Support service) | https://unsplash.com/photos/two-women-talking-in-a-gymnasium-c-LWLkJIV6Q |
 | `careers-caregivers.webp` | https://unsplash.com/photos/a-group-of-women-standing-next-to-each-other-ykiy5Zyv7k0 |
 | `caregiver-companion.webp` | https://unsplash.com/photos/a-man-and-woman-sitting-on-a-bench-9__g_UfBXOA |
-| `family-game-night.webp` (not used since the About bento was restored) | https://unsplash.com/photos/family-playing-board-games-VJVsEnR_vNE |
+| `family-game-night.webp` (Children & Family Support service) | https://unsplash.com/photos/family-playing-board-games-VJVsEnR_vNE |
 | `friends-smiling.webp` | https://unsplash.com/photos/two-women-pose-arm-in-arm-smiling-LTgaxUAGNUk |
 | `grandmother-granddaughter.webp` (not used since the generated banners) | https://unsplash.com/photos/woman-in-blue-tank-top-wearing-eyeglasses-smiling-Ig4-rFIl7as |
 | `nurse-home-visit.webp` | https://unsplash.com/photos/a-doctor-checking-a-patients-blood-pressure-dcBO4nt4MRE |
-| `senior-conversation.webp` (not used since the About bento was restored) | https://unsplash.com/photos/a-man-sitting-on-a-couch-talking-to-another-man-N5GljcLSmK4 |
+| `senior-conversation.webp` (About "Who we serve": Seniors) | https://unsplash.com/photos/a-man-sitting-on-a-couch-talking-to-another-man-N5GljcLSmK4 |
 | `service-apd.webp` | https://unsplash.com/photos/a-man-in-a-wheel-chair-in-a-kitchen-75xbITy2szk |
 | `service-cbc.webp` | https://unsplash.com/photos/girl-running-while-laughing-xtd3zYWxEs4 |
 | `service-home-care.webp` | https://unsplash.com/photos/a-man-and-a-woman-in-a-living-room-HscUZd52tQk |
@@ -709,8 +709,8 @@ The stock photos are from [Unsplash](https://unsplash.com) under the [Unsplash L
 | `grandpa-granddaughter.webp` (not used since the generated banners) | https://images.unsplash.com/photo-1609113006359-1e9c378ab54d |
 | `friends-talking.webp` (not used since the generated banners) | https://images.unsplash.com/photo-1773227059784-c1e36cc8c8c9 |
 | `family-baking.webp` (About "Who we serve") | https://images.unsplash.com/photo-1758874960394-afd9ead46eba |
-| `senior-portrait.webp` (About "Who we serve") | https://images.unsplash.com/photo-1566616213894-2d4e1baee5d8 |
-| `veteran.webp` (About "Who we serve") | https://images.unsplash.com/photo-1698671114507-6ae8567cb895 |
+| `senior-portrait.webp` (not used since the November 2026 photo swap) | https://images.unsplash.com/photo-1566616213894-2d4e1baee5d8 |
+| `veteran.webp` (not used since the November 2026 photo swap) | https://images.unsplash.com/photo-1698671114507-6ae8567cb895 |
 | `child-smiling.webp` (About "Who we serve") | https://images.unsplash.com/photo-1646250852980-e2beba095e97 |
 | `activities-coloring.webp` (Q&A) | https://images.unsplash.com/photo-1762955911431-4c44c7c3f408 |
 | `caregiver-portrait.webp` (Q&A) | https://images.unsplash.com/photo-1585842378054-ee2e52f94ba2 |

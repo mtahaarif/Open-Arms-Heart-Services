@@ -119,7 +119,7 @@ export default function AboutPage() {
                     src={a.image}
                     alt={a.alt}
                     sizes="(min-width: 1024px) 660px, (min-width: 768px) 810px, 115vw"
-                    className="-z-10 transition duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110"
+                    className={`-z-10 transition duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-110 ${a.imagePosition ?? ""}`}
                   />
                   <div className="absolute inset-x-0 bottom-0 -z-10 h-3/4 bg-linear-to-t from-black/70 via-black/25 to-transparent transition-opacity duration-700 group-hover:opacity-95" />
                   <div className="relative z-10 flex h-full flex-col justify-between p-3 sm:p-6 lg:p-5">
@@ -142,7 +142,7 @@ export default function AboutPage() {
             <GlowCard className="flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-line bg-white p-7 sm:flex-row sm:items-center sm:p-9 lg:rounded-[1.6rem] lg:px-8 lg:py-7">
               <div className="relative z-10">
                 <p className="font-display text-2xl text-plum-950 sm:text-3xl lg:text-2xl">Open Arms &amp; Heart Services is only a call away!</p>
-                <p className="mt-1">
+                <p data-label className="mt-1 [overflow-wrap:anywhere]">
                   Office: {site.phone.display} · {site.email}
                 </p>
               </div>

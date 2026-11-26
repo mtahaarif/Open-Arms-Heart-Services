@@ -82,8 +82,8 @@ export const programs: Program[] = [
     short: "Vulnerable Adult Support",
     tagline: "Dignity, safety and connection.",
     icon: ShieldCheck,
-    image: "/images/service-vulnerable-adult.webp",
-    imageAlt: "A woman and an older woman laughing together while gardening outdoors",
+    image: "/images/adult-wheelchair-community.webp",
+    imageAlt: "A smiling woman who uses a wheelchair chatting with a support worker at a community centre",
     intro:
       "Open Arms supports adults who need assistance maintaining **dignity, safety, and independence**. We coordinate with families, social workers, case managers and referral partners.",
     points: [
@@ -103,8 +103,8 @@ export const programs: Program[] = [
     short: "Children & Family Support",
     tagline: "Inclusive respite and meaningful experiences for ages 0–17.",
     icon: Baby,
-    image: "/images/service-cbc.webp",
-    imageAlt: "A group of children laughing and running together outdoors",
+    image: "/images/family-game-night.webp",
+    imageAlt: "A family playing a board game together in their living room",
     intro:
       "Open Arms has experience working with community-based care organizations and foster families to provide supportive, compassionate services.",
     feature: {

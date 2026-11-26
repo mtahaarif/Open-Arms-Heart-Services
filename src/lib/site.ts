@@ -31,9 +31,9 @@ export const site = {
   ],
   /** As recorded on Florida Health Finder (quality.healthfinder.fl.gov). */
   licenses: [
-    { short: "HHA Lic.", number: "299995365", name: "Home Health Agency license" },
-    { short: "HCS Reg.", number: "235855", name: "Homemaker and Companion Service registration" },
-    { short: "HCS Reg.", number: "234841", name: "Homemaker and Companion Service registration" },
+    { short: "License #:", number: "299995365", name: "Home Health Agency license" },
+    { short: "License #:", number: "235855", name: "Homemaker and Companion Service registration" },
+    { short: "License #:", number: "234841", name: "Homemaker and Companion Service registration" },
   ],
 
   phone: { display: "863-695-2124", href: "tel:+18636952124" },
@@ -72,7 +72,7 @@ export const site = {
 export const addressLines = [site.address.street, `${site.address.city}, ${site.address.region} ${site.address.zip}`] as const;
 export const fullAddress = addressLines.join(", ");
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.name}, ${fullAddress}`)}`;
-/** "HHA Lic. 299995365 · HCS Reg. 235855 · HCS Reg. 234841" */
+/** "License #: 299995365 · License #: 235855 · License #: 234841" */
 export const licenseLine = site.licenses.map((l) => `${l.short} ${l.number}`).join(" · ");
 export const sinceLine = `Compassionate care across the Central Region since ${site.since}`;
 
