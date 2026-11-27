@@ -14,6 +14,9 @@
 
 > **Typography, motion & CTA (November 2026, from benevolencehomeservices.com):** Quicksand was tried for all text and then reverted to League Spartan headings + Manrope text at the client's request. Motion copied from the same site: blocks marked `data-reveal` fade in (opacity only, 0.9 s ease-in-out) as they scroll into view — in both scroll directions: `RevealObserver` keeps watching, removes `.is-in` once a block has fully left the screen (an instant reset) and adds it again when the block returns, and every page fades in over 0.4 s on navigation (`src/app/template.tsx`, `.page-fade-in`); both are off for reduced motion. The closing call to action (`ContactBand`) is now their style: a pale brand-tint band with rounded top corners, a large centred heading and paragraph, a solid violet uppercase pill with an arrow and a white uppercase "Call" pill. Running text (`p`, `.lead`) is justified site-wide with automatic hyphenation; centred blocks stay centred, and labels (eyebrows, uppercase / tracked captions, display-font lines, `data-label`) keep normal alignment. The phone footer puts Care services and Company side by side.
 
+> **AHCA background-screening notice (November 2026):** the agency's "Florida Care Provider Background Screening Clearinghouse – Employment Requirements" notice (Section 435.12, F.S.; link to https://info.flclearinghouse.com) is required on every page and in job postings. The wording lives verbatim in `clearinghouseNotice` (`src/lib/content.ts`) and is rendered in full as its own section on `/careers` (`#background-screening`) and in the footer of every page. It is never hyphenated, and is left-aligned on phones (justified from `sm`). Job postings published elsewhere (job boards, the JotForm application) must carry the same text — the website can't add it there.
+
+
 
 
 

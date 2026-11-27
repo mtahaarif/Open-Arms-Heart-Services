@@ -1,11 +1,11 @@
-import { ArrowRight, ArrowUpRight, BriefcaseMedical, ClipboardList, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BriefcaseMedical, ClipboardList, Phone, ShieldCheck } from "lucide-react";
 import { Ribbons } from "@/components/brand/Ribbons";
 import { ContactBand } from "@/components/sections/ContactBand";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Photo } from "@/components/ui/Photo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { applicationChecklist, careersIntro, requirements, roles } from "@/lib/content";
+import { applicationChecklist, careersIntro, clearinghouseNotice, requirements, roles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { rich } from "@/lib/rich";
@@ -98,6 +98,38 @@ export default function CareersPage() {
             <a href={site.applicationUrl} target="_blank" rel="noopener noreferrer" className="btn-primary mt-6">
               Start your application <ArrowUpRight className="size-4" />
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* AHCA-required employment notice (Section 435.12, F.S.) — wording verbatim from the agency */}
+      <section id="background-screening" aria-labelledby="clearinghouse-title" className="scroll-mt-32 pt-5 pb-10">
+        <div className="wrap">
+          <div data-reveal className="rounded-[2rem] border-2 border-plum-200 bg-white p-7 shadow-[0_24px_60px_-36px_rgb(102_45_145/0.45)] sm:p-10">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
+              <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-plum-700 text-white">
+                <ShieldCheck className="size-7" aria-hidden />
+              </span>
+              <div className="min-w-0">
+                <p className="eyebrow">Employment requirements</p>
+                <h2 id="clearinghouse-title" className="mt-3 text-[1.5rem] leading-[1.15] sm:text-[1.9rem]">
+                  {clearinghouseNotice.title}
+                </h2>
+                <div className="mt-5 max-w-4xl space-y-4 text-[1.02rem] leading-relaxed">
+                  {clearinghouseNotice.paragraphs.map((t) => (
+                    <p key={t.slice(0, 24)} className="text-left hyphens-none sm:text-justify">
+                      {t}
+                    </p>
+                  ))}
+                  <p data-label>
+                    {clearinghouseNotice.linkIntro}{" "}
+                    <a href={clearinghouseNotice.url} target="_blank" rel="noopener noreferrer" className="link-arrow">
+                      {clearinghouseNotice.url} <ArrowUpRight className="size-4" aria-hidden />
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

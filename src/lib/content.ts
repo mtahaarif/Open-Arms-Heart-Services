@@ -132,6 +132,21 @@ export const requirements = [
   "90-day probationary period",
 ];
 
+/**
+ * AHCA-required employment notice (Section 435.12, Florida Statutes). Wording supplied by the agency
+ * (November 2026) — keep it verbatim. Shown in full on the Careers page and in the footer of every page.
+ */
+export const clearinghouseNotice = {
+  title: "Florida Care Provider Background Screening Clearinghouse – Employment Requirements",
+  paragraphs: [
+    "In accordance with Section 435.12, Florida Statutes, Open Arms & Heart Services Inc. requires individuals applying for designated positions to meet applicable Level 2 background screening requirements.",
+    "Prospective employees are encouraged to review the Florida Agency for Health Care Administration (AHCA) Care Provider Background Screening Clearinghouse Education and Awareness website for information regarding background screening requirements, employment eligibility, disqualifying offenses, and exemptions from disqualification.",
+  ],
+  linkIntro: "For additional information, please visit:",
+  url: "https://info.flclearinghouse.com",
+  linkText: "info.flclearinghouse.com",
+};
+
 export const applicationChecklist = [
   "Position applying for",
   "Caregiving experience",

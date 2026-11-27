@@ -1,9 +1,10 @@
+import { Fragment } from "react";
 import Link from "@/components/ui/Link";
-import { Clock, Mail, MapPin, Phone, Printer } from "lucide-react";
+import { ArrowUpRight, Clock, Mail, MapPin, Phone, Printer, ShieldCheck } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
-import { mission } from "@/lib/content";
+import { clearinghouseNotice, mission } from "@/lib/content";
 import { programHref, programs } from "@/lib/services";
-import { addressLines, licenseLine, mapsUrl, site } from "@/lib/site";
+import { addressLines, mapsUrl, site } from "@/lib/site";
 
 /** The first sentence of the mission statement. */
 const missionLine = mission.split(/(?<=\.)\s/)[0];
@@ -105,8 +106,39 @@ export function Footer() {
       </div>
 
       <div className="wrap">
+        {/* AHCA-required employment notice, on every page (Section 435.12, F.S.) — wording verbatim */}
+        <section aria-labelledby="footer-clearinghouse" className="border-t border-sand-200 py-7 text-[0.85rem] leading-relaxed">
+          <h2 id="footer-clearinghouse" className="flex items-start gap-2.5 font-display text-[0.95rem] leading-snug font-bold tracking-normal text-plum-700">
+            <ShieldCheck className="mt-0.5 size-4 shrink-0" aria-hidden />
+            {clearinghouseNotice.title}
+          </h2>
+          <div className="mt-3 space-y-2">
+            {/* Legal wording: never hyphenated; left-aligned on phones (narrow justified lines open wide gaps) */}
+            {clearinghouseNotice.paragraphs.map((t) => (
+              <p key={t.slice(0, 24)} className="text-left hyphens-none sm:text-justify">
+                {t}
+              </p>
+            ))}
+            <p data-label>
+              {clearinghouseNotice.linkIntro}{" "}
+              <a href={clearinghouseNotice.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-plum-700 underline underline-offset-4 hover:text-blush-700">
+                {clearinghouseNotice.url} <ArrowUpRight className="size-3.5" aria-hidden />
+              </a>
+            </p>
+          </div>
+        </section>
         <div className="flex flex-col gap-2 border-t border-sand-200 py-6 text-[0.85rem] sm:flex-row sm:items-center sm:justify-between">
-          <p data-label className="font-semibold text-ink">{licenseLine}</p>
+          <p data-label className="font-semibold text-ink">
+            {/* Each label stays with its number; the line can wrap after a "·" */}
+            {site.licenses.map((l, i) => (
+              <Fragment key={l.number}>
+                {i > 0 && " · "}
+                <span className="whitespace-nowrap">
+                  {l.short} {l.number}
+                </span>
+              </Fragment>
+            ))}
+          </p>
           <p>
             © {new Date().getFullYear()} {site.name}
           </p>
